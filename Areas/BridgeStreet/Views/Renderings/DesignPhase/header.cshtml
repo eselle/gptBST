@@ -1,0 +1,70 @@
+﻿<header class="container-fluid">
+    <nav class="container">
+        <a href="/" class="logo">
+            <img src="/Areas/BridgeStreet/Assets/Local/Images/logo.png" />
+        </a>
+        <ul class="nav-items">
+            <li class="nav-item selected">
+                <div class="nav-item-elements">
+                    <a href="">Reservations</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <div class="nav-item-elements">
+                    <a href="">Why BridgeStreet</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <div class="nav-item-elements">
+                    <a href="">About Us</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <div class="nav-item-elements">
+                    <a href="">Business Solutions</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="desktop-search row">
+        <div class="container">
+            <form id="searchbox-form" class="" method="post" action="/vacation-rentals">
+                <div class="form-container">
+                    <div class="searchbox-input searchbox-input-where-to has-icon">
+                        <input type="text" class="form-control" id="searchKeywords" placeholder="Where do you need to be?">                    
+                    </div>
+
+                    <div class="searchbox-input searchbox-input-date has-icon">
+                        <input type="text" id="check_in_date" name="from-date" class="form-control" tabindex="2" placeholder="Select Dates">
+                        
+                    </div>
+
+                    <div class="searchbox-input searchbox-guests has-icon">
+                        <input type="text" id="number_of_guests" name="guests" class="form-control" tabindex="3" placeholder="0 Guests">
+                        
+                    </div>                
+                </div>
+
+                <div class="btn-search">
+                    <a class="searchbox-submit" tabindex="4">Go</a>
+                </div>
+            </form> 
+        </div>       
+    </div>
+
+    <div class="mobile-search container-fluid no-padding">
+        <a href="/" class="logo container">
+            <img src="/Areas/BridgeStreet/Assets/Local/Images/logo.png" style="width: 148px" />
+        </a>
+
+        <div class="input-addon" id="sm-search-field">
+            <i class="icon-mapmarker form-control-icon" aria-hidden="true"></i>
+            <span class="input-stem input-large fake-search-field">Find your serviced apartment</span>
+            <div class="fake-search-button roundSearchButton ">
+                <i class="input-suffix icon-search"></i>
+            </div>
+        </div>
+    </div>
+
+</header>

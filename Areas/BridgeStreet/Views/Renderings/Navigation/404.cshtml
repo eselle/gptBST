@@ -1,0 +1,21 @@
+﻿@using Glass.Mapper.Sc.Web.Mvc
+@inherits GlassView<BridgeStreet.Website.Domain.Models.Base.PageBase>
+
+@{
+    string backgroundImage = string.Empty;
+    
+    Context.Response.TrySkipIisCustomErrors = true;
+    Context.Response.StatusCode = 404;
+    backgroundImage = Model.Image.Src;
+}
+
+<div class="generic-content-module container-fluid">
+    <div class="row">
+        <div class="generic-content-header generic-error" style="background-image: url(&quot;@backgroundImage&quot;);"></div>
+
+        <div class="error-content container">
+            @Editable(Model, i => i.Body)
+        </div>
+
+    </div>
+</div>

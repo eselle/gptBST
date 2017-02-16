@@ -1,0 +1,107 @@
+.p-accordion {
+	position: relative;
+	display: table;
+
+	&.property-detail-accordion {
+		padding: 20px 0;
+	}
+	
+	h2 {
+		.OpenSans700;
+		font-size: 22px;
+		line-height: 1.09;
+		color: @navy;		
+	}
+
+	ul {
+		overflow: hidden;
+		height: 35px;
+		margin-bottom: 30px;
+/*	    display: -webkit-flex;
+	    display: -ms-flexbox;
+	    display: flex;
+	    -webkit-flex-wrap: wrap;
+	    -ms-flex-wrap: wrap;
+	    flex-wrap: wrap;	*/	
+
+		&.p-accordion-items {
+		
+		}
+
+		li {
+			.OpenSans400;
+			font-size: 12px;
+			line-height: 1.33;
+			color: @gr-500; 	
+		}	
+
+		&#FilterAmeneties {
+
+			li {
+				display: table; 				
+			}
+		}
+
+		&#PropertyAmenities {
+			li {
+				text-indent: 0px;
+			    padding-left: 0px;
+			    list-style: disc outside none;
+			    margin-left: 1.5em;
+			}
+		}
+	}
+
+	.p-accordion-heading {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		margin: 10px 0;
+
+		&.inline {
+			top: 0;
+			margin: 0;
+			right: 15px;
+		}
+
+		.toggle-button {
+			.OpenSans700;
+			font-size: 12px;
+			line-height: 1.33;
+			letter-spacing: 1px;
+			text-align: right;
+			color: @gr-200;
+			margin-right: 8px;
+			text-transform: uppercase;
+
+			&:after {
+			    font-family: 'FontAwesome';
+			    content: '\f067';
+			 	position: relative;
+			    display: inline-block;
+			    font-style: normal;
+			    font-weight: 400;
+			    line-height: 0.55;
+			    -webkit-font-smoothing: antialiased;
+			    float: right;
+			    font-size: 14px;
+			    color: @gr-200;
+			    top: 5px;
+				left: 8px;
+			}
+
+			&.collapsed {
+				display: block;
+
+				&:after {
+				    font-family: 'FontAwesome';
+				    content: '\f068';
+				    top: 5px;
+					left: 8px;
+					font-size: 14px;
+				}
+			}
+
+		}
+	}
+}

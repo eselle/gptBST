@@ -1,0 +1,26 @@
+﻿@model BridgeStreet.Website.Areas.BridgeStreet.Models.PropertyDetails.PropertyImageViewModel
+
+@if (Model != null && Model.Images.Any() && Model.Images.Count() > 3)
+{
+    <div class="product-detail-carousel">
+        <div class="c-horizontal swiper-container swiper-container-horizontal">
+
+            <ul class="c-wrapper swiper-wrapper">
+                @foreach (var url in Model.Images)
+                {
+                    <li class="l-detail swiper-slide">
+                        <img class="img-carousel" src="@url" alt="Bridgestreet Property - @Model.PropertyName"/>
+                    </li>
+                }
+                
+            </ul>
+
+            <div class="swiper-button c-next">
+                <i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="swiper-button c-prev">
+                <i class="fa fa-chevron-left"></i>
+            </div>
+        </div>
+    </div>
+}

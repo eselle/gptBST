@@ -1,0 +1,15 @@
+﻿@using Sitecore.Mvc
+
+@Html.Sitecore().Placeholder("details-carousel")
+
+<div class="two-col-container container">
+    <div class="rows">
+        <div class="p-detail col-left col-xs-12 col-sm-7">
+            @Html.Sitecore().Placeholder("details-left")
+        </div>
+
+        <div class="t-details col-right col-xs-12 col-sm-5">
+            @Html.Sitecore().Placeholder("details-right")
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+﻿@model BridgeStreet.Website.Areas.BridgeStreet.Models.PartnerPage.PartnerTileListModel
+
+
+<div class="container-fluid no-padding">
+    <div class="row">
+        @{
+            var xsClasses = new string[] { "col-xs-12", "col-xs-12", "col-xs-12", "col-xs-12" };
+            var smClasses = new string[] { "col-sm-12", "col-sm-6", "col-sm-4", "col-sm-3" };
+            var mdClasses = new string[] { "col-md-12", "col-md-6", "col-md-4", "col-md-3"};
+            int i = 0;
+            int columns = (Model.RenderingParameters != null && Model.RenderingParameters.Columns > 0) ? Model.RenderingParameters.Columns : 2;
+            string textTransform = (Model.RenderingParameters != null && !string.IsNullOrWhiteSpace(Model.RenderingParameters.TitleTextTransform)) ? Model.RenderingParameters.TitleTextTransform : "none";
+            foreach (var item in Model.Tiles)
+            {
+                if (i > 0 && i % columns == 0)
+                {
+                    @:</div>
+                    @:<div class="row">
+                }
+                <!--Begin Tile -->
+                <div class="@xsClasses[columns - 1] @smClasses[columns - 1] @mdClasses[columns - 1] tile">
+                    <div class="tile-image-container">
+                        <a href="@item.Link" class="thumbnail" target="_blank">
+                            <img src="@item.Image" alt="@item.Heading">
+                        </a>
+                    </div>
+                    <div class="tile-title" style="text-transform: @textTransform">@item.Heading</div>
+                    <div class="tile-description-container">
+                        @Html.Raw(item.Description)
+                    </div>
+                    <div class="tile-button-container">
+                        <a href="@item.Link" class="tile-button" target="_blank">@item.ButtonText</a>
+                    </div>
+                </div>
+                <!-- End Tile -->
+                i++;
+            }
+        }
+    </div>
+</div>

@@ -1,0 +1,25 @@
+﻿# Styles Directory Manual
+
+This directory should be used for styles. It is using Less as the precomplier.
+
+## Structure
+
+### Base
+
+The `base/` folder holds what we might call the boilerplate stuff for your project. In there, you might find the reset (or Normalize.css, or whatever), probably some stuff dealing with typography, and, depending on the project, maybe some other files.
+
+### Helpers
+
+The `helpers/` folder gathers all LESS tools and helpers we'll use across the project. Got a function? A mixin? Put it in there. This folder also contains a _variables.less file which holds all global variables for the project (for typography, color schemes, and so on).
+
+### Layout
+
+The `layout/` directory usually contains a number of files, each of them setting some styles for the main sections of the layout (header, footer, and so on). It also contains the _grid file which is the grid system used to build the layout.
+
+### Components
+
+For smaller components, there is the `components/` folder. While layout/ is kind of macro (defining the global wireframe), `components/` is more micro. It can contain all kinds of specific modules like a slider, a loader, a widget, or anything along those lines. There are usually a lot of files in `components/` since your site is should be mostly composed of tiny modules.
+
+### Pages
+
+If you have page-specific styles, I think it's cool to put them in a `pages/` folder and in a file named after the page. For example, it's not uncommon to have very specific styles for the home page, so you'd have a `_home.less` file in `pages/` dealing with this.

@@ -1,0 +1,16 @@
+﻿[
+  {
+    "outputFile": "Areas/BridgeStreet/Assets/Local/Css/bridgestreet.css",
+    "inputFile": "Areas/BridgeStreet/Assets/Local/Css/bridgestreet.less",
+    "minify": {
+      "enabled": true
+    },
+    "options": {
+      "sourceMap": true
+    }
+  },
+  {
+    "outputFile": "Areas/BridgeStreet/Assets/Local/Less/main.css",
+    "inputFile": "Areas/BridgeStreet/Assets/Local/Less/main.less"
+  }
+]

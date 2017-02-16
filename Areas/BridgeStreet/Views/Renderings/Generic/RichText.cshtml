@@ -1,0 +1,10 @@
+﻿@using Glass.Mapper.Sc.Web.Mvc
+
+@inherits GlassView<BridgeStreet.Website.Domain.Models.Generic.RichText>
+
+<div class="row rich-text">
+    <div class="col-xs-12">
+        <h2>@Editable(Model, i => i.Title)</h2>
+        <p>@Editable(Model, i => i.Text)</p>
+    </div>
+</div>

@@ -1,0 +1,115 @@
+﻿@using Sitecore.Globalization
+@using BridgeStreet.Website.Infrastructure.Constants
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<BridgeStreet.Website.Domain.Models.Pages.ContactUs.ContactUsPage>
+<div class="contact-form-container">
+    <h1>@Editable(m => m.Title)</h1>
+    <div class="contact-top-content row">
+        <div class="content-left col-sm-8 col-xs-12">
+            <h2>@Editable(m => m.Subtitle)</h2>
+            <p>@Editable(m => m.Body)</p>
+        </div>
+        <div class="content-right col-sm-3 col-xs-12">
+
+            <h4>@Editable(m => m.GeneralContactTitle)</h4>
+            <span>@Editable(m => m.GeneralContactPhone)</span>
+
+            @if (Model.GeneralContactLink != null)
+            {
+                @RenderLink(m => m.GeneralContactLink, new { @class = "button" })
+            }
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <hr class="thick">
+        </div>
+    </div>
+
+    <form id="panel-contact-us-form" class="contact-form">
+        <h3>Your Information</h3>
+        <div class="row">
+            <div class="col-xs-12 col-sm-4">
+                <input type="text" id="FirstName" name="FirstName" placeholder="@Translate.Text(Constants.TranslationKeys.FirstName)" required />
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                <input type="text" id="LastName" name="LastName" placeholder="@Translate.Text(Constants.TranslationKeys.LastName)" required />
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                <input type="number" id="MobileNumber" name="MobileNumber" placeholder="@Translate.Text(Constants.TranslationKeys.MobileNumber)" required phone />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-4">
+                <input type="email" id="EmailAddress" name="EmailAddress" placeholder="@Translate.Text(Constants.TranslationKeys.YourEmailAddress)" required email />
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                <input type="text" id="Company" placeholder="@Translate.Text(Constants.TranslationKeys.Company)" />
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                <input type="text" id="Location" placeholder="@Translate.Text(Constants.TranslationKeys.Location)" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <h3>Your Feedback</h3>
+            </div>
+            <div class="col-xs-12 col-sm-3">
+                <div class="select-box-container">
+                    <select required id="FeedbackType">
+                        <option value="" disabled selected hidden>@Translate.Text(Constants.TranslationKeys.MyFeedbackIs)</option>
+                        @if (Model.ContactTypes != null && Model.ContactTypes.Any())
+                        {
+                            foreach (var type in Model.ContactTypes)
+                            {
+                                <option value="@type.Value">@type.DisplayText</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-9">
+                <input type="text" id="Subject" placeholder="@Translate.Text(Constants.TranslationKeys.Subject)" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <textarea id="Comments" placeholder="@Translate.Text(Constants.TranslationKeys.Comments)"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div id="how-should-we-contact-you" class="col-xs-12 col-sm-4">
+                <h5>@Translate.Text(Constants.TranslationKeys.HowShouldWeContactYou)</h5>
+                <input id="emailRadio" name="ContactMethod" type="radio" value="@Translate.Text(Constants.TranslationKeys.Email)"/>
+                <label for="emailRadio">@Translate.Text(Constants.TranslationKeys.Email)</label>
+
+                <input id="callRadio" name="ContactMethod" type="radio" value="@Translate.Text(Constants.TranslationKeys.Call)"/>
+                <label for="callRadio">@Translate.Text(Constants.TranslationKeys.Call)</label>
+
+                <input id="textRadio" name="ContactMethod" type="radio" value="@Translate.Text(Constants.TranslationKeys.Text)"/>
+                <label for="textRadio">@Translate.Text(Constants.TranslationKeys.Text)</label>
+            </div>
+
+            <div>
+                <div class="g-recaptcha col-xs-12 col-sm-5" data-sitekey="@Model.SiteKey"></div>
+                <label id="recaptcha-error">Please verify you are not a robot.</label>
+            </div>
+
+            <div class="col-xs-12 col-sm-3 submit-buttom">
+                <button id="btnSubmit">@Translate.Text(Constants.TranslationKeys.Submit)</button>
+            </div>
+        </div>
+        <input id="FormType" name="FormType" type="hidden" value="@Model.Id" />
+    </form>
+
+    <div id="panel-thank-you-message">
+        @Editable(o => o.ThankYouMessage)
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <hr class="thick">
+        </div>
+    </div>
+</div>

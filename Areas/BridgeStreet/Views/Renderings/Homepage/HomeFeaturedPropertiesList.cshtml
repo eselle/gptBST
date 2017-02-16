@@ -1,0 +1,67 @@
+﻿@using System.Diagnostics.Eventing.Reader
+@using BridgeStreet.Website.Domain.Models.Content.Properties
+@using BridgeStreet.Website.Infrastructure.Constants
+@using Sitecore.Globalization
+@using Sitecore.Links
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<BridgeStreet.Website.Areas.BridgeStreet.Models.Homepage.HomeFeaturedPropertyViewModel>
+
+<div class="homepagefeatured-4col container">
+    <h2 class="homepagefeatured-4col-label">@Editable(m => m.PropertiesList.Title)</h2>
+    <ul class="homepagefeatured-4col-pods property-pod-row row">
+        @{
+
+            if (Model.Properties.Any())
+            {
+                foreach (var property in Model.Properties)
+                {
+                    <li class="property-pod col-xs-12 col-sm-6 col-md-3" data-id="@property.Property.PropertyId">
+                        <a href="@property.Url" class="property-pod-wrapper">
+                            <div class="property-pod-image-wrapper img-pod-animated">
+                                <div class="media-cover">
+                                    <img class="img-animated" src="@property.Property.ImageSrc" alt="Bridgestreet Property - @property.Property.Name" />
+                                </div>
+                                <div class="featured-flag">
+                                    @Translate.Text(Constants.TranslationKeys.Featured).ToLower()
+                                </div>
+                            </div>
+                            <div class="property-pod-description-wrapper">
+                                <h3>@property.Property.Name</h3>
+                                <h6>@property.Property.Address1, @property.Property.City</h6>
+                                <p>@property.Property.Teaser</p>
+                            </div>
+                            <div class="property-pod-cta-wrapper">
+                               <span class="btn">VIEW</span>
+
+                                @if (property.Property.MinRate == 0)
+                                {
+                                    <div class="price-point">
+                                        <span>Rates available<br/> upon request</span>
+                                    </div>
+                                    <h3>
+                                        @if (property.Property.IsRealTimeBookable)
+                                        {
+                                            <i class="fa fa-bolt"></i>
+                                        }
+                                    </h3>
+                                }
+                                else
+                                {
+                                    <div class="price-point">
+                                        <span>Rates from</span>
+                                        <h3>
+                                            @(property.Property.CurrencySymbol + property.Property.MinRate.ToString("F"))
+                                            @if (property.Property.IsRealTimeBookable)
+                                            {
+                                                <i class="fa fa-bolt"></i>
+                                            }
+                                        </h3>
+                                    </div>
+                                }
+                            </div>
+                        </a>
+                    </li>
+                }
+            }
+        }
+    </ul>
+</div>

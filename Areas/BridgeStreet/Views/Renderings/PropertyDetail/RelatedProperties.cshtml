@@ -1,0 +1,47 @@
+﻿@using BridgeStreet.Website.Infrastructure.Constants
+@using Sitecore.Globalization
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<BridgeStreet.Website.Areas.BridgeStreet.Models.PropertyDetails.PropertyIdModel>
+
+<div class="related-properties container">
+    <input type="hidden" name="PropertyId" id="PropertyId" value="@Model.PropertyId" />
+    <h2>Related Properties</h2>
+    <ul id="related-properties" class="p-pod-list property-pod-row row "></ul>
+</div>
+<script type='text/template' id="related-properties-template">
+    <% _.each(Properties, function(prop){ %>
+    <li class="property-pod col-xs-12 col-sm-6">
+        <a class="property-pod-wrapper" href="<%= prop.URL %>">
+            <div class="property-pod-image-wrapper img-pod-animated">
+                <div class="media-cover">
+                    <img class="img-responsive img-animated" src="<%= prop.Image %>" alt="Bridgestreet Property - <%= prop.Name %>"/>
+                    <!--                             <div class="property-pod-heart-bl">
+                            <i class="fa fa-heart"></i>
+                            </div> -->
+                </div>
+            </div>
+            <div class="property-pod-description-wrapper">
+                <h3><%= prop.Name %></h3>
+                <h6><%= prop.Address1 %></h6>
+                <!-- <p class="hidden-md hidden-lg"><%= prop.Teaser %></p> -->
+            </div>
+
+            <div class="property-pod-cta-wrapper row">
+                <div class="col-xs-4">
+                    <span class="btn">View</span>
+                </div>
+                <div class="price-point">
+                    <%  if (prop.MinRate != "0" ){ %>
+                    <span>Rates from</span>
+                    <h3><%= prop.CurrencyCode %><%= prop.MinRate %></h3>
+
+                    <% } %>
+                    <%  if (prop.MinRate == "0" ){ %>
+                    <span>Rates available<br />upon request</span>
+                    <% } %>
+                </div>
+            </div>
+        </a>
+    </li>
+    <% }); %>
+</script>
+

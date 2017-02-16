@@ -1,0 +1,66 @@
+.p-detail {
+	display: table-cell;
+    vertical-align: top;
+    height: 100%;
+}
+
+
+.t-details {
+	padding: 0;
+	display: table-cell;
+    vertical-align: top;
+    height: 100%;
+    border-bottom: none;
+
+    .sticky-wrapper {
+    	padding-bottom: 20px;
+    }
+
+	.t-details-container {
+		overflow: hidden;
+		height: auto;
+		padding: 20px 0 0;
+
+		h2 {
+			.OpenSans700;
+			line-height: 0.67;		
+			color: @or-100;
+			margin-bottom: 20px;
+			margin-top: 20px;
+		}		
+	}
+}
+
+#your-trip-container {
+    margin-top: 0;
+
+    .img-pod-animated{
+        height:260px;
+        border-radius:4px;
+
+        img{
+            width:100%;
+            height:auto;
+        }
+    }
+
+    #trip-details {
+        &.hideTripDetails{
+            max-height: 5000px;
+        }
+    }
+
+    .btnHide.toggleTripDetails,
+    .btnDetails.toggleTripDetails{
+        display: none;
+    }
+
+    h2{
+        margin-bottom:20px;
+        font-size: 36px;
+    }
+
+    img{
+        margin-top: 0;
+    }
+}

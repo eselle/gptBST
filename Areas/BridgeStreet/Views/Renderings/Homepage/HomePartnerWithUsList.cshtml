@@ -1,0 +1,42 @@
+﻿@using BridgeStreet.Website.Domain.Models.Pages.HomePage.HomePartnerWithUsList
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<BridgeStreet.Website.Domain.Models.Pages.HomePage.HomePartnerWithUsList.HomePartnerWithUsList>
+
+
+@functions{
+
+    private string GetImageSource(HomePartnerWithUsListItem item)
+    {
+        if (item.Image != null)
+        {
+            return item.Image.Src;
+        }
+        else
+        {
+            return string.Empty;
+        }
+    }
+
+}
+<div class="homepagepartner-2col container">
+    <h2 class="homepagefeatured-4col-label">@Editable(m => m.Title)</h2>
+
+    <div class="homepagefeatured-4col-pods row">
+        @foreach (var pod in Model.Children.OfType<HomePartnerWithUsListItem>().Take(3))
+        {
+            <div class="homepagepartner-2col-pod col-xs-12 col-sm-4">
+                <div class="partner-pod">
+                    <div class="pod-background" style="background-image: url('@GetImageSource(pod)')">
+                        @using (BeginRenderLink(pod, p => p.Link))
+                        {
+                            <div class="va-container va-container-v va-container-h">
+                                <div class="va-middle text-center">
+                                    <h2>@Editable(pod, p => p.LinkText)</h2>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,30 @@
+﻿@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<BridgeStreet.Website.Domain.Models.Pages.ContactUs.MailingAddressList.MailingAddressList>
+
+@if (Model.MailingAddresses != null && Model.MailingAddresses.Any())
+{
+    <div class="address-list">
+        <div class="row">
+            <div class="col-xs-12">
+                <h2>@Editable(m => m.Title)</h2>
+            </div>
+        </div>
+        
+        <div id="contactUsMaps" class="row">
+            @{int mapId = 0;}
+            @foreach(var address in Model.MailingAddresses)
+            {
+                <div class="col-xs-12 col-md-6">
+                    <div id="address-map_@mapId" class="address-map" data-lat="@address.Latitude" data-lon="@address.Longitude" data-radius="80" data-zoom="16"></div>
+
+                    <div class="address-details">
+                        <h3>@Editable(address, a => a.LocationName)</h3>
+                        <p>@Editable(address, a => a.Address)</p>
+                    </div>
+                </div>
+
+                mapId++;
+            }
+        </div>
+    </div>
+}
+ 

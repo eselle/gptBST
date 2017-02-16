@@ -1,0 +1,69 @@
+.collapse-panel  {
+	.collapse-panel-wrapper {
+		position: relative;
+		padding: 0 20px 110px 20px;
+		
+		.col-filter {
+			height: auto;
+    		border-right: none;
+
+    		&:last-child {
+    			border : none;
+    		}			
+		}
+
+		.panel-body {
+			border-bottom: 1px solid @gr-100;
+			.row {
+				position: relative;
+			}
+
+			&:last-child {
+				/*border: none;*/
+			}
+
+			.label-cell {
+				text-align: left;
+
+				label {
+					margin: 5px 0 15px;
+				}
+			}	
+
+			.inner-row {
+				margin: 0 0;
+				padding-top: 6px;							
+			}		
+
+			.radios-wrapper {
+				margin: 5px 0;
+			}
+		}
+
+		.filter-accordion-button {
+			width: auto;
+			padding: 0;
+			right: 0;
+			top: 0;
+			position: absolute;
+
+			.filter-collapse-toggle{
+
+
+			}
+		}
+	
+	}
+
+	.filter-footer {
+		width: 100%;
+	    position: absolute;
+	    bottom: 10px;
+	    right: 6px;
+	    background-color: #fff;	
+
+	    button {
+	    	width: 100%;
+	    }		
+	}		
+}

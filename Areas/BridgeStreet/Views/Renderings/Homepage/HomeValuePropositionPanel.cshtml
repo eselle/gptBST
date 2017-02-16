@@ -1,0 +1,22 @@
+﻿@using BridgeStreet.Website.Domain.Models.Pages.HomePage.HomeValuePropositionPanel
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<HomeValuePropositionList>
+
+<div class="homepagepurpose-3col container-fluid">
+    <div class="homepagepurpose-3col-wrapper container">
+        <div class="rows">
+            <h2>@Editable(m => m.Title)</h2>
+            <ul>
+                @foreach (var proposition in @Model.ValuePropositions.OfType<HomeValuePropositionListItem>().Take(3).OrderBy(x => x.SortOrder))
+                {
+                    <li class="col-xs-12 col-sm-4 fromBottomIn" data-scroll="toggle(.fromBottomIn, .fromBottomOut) offset(-200px,0) once">
+                        <i class="@proposition.IconClass"></i>
+                        <div class="purpose-content">
+                            <span>@Editable(proposition, p => p.Title)</span>
+                            <p>@Editable(proposition, p => p.Description)</p>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

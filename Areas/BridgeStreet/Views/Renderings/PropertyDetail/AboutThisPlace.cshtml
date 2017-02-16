@@ -1,0 +1,47 @@
+﻿@using BridgeStreet.Website.Infrastructure.Constants
+@using Sitecore.Globalization
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<BridgeStreet.Website.Domain.Models.Content.Properties.Property>
+
+
+<div class="p-about container-fluid">
+    <div class="row supplier-line">
+        @{ if (!string.IsNullOrWhiteSpace(Model.GetPartnerLogoUrl()))
+            {
+                <div class="col-xs-6 col-sm-6 no-padding">
+                    <h2>@Translate.Text(Constants.TranslationKeys.AboutThisPlace)</h2>
+                </div>
+                <div class="col-xs-6 col-sm-6 no-padding">
+                    <h2 class="make-hidden">@Translate.Text(Constants.TranslationKeys.AboutThisPlace)</h2>
+                    <div class="supplier-logo">
+                        <div class="supplier-name-small">@Translate.Text(Constants.TranslationKeys.StayWith)</div>
+                        <img src="@Model.GetPartnerLogoUrl()" />
+                    </div>
+                </div>
+            }
+            else if (!string.IsNullOrWhiteSpace(Model.PartnerName))
+            {
+                <div class="col-xs-6 col-sm-6 no-padding">
+                    <h2>@Translate.Text(Constants.TranslationKeys.AboutThisPlace)</h2>
+                </div>
+                <div class="col-xs-6 col-sm-6 no-padding">
+                    <h2 class="make-hidden">@Translate.Text(Constants.TranslationKeys.AboutThisPlace)</h2>
+                    <div class="supplier-logo">
+                        <div class="supplier-name-heading"><span class="supplier-name-small">@Translate.Text(Constants.TranslationKeys.StayWith) </span></div>
+                    </div>
+                    <div class="supplier-logo">
+                        <h2><span class="supplier-name-small">@Model.PartnerName </span></h2>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="col-xs-12 col-sm-12 no-padding">
+                    <h2>@Translate.Text(Constants.TranslationKeys.AboutThisPlace)</h2>
+                </div>
+            }
+        }
+        </div>
+    <div class="row">
+        <p>@Editable(m => m.Description)</p>
+    </div>
+</div>

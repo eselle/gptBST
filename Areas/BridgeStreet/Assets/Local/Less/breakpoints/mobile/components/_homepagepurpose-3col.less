@@ -1,0 +1,95 @@
+.homepagepurpose-3col {
+	    background-image: url(/Areas/BridgeStreet/Assets/Local/Images/pattern.jpg);
+	    background-size: inherit;
+	    background-repeat: repeat;
+		background-position: center center;
+		-webkit-background-size: inherit;
+		-moz-background-size: inherit;
+		-ms-background-size: inherit;
+		-o-background-size: inherit;
+		background-size: inherit;
+
+	.homepagepurpose-3col-wrapper {
+		height: auto;
+		padding: 40px 0px;
+
+		h2 {
+			.OpenSans700;
+			font-size: 36px;
+			line-height: 1.06;
+			text-align: center;
+			color: white;
+		}
+
+		ul {
+		    margin-top: 50px;
+			display: -webkit-flex;
+			display: -ms-flexbox;
+			display: flex;
+
+			-webkit-flex-wrap: wrap;
+			-ms-flex-wrap: wrap;
+			flex-wrap: wrap;		    
+
+			li {
+				border-bottom: none;
+				display: block;
+			    padding-top: 40px;
+			    padding-bottom: 0;
+			    text-align: center;	
+
+			    &:first-child {
+			    	padding-top: 0;
+			    }
+
+			    .purpose-content {
+
+			    	margin-top: 20px;
+			    }
+
+				&:last-child {
+					border-bottom: none;
+
+					&:after {
+						border: none;
+					}
+
+				}
+
+				&:after {
+					content: '';
+					border-right: none;
+				    height: 100%;
+				    position: absolute;
+				    top: 0;
+				    right: 0;
+				    opacity: 0.4;
+				}
+
+				i {
+					width: 40px;
+					color: white;
+					font-size: 40px;
+				}
+
+				span {
+					.OpenSans700;
+					font-size: 22px;
+					line-height: 1.09;
+					color: white;
+					margin-top: 0;
+					display: block;					
+				}
+
+				p {
+					.OpenSans600;
+					font-size: 18px;
+					line-height: 1.22;
+					color: white;
+					opacity: 0.75;
+					margin-top: 10px;
+				}
+			}
+		}
+	}
+}

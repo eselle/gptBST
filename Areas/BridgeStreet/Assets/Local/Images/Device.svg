@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="58px" height="81px" viewBox="0 0 58 81" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>Device</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0 80.3945055 57.7835508 80.3945055 57.7835508 0 0 0"></polygon>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Guarantee-Icons" transform="translate(-912.000000, -52.000000)">
+            <g id="Wireless">
+                <g transform="translate(881.000000, 52.000000)">
+                    <g id="Device" transform="translate(31.000000, 0.000000)">
+                        <polygon id="Stroke-1" stroke="#0073CF" stroke-width="2" points="1.25616415 11.3054773 56.5273867 11.3054773"></polygon>
+                        <path d="M1.25616415,69.0890282 L56.5273867,69.0890282" id="Stroke-3" stroke="#0073CF" stroke-width="2"></path>
+                        <path d="M56.5273867,72.8575206 L56.5273867,7.53698489 C56.5273867,4.06745951 53.7160913,1.25616415 50.2465659,1.25616415 L7.53698489,1.25616415 C4.06745951,1.25616415 1.25616415,4.06745951 1.25616415,7.53698489 L1.25616415,72.8575206 C1.25616415,76.327046 4.06745951,79.1383413 7.53698489,79.1383413 L50.2465659,79.1383413 C53.7160913,79.1383413 56.5273867,76.327046 56.5273867,72.8575206 L56.5273867,72.8575206 Z" id="Stroke-5" stroke="#0073CF" stroke-width="2"></path>
+                        <path d="M21.3547905,6.28082074 L36.4287603,6.28082074" id="Stroke-7" stroke="#0073CF" stroke-width="2"></path>
+                        <path d="M26.3794471,74.1136848 L31.4041037,74.1136848" id="Stroke-9" stroke="#0073CF" stroke-width="2"></path>
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <g id="Clip-12"></g>
+                        <polygon id="Stroke-11" stroke="#0073CF" stroke-width="2" mask="url(#mask-2)" points="6.28082074 64.0643716 51.5027301 64.0643716 51.5027301 16.3301339 6.28082074 16.3301339"></polygon>
+                        <path d="M23.8671188,42.7978894 C25.345624,41.9424416 27.0615442,41.4537937 28.8917754,41.4537937 C30.7232627,41.4537937 32.4404391,41.9436978 33.9202005,42.8004017" id="Stroke-13" stroke="#E17000" stroke-width="2" mask="url(#mask-2)"></path>
+                        <path d="M20.0986264,37.7400701 C22.636078,36.1145936 25.6546404,35.1724705 28.8917754,35.1724705 C32.1289104,35.1724705 35.1449605,36.1145936 37.6836683,37.7388139" id="Stroke-14" stroke="#E17000" stroke-width="2" mask="url(#mask-2)"></path>
+                        <path d="M16.3301339,32.6995858 C19.9227634,30.2940315 24.2439681,28.8921523 28.8917754,28.8921523 C33.5408389,28.8921523 37.8632998,30.2952876 41.4559292,32.700842" id="Stroke-15" stroke="#E17000" stroke-width="2" mask="url(#mask-2)"></path>
+                        <path d="M31.4041037,50.2465659 C31.4041037,51.6333712 30.2785806,52.7588942 28.8917754,52.7588942 C27.503714,52.7588942 26.3794471,51.6333712 26.3794471,50.2465659 C26.3794471,48.8585046 27.503714,47.7342376 28.8917754,47.7342376 C30.2785806,47.7342376 31.4041037,48.8585046 31.4041037,50.2465659 L31.4041037,50.2465659 Z" id="Stroke-16" stroke="#E17000" stroke-width="2" mask="url(#mask-2)"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

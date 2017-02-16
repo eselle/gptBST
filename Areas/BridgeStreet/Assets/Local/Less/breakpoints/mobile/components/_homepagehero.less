@@ -1,0 +1,154 @@
+.homepage-hero {
+	width: 100%;
+	height: 100%;
+	display: block;
+	position: relative;
+	height: 480px;
+
+	.home-video-vid {
+		background-size: cover;
+		display: none;
+		height: auto;
+		left: 50%;
+		min-width: 125%;
+		min-height: 100%;
+		filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=1);
+		position: fixed;
+		top: 50%;
+		-moz-transform: translate(-50%,-50%) scale(1);
+		-ms-transform: translate(-50%,-50%) scale(1);
+		-webkit-transform: translate(-50%,-50%) scale(1);
+		transform: translate(-50%,-50%) scale(1);		
+	}
+
+
+	.full-video-container {
+	    height: 100%;
+	    left: 0;
+	    top: 0;
+	    width: 100%;
+	    z-index: -1000;
+	    
+
+	    &.visible {
+		    z-index: 10001;
+		    opacity: 1;
+		    display: block;
+		}
+
+		.full-video-close-button {
+		    cursor: pointer;
+		    height: 44px;
+		    opacity: 1;
+		    position: fixed;
+		    right: 40px;
+		    top: 81px;
+		    -moz-transform: translateY(-40px);
+		    -ms-transform: translateY(-40px);
+		    -webkit-transform: translateY(-40px);
+		    transform: translateY(-40px);
+		    -moz-transition: opacity .2s,-moz-transform .2s;
+		    -o-transition: opacity .2s,-o-transform .2s;
+		    -webkit-transition: opacity .2s,-webkit-transform .2s;
+		    transition: opacity .2s,transform .2s;
+		    width: 44px;
+		    z-index: 1001;
+
+    		i {
+    			font-size: 40px;
+    			color: white;
+    		}
+		}
+	}	
+
+	.full-video {
+	    display: block;
+	    position: absolute;
+	    left: 50%;
+	    top: 50%;
+	    -moz-transform: translate(-50%,-50%);
+	    -ms-transform: translate(-50%,-50%);
+	    -webkit-transform: translate(-50%,-50%);
+	    transform: translate(-50%,-50%);
+	    min-width: 100%;
+	    min-height: 100%;
+	    width: auto;
+	    height: auto;
+	    background: #777;
+	    z-index: 0;
+	}
+
+  	.hero-item {
+	    width: 100%;
+	    height: 100%;
+	    position: relative;
+	    overflow: hidden;
+	    background-repeat: no-repeat;
+	    background-position: center center;
+	    -webkit-background-size: cover;
+	    -moz-background-size: cover;
+	    -ms-background-size: cover;
+	    -o-background-size: cover;
+	    background-size: cover;	    
+	    display: block;
+	    
+
+	    .hero-background {
+		    width: 100%;
+		    height: 100%;
+		    position: relative;
+		    overflow: hidden;	    	
+		    background-repeat: no-repeat;
+		    background-position: center center;
+		    -webkit-background-size: cover;
+		    -moz-background-size: cover;
+		    -ms-background-size: cover;
+		    -o-background-size: cover;
+		    background-size: cover;	
+		    	    	
+	    }
+
+  		.hero-messaging {
+		    position: absolute;
+		    bottom: 20px;
+		    color: #fff;
+		    left: 0;
+		    right: 0;
+		    text-align: center;
+		    opacity: 0;
+
+  			h1 {	
+  				font-size: 2em;
+  				line-height: 1;
+  				text-shadow: 0 0 10px rgba(86, 89, 92, 0.5);
+  				color: white;
+  				margin: 10px 0;
+  				font-weight: 700;
+  			}
+
+  			h4 {
+				font-size: 13px;
+				line-height: 1;
+				color: #ffffff;
+				text-shadow: 0 0 10px rgba(86, 89, 92, 0.5);
+
+  			}
+
+  		}
+
+		.video-btn {
+			cursor: pointer;
+		    margin: 0 auto;
+		    display: table;  
+		    top: calc(50% - 10px);	
+		    position:relative;			
+
+  			i {
+  				color: white;
+  				margin: 10px 0;
+  				font-size: 60px;
+  			}
+
+  		}  		
+  	}
+}

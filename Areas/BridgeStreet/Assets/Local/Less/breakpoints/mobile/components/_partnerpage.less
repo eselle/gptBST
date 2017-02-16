@@ -1,0 +1,89 @@
+﻿#partner-contact-us-form{
+	&.contact-form{
+		.how-to-contact{
+			input[type=radio]{
+				display: none;
+			}
+
+			label{
+				text-transform: capitalize;
+			    margin: 0 0 0 25px;
+			    text-align: left;
+			    color: #565a5c;
+			    font-size: 14px;
+			    position: relative;
+			    padding-left: 27px;
+
+			    &:before{
+		    	    background-color: #fff;
+				    border: 1px solid #dddede;
+				    border-radius: 10px;
+				    content: "";
+				    display: inline-block;
+				    height: 18px;
+				    line-height: 16px;
+				    margin: 0 10px 0 0;
+				    text-indent: -1px;
+				    vertical-align: middle;
+				    width: 18px;
+				    position: absolute;
+				    top: 0;
+				    left: 0;
+				    float: left;
+				    padding-left: 0;
+			    }
+
+			    &[for=emailRadio]{
+			    	margin:0;
+			    }
+			}
+
+			input[type=radio]:checked+label {
+				color: #565a5c;
+
+				&:before {
+				    background-color: #f5f5f5;
+				    content: '\f111';
+				    font-size: 8px;
+				    text-align: center;
+				    font-family: FontAwesome;
+				    color: #565a5c;
+				}
+			}
+		}
+
+		.g-recaptcha{
+			width:100%;
+		}
+
+		#btnSubmit{
+			background-color: @navy;
+			float: right;
+			margin-top: 18px;
+		    color: #fff;
+		    font-size: 16px;
+		    border: 1px solid #dddede;
+		    border-radius: 4px;
+		    padding: 10px;
+		    text-align: center;
+		    min-width: 140px;
+		    width: auto;
+		    font-family: 'Open Sans',sans-serif;
+		    font-weight: 700;
+		    margin-bottom: 30px;
+		}
+	}
+}
+
+.partner-fact-list{
+    
+}
+
+#partner-contact-us-form-thank-you{
+    display:none;    
+}
+
+#recaptcha-error{
+    display:none;
+    color: red;                      
+}

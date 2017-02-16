@@ -1,0 +1,340 @@
+﻿ /* ==========================================================================
+   Mobile Heading, Paragraph, and font styles
+   =========================================================================== */ 
+
+
+/* ==========================================================================
+   Mobile Pod styles
+   ========================================================================== */
+
+.PartnerPodMobile {
+   .partner-pod {
+      overflow: hidden;
+      background-color: black;
+      margin-bottom: 15px;
+      border-radius: @globalRadius;
+      
+      .pod-background {
+         
+         -webkit-background-size: cover;
+         -moz-background-size: cover;
+         -o-background-size: cover;
+         background-size: cover;
+         background-position: center;
+         position: relative;
+         height: 160px;
+
+         .buttonTransitions(1000ms);
+      }
+
+      &:hover .pod-background{
+         opacity: 0.8;         
+      } 
+
+
+      h2 {
+         .OpenSans700;
+         font-size: 16px;
+         line-height: 1.13;
+         color: white;
+         text-shadow: 0 0 10px rgba(0, 0, 0, 0.85);
+
+      }
+   }
+}
+
+/*********************************
+ SEARCH PAGE - CARD FOR MOBILE
+ ********************************/
+
+
+/************************************************************
+ PROPERTY DETAIL PAGE - RELATED PROPERTIES - CARD FOR MOBILE
+ ***********************************************************/
+
+.PropertyPodRelatedMobile {   
+   .property-pod-related{
+      margin-bottom: 15px;
+
+      .property-pod-wrapper {
+          background-color: white;
+          border: 1px solid @gr-100;
+          width: 100%;
+          position: relative;
+        /*  min-height: auto;  */       
+
+          height: 100%;
+          float: left;          
+
+         .property-pod-image-wrapper {
+            position: relative;
+
+            overflow: hidden;
+            padding-bottom: 67%;
+
+            .media-cover {
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              left: 0;
+              right: 0;
+              z-index: 1;
+              overflow: hidden;              
+            }
+
+            .img-animated {
+                width: auto;
+                height: 100%;   
+                margin: 0 auto;
+                display: block;                             
+            }   
+
+
+            .property-pod-user-br {
+               .OpenSans400;
+                position: absolute;
+                bottom: 15px;
+                right: 15px;
+                background-color: @or-100;
+                color: white;
+                border-radius: 50%;
+                font-size: 12px;
+                padding: 5px;
+                cursor: pointer;
+                width: 25px;
+                height: 25px;
+                padding: 4px 6px;
+                text-align: center;                
+            }
+
+            .property-pod-heart-bl {
+                position: absolute;
+                bottom: 15px;
+                left: 15px;
+                color: white;
+                font-size: 24px;
+                cursor: pointer;
+
+                i {
+                  display: block;
+                }  
+
+                &.active {
+                     color: @or-100;
+                }         
+            }
+
+            .featured-flag {
+              top: 10px;
+              position: absolute;
+              right: 10px;   
+              background-color: @navy;
+              border-radius: 12px;
+              text-transform: uppercase;
+              color: white;
+              .OpenSans600;
+              font-size: 10px;
+              font-weight: 600;
+              font-style: normal;
+              font-stretch: normal;
+              line-height: 1.4;
+              letter-spacing: 1px;
+              text-align: center;   
+              padding: 4px 14px;  
+              z-index:1;           
+            }
+
+            .user-flag {
+              position: absolute;
+              bottom: 16px;
+              right: 25px;
+              color: white;  
+              font-size: 29px;            
+            }             
+         }
+
+         .property-pod-description-wrapper {
+            padding: 20px 15px;
+            padding-bottom: 0;
+            width: 100%;
+            margin-bottom:50px; 
+
+            h3 {
+               margin-top: 0;
+               .OpenSans700;
+               font-size: 16px;
+               line-height: 1.13;
+               color: @navy;
+            }
+
+            h6 {
+               .OpenSans400;
+               font-size: 14px;
+               line-height: 1.29;
+               color: @gr-500;     
+               margin-bottom: 0;         
+            }
+
+            p {
+               .OpenSans400;
+               font-size: 12px;
+               line-height: 1.33;
+               color: @gr-200;             
+            }
+         }
+
+        .building-type {
+            padding: 13px 20px 30px;
+
+            span {
+              .OpenSans600;
+              font-size:10px;
+              line-height: 1.17;
+              color: @gr-200;  
+            }
+
+            ul {
+                &.building-type-items {
+                    .building-type-item {
+                        &.active {
+                            background-color: @or-100;
+                        }
+
+                        &.enabled {
+                            background-color: @navy;
+                        }
+                    }
+                }
+
+                li {
+                    float: left;
+                    background-color: @gr-100;
+                    border-radius: 50%;
+                    width: 18px;
+                    height: 18px;
+                    padding: 9px 0px;
+                    position: relative;
+                    margin-right: 5px;   
+                    text-align: center;                     
+
+                    span {
+                        color: white;
+                        font-size: 12px;
+                        font-weight: bold;
+                        position: absolute;
+                        left: 5px;    
+                        line-height: 0.2;                        
+                    }
+                }
+            }
+        
+        }
+
+         .property-pod-cta-wrapper {
+            padding: 15px;  
+            position:absolute;
+            bottom:0px;
+            right:0px;
+            left:0; 
+
+            span.btn{
+                background-color:@or-100;
+                position:relative;
+                top:5px;
+                line-height: 35px;
+                height: 35px;
+
+                &:hover,
+                &:focus,
+                &:active{
+                    color:@white;
+                    background-color:@or-100;
+                    cursor:pointer;
+                }
+            }
+
+            .price-point {               
+
+               h3 {
+                  .OpenSans700;
+                  font-size: 22px;
+                  line-height: 1.09;
+                  text-align: right;
+                  color: @gre-100;
+                  margin: 0;
+
+                  i {
+                      color: @or-100;
+                  }
+               }
+
+               span {
+                  .OpenSans600;
+                  font-size:10px;
+                  line-height: 1.17;
+                  color: @gr-200;   
+                  margin-top: 5px;               
+                  text-align: right;
+                  display: block;
+               }
+
+            }
+         }
+      }
+   }
+}
+
+
+ /* ==========================================================================
+   Mobile Homepage Hero styles
+   ========================================================================== */
+
+
+
+
+ /* ==========================================================================
+   Mobile Navigation styles
+   ========================================================================== */
+
+
+
+
+ /* ==========================================================================
+   Mobile Button styles
+   ========================================================================== */
+
+.mobileSearchButton{
+   .button;
+   background-color: @or-100;
+   color: white;
+   .buttonTransitions;
+   margin: auto auto;
+   width: 100%;
+   border: 1px solid @or-100;
+   .OpenSans700;
+   font-size: 16px;
+   display: block;
+   padding: 12px;
+
+   a {
+      color: @or-100;
+   }
+
+   &:hover{
+      background-color: @or-100;
+      color: white;
+   }
+
+   &.focus {
+      background-color: @or-100;
+      a {
+         color: white ;
+      }
+   }
+}
+
+
+ /* ==========================================================================
+   Mobile Carousel styles
+   ========================================================================== */
+

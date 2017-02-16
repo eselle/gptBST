@@ -1,0 +1,654 @@
+ /* ==========================================================================
+   Global Animations and Filters
+   ========================================================================== */
+
+.buttonTransitions(@speed : 300ms, @property : all, @ease : ease) {
+   transition: @speed @property @ease;
+   -webkit-transition: @speed @property @ease;
+   -moz-transition: @speed @property @ease;
+   -ms-transition: @speed @property @ease;
+   -o-transition: @speed @property @ease;
+}
+
+.filter(@brightness : 100%, @contrast : 100%, @grayscale: 0) {
+    filter: brightness(@brightness) contrast(@contrast) grayscale(@grayscale);
+    -webkit-filter: brightness(@brightness) contrast(@contrast) grayscale(@grayscale);
+    -moz-filter: brightness(@brightness) contrast(@contrast) grayscale(@grayscale);
+    -o-filter: brightness(@brightness) contrast(@contrast) grayscale(@grayscale);
+    -ms-filter: brightness(@brightness) contrast(@contrast) grayscale(@grayscale);
+}
+
+
+/* ==========================================================================
+   HOME PAGE - FEATURED PROPERTIES - CARD FOR MOBILE
+   ========================================================================== */
+.PropertyPod {
+   .property-pod{
+      margin-bottom: 15px;
+      display: block;
+
+      .property-pod-wrapper {
+          background-color: white;
+          border: 1px solid @gr-100;
+          width: 100%;
+          position: relative;  
+          float: left;  
+          height: 100%;            
+
+         .property-pod-image-wrapper {
+            position: relative;
+            overflow: hidden;
+            padding-bottom: 67%;
+
+            .media-cover {
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              left: 0;
+              right: 0;
+              z-index: 1;
+              overflow: hidden;              
+            }
+
+            .img-animated {
+                width: auto;
+                height: 100%;   
+                margin: 0 auto;
+                display: block;                             
+            }            
+           
+
+            .property-pod-user-br {
+               .OpenSans400;
+                position: absolute;
+                bottom: 15px;
+                right: 15px;
+                background-color: @or-100;
+                color: white;
+                border-radius: 50%;
+                font-size: 12px;
+                padding: 5px;
+                cursor: pointer;
+                width: 25px;
+                height: 25px;
+                padding: 4px 6px;
+                text-align: center;
+
+            }
+
+           .featured-flag {
+              top: 10px;
+              position: absolute;
+              right: 10px;   
+              background-color: @navy;
+              border-radius: 12px;
+              text-transform: uppercase;
+              color: white;
+              .OpenSans600;
+              font-size: 10px;
+              font-weight: 600;
+              font-style: normal;
+              font-stretch: normal;
+              line-height: 1.4;
+              letter-spacing: 1px;
+              text-align: center;     
+              padding: 4px 14px; 
+              z-index: 1;    
+                 
+           }
+
+           .user-flag {
+              position: absolute;
+              bottom: 16px;
+              right: 25px;
+              color: white;  
+              font-size: 29px;            
+           }              
+
+            .property-pod-heart-bl {
+                position: absolute;
+                bottom: 15px;
+                left: 15px;
+                color: white;
+                font-size: 24px;
+                cursor: pointer;
+
+                i {
+                  display: block;
+                }  
+
+                &.active {
+                     color: @or-100;
+                }         
+            }
+         }
+
+         .property-pod-description-wrapper {
+            padding: 20px 20px 10px;
+
+            h3 {
+               margin-top: 0;
+               .OpenSans700;
+               font-size: 16px;
+               line-height: 1.13;
+               color: @navy;               
+            }
+
+            h6 {
+               .OpenSans400;
+               font-size: 14px;
+               line-height: 1.29;
+               color: @gr-500;               
+            }
+
+            p {
+               .OpenSans400;
+               font-size: 12px;
+               line-height: 1.33;
+               color: @gr-200;             
+            }
+         }
+
+        .building-type {
+            padding: 13px 20px 30px;
+
+            span {
+              .OpenSans600;
+              font-size:10px;
+              line-height: 1.17;
+              color: @gr-200;  
+            }
+
+            ul {
+                &.building-type-items {
+                    .building-type-item {
+                        &.active {
+                            background-color: @or-100;
+                        }
+
+                        &.enabled {
+                            background-color: @navy;
+                        }
+                    }
+                }
+
+                li {
+                    float: left;
+                    background-color: @gr-100;
+                    border-radius: 50%;
+                    width: 18px;
+                    height: 18px;
+                    padding: 9px 0px;
+                    position: relative;
+                    margin-right: 5px;   
+                    text-align: center;                     
+
+                    span {
+                        color: white;
+                        font-size: 12px;
+                        font-weight: bold;
+                        position: absolute;
+                        left: 5px;    
+                        line-height: 0.2;                        
+                    }
+                }
+            }
+        
+        }         
+
+         .property-pod-cta-wrapper {
+
+            .btn-view {
+               font-size: 12px;
+               .generic-button(@or-100, @or-200, 45px, 12px);               
+            }
+
+            .price-point {
+                padding: 10px 20px 20px;
+                text-align: right;             
+
+               h3 {
+                  .OpenSans700;
+                  font-size: 22px;
+                  line-height: 1.09;
+                  text-align: right;
+                  color: @gre-100;
+                  margin: 0;
+
+                  i {
+                      margin-left: 4px;
+                      color: @or-100;
+                  }
+               }
+
+               span {
+                  .OpenSans600;
+                  font-size:10px;
+                  line-height: 1.14;
+                  color: @gr-200;   
+                  margin-top: 5px;               
+                  text-align: right;
+                  display: block;
+               }
+
+            }
+         }
+      }
+
+      &.list {
+          .property-pod-wrapper {
+              max-height: 154px;
+              position: relative;
+              min-height: auto;
+
+              .property-pod-image-wrapper {
+                  float: left;
+              }
+          }
+
+          .property-pod-description-wrapper {
+              float: left;
+              width: 42%;
+              padding: 20px 20px;            
+          }
+
+          .property-pod-cta-wrapper {
+/*              padding: 0;
+              float: right;
+              display: table;
+              width: 24%;
+              position: absolute;
+              right: 20px;
+              bottom: 20px;*/
+
+          }
+      }
+   }
+}
+
+
+.PropertyPodSearch {
+   .property-pod{
+      margin-bottom: 15px;
+
+      .property-pod-wrapper {
+          background-color: white;
+          border: 1px solid @gr-100;
+          width: 100%;
+          position: relative;
+          min-height: 404px;         
+
+         .property-pod-image-wrapper {
+            position: relative;
+
+            .property-pod-user-br {
+               .OpenSans400;
+                position: absolute;
+                bottom: 15px;
+                right: 15px;
+                background-color: @or-100;
+                color: white;
+                border-radius: 50%;
+                font-size: 12px;
+                padding: 5px;
+                cursor: pointer;
+
+                width: 25px;
+                height: 25px;
+                padding: 4px 6px;
+                text-align: center;
+                    
+            }
+
+           .featured-flag {
+              top: 10px;
+              position: absolute;
+              right: 10px;   
+              background-color: @navy;
+              border-radius: 12px;
+              text-transform: uppercase;
+              color: white;
+              .OpenSans600;
+              font-size: 10px;
+              font-weight: 600;
+              font-style: normal;
+              font-stretch: normal;
+              line-height: 1.4;
+              letter-spacing: 1px;
+              text-align: center;
+              padding: 4px 14px;
+              z-index: 1;
+           }
+
+           .user-flag {
+              position: absolute;
+              bottom: 16px;
+              right: 25px;
+              color: white;  
+              font-size: 29px;            
+           }              
+
+            .property-pod-heart-bl {
+                position: absolute;
+                bottom: 15px;
+                left: 15px;
+                color: white;
+                font-size: 24px;
+                cursor: pointer;
+
+                i {
+                  display: block;
+                }  
+
+                &.active {
+                     color: @or-100;
+                }         
+            }
+         }
+
+         .property-pod-description-wrapper {
+            padding: 20px;
+            padding-bottom: 0;
+
+            h3 {
+               margin-top: 0;
+               .OpenSans700;
+               font-size: 16px;
+               line-height: 1.13;
+               color: @navy; 
+            }
+
+            h6 {
+               .OpenSans400;
+               font-size: 14px;
+               line-height: 1.29;
+               color: @gr-500;               
+            }
+
+            p {
+               .OpenSans400;
+               font-size: 12px;
+               line-height: 1.33;
+               color: @gr-200;             
+            }
+         }
+
+          .building-type {
+              padding: 13px 20px 30px;
+
+              span {
+                .OpenSans600;
+                font-size:10px;
+                line-height: 1.17;
+                color: @gr-200;  
+              }
+
+              ul {
+                  &.building-type-items {
+                      .building-type-item {
+                          &.active {
+                              background-color: @or-100;
+                          }
+
+                          &.enabled {
+                              background-color: @navy;
+                          }
+                      }
+                  }
+
+                  li {
+                      float: left;
+                      background-color: @gr-100;
+                      border-radius: 50%;
+                      width: 18px;
+                      height: 18px;
+                      padding: 9px 0px;
+                      position: relative;
+                      margin-right: 5px;   
+                      text-align: center;                     
+
+                      span {
+                          color: white;
+                          font-size: 12px;
+                          font-weight: bold;
+                          position: absolute;
+                          left: 5px;    
+                          line-height: 0.2;                        
+                      }
+                  }
+              }
+          
+          }    
+        
+         .property-pod-cta-wrapper {
+            padding: 15px 20px;
+            width: 100%;
+            position: relative;
+            display: table;
+
+            .btn-view {
+               font-size: 12px;
+               .generic-button(@or-100, @or-200, 45px, 12px);               
+            }
+
+            .price-point {              
+               h3 {
+                  .OpenSans700;
+                  font-size: 22px;
+                  line-height: 1.09;
+                  text-align: right;
+                  color: @gre-100;
+                  margin: 0;
+
+                  i {
+                      color: @or-100;
+                  }
+               }
+
+               span {
+                  .OpenSans600;
+                  font-size:12px;
+                  line-height: 1.17;
+                  color: @gr-200;   
+                  margin-top: 5px;               
+                  text-align: right;
+                  display: block;
+                  text-transform: uppercase;
+               }
+
+            }
+         }
+      }
+
+      &.list {
+          .property-pod-wrapper {
+              max-height: 154px;
+              position: relative;
+              min-height: auto;
+
+              .property-pod-image-wrapper {
+                  float: left;
+              }
+          }
+
+          .property-pod-description-wrapper {
+              float: left;
+              width: 42%;
+              padding: 20px 20px;            
+          }
+
+          .property-pod-cta-wrapper {
+              padding: 0;
+              float: right;
+              display: table;
+              width: 24%;
+              position: absolute;
+              right: 20px;
+              bottom: 20px;
+
+          }
+      }
+   }
+}
+
+
+.PartnerPod {
+   .partner-pod {
+      overflow: hidden;
+      background-color: black;
+      
+      .pod-background {
+         
+         -webkit-background-size: cover;
+         -moz-background-size: cover;
+         -o-background-size: cover;
+         background-size: cover;
+         background-position: center;
+         position: relative;
+         height: 223px;
+
+         .buttonTransitions(1000ms);
+      }
+
+      &:hover .pod-background{
+         opacity: 0.8;         
+      } 
+
+
+      h2 {
+         .OpenSans700;
+         font-size: 16;
+         line-height: 1.13;
+         color: white;
+         text-shadow: 0 0 10px rgba(0, 0, 0, 0.85);
+
+      }
+   }
+}
+
+ /* ==========================================================================
+   Global Button styles
+   ========================================================================== */
+
+
+.borderRadius(@radius) {
+   -webkit-border-radius: @radius;
+   -moz-border-radius: @radius;
+   -ms-border-radius: @radius;
+   -o-border-radius: @radius;
+   border-radius: @radius;
+   overflow: hidden;
+}
+
+.button(@radius : @globalRadius) {
+   .RobotoCondensed;
+   .borderRadius(@radius);
+
+   border: 0;
+   padding: 11px 18px;
+   white-space: nowrap;
+   cursor: pointer;
+   text-align: center;
+   vertical-align: middle;   
+   font-weight: bold;
+}
+
+
+.generic-button(@color: @or-100, @colorHover : @or-200, @height : 100%, @fontSize: 16px) {
+    .button;
+    height: 100%;
+    font-size: @fontSize;
+    padding: 6px 18px;
+    margin-top: 13px;
+    .buttonTransitions;
+    color: white;
+    text-decoration: none;
+    background-color: @color;
+    display: block;
+
+    a {
+      .OpenSans400;
+      font-weight: bold;
+    }
+
+    &:hover {
+      background-color:  @colorHover;
+      color: white;
+      text-decoration: none;
+    }
+}
+
+.booking-button(@color: @or-100, @colorHover : @or-200, @height : 100%, @fontSize: 16px) {
+   .button;
+   font-size: @fontSize;
+   height: 100%;
+   padding: 11px 18px;
+   .buttonTransitions;
+   color: white;
+   text-decoration: none;
+   background-color: @color;
+   display: block;
+
+   span {
+      .OpenSans400;
+      font-weight: bold;
+   }
+
+   &:hover {
+      background-color:  @colorHover;
+      color: white;
+      text-decoration: none;
+   }
+}
+
+.searchButton(@fontSize: 18px, @width: 70px) {
+   .button;
+   
+   font-size: @fontSize;
+   height: 100%;
+
+   .buttonTransitions;
+   
+   color: white;
+   text-decoration: none;
+   background-color: @or-100;
+   display: table-cell;
+   text-transform: uppercase;
+   .borderRadius(0);
+   width: @width;
+
+   a {
+      .OpenSans400;
+      font-weight: bold;
+   }
+
+   &:hover {
+      background-color:  @or-200;
+      color: white;
+      text-decoration: none;
+   }   
+}
+
+.explore-button(@height : 29px, @fontSize: 16px) {
+   .button;
+   font-size: @fontSize;
+   height: @height;
+
+   .buttonTransitions;
+   color: white;
+   text-decoration: none;
+   background-color: @or-100;
+    display: table;
+    padding: 5px 18px;
+
+    a {
+      font-size: @fontSize;
+      font-weight: bold;    
+    }
+
+   &:hover {
+      background-color:  @or-200;
+      color: white;
+      text-decoration: none;
+   }
+}

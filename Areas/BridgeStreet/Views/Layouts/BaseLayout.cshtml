@@ -1,0 +1,108 @@
+﻿@using BridgeStreet.Website.Extensions
+@using Sitecore.Mvc;
+@using Sitecore.Mvc.Analytics.Extensions
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7 @Html.Sitecore().Controller("Global", "Language")" lang="@Html.Sitecore().Controller("Global", "Language")"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8 @Html.Sitecore().Controller("Global", "Language")" lang="@Html.Sitecore().Controller("Global", "Language")"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9 @Html.Sitecore().Controller("Global", "Language")" lang="@Html.Sitecore().Controller("Global", "Language")"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js @Html.Sitecore().Controller("Global", "Language")" lang="@Html.Sitecore().Controller("Global", "Language")">
+<!--<![endif]-->
+<head>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-847394-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    @Html.Sitecore().Controller("Global", "HtmlHead")
+    @Html.Sitecore().Controller("Global", "CssBundles")
+    @Html.Sitecore().Controller("Global", "ScriptsTop")
+    @Html.Sitecore().Controller("Global", "ScriptVendorBundles")
+    @Html.Sitecore().VisitorIdentification()
+</head>
+<body class="@(!Sitecore.Context.PageMode.IsNormal ? "preview-mode" : "") remodal-bg remodal-is-closed" data-sticky_parent>
+    <!-- Google Tag Manager -->
+    <noscript>
+        <iframe src="//www.googletagmanager.com/ns.html?id=GTM-T5NFRC"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+            '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-T5NFRC');</script>
+    <!-- End Google Tag Manager -->
+    <!--[if lt IE 7]>
+                <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+            <![endif]-->
+    @Html.Sitecore().Placeholder("slide-out-menu")
+    <div id="page" class="page-wrapper slideout-panel" data-sticky_parent>
+        @Html.Sitecore().Placeholder("header")
+        @Html.Sitecore().Placeholder("main")
+        @Html.Sitecore().Placeholder("footer")
+    </div>
+    @Html.Sitecore().Controller("Global", "ScriptVendorBundles2")
+    @Html.Sitecore().Controller("Global", "ScriptLocalBundles")
+    @Html.Sitecore().Controller("Global", "ScriptsBottom")
+
+    @{ var googleMapsApiKey = Sitecore.Configuration.Settings.GetSetting("Bridgestreet.GoogleMaps.ApiKey");}
+    <script type="text/javascript" charset="UTF-8" src="https://maps.google.com/maps/api/js?key=@googleMapsApiKey&libraries=geometry&libraries=places&ver=1.0"></script>
+
+    <!-- BoldChat Visitor Monitor HTML v5.00 (Website=BridgeStreet US,Ruleset=Bridgestreet US,Floating Chat=AOFloatButton -->
+    <script type="text/javascript">
+        window._bcvma = window._bcvma || [];
+        _bcvma.push(["setAccountID", "1652799714953928050"]);
+        _bcvma.push(["setParameter", "WebsiteID", "1844769196760883086"]);
+        _bcvma.push(["setParameter", "InvitationID", "3330819275964640456"]);
+        _bcvma.push(["setParameter", "VisitName", ""]);
+        _bcvma.push(["setParameter", "VisitPhone", ""]);
+        _bcvma.push(["setParameter", "VisitEmail", ""]);
+        _bcvma.push(["setParameter", "VisitRef", ""]);
+        _bcvma.push(["setParameter", "VisitInfo", ""]);
+        _bcvma.push(["setParameter", "CustomUrl", ""]);
+        _bcvma.push(["setParameter", "WindowParameters", ""]);
+        _bcvma.push(["addFloat", { type: "chat", id: "1637596089878679666" }]);
+        _bcvma.push(["pageViewed", document.location.href, document.referrer]);
+        var bcLoad = function () {
+            if (window.bcLoaded) return; window.bcLoaded = true;
+            var vms = document.createElement("script"); vms.type = "text/javascript"; vms.async = true;
+            vms.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + "vmss.boldchat.com/aid/1652799714953928050/bc.vms4/vms.js";
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(vms, s);
+        };
+        if (window.pageViewer && pageViewer.load) pageViewer.load();
+        else if (document.readyState == "complete") bcLoad();
+        else if (window.addEventListener) window.addEventListener('load', bcLoad, false);
+        else window.attachEvent('onload', bcLoad);
+    </script>
+    <noscript>
+        <a href="http://www.boldchat.com" title="Live Chat" target="_blank"><img alt="Live Chat" src="https://vms.boldchat.com/aid/1652799714953928050/bc.vmi?&amp;wdid=1844769196760883086&amp;vr=&amp;vn=&amp;vi=&amp;ve=&amp;vp=&amp;iq=&amp;curl=" border="0" width="1" height="1" /></a>
+    </noscript>
+    <!-- /BoldChat Visitor Monitor HTML v5.00 -->
+
+
+    <script type="text/javascript">
+        WebFontConfig = {
+            google: { families: ['Roboto::latin', 'Open+Sans:400,800,600,700:latin', 'Lora:400,700,400italic:latin'] }
+        };
+        (function () {
+            var wf = document.createElement('script');
+            wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+            wf.type = 'text/javascript';
+            wf.async = 'true';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(wf, s);
+        })();
+    </script>
+
+</body>
+</html>

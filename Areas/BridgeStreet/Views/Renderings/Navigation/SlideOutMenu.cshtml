@@ -1,0 +1,60 @@
+﻿@using BridgeStreet.Website.Domain.Models.Navigation
+@using Glass.Mapper.Sc.Fields
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<BridgeStreet.Website.Areas.BridgeStreet.Models.Navigation.HeaderViewModel>
+
+
+@functions{
+    public string IsSelected(Guid pageId, MenuLink menuLink)
+    {
+        if (menuLink != null && menuLink.Link != null)
+        {
+            if (pageId == menuLink.Link.TargetId)
+            {
+                return "selected";
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+
+        return string.Empty;
+    }
+}
+
+@{
+    if (Model == null || Model.HeaderConfiguration == null || Model.HeaderConfiguration.HeaderMenus == null)
+    {
+        return;
+    }
+
+    var pageId = Sitecore.Context.Item.ID;
+    List<Menu> menus = Model.HeaderConfiguration.HeaderMenus.OrderBy(x => x.SortOrder).ToList();
+}
+<nav id="menu" class="nav-wrapper menu slideout-menu">
+    <ul class="nav-items">
+        @foreach (Menu menu in menus)
+        {
+            <li>
+                @using (BeginRenderLink(menu, x => x.Link, isEditable: true))
+                {
+                    @Editable(menu, x => x.Title)
+                }
+                <ul>
+                    @if (menu.MenuLinks != null)
+                    {
+                        foreach (MenuLink link in menu.MenuLinks.OrderBy(x => x.SortOrder).ToList())
+                        {
+                            <li class="@IsSelected(pageId.Guid,link)">
+                                @using (BeginRenderLink(link, x => x.Link, isEditable: true))
+                                {
+                                    @Editable(link, x => x.LinkText)
+                                }
+                            </li>
+                        }
+                    }
+                </ul>
+            </li>
+        }
+    </ul>
+</nav>

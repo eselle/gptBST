@@ -1,0 +1,30 @@
+﻿@using Glass.Mapper.Sc.Web.Mvc
+
+@inherits GlassView<BridgeStreet.Website.Domain.Models.Pages.PartnerPage.PartnerFactList.PartnerFactList>
+
+@if (Model.Items != null && Model.Items.Any())
+{
+    <div class="partner-fact-list">
+        @{
+            var lastFact = Model.Items.Last();
+        }
+        @foreach (var fact in Model.Items)
+        {
+            <hr class="thick" />
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 img-wrap">
+                    @RenderImage(fact, f => f.Image)
+                </div>
+                <div class="col-xs-12 col-sm-9">
+                    @Editable(fact, f => f.Title)
+                    @Editable(fact, f => f.Description)
+                </div>
+            </div>
+
+            if (fact.Equals(lastFact)) {
+                <hr class="thick" />
+            }
+        }
+    </div>
+}

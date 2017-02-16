@@ -1,0 +1,537 @@
+﻿@using BridgeStreet.Website.Infrastructure.Constants
+@using Sitecore.Globalization
+@using Sitecore.Mvc
+
+@using BridgeStreet.Website.Areas.BridgeStreet.Models.Global
+@using BridgeStreet.Website.Domain.Models.Lists.LocationList
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<BridgeStreet.Website.Areas.BridgeStreet.Models.BookingFlow.BookingModel>
+
+<div id="booking-form">
+    <div class="two-col-container container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-5 col-sm-push-7">
+                <div id="your-trip-container" class="hideTripDetails bookingflow">
+                    <h2>
+                        @Translate.Text(Constants.TranslationKeys.BookingFlow.TitleYourTrip) 
+                        <a href="" class="btnDetails toggleTripDetails">@Translate.Text(Constants.TranslationKeys.View)</a>
+                    </h2>
+                    
+                    <div id="trip-details" class="row hideTripDetails">
+                        <div class="col-xs-12">
+                            <div class="reservation-reference" style="display: none;">
+                                <label id="lblReservationReference">@Translate.Text(Constants.TranslationKeys.ReservationReference): <span class="reservation-number"></span></label>
+                            </div>
+
+                            <div class="property-image img-pod-animated">
+                                <div class="media-cover">
+                                    <img id="imgRoom" class="img-animated" src="" alt="" />
+                                </div>
+                            </div>
+
+                            <h3 id="lblHotelName"></h3>
+
+                            <h5 id="lblHotelAddress"></h5>
+
+                                <hr />
+
+                                <h4>@Translate.Text(Constants.TranslationKeys.BookingFlow.LableCheckIn)</h4>
+                                <label id="lblCheckIn"></label>
+                                <label id="lblCheckInTime"></label>
+                                <div class="clear"></div>
+
+                                <hr />
+
+                                <h4>@Translate.Text(Constants.TranslationKeys.BookingFlow.LabelCheckOut)</h4>
+                                <label id="lblCheckOut"></label>
+                                <label id="lblCheckOutTime"></label>
+                                <div class="clear"></div>
+
+                                <div id="accomodation_container">
+                                    <hr class="thick"/>
+                                    <h4>@Translate.Text(Constants.TranslationKeys.BookingFlow.LabelAccomodation)</h4>
+
+                                    <label>@Translate.Text(Constants.TranslationKeys.BookingFlow.LabelPricePerNight)</label>
+                                    <label id="lblPricePerNight"></label>
+                                    <div class="clear"></div>
+
+
+                                    <label>@Translate.Text(Constants.TranslationKeys.BookingFlow.LabelLengthOfStay)</label>
+                                    <label id="lblLengthOfStay"></label>
+                                    <div class="clear"></div>
+
+                                    <hr />
+
+                                    <label><b>@Translate.Text(Constants.TranslationKeys.BookingFlow.LabelTotalAccomodation)</b></label>
+                                    <label id="lblTotalAccomodation"></label>
+                                    <div class="clear"></div>
+
+                                    <label>@Translate.Text(Constants.TranslationKeys.BookingFlow.LabelTaxes)</label>
+                                    <label id="lblTax"></label>
+                                    <div class="clear"></div>
+
+
+                                    <label>@Translate.Text(Constants.TranslationKeys.BookingFlow.LabelFees)</label>
+                                    <label id="lblFees"></label>
+                                    <hr class="thick" />
+                                </div>
+
+                                <label><b>@Translate.Text(Constants.TranslationKeys.BookingFlow.LabelTotalDue)</b></label>
+                                <label id="lblTotalPrice"></label>
+
+                                <br />
+
+                                <button id="btnEditTrip" style="display: none;">@Translate.Text(Constants.TranslationKeys.BookingFlow.ButtonEditBooking)</button>
+                            </div>
+                        </div>
+
+                        <a href="" class="btnHide toggleTripDetails">@Translate.Text(Constants.TranslationKeys.Hide)-</a>
+                        
+                        <div class="clear"></div>
+
+                        <div class="row visible-xs">
+                            <hr class="thick" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-7 col-sm-pull-5 form-content">
+                    <div id="header">
+                        <h1>@Translate.Text(Constants.TranslationKeys.BookYourStay)</h1>
+                    </div>
+
+                    <ul class="nav nav-tabs" id="bookingTab">
+                        <li class="active"><a data-toggle="tab" href="#tabGuestInformation"><span class="hidden-xs hidden-sm">@Translate.Text(Constants.TranslationKeys.BookingFlow.TabGuestInformation)</span><span class="hidden-md hidden-lg">@Translate.Text(Constants.TranslationKeys.BookingFlow.TabGuestInformationMobile)</span></a></li>
+                        <li class="disabled"><a data-toggle="tab" href="#tabBillingDetails"><span class="hidden-xs hidden-sm">@Translate.Text(Constants.TranslationKeys.BookingFlow.TabBillingDetails)</span><span class="hidden-md hidden-lg">@Translate.Text(Constants.TranslationKeys.BookingFlow.TabBillingDetailsMobile)</span></a></li>
+                        <li class="disabled"><a data-toggle="tab" href="#tabConfirmation">@Translate.Text(Constants.TranslationKeys.BookingFlow.TabReview)</a></li>
+                        <li class="disabled"><a data-toggle="tab" href="#tabStartPacking"><span class="hidden-xs hidden-sm">@Translate.Text(Constants.TranslationKeys.BookingFlow.TabConfirmation)</span><span class="hidden-md hidden-lg">@Translate.Text(Constants.TranslationKeys.BookingFlow.TabConfirmationMobile)</span></a></li>
+                    </ul>
+
+                    <form id="bookingForm" novalidate>
+                        <div class="tab-content">
+                            <!-- ---------------------------------------------------- -->
+                            <!-- Guest Information Tab -->
+                            <!-- ---------------------------------------------------- -->
+                            <div id="tabGuestInformation" class="tab-pane fade in active">
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-3">
+                                        <div class="select-box-container">
+                                            <select id="sTitle" name="Title" title="@Translate.Text(Constants.TranslationKeys.BookingFlow.FieldTitle)" required>
+                                                <option disabled selected value="">
+                                                    @Translate.Text(Constants.TranslationKeys.BookingFlow.FieldTitle)
+                                                </option>
+                                                @foreach (ValueDropDownOption val in Model.BookingPage.TitleOptions)
+                                                {
+                                                    <option value="@val.Value">
+                                                        @val.Title
+                                                    </option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-9">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-md-6">
+                                                <input type="text" id="txtFirstName" maxlength="100" name="FirstName" placeholder="@Translate.Text(Constants.TranslationKeys.BookingFlow.FieldFirstName)" required />
+                                            </div>
+                                            <div class="col-xs-12 col-md-6">
+                                                <input type="text" id="txtLastName" maxlength="100" name="LastName" placeholder="@Translate.Text(Constants.TranslationKeys.BookingFlow.FieldLastName)" required />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <input type="text" id="txtAddressLine1" maxlength="255" name="Address1" placeholder="@Translate.Text(Constants.TranslationKeys.BookingFlow.FieldAddress)" required />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <input type="text" id="txtAddressLine2" maxlength="255" name="Address2" placeholder="@Translate.Text(Constants.TranslationKeys.BookingFlow.FieldAddressLine2)" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-9">
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <input type="text" id="txtCity" name="City" maxlength="100" placeholder="City" required />
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <input type="text" id="txtState" name="StateCounty" maxlength="100" placeholder="@Translate.Text(Constants.TranslationKeys.BookingFlow.FieldStateCounty)" required />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 col-md-3">
+                                        <input type="text" id="txtZip" name="ZipPost" maxlength="15" maxlength="5" placeholder="@Translate.Text(Constants.TranslationKeys.BookingFlow.FieldZipCode)" required />
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="select-box-container half-width">
+                                            <select id="sCountry" name="Country" required>
+                                                <option disabled selected>Country</option>
+                                                @foreach (Country val in Model.BookingPage.CountryOptions)
+                                                {
+                                                    <option value="@val.CountryCode">@val.Name</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6">
+                                        <input type="text" id="txtMobileNumber" maxlength="50" name="MobileNumber" maxlength="10" placeholder="@Translate.Text(Constants.TranslationKeys.BookingFlow.FieldMobileNumber)" required />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-6">
+                                        <input type="email" id="txtEmail" maxlength="50" placeholder="@Translate.Text(Constants.TranslationKeys.BookingFlow.FieldEmailAddress)" name="EmailAddress" required />
+                                    </div>
+                                    <div class="col-xs-12 col-md-6">
+                                        <input type="email" id="txtConfirmEmail" maxlength="50" placeholder="@Translate.Text(Constants.TranslationKeys.BookingFlow.FieldConfirmEmailAddress)" required />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div id="how-to-contact-label">@Translate.Text(Constants.TranslationKeys.HowShouldWeContactYou)</div>
+                                        <div id="how-to-contact">
+                                            <input type="radio" name="ContactMethod" value="Email" id="emailRadio" checked /><label for="emailRadio">@Translate.Text(Constants.TranslationKeys.BookingFlow.LabelEmail)</label>
+                                            <input type="radio" name="ContactMethod" value="Call" id="callRadio" /><label for="callRadio">@Translate.Text(Constants.TranslationKeys.BookingFlow.LabelCall)</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <input type="text" id="txtCompanyName" maxlength="255" name="CompanyName" placeholder="@Translate.Text(Constants.TranslationKeys.BookingFlow.FieldCompanyName)" />
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <input type="text" id="txtWebsite" maxlength="255" placeholder="@Translate.Text(Constants.TranslationKeys.BookingFlow.FieldCompanyWebsite)" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="select-box-container full-width">
+                                            <select id="sContactSource" name="HowDidYouHearAboutUs">
+                                                <option disabled selected>@Translate.Text(Constants.TranslationKeys.BookingFlow.FieldHowDidYouHearAboutUs)</option>
+                                                @foreach (ValueDropDownOption val in Model.BookingPage.ContactSourceOptions)
+                                                {
+                                                    <option value="@val.Value">@val.Title</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <button class="disabled" id="btnUpdateBookingDetail">@Translate.Text(Constants.TranslationKeys.BookingFlow.ButtonContinueToBilling)</button>
+                                        <div id="message" class="message error"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- ---------------------------------------------------- -->
+                            <!-- Billing Details Tab -->
+                            <!-- ---------------------------------------------------- -->
+                            <div id="tabBillingDetails" class="tab-pane fade in">
+                                <div class="container-fluid">
+                                    <div class="row guest-detail-container">
+                                        <div class="col-xs-9 col-md-11">
+                                            <h3>@Translate.Text(Constants.TranslationKeys.BookingFlow.TitleGuestDetail)</h3>
+                                            <label for="">
+                                                <span id="guestTitle">
+                                                    @Translate.Text(Constants.TranslationKeys.BookingFlow.FieldTitle)&nbsp;
+                                                </span>
+                                                <span id="guestFirstName">
+                                                    @Translate.Text(Constants.TranslationKeys.BookingFlow.FieldFirstName)&nbsp;
+                                                </span>
+                                                <span id="guestLastName">
+                                                    @Translate.Text(Constants.TranslationKeys.BookingFlow.FieldLastName)
+                                                </span>
+                                                <br>
+                                                <span id="guestAddress">
+                                                    @Translate.Text(Constants.TranslationKeys.BookingFlow.FieldAddress)
+                                                </span>
+                                                <br>
+                                                <span id="guestCity">
+                                                    @Translate.Text(Constants.TranslationKeys.BookingFlow.FieldCity)
+                                                </span>
+                                                <span id="guestCountry">
+                                                    @Translate.Text(Constants.TranslationKeys.BookingFlow.FieldCountry)
+                                                </span>
+                                                <span id="guestZip">
+                                                    @Translate.Text(Constants.TranslationKeys.BookingFlow.FieldZipCode)
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="col-xs-3 col-md-1">
+                                            <button id="btnGuestInfoEdit">@Translate.Text(Constants.TranslationKeys.BookingFlow.ButtonEdit)</button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div id="same-as-guest-address-container" class="checkbox-container">
+                                                <h3>@Translate.Text(Constants.TranslationKeys.BillingAddress)</h3>
+                                                <input type="checkbox" id="chkSameAsGuestAddress">
+                                                <label for="chkSameAsGuestAddress">@Translate.Text(Constants.TranslationKeys.BookingFlow.LabelSameAsGuestAddress)</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <input type="text" id="txtBillingAddress" maxlength="255" name="BillingAddress1" placeholder="@Translate.Text(Constants.TranslationKeys.BookingFlow.FieldAddress)" required />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <input type="text" id="txtBillingAddress2" maxlength="255" name="BillingAddress2" placeholder="@Translate.Text(Constants.TranslationKeys.BookingFlow.FieldAddressLine2)" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-9">
+                                            <div class="row">
+                                                <div class="col-xs-6">
+                                                    <input type="text" id="txtBillingCity" maxlength="100" name="BillingCity" placeholder="@Translate.Text(Constants.TranslationKeys.BookingFlow.FieldCity)" required />
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <input type="text" id="txtBillingState" maxlength="100" name="BillingStateCounty" placeholder="@Translate.Text(Constants.TranslationKeys.BookingFlow.FieldStateCounty)" required />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6 col-md-3">
+                                            <input type="text" id="txtBillingZip" maxlength="15" name="BillingZipPost" placeholder="@Translate.Text(Constants.TranslationKeys.BookingFlow.FieldZipCode)" required />
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <select id="bCountry" name="Country" required>
+                                                <option disabled selected>Country</option>
+                                                @foreach (Country val in Model.BookingPage.CountryOptions)
+                                                {
+                                                    <option value="@val.CountryCode">@val.Name</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <hr />
+
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <input type="text" id="txtPromoCode" maxlength="100" placeholder="@Translate.Text(Constants.TranslationKeys.BookingFlow.FieldPromoCode)" />
+                                            <label id="lblPromoCodeMessage"></label>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <button id="btnApplyPromo" class="apply-button disabled">@Translate.Text(Constants.TranslationKeys.Apply)</button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <button class="disabled" type="button" id="btnBillingDetailsConfirm">@Translate.Text(Constants.TranslationKeys.ContinueToConfirm)</button>
+                                            <div id="message" class="message error"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- ---------------------------------------------------- -->
+                            <!-- Confirmation Tab -->
+                            <!-- ---------------------------------------------------- -->
+                            <div id="tabConfirmation" class="tab-pane fade in">
+                                <div class="container-fluid">
+                                    <div class="row guest-detail-container">
+                                        <div class="col-xs-9 col-md-11">
+                                            <h3>
+                                                @Translate.Text(Constants.TranslationKeys.BookingFlow.TitleGuestDetail)
+                                            </h3>
+                                            <label>
+                                                <span id="guestTitle2">
+                                                    @Translate.Text(Constants.TranslationKeys.BookingFlow.FieldTitle)&nbsp;
+                                                </span>
+                                                <span id="guestFirstName2">
+                                                    @Translate.Text(Constants.TranslationKeys.BookingFlow.FieldFirstName)
+                                                    &nbsp;
+                                                </span>
+                                                <span id="guestLastName2">
+                                                    @Translate.Text(Constants.TranslationKeys.BookingFlow.FieldLastName)
+                                                </span>
+                                            </label>
+
+                                            <br />
+
+                                            <label for="">
+                                                <span id="guestAddress2-2">
+                                                    @Translate.Text(Constants.TranslationKeys.BookingFlow.FieldAddress)
+                                                </span>
+                                                <br />
+                                                <span id="guestCity2">
+                                                    @Translate.Text(Constants.TranslationKeys.BookingFlow.FieldCity)
+                                                    &nbsp;
+                                                </span>
+                                                <span id="guestCountry2">
+                                                    @Translate.Text(Constants.TranslationKeys.BookingFlow.FieldCountry)
+                                                    &nbsp;
+                                                </span>
+                                                <span id="guestZip2">
+                                                    @Translate.Text(Constants.TranslationKeys.BookingFlow.FieldZipCode)
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="col-xs-3 col-md-1">
+                                            <button id="btnEditGuest">@Translate.Text(Constants.TranslationKeys.BookingFlow.ButtonEdit)</button>
+                                        </div>
+                                    </div>
+                                    <div class="row guest-detail-container">
+                                        <div class="col-xs-9 col-md-11">
+                                            <h3>
+                                                @Translate.Text(Constants.TranslationKeys.BookingFlow.TitleBillingAddress)
+                                            </h3>
+
+                                            <label for="">
+                                                <span id="lblguestTitle">
+                                                    @Translate.Text(Constants.TranslationKeys.BookingFlow.FieldTitle)
+                                                </span>
+
+                                                <span id="lblguestFirstName">
+                                                    @Translate.Text(Constants.TranslationKeys.BookingFlow.FieldFirstName)&nbsp;
+                                                </span>
+                                                <span id="lblguestLastName">
+                                                    @Translate.Text(Constants.TranslationKeys.BookingFlow.FieldLastName)&nbsp;
+                                                </span>
+                                                <br />
+                                                <span id="lblguestAddress">
+                                                    @Translate.Text(Constants.TranslationKeys.BookingFlow.FieldAddress)
+                                                </span>
+                                                <br>
+                                                <span id="lblguestCity">
+                                                    @Translate.Text(Constants.TranslationKeys.BookingFlow.FieldCity)&nbsp;
+                                                </span>
+                                                <span id="lblguestCountry">
+                                                    @Translate.Text(Constants.TranslationKeys.BookingFlow.FieldCountry)&nbsp;
+                                                </span>
+                                                <span id="lblguestZip">
+                                                    @Translate.Text(Constants.TranslationKeys.BookingFlow.FieldZipCode)
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="col-xs-3 col-md-1">
+                                            <button id="btnEditPayment">@Translate.Text(Constants.TranslationKeys.BookingFlow.ButtonEdit)</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <h3>@Translate.Text(Constants.TranslationKeys.BookingFlow.TitleCommentsOrSpecialInstructions)</h3>
+                                        <p> @Translate.Text(Constants.TranslationKeys.SpecialInstructions)</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <textarea rows="4" cols="10" id="txtComments"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <h3>@Translate.Text(Constants.TranslationKeys.BookingFlow.TitleConfirmationDetails)</h3>
+                                        <p> @Translate.Text(Constants.TranslationKeys.ReviewAndAgree) </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="checkbox-container terms-check">
+                                            <input type="checkbox" id="chkAgreeToTerms" required />
+                                            <label for="chkAgreeToTerms"><a id="terms-and-conditions" href="#" data-toggle="modal" data-target="#myModal">@Translate.Text(Constants.TranslationKeys.BookingFlow.LabelYesIAgreeToTheTermsAndConditions)</a></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <button class="disabled" id="btnCompleteBooking">@Translate.Text(Constants.TranslationKeys.CompleteBooking)</button>
+                                        <div id="message" class="message error"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ---------------------------------------------------- -->
+                            <!-- Start packing Tab -->
+                            <!-- ---------------------------------------------------- -->
+                            <div id="tabStartPacking" class="tab-pane fade in">
+                                <h2>@Editable(m => m.BookingPage.ConfirmationTitle)</h2>
+                                <b class="reservation-number">
+                                    @Translate.Text(Constants.TranslationKeys.ReservationReference) 
+                                    <span id="reservation-number-span"></span>
+                                </b>
+
+                                @Html.Raw(Model.BookingPage.ConfirmationText)
+
+                                <button id="btnPrint">Print</button>
+
+                                @Html.Sitecore().Placeholder("friends")
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">@Translate.Text(Constants.TranslationKeys.TermsAndConditions)</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.Raw(Model.BookingPage.TermsAndConditionsText)
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Translate.Text(Constants.TranslationKeys.Close)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+                            var queryStrings = {
+                                PropertyId: "@Model.PropertyId",
+                                FromDate: "@Model.FromDate",
+                                ToDate: "@Model.ToDate",
+                                RoomType: "@Model.RoomType",
+                                NumberOfAdults: "@Model.NumberOfAdults",
+                                NumberOfChildren: "@Model.NumberOfChildren",
+                                NumberOfPets: "@Model.NumberOfPets",
+                                PromoCode: "@Model.PromoCode",
+                                OscarToken: "@Model.OscarToken",
+                                SessionId: "@Model.SessionId"
+                            };
+                        </script>
+
+                        @*if (Model.Property != null)
+                        {
+                            var name = (string.IsNullOrEmpty(Model.Property.Name)) ? string.Empty : Model.Property.Name.Replace("'", "`");
+                            var tax = (Model.Rate == null) ? 0.00M : Model.Rate.Tax;
+                            var baseRate = (Model.Rate == null) ? 0.00M : Model.Rate.Rate;
+                            var total = (Model.Rate == null) ? 0.00M : Model.Rate.Total;
+
+                            <script type="text/javascript" language="javascript">
+                                ga('require', 'ecommerce');
+                                ga('ecommerce:addTransaction', {
+                                    'id': '',                             // Transaction ID. Required.
+                                    'affiliation': '@name',    // Affiliation or store name.
+                                    'revenue': '@total',                        // Grand Total.
+                                    'shipping': '0',                                            // Shipping.
+                                    'tax': '@tax',   // Tax.
+                                    'currency': '@Model.Property.CurrencySymbol'     // local currency code.
+                                });
+                                ga('ecommerce:addItem', {
+                                    'id': '<%= this.LastLeadID %>',                             // Transaction ID. Required.
+                                    'name': '@name',           // Product name. Required.
+                                    'sku': '@Model.PropertyId',              // SKU/code.
+                                    'category': 'Serviced Aparment',                            // Category or variation.
+                                    'price': '@baseRate',                           // Unit price.
+                                    'quantity': '1',                                            // Quantity.
+                                    'currency': '@Model.Property.CurrencySymbol'     // local currency code.
+                                });
+
+                                ga('ecommerce:send');
+
+                                ga('ecommerce:clear');
+
+                                ga('send', 'pageview', '/BookingFlow.cshtml');
+                            </script>
+                        }*@

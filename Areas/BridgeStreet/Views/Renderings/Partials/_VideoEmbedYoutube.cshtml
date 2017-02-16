@@ -1,0 +1,16 @@
+﻿@using Glass.Mapper.Sc.Web.Mvc
+@using BridgeStreet.Website.Infrastructure.Constants
+
+@inherits GlassView<BridgeStreet.Website.Domain.Models.Components.Media.VideoGallery.YoutubeMediaVideo>
+
+@if (Model.YoutubeId != null)
+{
+    <div class="media-video">
+        <div class="embed-responsive-wrapper">
+            <iframe class="embed-responsive-item"
+                    src="@(Constants.Urls.YouTubeBaseUrl)/@(Editable(Model, x => x.YoutubeId))?rel=0"
+                    width="500"
+                    height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        </div>
+    </div>
+}

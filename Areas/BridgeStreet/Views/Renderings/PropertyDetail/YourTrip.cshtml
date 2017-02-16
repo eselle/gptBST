@@ -1,0 +1,117 @@
+﻿@using BridgeStreet.Website.Infrastructure.Constants
+@using Sitecore.Globalization
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<BridgeStreet.Website.Areas.BridgeStreet.Models.PropertyDetails.PropertyIdModel>
+
+
+<form id="your-trip-container" class="t-details-container">
+    <input type="hidden" name="PropertyId" id="PropertyId" value="@Model.PropertyId" />
+    <div class="t-details-list col-xs-12">
+        <h2>
+            Your Trip
+            <a href="" class="btnDetails toggleTripDetails">VIEW +</a>
+        </h2>
+        <div id="trip-details" class="">
+            <div id="thinking">
+                <div class="sk-folding-cube">
+                    <div class="sk-cube1 sk-cube"></div>
+                    <div class="sk-cube2 sk-cube"></div>
+                    <div class="sk-cube4 sk-cube"></div>
+                    <div class="sk-cube3 sk-cube"></div>
+                </div>
+            </div>
+            <div id="your-trip">
+            </div>
+        </div>
+        <a href="" class="btnHide toggleTripDetails">HIDE -</a>
+    </div>
+</form>
+    
+
+
+<script type='text/template' id='your-trip-template'>
+    <div class="date-picker-group">
+        <div class="date-picker-container col-xs-6">
+            <input type="text" id="ArrivalDate" name="ArrivalDate" value="<%= ArrivalDate %>" class="flatpickr flatpickr-input" tabindex="2" placeholder="mm/dd/yyyy" readonly>
+        </div>
+        <div class="date-picker-container col-xs-6">
+            <input type="text" id="DepartureDate" name="DepartureDate" value="<%= DepartureDate %>" class="flatpickr flatpickr-input" tabindex="3" placeholder="mm/dd/yyyy" readonly>
+        </div>
+    </div>
+    <!--<span class="t-details-date">7 Sept-12 Oct</span> -->
+
+    <input type="hidden" name="IsRealTimeBookable" id="IsRealTimeBookable" value="<%= IsRealTimeBookable %>" />
+    <ul class="t-details-items">
+
+        <li class="t-details-item">
+            <div class="t-details-wrapper">
+                <span class="category">@Translate.Text(Constants.TranslationKeys.RoomType)</span>
+                <div class="bedroom-types dropdown-group">
+                    <select class="selectpicker" id="RoomType" title="Room Type" data-width="150px" value="<%= RoomType %>">
+                        <% _.each(RoomBookingOptions, function(opt){ %>
+                        <option title="<%= opt.Name %>" value="<%= opt.Value %>"> <%= opt.Name %></option>
+                        <% }); %>
+                    </select>
+                </div>
+            </div>
+        </li>
+        <li class="t-details-item">
+            <div class="t-details-wrapper">
+                <span class="category">@Translate.Text(Constants.TranslationKeys.Adults)</span>
+                <div class="spinner spinner-item">
+                    <input readonly="readonly" type="spinner" class="trip-detail-spinner" id="Adults" value="<%= Adults %>" name="spinner">
+                </div>
+            </div>
+        </li>
+        <li class="t-details-item">
+            <div class="t-details-wrapper">
+                <span class="category">@Translate.Text(Constants.TranslationKeys.Children)</span>
+                <div class="spinner spinner-item">
+                    <input readonly="readonly" type="spinner" placeholder id="Children" class="trip-detail-spinner" value="<%= Children %>" name="spinner">
+                </div>
+            </div>
+        </li>
+        <li class="t-details-item">
+            <div class="t-details-wrapper">
+                <span class="category">@Translate.Text(Constants.TranslationKeys.Pets)</span>
+                <div class="spinner spinner-item">
+                    <input readonly="readonly" type="spinner" class="trip-detail-spinner" id="Pets" value="<%= Pets %>" name="spinner">
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    <div class="t-details-totals">
+        <span>@Translate.Text(Constants.TranslationKeys.Nights)</span>
+        <span class="amount" id="lblNights"><%= Nights %></span>
+    </div>
+    <div class="t-details-totals t-details-price-per-night" id="costAvg">
+        <span>@Translate.Text(Constants.TranslationKeys.AvgCostPerNight)</span>
+        <span class="amount"><%= CurrencyCode %> <span id="lblCostPerNight"></span></span>
+    </div>
+    <div class="t-details-totals t-details-cost-total" id="costTotal">
+        <span>@Translate.Text(Constants.TranslationKeys.CostOfStay)</span>
+        <span class="amount"><%= CurrencyCode %> <span id="lblSubtotalPrice"></span></span>
+    </div>
+
+    <div class="no-rtb-reason-row" sstyle="display: none;">
+        <b>@Translate.Text(Constants.TranslationKeys.RTBRestrictionIntro)</b>
+        <div class="no-rtb-reason" id="OverCapacity">@Translate.Text(Constants.TranslationKeys.RTBRestrictionOverCapacity)</div>
+        <div class="no-rtb-reason" id="UnderLOS">@Translate.Text(Constants.TranslationKeys.RTBRestrictionUnderLOS)</div>
+        <div class="no-rtb-reason" id="Unavailable">@Translate.Text(Constants.TranslationKeys.RTBRestrictionUnavailable)</div>
+        <div class="no-rtb-reason" id="LeadViolation">@Translate.Text(Constants.TranslationKeys.RTBRestrictionLeadViolation)</div>
+        <div class="no-rtb-reason" id="PartialDateMatch">@Translate.Text(Constants.TranslationKeys.RTBRestrictionPartialDateMatch)</div>
+        <div class="no-rtb-reason" id="PetsNotAllowed">@Translate.Text(Constants.TranslationKeys.RTBRestrictionPetsNotAllowed)</div>
+    </div>
+    
+    <a href="" id="book-button" class="t-details-cta btn-book">
+        <span> @Translate.Text(Constants.TranslationKeys.BookNow) </span>
+    </a>
+    
+    <a href="" id="request-button" class="t-details-cta btn-book">
+        <span> @Translate.Text(Constants.TranslationKeys.Request) </span>
+    </a>
+
+    <a href="mailto:&subject=@Translate.Text(Constants.TranslationKeys.BookingFlow.EmailShareSubject)&body= <%= EncodedFullUrl %>" class="t-details-cta btn-save-share">
+        <span class="">Share</span>
+    </a>
+</script>

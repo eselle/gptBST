@@ -1,0 +1,32 @@
+﻿@using BridgeStreet.Website.Domain.Models.Navigation
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<IEnumerable<BridgeStreet.Website.Domain.Models.Navigation.Menu>>
+
+@foreach (Menu menu in Model)
+{
+    @* If we are not only displaying the child menu links, include the menu title *@
+    if (!menu.DisplayChildrenOnly)
+    {
+        <h3 class="h3">
+            @using (BeginRenderLink(menu, x => x.Link, isEditable: true))
+            {
+                @Editable(menu, x => x.Title)
+            }
+        </h3>
+    }
+
+    @* Display any child menu links *@
+    if (menu.MenuLinks != null && menu.MenuLinks.Any())
+    {
+        <ul class="footer-links col-xs-12 col-sm-3" >
+            @foreach (MenuLink menuLink in menu.MenuLinks.ToList())
+            {
+                <li>
+                    @using (BeginRenderLink(menuLink, m => m.Link, isEditable: true))
+                    {
+                        @Editable(menuLink, m => m.LinkText)
+                    }
+                </li>
+            }
+        </ul>
+    }
+}

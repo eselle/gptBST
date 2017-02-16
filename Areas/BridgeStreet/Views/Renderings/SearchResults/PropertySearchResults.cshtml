@@ -1,0 +1,406 @@
+﻿@using BridgeStreet.Data.Services.Models.SearchResults
+@using Sitecore.Links
+@using Sitecore.Globalization
+@using BridgeStreet.Website.Infrastructure.Constants
+
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<BridgeStreet.Website.Domain.Models.Pages.PropertySearch.PropertySearchPage>
+
+<form id="filter-container">
+    <div class="filter-minimal">        
+        <p id="intro"></p>
+        <div class="expand-filter-btn">
+            <button type="button" class="btn btn-blue filters-edit-btn col-xs-12">Filter & Edit</button>
+        </div>
+    </div>
+    <div id="top-filter"></div>
+    <div class="pane-slider extrapadding60 container-fluid hidden-xs">
+        <div class="list-view-button view-button">
+            <span>@Translate.Text(Constants.TranslationKeys.ListView)</span>
+        </div>
+        <div class="state-slider-container extrapadding60 col-sm-12">
+            <div id="StateSlider"></div>
+        </div>
+        <div class="map-view-button view-button">
+            <span>@Translate.Text(Constants.TranslationKeys.MapView)</span>
+        </div>
+    </div>
+
+    <div class="results-list-map pretty-split-pane-frame">
+        <div id="bottom-filter"></div>
+            <div class="results-list-map-wrapper split-pane vertical-percent container-fluid">
+                <div id="PropertyPodSearchMapview" class="PropertyPodSearchMapview container"></div>
+                <div class="property-view split-pane-component" id="left-component">
+
+                    <div id="no-results" class="container-fluid">
+                        <div  class="row rich-text">
+                            <div class="col-xs-12">
+                                @Html.Raw(Model.NoResultsText)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="grid" class="scrollable-y pretty-split-pane-component-inner property-pod-row grid split-view half-padding toppadding75 clear" data-columns>
+                        <div id="thinking" style="display:none">
+                            <div class="sk-folding-cube">
+                                <div class="sk-cube1 sk-cube"></div>
+                                <div class="sk-cube2 sk-cube"></div>
+                                <div class="sk-cube4 sk-cube"></div>
+                                <div class="sk-cube3 sk-cube"></div>
+                            </div>
+                        </div>
+
+                        <div id="full-match" class="property-pod-row"></div>
+                        <div class="col-xs-12 half-padding toppadding75">
+                            <div id="extra-results-intro" class="search-separator" style="display:none"><span>@Translate.Text(Constants.TranslationKeys.PartialResultsIntro)</span></div>
+                        </div>
+                        <div id="partial-results-only-intro" class="search-separator" style="display:none"><span>@Translate.Text(Constants.TranslationKeys.OnlyPartialResultsIntro)</span></div>
+                        <div id="partial-match" class="property-pod-row"></div>
+                    </div>
+                </div>
+
+                <div class="split-pane-divider" id="my-divider">
+
+                </div>
+                <div class="map-view split-pane-component" id="right-component">
+
+                    <div class="pretty-split-pane-component-inner" id="GMap">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+</form>
+
+<script type='text/template' id='bottom-filter-template'>
+    <div class="collapse collapse-panel pull-left" role="menu" id="CollapseExample">
+        <div class="collapse-panel-wrapper">
+            <div class="col-filter col-xs-12 col-sm-12 col-lg-12">
+                <div class="filters-section options panel-body nopadding">
+                    <div class="row">
+                        <div class="label-cell col-xs-12 col-sm-3 col-md-2">
+                            <label><%= PropertyTypes.DisplayName %></label>
+                        </div>
+                        <div class="p-accordion toppadding0 padding15 col-xs-12 col-sm-9 col-md-10">
+                            <ul id="FilterAmeneties" class="p-accordion-items p-ammeneties-items filter-more nomargin closed" data-line-value="1">
+                                <% _.each(PropertyTypes.Options, function(opt){ %>
+                                <li class="p-ammeneties-item list-style-none col-xs-12 col-sm-4 col-md-3">
+                                    <div class="checkbox-inline">
+                                        <label class="facet-checkbox">
+                                            <div>
+                                                <% if (opt.Selected) { %>
+                                                <input type="checkbox" name="PropertyTypes" id="<%= opt.Value %>" value="<%= opt.Value %>" checked />
+                                                <% } %>
+                                                <% if (!opt.Selected) { %>
+                                                <input type="checkbox" name="PropertyTypes" id="<%= opt.Value %>" value="<%= opt.Value %>" />
+                                                <% } %>
+                                                <span class="checkbox__label"><%= opt.Text %></span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </li>
+                                <% }); %>
+                            </ul>
+
+                            <div class="p-accordion-heading inline">
+                                <a class="filter-collapse-toggle accordion-toggle" href="#FilterAmeneties"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filters-section pet-filter-group panel-body nopadding">
+                    <div class="row">
+                        <div class="label-cell col-xs-12 col-sm-3 col-md-2">
+                            <label>Pets</label>
+                        </div>
+                        <ul id="FilterAmeneties" class="p-accordion-items p-ammeneties-items filter-more nomargin closed" data-line-value="1">
+                            <li class="p-ammeneties-item list-style-none col-xs-12 col-sm-4 col-md-3">
+                                <div class="col-xs-12 col-sm-9 col-md-10">
+                                    <div class="checkbox-inline">
+                                        <label class="facet-checkbox">
+                                            <div>
+                                                <%  if (IsPetFriendly.Selected){ %>
+                                                <input type="checkbox" name="IsPetFriendly" value="true" checked />
+                                                <% } %>
+                                                <%  if (!IsPetFriendly.Selected ){ %>
+                                                <input type="checkbox" name="IsPetFriendly" value="true" />
+                                                <% } %>
+                                                <span class="checkbox__label"><%= IsPetFriendly.Text %></span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-filter col-xs-12 col-sm-12 col-lg-12">
+                <% _.each(Attributes, function(attrSet){ %>
+                <div class="checkbox-group amenities filters-section panel-body nopadding">
+                    <div class="row">
+                        <div class="label-cell col-xs-12 col-sm-3 col-md-2">
+                            <label><%= attrSet.DisplayName %></label>
+                        </div>
+                        <div class="p-accordion toppadding0 padding15 col-xs-12 col-sm-9 col-md-10">
+                            <ul id="FilterAmeneties" class="p-accordion-items p-ammeneties-items filter-more nomargin closed" data-line-value="1">
+                                <% _.each(attrSet.Options, function(opt){ %>
+                                <li class="p-ammeneties-item list-style-none col-xs-12 col-sm-4 col-md-3">
+                                    <div class="checkbox-inline">
+                                        <label class="facet-checkbox">
+                                            <div>
+                                                <% if (opt.Selected) { %>
+                                                <input type="checkbox" name="Attributes" id="<%= opt.Value %>" value="<%= opt.Value %>" checked />
+                                                <% } %>
+                                                <% if (!opt.Selected) { %>
+                                                <input type="checkbox" name="Attributes" id="<%= opt.Value %>" value="<%= opt.Value %>" />
+                                                <% } %>
+                                                <span class="checkbox__label"><%= opt.Text %></span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </li>
+                                <% }); %>
+                            </ul>
+
+                            <div class="p-accordion-heading inline">
+                                <a class="filter-collapse-toggle accordion-toggle" href="#FilterAmeneties"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                         <% }); %>
+             
+            </div>
+        </div>
+
+        <div class="panel-body filter-footer">
+            <div class="row row-condensed col-sm-6 col-sm-offset-6 half-padding">
+                <div class="col-xs-6 half-padding">
+                    <div class="rows">
+                        <button href="#CollapseExample" data-toggle="collapse" type="button" class="btn btn-white cancel-btn">Cancel</button>
+                    </div>
+                </div>
+                <div class="col-xs-6 half-padding">
+                    <div class="rows">
+                        <button type="submit" class="btn btn-blue submit-btn">Apply</button>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+</script>
+
+<script type='text/template' id='top-filter-template'>
+    <div class="results-filter container-fluid">
+        <input type="hidden" name="ArrivalDate" id="ArrivalDate" value="<%= ArrivalDate %>" />
+        <input type="hidden" name="DepartureDate" id="DepartureDate" value="<%= DepartureDate %>" />
+        <input type="hidden" name="Latitude" id="Latitude" value="<%= Latitude %>" />
+        <input type="hidden" name="Longitude" id="Longitude" value="<%= Longitude %>" />
+        <input type="hidden" name="Adults" id="Adults" value="<%= Adults %>" />
+        <input type="hidden" name="Children" id="Children" value="<%= Children %>" />
+        <div class="results-filter-wrapper results-filter-wrapper-top">
+            <div class="row">
+                @*<div class="filter-half col-xs-12 col-md-6">  *@
+                <div class="filter-half size-section col-xs-12 col-sm-6 col-md-3">
+                    <div class="rows">
+                        <div class="label-cell clearfix">
+                            <label><%= Size.Name %></label>
+                        </div>
+                        <div class="dropdown-group clearfix">
+                            <div class="rows">
+                                <div class="size-selector">
+                                    <select id="RoomType" name="RoomType" class="selectpicker">
+                                        <% _.each(Size.RoomTypes, function(opt){ %>
+                                        <%  if (opt.Selected ){ %>
+                                        <h1><%= opt.Text %></h1>
+                                        <option title="<%= opt.Text %>" value="<%= opt.Value %>" selected> <%= opt.Text %></option>
+                                        <% } %>
+                                        <%  if (!opt.Selected){ %>
+                                        <option title="<%= opt.Text %>" value="<%= opt.Value %>"> <%= opt.Text %></option>
+                                        <% } %>
+                                        <% }); %>
+                                    </select>
+                                </div>
+                                @*<div class="size-selector ">
+                            <select id="Bathrooms" name="Bathrooms" class="selectpicker" data-width="100%">
+                                <% _.each(Size.Bathrooms, function(opt){ %>
+                                    <%  if (opt.Selected ){ %>
+                                        <h1><%= opt.Text %></h1>
+                                        <option title="<%= opt.Text %>" value="<%= opt.Value %>" selected> <%= opt.Text %></option>
+                                    <% } %>
+                                    <%  if (!opt.Selected){ %>
+                                        <option title="<%= opt.Text %>" value="<%= opt.Value %>"> <%= opt.Text %></option>
+                                    <% } %>
+                                <% }); %>
+                            </select>
+                        </div>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="filter-half no-border-right col-xs-12 col-md-6 col-md-push-6 col-lg-4 col-lg-push-8">*@
+                <div class="filter-half price-range-slider col-xs-12 ">
+                    <div class="rows">
+                        <div class="label-cell clearfix">
+                            <label><%= Price.Name %></label>
+                            <span> Avg price/night</span>
+                        </div>
+                        <div class="range-slider-wrapper col-xs-12 ">
+                            <span id="ValueLower" class="slider-label label-left hidden-xs col-sm-1 col-md-1 nopadding" data-value="<%= Price.Min %>"><%= Price.CurrencyCode %></span>
+                            <div id="RangeSlider" class="col-xs-12 col-sm-10 col-md-10 nopadding"></div>
+                            <span id="ValueHigher" class="slider-label label-right hidden-xs col-sm-1 col-md-1 nopadding" data-value="<%= Price.Max %>"><%= Price.CurrencyCode %></span>
+                            <input type="hidden" name="PriceRangeMax" id="PriceRangeMax" value="<%= Price.RangeMax %>" />
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-half view-section no-border-right col-xs-12 ">
+                    <div class="rows">
+                        <div class="label-cell label-cell-view">
+                            <label><%= View.Name %></label>
+                        </div>
+                        <div class="book-deals-wrapper col-lg-10">
+                            <div class="col">
+                            <div class="checkbox-inline">
+                                <label class="facet-checkbox">
+                                    <div> 
+                                        <%  if (ShowInstantBook)  {%>
+                                            <%  if (View.IsRealTimeBookable.Selected)  {%>
+                                            <input type="checkbox" id="IsRealTimeBookable" name="IsRealTimeBookable" value="true" checked />
+                                            <% } %>
+                                            <%  if (!View.IsRealTimeBookable.Selected) { %>
+                                            <input type="checkbox" id="IsRealTimeBookable" name="IsRealTimeBookable" value="true" />
+                                            <% } %>
+                                            <span class="checkbox__label"><i class="fa fa-bolt"></i><%= View.IsRealTimeBookable.Text %></span>
+                                        <% } %>                                        
+                                        <%  if (!ShowInstantBook)  {%>
+                                        <input type="checkbox" id="IsRealTimeBookable" name="IsRealTimeBookable" value="true" disabled />
+                                            <span style="color: #dddede;" class="checkbox__label"><i style="color: #dddede;" class="fa fa-bolt"></i><%= View.IsRealTimeBookable.Text %></span>
+                                        <% } %>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                            <div class="col">
+                            <div class="checkbox-inline">
+                                <label class="facet-checkbox">                                    
+                                    <%  if (ShowSpecials)  {%>
+                                        <%  if (View.PropertySpecial.Selected){ %>
+                                        <input type="checkbox" id="PropertySpecial" name="PropertySpecial" value="true" checked />
+                                        <% } %>
+                                        <%  if (!View.PropertySpecial.Selected ){ %>
+                                        <input type="checkbox" id="PropertySpecial" name="PropertySpecial" value="true" />
+                                        <% } %>
+                                        <span class="checkbox__label"><%= View.PropertySpecial.Text %></span>                                    
+                                    <% } %>
+                                    <%  if (!ShowSpecials)  {%>
+                                    <input type="checkbox" id="PropertySpecial" name="PropertySpecial" value="true" disabled />
+                                    <span style="color: #dddede;" class="checkbox__label"><%= View.PropertySpecial.Text %></span>
+                                    <% } %>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                @*<div class="filter-half col-xs-12 col-md-6">*@
+
+            </div>
+        </div>
+        <div class="results-filter-wrapper results-filter-wrapper-bottom">
+            <div class="row">
+                <div class="filter-half border-right col-xs-12">
+                    <div class="more-filters-button-container">
+                        <button type="button" class="btn btn-blue more-filters-btn col-xs-12 col-md-1" href="#CollapseExample" data-toggle="collapse" aria-expanded="false">More Filters</button>
+
+                            <button class="btn btn-close filter-close" value="IsPetFriendly=true" type="button"><%= IsPetFriendly.Text %> <i class="fa fa-close"></i> </button>
+                       
+                        <% _.each(Attributes, function(attrSet){ %>
+                            <% _.each(attrSet.Options, function(opt){ %>
+                       
+                                    <button class="btn btn-close filter-close" value="Attributes=<%= opt.Value %>" type="button"><%= opt.Text %> <i class="fa fa-close"></i> </button>
+                      
+                            <% }); %>                        
+                        <% }); %>
+
+                        <% _.each(PropertyTypes.Options, function(opt){ %>
+                       
+                                <button class="btn btn-close filter-close" value="PropertyTypes=<%= opt.Value %>" type="button"><%= opt.Text %> <i class="fa fa-close"></i> </button>
+                      
+                        <% }); %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type='text/template' id='grid-template'>
+    <% _.each(PropertyList, function(prop){ %>
+        <div class="property-pod column col-search-pod half-padding toppadding75" id="<%= prop.PropertyId %>">
+            <a class="property-pod-wrapper" href="<%= prop.URL %>">
+                <div class="property-pod-image-wrapper img-pod-animated">
+                    <div class="media-cover">
+                        <img class="img-animated" src="<%= prop.Image %>" alt="Bridgestreet Property - <%= prop.Name %>"/>
+                    </div>
+                        <!--
+        <div class="property-pod-heart-bl">
+            <i class="fa fa-heart"></i>
+        </div>
+        -->
+                        <%  if (prop.IsFeatured ){ %>
+                        <div class="featured-flag">
+                            featured
+                        </div>
+                        <% } %>
+                        <!--
+        <div class="user-flag">
+            <i class="icon-man"></i>
+
+        </div>
+        <div class="property-pod-user-br">
+            <span>22</span>
+
+        </div>
+        -->
+                </div>
+                <div class="property-pod-description-wrapper">
+                    <h3><%= prop.Name %></h3>
+                    <h6>
+                        <%= prop.Address1 %>, <%= prop.Address2 %><br />
+                        <%= prop.City %>, <%= prop.State %> <%= prop.PostalCode %> <%= prop.Country %>
+                    </h6>
+                </div>
+
+                <div class="property-pod-cta-wrapper  row">
+                    <div class="col-xs-4">
+                        <span class="btn">VIEW</span>
+                    </div>
+                    <div class="price-point">
+                            <%  if (prop.MinRate != "0" ){ %>
+                            <span>Rates from</span>
+                    <h3>
+                        <%= prop.CurrencyCode %><%= prop.MinRate %>
+                                <%  if (prop.IsRealTimeBookable ){ %>
+                                <i class="fa fa-bolt"></i>                                
+                                <% } %>
+                            </h3>
+                            <% } %>
+                            <%  if (prop.MinRate == "0" ){ %>
+                            <span>Rates available<br />upon request</span>
+                            <% } %>
+                    </div>                    
+                    <%  if (!prop.IsExactMatch ){ %>
+                    <div class="property-pod-disclaimer col-xs-12">
+                            This property matches part of your search criteria.
+                            <%  if (prop.IsPartialDateMatch ){ %>
+                            This property is unavailable for the selected dates.
+                            <% } %>
+                    </div>
+                    <% } %>
+                </div>
+            </a>
+        </div>
+    <% }); %>
+</script>

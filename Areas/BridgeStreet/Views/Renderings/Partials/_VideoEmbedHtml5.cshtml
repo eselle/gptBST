@@ -1,0 +1,29 @@
+﻿@using Glass.Mapper.Sc.Web.Mvc
+
+@inherits GlassView<BridgeStreet.Website.Domain.Models.Components.Media.VideoGallery.Html5MediaVideo>
+
+@{
+    string backgroundImage = string.Empty;
+
+    if (Model.Image != null)
+    {
+        backgroundImage = Model.Image.Src;
+    }
+}
+
+<div class="embed-responsive-html5-wrapper">
+    <video controls poster="@backgroundImage" class="embed-responsive-html5-item">
+        @if (@Model.Mp4VideoSource != null && !string.IsNullOrWhiteSpace(@Model.Mp4VideoSource.Url))
+        {
+            <source src="@Model.Mp4VideoSource.Url" type='video/mp4' />
+        }
+        @if (@Model.WebmVideoSource != null && !string.IsNullOrWhiteSpace(@Model.WebmVideoSource.Url))
+        {
+            <source src="@Model.WebmVideoSource.Url" type='video/webm' />
+        }
+        @if (@Model.OggVideoSource != null && !string.IsNullOrWhiteSpace(@Model.OggVideoSource.Url))
+        {
+            <source src="@Model.OggVideoSource.Url" type='video/ogg' />
+        }
+    </video>
+</div>

@@ -1,0 +1,53 @@
+﻿@using BridgeStreet.Website.Domain.Models.Lists.LocationList
+@using BridgeStreet.Website.Domain.Models.Pages.HomePage.HomeFeaturedLocationList
+@using BridgeStreet.Website.Extensions
+@using BridgeStreet.Website.Infrastructure.Constants
+@using Sitecore.Buckets.LinkProviders
+@using Sitecore.Globalization
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<BridgeStreet.Website.Areas.BridgeStreet.Models.Homepage.HomeFeaturedLocationListViewModel>
+
+@{
+    var searchLink = string.Empty;
+
+    if (Model.PropertySearchPage != null)
+    {
+        searchLink = Model.PropertySearchPage.Url;
+    }
+}
+
+@functions{
+    public string AreaSearchUrl(string baseUrl, string defaultParams)
+    {
+        if (string.IsNullOrWhiteSpace(baseUrl))
+        {
+            return string.Empty;
+        }
+        else
+        {
+            return string.Format("{0}?{1}", baseUrl, defaultParams);
+        }
+    }
+}
+
+<div class="homepage-3col container-fluid">
+    <ul class="homepage-3col-items row">
+        @foreach (var location in Model.LocationItems.Take(3))
+        {
+            <li class="homepage-3col-item img-pod-animated col-xs-12 col-sm-4">
+                <a href="@AreaSearchUrl(searchLink, location.Detail.DefaultSearchQuery)" class="">
+                    @RenderImage(location, m => m.ListItem.Image, new { @class = "img-responsive img-animated" })
+                    <div class="va-container-tl">
+                        <h4 class="homepage-3col-location">@Editable(location, m => m.ListItem.Title)</h4>
+                    </div>
+                    <div class="va-container-br">
+                        @if (location.Detail.MinRate > 0)
+                        {
+                            <span class="homepage-3col-price-label">@Translate.Text(Constants.TranslationKeys.StartingAt)</span>
+                            <h3>@string.Concat(location.Detail.CurrencySymbol, location.Detail.MinRate.ToString("0.00"))</h3>
+                        }
+                    </div>
+                </a>
+            </li>
+        }
+    </ul>
+</div>

@@ -1,0 +1,15 @@
+﻿@using Glass.Mapper.Sc.Web.Mvc
+@inherits GlassView<BridgeStreet.Website.Domain.Models.Pages.AboutUs.PersonListItem>
+
+
+<div class="person-list-item row">
+    <div class="col-xs-12 col-sm-3">
+        <div class="imgWrap">
+            @RenderImage(Model, x => x.Image, isEditable: true, parameters: new { @class = "img-responsive" })
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-9">
+        <h4>@Editable(Model, i => i.Name), @Editable(Model, i => i.JobTitle)</h4>
+        <p>@Editable(Model, i => i.Bio)</p>
+    </div>
+</div>

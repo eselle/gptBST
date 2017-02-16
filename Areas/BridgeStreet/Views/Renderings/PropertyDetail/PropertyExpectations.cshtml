@@ -1,0 +1,21 @@
+﻿@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<BridgeStreet.Website.Domain.Models.Pages.PropertyDetailPage.ExpectationsList.ExpectationsList>
+              
+@if (Model.Expectations != null && Model.Expectations.Any())
+{
+    <div class="p-features">
+        <h2>@Editable(m => m.Title)</h2>
+
+        @if (Model.Expectations.Any())
+        {
+            <ul class="p-features-items col-sm-12">
+                @foreach (var expectation in Model.Expectations.Take(4))
+                {
+                    <li class="p-features-item col-sm-3">
+                        <i class="@expectation.IconClass"></i>
+                        <p>@Editable(expectation, e => e.Text)</p>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+}

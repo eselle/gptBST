@@ -1,0 +1,159 @@
+.no-padding {
+	padding: 0 0 0 0;
+}
+
+.brand-list-image-margin {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.thumbnail, .thumbnail > img {
+	display:inline-block;
+	border-radius: 0;
+    border: none;
+}
+
+.thumbnail {
+	margin-top: 20px;
+	width: 50%;
+}
+
+.tile-image-container, .tile-button-container {
+	width: 100%;
+	text-align: center;
+}
+
+.tile-title {
+	font-weight: 700;
+	font-size: 14px;
+	margin-bottom: 5px;
+	margin-top: 0px;
+    text-align: center;
+}
+
+.tile-description-container {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: justify;
+}
+
+.tile {
+	margin-top: 6px;
+	margin-bottom: 6px;
+}
+
+.tile-button-container > a {
+	display:inline-block;
+    color: #ffffff !important;
+	border: none !important;
+	background: #e17000 !important;
+	border-radius: 0px !important;
+	padding: 10px;
+    width: auto !important;
+    min-width: 130px !important;
+	font-family: 'Open Sans',sans-serif;
+	font-weight: bold !important;
+    font-size: 13px !important;
+    margin-bottom: 20px;
+}
+
+.supplier-line{
+    position: relative;
+}
+
+.supplier-logo {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.supplier-name-heading {
+    padding-top: 10px;
+}
+.supplier-logo > img {
+    position: absolute;
+    height: 60%;
+    top: 14px;
+    right: 0;
+}
+
+.supplier-name {
+    position: relative;
+    text-align: right;
+}
+
+.supplier-name > h2, .supplier-logo > h2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.supplier-name-small
+{
+    font-size: 9px;
+}
+
+.make-hidden
+{
+    visibility: hidden;
+}
+
+
+@media (max-width: 767px) {
+  /** Pull left xs **/
+  .text-left-xs {
+    text-align: left;
+  }
+
+  /** Pull right xs **/
+  .text-right-xs {
+    float: right;
+  }
+}
+
+@media (min-width: 768px) {
+  /** Pull left sm **/
+  .text-left-sm {
+    text-align: left;
+  }
+
+  /** Pull right sm **/
+  .text-right-sm {
+    text-align: right;
+  }
+}
+
+@media (min-width: 992px) {
+  /** Pull left **/
+  .text-left-md {
+    text-align: left;
+  }
+
+  /** Pull right **/
+  .text-right-md {
+    text-align: right;
+  }
+}
+
+@media (min-width: 1200px) {
+  /** Pull left **/
+  .text-left-lg {
+    text-align: left;
+  }
+
+  /** Pull right **/
+  .text-right-lg {
+    text-align: right;
+  }
+}
+
+@media (min-width: 992px) {
+    .col-md-1-7 {
+        width: 14.28571428%;
+    }
+}

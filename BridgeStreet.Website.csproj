@@ -1,0 +1,894 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CA447F71-8C71-4257-8172-369585F0C7F8}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BridgeStreet.Website</RootNamespace>
+    <AssemblyName>BridgeStreet.Website</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <StyleCopTreatErrorsAsWarnings>False</StyleCopTreatErrorsAsWarnings>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>5</LangVersion>
+    <FilesToIncludeForPublish>OnlyFilesToRunTheApp</FilesToIncludeForPublish>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Castle.Facilities.SolrNetIntegration">
+      <HintPath>..\packages\Sitecore.Solr.Support 1.0.0 rev. 160211\bin\Castle.Facilities.SolrNetIntegration.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CsvHelper">
+      <HintPath>..\packages\CsvHelper.2.13.2.0\lib\net40-client\CsvHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="Glass.Mapper, Version=4.0.11.63, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Glass.Mapper.Sc.4.0.11.63\lib\net45\Glass.Mapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Glass.Mapper.Sc">
+      <HintPath>..\packages\Glass.Mapper.Sc.4.0.11.63\lib\81\Glass.Mapper.Sc.dll</HintPath>
+    </Reference>
+    <Reference Include="Glass.Mapper.Sc.Mvc">
+      <HintPath>..\packages\Glass.Mapper.Sc.4.0.11.63\lib\Mvc52\Glass.Mapper.Sc.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Sitecore.Solr.Support 1.0.0 rev. 160211\bin\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.ContentSearch, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Sitecore.8.1.160302\Sitecore.ContentSearch.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.ContentSearch.Linq, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Sitecore.8.1.160302\Sitecore.ContentSearch.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.ContentSearch.Linq.Solr">
+      <HintPath>..\packages\Sitecore.Solr.Support 1.0.0 rev. 160211\bin\Sitecore.ContentSearch.Linq.Solr.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.ContentSearch.SolrProvider">
+      <HintPath>..\packages\Sitecore.Solr.Support 1.0.0 rev. 160211\bin\Sitecore.ContentSearch.SolrProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.ContentSearch.SolrProvider.CastleWindsorIntegration">
+      <HintPath>..\packages\Sitecore.Solr.Support 1.0.0 rev. 160211\bin\Sitecore.ContentSearch.SolrProvider.CastleWindsorIntegration.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.ExperienceAnalytics">
+      <HintPath>..\packages\Sitecore.8.1.160302\Sitecore.ExperienceAnalytics.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Kernel">
+      <HintPath>..\packages\Sitecore.8.1.160302\Sitecore.Kernel.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Logging, Version=1.2.0.30715, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Sitecore.8.1.160302\Sitecore.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Mvc">
+      <HintPath>..\packages\Sitecore.8.1.160302\Sitecore.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Mvc.Analytics">
+      <HintPath>..\packages\Sitecore.8.1.160302\Sitecore.Mvc.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.SessionSerialization">
+      <HintPath>..\packages\Sitecore Session Serialization 1.0.0 rev. 161011 Hotfix 128003-1\package\files\bin\Sitecore.SessionSerialization.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Ship.AspNet, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Ship.AspNet.0.4.0.150818\lib\net45\Sitecore.Ship.AspNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.Ship.Core, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Ship.AspNet.0.4.0.150818\lib\net45\Sitecore.Ship.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.Ship.Infrastructure, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Ship.AspNet.0.4.0.150818\lib\net45\Sitecore.Ship.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.Support.398622">
+      <HintPath>..\packages\Sitecore.Support.398622\Sitecore.Support.398622.dll</HintPath>
+    </Reference>
+    <Reference Include="SitecoreDocumenter.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\SitecoreDocumenter\SitecoreDocumenter.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="SolrNet">
+      <HintPath>..\packages\Sitecore.Solr.Support 1.0.0 rev. 160211\bin\SolrNet.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IdentityModel.Selectors">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IdentityModel.Services">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IdentityModel.Tokens.ValidatingIssuerNameRegistry">
+      <HintPath>..\packages\System.IdentityModel.Tokens\System.IdentityModel.Tokens.ValidatingIssuerNameRegistry.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Sitecore.8.1.160302\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.1.0\lib\net40\WebActivatorEx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Areas\BridgeStreet\Controllers\AllLocationsController.cs" />
+    <Compile Include="Areas\BridgeStreet\Controllers\PartnerPageController.cs" />
+    <Compile Include="Areas\BridgeStreet\Controllers\WebAPI\LocationController.cs" />
+    <Compile Include="Areas\BridgeStreet\Controllers\WebAPI\BookingRequestController.cs" />
+    <Compile Include="Areas\BridgeStreet\Controllers\WebAPI\PartnerContactUsController.cs" />
+    <Compile Include="Areas\BridgeStreet\Models\PartnerPage\PartnerTileListModel.cs" />
+    <Compile Include="Areas\BridgeStreet\Models\AllLocations\AllLocationsViewModel.cs" />
+    <Compile Include="Areas\BridgeStreet\Models\AllLocations\AreaGroupingResult.cs" />
+    <Compile Include="Areas\BridgeStreet\Models\AllLocations\AreaListResult.cs" />
+    <Compile Include="Areas\BridgeStreet\Models\AllLocations\AreaResult.cs" />
+    <Compile Include="Areas\BridgeStreet\Models\PartnerPage\PartnerTileModel.cs" />
+    <Compile Include="Areas\BridgeStreet\Models\PartnerPage\PartnerContactUsFormModel.cs" />
+    <Compile Include="Areas\BridgeStreet\Models\PropertyDetails\PropertyDetailQuery.cs" />
+    <Compile Include="Areas\BridgeStreet\Controllers\WebAPI\SearchController.cs" />
+    <Compile Include="Areas\BridgeStreet\Controllers\WebAPI\YourTripController.cs" />
+    <Compile Include="Areas\BridgeStreet\Models\Homepage\HomeFeaturedLocationItemViewModel.cs" />
+    <Compile Include="Areas\BridgeStreet\Models\Homepage\HomeFeaturedLocationListViewModel.cs" />
+    <Compile Include="App_Start\ViewEngineConfig.cs" />
+    <Compile Include="Areas\BridgeStreet\Controllers\RequestBookingFlowController.cs" />
+    <Compile Include="Areas\BridgeStreet\Controllers\BookingFlowController.cs" />
+    <Compile Include="Areas\BridgeStreet\Controllers\BridgeStreetController.cs" />
+    <Compile Include="Areas\BridgeStreet\Controllers\ContactUsController.cs" />
+    <Compile Include="Areas\BridgeStreet\Controllers\GlobalController.cs" />
+    <Compile Include="Areas\BridgeStreet\Controllers\GlobalWebApiController.cs" />
+    <Compile Include="Areas\BridgeStreet\Controllers\HomepageController.cs" />
+    <Compile Include="Areas\BridgeStreet\Controllers\NavigationController.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\GlassMapperSc.cs" />
+    <Compile Include="App_Start\GlassMapperScCustom.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Windsor\IIocContainerFactory.cs" />
+    <Compile Include="App_Start\Windsor\WindsorConfig.cs" />
+    <Compile Include="App_Start\Windsor\WindsorContainerFactory.cs" />
+    <Compile Include="App_Start\Windsor\WindsorControllerActivator.cs" />
+    <Compile Include="App_Start\Windsor\WindsorControllerFactory.cs" />
+    <Compile Include="Areas\BridgeStreet\BridgeStreetAreaRegistration.cs" />
+    <Compile Include="Areas\BridgeStreet\Controllers\NotificationController.cs" />
+    <Compile Include="Areas\BridgeStreet\Controllers\PropertyController.cs" />
+    <Compile Include="Areas\BridgeStreet\Controllers\PropertyDetailController.cs" />
+    <Compile Include="Areas\BridgeStreet\Controllers\PropertySearchController.cs" />
+    <Compile Include="Areas\BridgeStreet\Controllers\SitemapController.cs" />
+    <Compile Include="Areas\BridgeStreet\Controllers\SocialSharingController.cs" />
+    <Compile Include="Areas\BridgeStreet\Controllers\WebAPI\BookingController.cs" />
+    <Compile Include="Areas\BridgeStreet\Controllers\WebAPI\ContactUsController.cs" />
+    <Compile Include="Areas\BridgeStreet\Models\BookingFlow\BookingConfirmation.cs" />
+    <Compile Include="Areas\BridgeStreet\Models\BookingFlow\BaseBookingModel.cs" />
+    <Compile Include="Areas\BridgeStreet\Models\BookingFlow\BookingModel.cs" />
+    <Compile Include="Areas\BridgeStreet\Models\BookingFlow\RequestBookingModel.cs" />
+    <Compile Include="Areas\BridgeStreet\Models\BookingFlow\BookingTripInfo.cs" />
+    <Compile Include="Areas\BridgeStreet\Models\ContactUs\ContactModel.cs" />
+    <Compile Include="Areas\BridgeStreet\Models\Homepage\HomeFeaturedPropertyListItemViewModel.cs" />
+    <Compile Include="Areas\BridgeStreet\Models\Homepage\HomeFeaturedPropertyViewModel.cs" />
+    <Compile Include="Areas\BridgeStreet\Models\PropertyDetails\PropertyIdModel.cs" />
+    <Compile Include="Areas\BridgeStreet\Models\PropertyDetails\PropertyImageViewModel.cs" />
+    <Compile Include="Areas\BridgeStreet\Models\PropertyDetails\YourTripModel.cs" />
+    <Compile Include="Areas\BridgeStreet\Models\SocialSharing\SocialSharePanelViewModel.cs" />
+    <Compile Include="Areas\BridgeStreet\Models\SocialSharing\SocialSharingViewModel.cs" />
+    <Compile Include="Areas\BridgeStreet\Models\Global\HtmlHeadViewModel.cs" />
+    <Compile Include="Areas\BridgeStreet\Models\Navigation\FooterViewModel.cs" />
+    <Compile Include="Areas\BridgeStreet\Models\Navigation\HeaderViewModel.cs" />
+    <Compile Include="Extensions\BridgeStreetHtmlHelper.cs" />
+    <Compile Include="Extensions\BundleOrderer.cs" />
+    <Compile Include="Extensions\HtmlHelperExtensions.cs" />
+    <Compile Include="Extensions\UtilityExtensions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SiteViewEngine.cs" />
+    <Compile Include="ViewEngine\BridgeStreetRazorViewEngine.cs" />
+    <Compile Include="WindsorInstallers\ContextInstaller.cs" />
+    <Compile Include="WindsorInstallers\ControllerInstaller.cs" />
+    <Compile Include="WindsorInstallers\RepositoryInstaller.cs" />
+    <Compile Include="WindsorInstallers\SearchInstaller.cs" />
+    <Compile Include="WindsorInstallers\ServiceInstaller.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="500.aspx" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Css\main.css" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Fonts\icomoon.svg" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Fonts\icons_mobiscroll.svg" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\500.jpg" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\Bed.svg" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\deloittelogo.png" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\Device.svg" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\featured_flag.png" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\icon_blurp_0.png" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\icon_blurp_1.png" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\icon_blurp_2.png" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\loft.jpg" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\logo-reverse-gray.svg" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\logo-reverse.svg" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\pulldown.png" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\room.png" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\star-half.png" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\star-off.png" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\star-on.png" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\Stopwatch.svg" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\desktop\components\_homepagefeatured-4col.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\helpers\_ryan.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\main.css">
+      <DependentUpon>main.less</DependentUpon>
+    </Content>
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\main.min.css">
+      <DependentUpon>main.css</DependentUpon>
+    </Content>
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\elements\BRIDGESTREET.accordion.list.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\elements\BRIDGESTREET.alllocations.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\elements\BRIDGESTREET.bookingflow.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\elements\BRIDGESTREET.contactusform.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\elements\BRIDGESTREET.detail.related.properties.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\elements\BRIDGESTREET.detail.yourtrip.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\elements\BRIDGESTREET.global.search.guests.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\elements\BRIDGESTREET.navigation.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\elements\BRIDGESTREET.nearby.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\elements\BRIDGESTREET.peeldown.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\elements\BRIDGESTREET.search.filter.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\elements\BRIDGESTREET.split.screen.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\elements\BRIDGESTREET.video.slider.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\scripts.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\utils\BRIDGESTREET.currency.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\widgets\BRIDGESTREET.spinner.widget.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\widgets\BRIDGESTREET.ui.components.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\backbone\backbone-min.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\flatpickr\css\flatpickr.min.css" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\flatpickr\js\flatpickr.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\foundation\css\foundation-datepicker.min.css" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\foundation\js\foundation-datepicker.min.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\gmaps\gmaps.min.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\jquery-ui-1.12.0\js\jquery-ui.spinner.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\jquery-validate\jquery.validate.min.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\jquery.matchHeight\jquery.matchHeight-min.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\jquery.mmenu\css\jquery.mmenu.all.css" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\jquery.mmenu\js\jquery.mmenu.all.min.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\popcorn\popcorn.min.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\prettify\css\prettify.css" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Fonts\fontawesome-webfont.svg" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\aparthotel-title.png" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\eventpreview0.jpg" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\eventpreview1.jpg" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\exclusive-title.png" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\hero_image_0.jpg" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\living-title.png" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\logo.png" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\london.jpg" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\newyork.jpg" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\paris.jpg" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\partnerimage0.jpg" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\partnerimage1.jpg" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\partnerimage2.jpg" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\pattern.jpg" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\pdetailsmall0.jpg" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\pdetailsmall1.jpg" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\pdetailsmall2.jpg" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\pdetailsmall3.jpg" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\places-title.png" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\property0.jpg" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\property1.jpg" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\property2.jpg" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\property3.jpg" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\propertydetail0.jpg" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\propertydetail1.jpg" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\propertydetail2.jpg" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\propertydetail3.jpg" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\residences-title.png" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\studyo-title.png" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Images\vertical.png" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\base\normalize.css" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\bsh.constants.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\bsh.propertySearchBar.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\elements\BRIDGESTREET.detail.carousel.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\elements\BRIDGESTREET.featured.pod.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\elements\BRIDGESTREET.global.search.daterange.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\elements\BRIDGESTREET.global.search.go.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\elements\BRIDGESTREET.global.search.location.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\elements\BRIDGESTREET.homepage.hero.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\elements\BRIDGESTREET.mapview.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\elements\BRIDGESTREET.mobile.modal.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\elements\BRIDGESTREET.search.listing.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\elements\BRIDGESTREET.statistics.pod.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\main.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\utils\BRIDGESTREET.calendarcontrol.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\utils\BRIDGESTREET.date.format.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\utils\DOMUtils.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\utils\increment.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\bootstrap-3.3.6\css\bootstrap-theme.min.css" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\bootstrap-3.3.6\css\bootstrap.min.css" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\bootstrap-3.3.6\js\bootstrap.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\bootstrap-select\css\bootstrap-select.min.css" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\bootstrap-select\js\bootstrap-select.min.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\brickwork\jquery.brickwork.min.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\elementresize\element.resize.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\fastclick\fastclick.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\font-awesome-4.6.3\css\font-awesome.min.css" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\gsap-1.19.0\plugins\CSSPlugin.min.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\gsap-1.19.0\plugins\EasePack.min.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\gsap-1.19.0\plugins\ScrollToPlugin.min.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\gsap-1.19.0\TweenMax.min.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\idangero.swiper-3.3.1\css\swiper.min.css" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\idangero.swiper-3.3.1\js\swiper.min.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\idangero.swiper-3.3.1\swiper.min.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\jquery-countTo\jquery.countTo.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\jquery-ui-1.12.0\css\jquery-ui.min.css" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\jquery-ui-1.12.0\css\jquery-ui.structure.min.css" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\jquery-ui-1.12.0\css\jquery-ui.theme.min.css" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\jquery-ui-1.12.0\js\jquery-ui.min.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\jquery\jquery.min.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\mobiscroll\css\icons_mobiscroll.svg" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\mobiscroll\css\mobiscroll.custom-3.0.0-beta4.min.css" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\mobiscroll\js\mobiscroll.custom-3.0.0-beta4.min.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\nouislider\css\nouislider.css" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\nouislider\js\nouislider.min.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\prettify\js\prettify.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\raty\js\jquery.raty.min.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\recaptcha\api.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\remodal-1.1.0\remodal.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\salvatorre\salvattore.min.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\scrolltrigger\ScrollTrigger.min.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\SimpleAccordion\jquery.simpleaccordion.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\slideout\slideout.min.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\splitjs\split.min.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\splitpane\split.pane.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\stickup\stickUp.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\sticky-kit\sticky-kit.min.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\tweenmaxscrollto\tweenmax.scrollto.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\underscore\underscore-min.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\vivus\vivus.min.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\watermark\watermark.min.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\wNumb\wNumb.js" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\BookingFlow\BookingFlow.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Navigation\HeaderAlt.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="config.js" />
+    <Content Include="Error.html" />
+    <Content Include="Global.asax" />
+    <Content Include="gulpfile.js" />
+    <Content Include="localConfig.example.js" />
+    <Content Include="mock.html" />
+    <Content Include="NotificationTemplates\Email\ContactForm.html" />
+    <Content Include="NotificationTemplates\Email\PartnerContactForm.html" />
+    <Content Include="PartnerImages\deliveroo.jpg" />
+    <Content Include="PartnerImages\DU-160.jpg" />
+    <Content Include="PartnerImages\DU-circle.jpg" />
+    <Content Include="PartnerImages\dufl.jpg" />
+    <Content Include="PartnerImages\EN-160.png" />
+    <Content Include="PartnerImages\EN-circle.jpg" />
+    <Content Include="PartnerImages\enterprise.jpg" />
+    <Content Include="PartnerImages\opentable.jpg" />
+    <Content Include="PropertyImages\Fullsize\a.jpg" />
+    <Content Include="PropertyImages\Fullsize\b.jpg" />
+    <Content Include="PropertyImages\Fullsize\c.jpg" />
+    <Content Include="PropertyImages\Fullsize\d.jpg" />
+    <Content Include="PropertyImages\Fullsize\e.jpg" />
+    <Content Include="PropertyImages\Fullsize\f.jpg" />
+    <Content Include="PropertyImages\Fullsize\g.jpg" />
+    <Content Include="PropertyImages\Fullsize\h.jpg" />
+    <Content Include="PropertyImages\Fullsize\no-image.jpg" />
+    <Content Include="PropertyImages\Fullsize\property0.jpg" />
+    <Content Include="SitecoreSecurityHardeningStepsReadMe.txt" />
+    <Content Include="Sitecore\admin\Documentation.aspx" />
+    <Content Include="Sitecore\admin\UserControls\RenderingsList.ascx" />
+    <Content Include="Sitecore\admin\UserControls\TemplatesList.ascx" />
+    <Content Include="UberSafeCCPayments.html" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Start\App_Data\" />
+    <Folder Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\desktop\pages\" />
+    <Folder Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\pages\" />
+    <Folder Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\pages\" />
+    <Folder Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\wide\pages\" />
+    <Folder Include="Areas\BridgeStreet\Assets\Local\Scripts\pages\" />
+    <Folder Include="Areas\BridgeStreet\Assets\Local\Svg\" />
+    <Folder Include="Areas\BridgeStreet\Views\Notification\" />
+    <Folder Include="Areas\BridgeStreet\Views\Shared\DisplayTemplates\" />
+    <Folder Include="Areas\BridgeStreet\Views\YourTrip\" />
+    <Folder Include="PropertyImages\Thumbnails\" />
+    <Folder Include="PropertyImages\Viewable\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Config\Include\z.Glass.Mapper.Sc.ViewRender.config.exclude" />
+    <Content Include="App_Config\Include\Glass.Mapper.Sc.Start.config" />
+    <Content Include="App_Config\Include\Glass.Mapper.Sc.config" />
+    <Content Include="App_Config\Include\Glass.Mapper.Sc.CodeFirst.config.exclude" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BridgeStreet.Data.Services.Models\BridgeStreet.Data.Services.Models.csproj">
+      <Project>{f3c4a5be-8a18-49ca-83d0-3ba8268b3147}</Project>
+      <Name>BridgeStreet.Data.Services.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BridgeStreet.Data.Services\BridgeStreet.Data.Services.csproj">
+      <Project>{70df54f5-5f2a-4379-b417-bef9f52b5ec3}</Project>
+      <Name>BridgeStreet.Data.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bridgestreet.Website.Domain\BridgeStreet.Website.Domain.csproj">
+      <Project>{d2bc5021-c663-4251-9617-38bcb53bbacb}</Project>
+      <Name>BridgeStreet.Website.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bridgestreet.Website.Infrastructure.Sc\BridgeStreet.Website.Infrastructure.Sc.csproj">
+      <Project>{ad69bfb1-9f6b-42a2-a053-9e3f433b8917}</Project>
+      <Name>BridgeStreet.Website.Infrastructure.Sc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bridgestreet.Website.Infrastructure\BridgeStreet.Website.Infrastructure.csproj">
+      <Project>{169b6b14-98b3-4461-b4ec-8513e53b8f74}</Project>
+      <Name>BridgeStreet.Website.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bridgestreet.Website.Repository\BridgeStreet.Website.Repository.csproj">
+      <Project>{8592508b-8b3e-4b4b-ac18-c6e0af55e487}</Project>
+      <Name>BridgeStreet.Website.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bridgestreet.Website.Service\BridgeStreetWebsite.Service.csproj">
+      <Project>{01fd4a7c-0faa-43b2-843e-56359c42a1f0}</Project>
+      <Name>BridgeStreetWebsite.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\BridgeStreet\Views\Layouts\BaseLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Global\ScriptsBottom.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\BridgeStreet\Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Config\Include\Site\Events.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Config\Include\Site\Settings.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Config\Include\Site\Sites.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Global\HtmlHead.cshtml" />
+    <Content Include="App_Config\Include\Site\Pipelines.config" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Global\ScriptsTop.cshtml" />
+    <Content Include="App_Config\Include\ship.config" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Navigation\CookiePolicy.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Navigation\Footer.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Navigation\Header.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Global\ScriptVendorBundles.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Global\CssBundles.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Global\ScriptLocalBundles.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\SocialSharing\SocialSharingLinks.cshtml" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Css\README.md" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Generic\RichText.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Generic\RichText2Column.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Generic\ImageLeftContentRight.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Generic\ImageRightContentLeft.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Navigation\TelephoneNumberPartial.cshtml" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\components\_propertypodlist.less" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Navigation\404.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Homepage\VideoSlider.cshtml" />
+    <Content Include="App_Config\Include\Bridgestreet.ContentSearch.Solr.IndexConfiguration.config" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Navigation\SlideOutMenu.cshtml" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Fonts\fontawesome-webfont.eot" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Fonts\fontawesome-webfont.ttf" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Fonts\fontawesome-webfont.woff" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Fonts\fontawesome-webfont.woff2" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Fonts\FontAwesome.otf" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\desktop\components\_homepagehero.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\desktop\desktopcontents.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\desktop\helpers\_mixins.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\desktop\layout\_footer.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\components\_homepagehero.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\helpers\_mixins.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\layout\_footer.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\layout\_header.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\components\_homepagehero.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\helpers\_mixins.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\layout\_footer.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\layout\_header.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\tabletcontents.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\_desktop.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\_mobile.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\_tablet.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\helpers\_animations.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\helpers\_colors.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\helpers\_fonts.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\helpers\_globals.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\helpers\_ui.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\helpers\_variables.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\main.less" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\DesignPhase\header.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Areas\BridgeStreet\Views\Renderings\DesignPhase\homepagehero.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\DesignPhase\homepagestatistics.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\DesignPhase\homepage-3col.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\DesignPhase\homepagepurpose-3col.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\DesignPhase\homepagefeatured-4col.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\DesignPhase\homepagepartner-2col.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\DesignPhase\footersocial.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\DesignPhase\footer.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\DesignPhase\searchresults.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Property\PropertyListing.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Property\PropertyCard.cshtml" />
+    <Content Include="App_Config\Include\Sitecore.ContentSearch.Solr.DefaultIndexConfiguration.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Config\Include\ContentTesting\Sitecore.ContentTesting.Solr.IndexConfiguration.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Config\Include\FXM\Sitecore.FXM.Solr.DomainsSearch.DefaultIndexConfiguration.config" />
+    <Content Include="App_Config\Include\FXM\Sitecore.FXM.Solr.DomainsSearch.Index.Master.config" />
+    <Content Include="App_Config\Include\FXM\Sitecore.FXM.Solr.DomainsSearch.Index.Web.config" />
+    <Content Include="App_Config\Include\ListManagement\Sitecore.ListManagement.Solr.Index.List.config" />
+    <Content Include="App_Config\Include\ListManagement\Sitecore.ListManagement.Solr.IndexConfiguration.config" />
+    <Content Include="App_Config\Include\Social\Sitecore.Social.Solr.Index.Master.config" />
+    <Content Include="App_Config\Include\Social\Sitecore.Social.Solr.Index.Web.config" />
+    <Content Include="App_Config\Include\Social\Sitecore.Social.Solr.IndexConfiguration.config" />
+    <Content Include="App_Config\Include\Sitecore.ContentSearch.Solr.Index.Analytics.config" />
+    <Content Include="App_Config\Include\Sitecore.ContentSearch.Solr.Index.Core.config" />
+    <Content Include="App_Config\Include\Sitecore.ContentSearch.Solr.Index.Master.config" />
+    <Content Include="App_Config\Include\Sitecore.ContentSearch.Solr.Index.Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Config\Include\Sitecore.Marketing.Definitions.MarketingAssets.Repositories.Solr.Index.Master.config" />
+    <Content Include="App_Config\Include\Sitecore.Marketing.Definitions.MarketingAssets.Repositories.Solr.Index.Web.config" />
+    <Content Include="App_Config\Include\Sitecore.Marketing.Solr.Index.Master.config" />
+    <Content Include="App_Config\Include\Sitecore.Marketing.Solr.Index.Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Homepage\HomeHero.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Homepage\HomeFeaturedLocationsList.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Navigation\FooterColumnPartial.cshtml" />
+    <Content Include="App_Config\Include\Sitecore.Marketing.Solr.IndexConfiguration.config" />
+    <Content Include="App_Config\Include\Sitecore.Marketing.Definitions.MarketingAssets.Repositories.Solr.IndexConfiguration.config" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Global\ScriptVendorBundles2.cshtml" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\components\_footersocial.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\components\_homepage-3col.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\components\_homepagefeatured-4col.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\components\_homepagepartner-2col.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\components\_homepagepurpose-3col.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\components\_homepagestatistics.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\components\_resultslistmap.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\components\_searchresultsfilter.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\layout\_search.less" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Partials\_VideoEmbedChooser.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Partials\_VideoEmbedHtml5.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Partials\_VideoEmbedVimeo.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Partials\_VideoEmbedYoutube.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Sublayouts\HomeSublayout.cshtml" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\helpers\_mixins.less" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Homepage\HomeValuePropositionPanel.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Homepage\HomePartnerWithUsList.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Homepage\HomeFeaturedPropertiesList.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Widgets\GeneralHero.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Widgets\PageTitle.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Navigation\SocialSharePanel.cshtml" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\components\_footersocial.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\components\_homepage-3col.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\components\_homepagefeatured-4col.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\components\_homepagepartner-2col.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\components\_homepagepurpose-3col.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\components\_homepagestatistics.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\components\_modal.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\layout\_search.less" />
+    <Content Include="App_Config\Include\Site\Commands.config" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Navigation\BrandsList.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\PropertyDetail\AboutThisPlace.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\PropertyDetail\Amenities.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\PropertyDetail\ContactUs.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\PropertyDetail\Events.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\PropertyDetail\Nearby.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\PropertyDetail\PropertyExpectations.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\PropertyDetail\PropertyHeader.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\PropertyDetail\PropertyImages.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\PropertyDetail\RelatedProperties.cshtml" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\_wide.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\desktop\layout\_search.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\components\_ourbrands.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\components\_detailcarousel.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\components\_ourbrands.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\wide\components\_homepagehero.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\wide\helpers\_mixins.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\wide\layout\_footer.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\wide\layout\_header.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\wide\widecontents.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\mobiscroll\css\icons_mobiscroll.eot" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\mobiscroll\css\icons_mobiscroll.ttf" />
+    <Content Include="Areas\BridgeStreet\Assets\Vendor\mobiscroll\css\icons_mobiscroll.woff" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\desktop\components\_relatedproperties.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\components\_detailcarousel.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\components\_relatedevents.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\components\_relatedfeatures.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\components\_relatedproperties.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\components\_twocolumncontainer.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\components\_relatedevents.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\components\_relatedfeatures.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\components\_relatedproperties.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\wide\components\_relatedproperties.less" />
+    <Content Include="Areas\BridgeStreet\Views\Sublayouts\PropertyDetailSublayout.cshtml" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\components\_aboutproperty.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\components\_accordionlist.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\components\_contactpod.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\components\_propertyheader.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\components\_tripdetails.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\components\_aboutproperty.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\components\_contactpod.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\components\_propertyheader.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\components\_tripdetails.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\components\_searchresultsfilter.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\components\_threeiconblurp.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\components\_threeiconblurp.less" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\PropertyDetail\PropertyPodList.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\PropertyDetail\YourTrip.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Sublayouts\BookingSublayout.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\ContactUs\MailingAddressList.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Sublayouts\ContentPageSublayout.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Homepage\HomeFactsPanel.cshtml" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Fonts\icomoon.eot" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Fonts\icomoon.ttf" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Fonts\icomoon.woff" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Fonts\icons_mobiscroll.eot" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Fonts\icons_mobiscroll.ttf" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Fonts\icons_mobiscroll.woff" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\desktop\components\_filterspanel.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\desktop\components\_searchresultsfilter.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\desktop\layout\_navigation.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\components\_filterspanel.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\components\_nearby.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\components\_pulldown.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\components\_resultslistmap.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\layout\_navigation.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\components\_filterspanel.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\components\_nearby.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\components\_pulldown.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\components\_searchresultsdragstate.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\layout\_navigation.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\wide\components\_filterspanel.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\wide\components\_homepagefeatured-4col.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\wide\components\_searchresultsfilter.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\wide\layout\_search.less" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Widgets\Guarantee.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\BookingFlow\RequestFlow.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\PropertyDetail\PropertyFactsPanel.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\SearchResults\PropertySearchResults.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\PartnerPage\PartnerContactUs.cshtml" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\components\_bookingform.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\components\_bookingform.less" />
+    <Content Include="Areas\BridgeStreet\Views\Sublayouts\PartnerPageSublayout.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\PartnerPage\PartnerContactInfo.cshtml" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\wide\layout\_headeralt.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\wide\layout\_searchalt.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\layout\_headeralt.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\layout\_searchalt.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\layout\_headeralt.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\layout\_searchalt.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\desktop\layout\_searchalt.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\elements\BRIDGESTREET.contactusMaps.js" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\components\_contactus.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\components\_contactus.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Scripts\elements\BRIDGESTREET.partnercontactusform.js" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Generic\MediaVideo.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\PartnerPage\PartnerFactList.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Sublayouts\PartnerPage2ColumnSublayout.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\AllLocations\AllLocationsListing.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Sublayouts\AllLocationsSublayout.cshtml" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\components\_partnerpage.less" />
+    <Content Include="App_Config\Include\Sitecore.SessionSerialization.config" />
+    <Content Include="Areas\BridgeStreet\Views\Sublayouts\AboutUsSublayout.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\AboutUs\PersonList.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\AboutUs\PersonListItem.cshtml" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\components\_allLocations.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\desktop\components\_videoslider.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\tablet\components\_twocolumncontainer.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\mobile\components\_404.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\helpers\_propertypod.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\helpers\_print.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\desktop\layout\_header.less" />
+    <Content Include="Areas\BridgeStreet\Assets\Local\Less\breakpoints\desktop\layout\_headeralt.less" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\PartnerPage\PartnerTiles.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Generic\ImageLeftFull.cshtml" />
+    <None Include="compilerconfig.json" />
+    <Content Include="App_Config\Include\Bridgestreet.ContentSearch.Solr.Index.Web.config" />
+    <Content Include="App_Config\Include\Bridgestreet.ContentSearch.Solr.Index.Master.config" />
+    <None Include="compilerconfig.json" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\ContactUs\ContactUsForm.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Sublayouts\ContactUsSublayout.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\ContactUs\GlobalReservationsList.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Layouts\PlaintextLayout.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Layouts\XmlLayout.cshtml" />
+    <Content Include="Areas\BridgeStreet\Views\Renderings\Sitemap\Sitemap.cshtml" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
+    <Content Include="rewriteMaps.config" />
+    <Content Include="package.json" />
+    <None Include="Properties\PublishProfiles\alex_bridgestreet_local.pubxml" />
+    <None Include="Properties\PublishProfiles\brada_bsh_local.pubxml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\PublishProfiles\daniel_bridgestreet_local.pubxml" />
+    <None Include="Properties\PublishProfiles\darya_local.pubxml" />
+    <None Include="Properties\PublishProfiles\joe_bridgestreet_local.pubxml" />
+    <None Include="Properties\PublishProfiles\Khader_BridgeStreet_Publish.pubxml" />
+    <None Include="Properties\PublishProfiles\paris_bridgestreet_local.pubxml" />
+    <None Include="Properties\PublishProfiles\tyler_bridgestreet_local.pubxml" />
+    <Content Include="Sitecore\service\Analytics\Session\PushSession.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'CI Build|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>5</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!--<Import Project="$(ProgramFiles)\MSBuild\StyleCop\v4.7\StyleCop.targets" />-->
+  <Import Project="..\packages\StyleCop4.7\StyleCop.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

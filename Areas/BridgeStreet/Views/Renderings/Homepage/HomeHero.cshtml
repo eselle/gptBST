@@ -1,0 +1,68 @@
+﻿@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<BridgeStreet.Website.Domain.Models.Pages.HomePage.HomeHero.HomeHero>
+
+@{
+    string poster = string.Empty;
+    string backgroundImage = string.Empty;
+
+    if (Model.HeroVideo != null && Model.HeroVideo.Image != null)
+    {
+        poster = Model.HeroVideo.Image.Src;
+    }
+
+    if (Model.HeroImage != null)
+    {
+        backgroundImage = Model.HeroImage.Src;
+    }
+}
+
+
+<div class="homepage-hero" style="height: 835px;">
+    <div class="slide section active hero-item nopadding container-fluid" data-index="1">
+
+    @if (Model.HeroVideo != null)
+    {
+        <div class="full-video-container" style="display: block;">
+            <video id="RandomVideo" autoplay="" muted="" loop="" preload="auto" class="full-video" data-track="bound" poster="">
+
+            </video>
+        </div>
+    }
+        <div class="hero-background" style="background-image: url(&quot;@backgroundImage&quot;);"></div>
+    
+        <div class="hero-messaging" style="opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);">
+            <h1 class="text-center hero-alpha col-xs-12">@Editable(m => m.HeroTitle)</h1>
+            <h4 class="text-center hero-alpha col-xs-12">@Editable(m => m.HeroSubtitle)</h4>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    (function () {
+
+        function addSourceToVideo(element, src, type) {
+
+            var source = document.createElement('source');
+
+            source.src = src;
+
+            source.type = type;
+
+            element.appendChild(source);
+        }
+
+
+        var videoObj = ['/Videos/Video1.mp4',
+                        '/Videos/Video2.mp4',
+                        '/Videos/Video3.mp4',
+                        '/Videos/Video4.mp4'];
+
+        var randomVideo = videoObj.length * Math.random() | 0;
+
+        var videoEl = document.getElementById('RandomVideo');
+
+        addSourceToVideo(videoEl, videoObj[randomVideo], 'video/mp4');
+
+    })();
+
+</script>

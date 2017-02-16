@@ -1,0 +1,10 @@
+﻿@using BridgeStreet.Website.Domain.Models.Base;
+@using Glass.Mapper.Sc.Web.Mvc
+
+@inherits GlassView<BridgeStreet.Website.Domain.Models.Generic.ImageContent>
+
+<div id="@Model.AnchorName" class="generic-content-module image-left row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        @RenderImage(Model, x => x.Image, isEditable: true, parameters: new { @class = "img-responsive" })
+    </div>
+</div>

@@ -1,0 +1,99 @@
+﻿@using Sitecore.Globalization
+@using BridgeStreet.Website.Infrastructure.Constants
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<BridgeStreet.Website.Domain.Models.Pages.PartnerPage.PartnerContactForm>
+
+<div class="contact-form-container container-fluid">
+    <div id="partner-contact-us-form-thank-you">
+        @Editable(Model, m => m.ThankYouMessage)
+    </div>
+    <form id="partner-contact-us-form" class="contact-form">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6">
+                <input id="FirstName" name="FirstName" type="text" placeholder="@Translate.Text(Constants.TranslationKeys.FirstName)" required/>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <input id="LastName" name="LastName" type="text" placeholder="@Translate.Text(Constants.TranslationKeys.LastName)" required/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6">
+                <input id="Phone" name="Phone" type="number" placeholder="@Translate.Text(Constants.TranslationKeys.PhoneNumber)" required/>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <input id="Email" name="Email" type="email" placeholder="@Translate.Text(Constants.TranslationKeys.Email)" required/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6">
+                <input id="Company" name="Company" type="text" placeholder="@Translate.Text(Constants.TranslationKeys.Company)"/>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <input id="CompanyType" name="CompanyType" type="text" placeholder="@Translate.Text(Constants.TranslationKeys.CompanyType)"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <textarea id="Comments" name="Comments" placeholder="@Translate.Text(Constants.TranslationKeys.Comments)"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6">
+                <h3>@Translate.Text(Constants.TranslationKeys.Region)</h3>
+                @{
+                    var iteration = 0;
+                    foreach (var region in Model.RegionOptions)
+                    {
+                        <div class="checkbox-container">
+                            <input type="checkbox" name="region" id="@("region" + iteration)" value="@region.Value"/>
+                            <label for="@("region" + iteration)">@region.Title</label>
+                        </div>
+
+                        iteration += 1;
+                    }
+                }
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <h3>@Translate.Text(Constants.TranslationKeys.AreaOfInterest)</h3>
+                @{
+                    iteration = 0;
+                    foreach (var area in Model.AreasOfInterestOptions)
+                    {
+                        <div class="checkbox-container">
+                            <input type="checkbox" name="AreaOfInterest" id="@("area" + iteration)" value="@area.Value"/>
+                            <label for="@("area" + iteration)">@area.Title</label>
+                        </div>
+
+                        iteration += 1;
+                    }
+                }
+            </div>
+        </div>
+
+        <hr/>
+
+        <div class="row">
+            <div class="col-xs-12 how-to-contact">
+                <h5>@Translate.Text(Constants.TranslationKeys.HowShouldWeContactYou)</h5>
+                <input id="emailRadio" name="ContactMethod" type="radio" value="@Translate.Text(Constants.TranslationKeys.Email)"/>
+                <label for="emailRadio">@Translate.Text(Constants.TranslationKeys.Email)</label>
+
+                <input id="callRadio" name="ContactMethod" type="radio" value="@Translate.Text(Constants.TranslationKeys.Call)"/>
+                <label for="callRadio">@Translate.Text(Constants.TranslationKeys.Call)</label>
+
+                <input id="textRadio" name="ContactMethod" type="radio" value="@Translate.Text(Constants.TranslationKeys.Text)"/>
+                <label for="textRadio">@Translate.Text(Constants.TranslationKeys.Text)</label>
+            </div>
+
+            <div class="col-xs-12">
+                <div class="g-recaptcha" data-sitekey="@Model.RecaptchaKey"></div>
+                <label id="recaptcha-error">Please verify you are not a robot.</label>
+            </div>
+
+            <div class="col-xs-12">
+                <button id="btnSubmit">@Translate.Text(Constants.TranslationKeys.Submit)</button>
+            </div>
+        </div>
+        <input id="FormType" name="FormType" type="hidden" value="@Model.Id"/>
+    </form>
+</div>
+

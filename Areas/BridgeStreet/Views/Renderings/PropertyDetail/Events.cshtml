@@ -1,0 +1,27 @@
+﻿@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<BridgeStreet.Website.Domain.Models.Pages.PropertyDetailPage.EventsList.EventsList>
+    
+        
+@if (Model != null)
+{
+
+
+    <div class="events-preview">
+        <h2>@Model.Title</h2>
+
+        @if (Model.Events.Any())
+        {
+            <ul class="event-items row">
+                @foreach (var ev in Model.Events)
+                {
+                    <li class="event-item col-xs-12 col-sm-6">
+                        @RenderImage(ev, e => e.Image, new {@class = "img-responsive" })
+                        <h3>@ev.Title</h3>
+                        <span>@ev.Location</span>
+                        <p>@ev.Date</p>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+}
+

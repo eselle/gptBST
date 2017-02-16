@@ -1,0 +1,23 @@
+﻿@using BridgeStreet.Website.Domain.Models.Navigation.BrandsList
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<BridgeStreet.Website.Domain.Models.Navigation.BrandsList.BrandList>
+              
+@if (Model != null)
+{
+    <div class="our-brands container-fluid">
+
+        <div class="our-brands-container container">
+            <h6 class="our-brands-label">@Model.Title</h6>
+            <ul class="our-brands-items row">
+                @foreach (var brand in @Model.Children.OfType<BrandListItem>())
+                {
+                    <li class="our-brands-item col-xs-6 col-sm-3 col-md-2 col-md-1-7">
+                        @using (BeginRenderLink(brand, b => b.BrandLink))
+                        {
+                            @RenderImage(brand, b => b.BrandImage, new {@class = "img-responsive"})
+                        }
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+}

@@ -1,0 +1,17 @@
+﻿@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<BridgeStreet.Website.Domain.Models.Pages.PropertyDetailPage.PropertyPodList.PropertyPodList>
+
+@if (Model.Pods != null && Model.Pods.Any())
+{
+    <ul class="p-about-preview-items border-bottom row">
+        @foreach (var pod in Model.Pods)
+        {
+            <li class="p-about-preview-item col-xs-6 col-sm-6 col-md-3">
+                <div class="p-about-preview-image">
+                    @RenderImage(pod, p => p.PodImage)
+                </div>
+                <p>@Editable(pod, p => p.Description)</p>
+            </li>
+        }
+
+    </ul>
+}

@@ -1,0 +1,71 @@
+﻿@using BridgeStreet.Website.Domain.Models.Navigation
+@using BridgeStreet.Website.Domain.Models.SocialMedia
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<BridgeStreet.Website.Areas.BridgeStreet.Models.Navigation.FooterViewModel>
+
+
+<footer class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="footer-links-wrapper col-xs-6 col-sm-12 col-md-8">
+                @if (Model.FooterConfiguration.FooterMenuColumn1 != null)
+                {
+                    @Html.Partial("FooterColumnPartial", Model.FooterConfiguration.FooterMenuColumn1)
+                }
+                @if (Model.FooterConfiguration.FooterMenuColumn2 != null)
+                {
+                    @Html.Partial("FooterColumnPartial", Model.FooterConfiguration.FooterMenuColumn2)
+                }
+                @if (Model.FooterConfiguration.FooterMenuColumn3 != null)
+                {
+                    @Html.Partial("FooterColumnPartial", Model.FooterConfiguration.FooterMenuColumn3)
+                }
+
+                <ul class="footer-links footer-student-link col-xs-12 col-sm-3">
+                    <li>
+                        <span class="footer-student-link-label">@Editable(Model, x => x.FooterConfiguration.ExploreLivingQuestion)</span>
+                    </li>
+                    <li>
+                        @RenderLink(Model, x => x.FooterConfiguration.ExploreLivingLink)
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer-contact-container col-xs-6 col-sm-12 col-md-4">
+                <h5>@Editable(m => m.FooterConfiguration.TagLine)</h5>
+                <div class="footer-telephone">
+                    @foreach (var telephoneNumber in Model.FooterConfiguration.TelephoneNumbers)
+                    {
+                        <div>
+                            <span class="telephone-label">@Editable(telephoneNumber, x => x.Title)</span>
+                            <span itemprop="telephone" class="telephone-value">
+                                <a href="tel:@Editable(telephoneNumber, x => x.PhoneNumber)">@Editable(telephoneNumber, x => x.PhoneNumber)</a>
+                            </span>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="footer-bottom-container col-xs-12 col-sm-6 col-sm-offset-6 col-md-offset-0 col-md-12">
+                <div class="row">
+                    <div class="footer-social-icons col-sm-12 col-md-6">
+                        <h6>Let's keep in touch</h6>
+                        @foreach (var social in Model.FooterConfiguration.FooterSocialProperties)
+                        {
+                            if (social.SocialMediaPlatform != null && social.SocialMediaLink != null)
+                            {
+                                using (BeginRenderLink(social, s => s.SocialMediaLink, new { @class = social.SocialMediaPlatform.CssClass, @target = "_blank" }))
+                                {
+                                    <i class="@social.SocialMediaPlatform.IconCssClass" aria-hidden="true"></i>
+                                }
+                            }
+                        }
+                    </div>
+
+                    <div class="footer-legal col-xs-12 col-sm-12 col-md-6">
+                        <p>@Editable(m => m.FooterConfiguration.CopyrightText.Replace("{year}", DateTime.Now.Year.ToString()))</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

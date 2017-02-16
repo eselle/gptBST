@@ -1,0 +1,47 @@
+﻿@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<BridgeStreet.Website.Domain.Models.Pages.HomePage.VideoSlider.VideoSlider>
+
+@{
+    var firstUrl = (Model.FirstVideo == null || Model.FirstVideo.Mp4VideoSource == null ) ? "" : Model.FirstVideo.Mp4VideoSource.Url;
+    var secondUrl = (Model.SecondVideo == null || Model.SecondVideo.Mp4VideoSource == null) ? "" : Model.SecondVideo.Mp4VideoSource.Url;
+    string backgroundImage = string.Empty;
+    string poster = string.Empty;
+
+    if (Model.StaticImage != null)
+    {
+        backgroundImage = Model.StaticImage.Src;
+
+        poster = Model.StaticImage.Src;
+    }    
+}
+
+<div class="homepage-hero video-slider" style="height: 835px;">
+    <div class="slide section active hero-item nopadding container-fluid" data-index="1">
+
+        <div class="hero-background hidden-md hidden-lg" style="background-image: url(&quot;@backgroundImage&quot;);"></div>
+        <div class="split-video-container hidden-xs- hidden-sm" style="display: block;">
+
+            <div class="cd-image-container">
+                <video id="example_video_1" muted="" loop="" mediagroup="videoMG1" class="split-video video" data-track="bound" preload=" auto" class="full-video" data-track="bound" poster="">
+                    <source src="@firstUrl" type='video/mp4' />
+                </video>
+                <span class="cd-image-label" data-type="original"></span>
+
+                <div class="cd-resize-img">
+                    <video width="900" id="example_video_2" muted="" loop="" mediagroup="videoMG1" class="split-video video" data-track="bound" poster="">
+                        <source src="@secondUrl" type='video/mp4' />
+                    </video>
+                    <span class="cd-image-label" data-type="modified"></span>
+                </div>
+
+                <span class="cd-handle"></span>
+
+            </div>
+            
+        </div>
+
+        <div class="hero-messaging" style="opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);">
+            <h1 class="text-center hero-alpha col-xs-12">@Editable(m => m.SliderTitle)</h1>
+            <h4 class="text-center hero-alpha col-xs-12">@Editable(m => m.SliderSubtitle)</h4>
+        </div>
+    </div>
+</div>

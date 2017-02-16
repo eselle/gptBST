@@ -1,0 +1,89 @@
+.pull-down {
+	overflow: hidden;
+	position: absolute;
+	top: 151px;
+	width: 100%;
+	z-index: 111;
+
+	.p-d-container {
+		margin-top: -305px;
+		.buttonTransitions;
+
+		.pull-down-wrapper {
+		    display: table;
+		    background-color: #fff;
+		    padding: 30px 40px 20px 15px;
+		    position: relative;
+		    width: 100%;
+
+		    .pull-down-logo {
+				padding-left: 15px;
+				padding-right: 15px;  
+
+				img {
+					width: auto;
+				}
+		    }
+
+
+			.pull-down-content {
+				display: block;
+			    padding: 0 10px;
+
+				p {
+					.OpenSans400;
+					font-size: 14px;
+					line-height: 1.29;
+					color: @gr-500;	
+					margin-top: 20px;			
+				}
+			}
+			.pull-down-learn-more {
+			    display: block;
+
+				.pull-down-learn-more-container {
+					display: table;
+					padding: 10px 0;
+
+					.pull-down-learn-more-button {
+						/*.solidFillButton(@BrandBlue);*/
+					}
+				}
+			}
+
+			.close-btn {
+			    position: absolute;
+			    right: 20px;			
+			    top: 20px;
+
+				i {
+					color: #cccccc;
+					font-size: 28px;
+				}
+			}
+		}
+
+		.pull-down-button {
+			background: url(/Areas/BridgeStreet/Assets/Local/Images/pulldown.png);
+			background-repeat: no-repeat;		
+			width: 172px;
+			height: 50px;
+			display: inline-block;
+			padding: 5px 14px;
+			cursor: pointer;
+			margin: 0 auto;
+			display: table;			
+
+			span {
+				.OpenSans700;
+				font-size: 11px;
+				line-height: 2.5;
+				color: #2cba64;	
+
+				text-align: center;
+				width: 100%;
+				display: block;						
+			}
+		}
+	}
+}

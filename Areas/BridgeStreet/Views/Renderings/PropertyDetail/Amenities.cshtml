@@ -1,0 +1,25 @@
+﻿@using BridgeStreet.Website.Infrastructure.Constants
+@using Sitecore.Globalization
+@model IEnumerable<string>
+
+@if (Model != null && Model.Any())
+{
+        <div class="p-accordion property-detail-accordion p-accordion-ammeneties border-bottom">
+            <h2>@Translate.Text(Constants.TranslationKeys.Amenities)</h2>
+            <ul id="PropertyAmenities" class="p-accordion-items p-ammeneties-items closed" data-line-value="1">
+                @foreach (var amenity in Model)
+                {
+                    <li class="p-ammeneties-item toppadding10 list-style-disc col-xs-6 col-sm-4 col-md-3">
+                        <span>@amenity</span>
+                    </li>
+                }
+            </ul>
+
+            @if (Model.Count() > 4)
+            {
+                <div class="p-accordion-heading">
+                    <a data-group="/d" class="accordion-toggle toggle-button" href="#PropertyAmenities" aria-expanded="true">@Translate.Text(Constants.TranslationKeys.More)</a>
+                </div>
+            }
+        </div>
+}

@@ -1,0 +1,11 @@
+﻿@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<BridgeStreet.Website.Domain.Models.Pages.PartnerPage.PartnerContactInfo>
+
+<div>
+    @Model.Title
+    @Model.Description
+    @foreach(var phone in Model.Contacts)
+    {
+        @phone.Title
+        @phone.PhoneNumber
+    }
+</div>

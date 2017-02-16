@@ -1,0 +1,12 @@
+﻿@using BridgeStreet.Website.Domain.Models.SocialMedia
+@using BridgeStreet.Website.Infrastructure.Constants
+@using Sitecore.Globalization
+
+@model List<BridgeStreet.Website.Domain.DomainModels.PropertyDetail>
+
+               <ul>
+                  @foreach (var p in Model)
+                  {
+                      <li>@p.Name</li>
+                  }
+               </ul>

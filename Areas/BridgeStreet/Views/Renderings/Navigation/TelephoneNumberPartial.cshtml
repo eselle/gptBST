@@ -1,0 +1,4 @@
+﻿@using BridgeStreet.Website.Domain.Models.Navigation
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<BridgeStreet.Website.Domain.Models.Navigation.TelephoneNumber>
+
+<div><span class="telephone-label">@Editable(Model.Name)</span> <span itemprop="telephone" class="telephone-value"><a href="tel:@Editable(Model.Number)">@Editable(Model.Number)</a></span></div>

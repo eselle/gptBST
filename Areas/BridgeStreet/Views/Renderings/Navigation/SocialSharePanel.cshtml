@@ -1,0 +1,50 @@
+﻿@using BridgeStreet.Website.Infrastructure.Constants
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<BridgeStreet.Website.Domain.Models.SocialConnectedPanel.SocialConnectedPanel>
+
+<div class="footer-social container-fluid">
+    <div class="footer-social-wrapper container">
+        <div class="footer-social-brands">
+            <div class="">
+                <h6>@Editable(m => m.BrandsText)</h6>
+                <select class="selectpicker">
+                    <option selected disabled hidden>@Sitecore.Globalization.Translate.Text(Constants.TranslationKeys.OurBrands)</option>
+                    @if (@Model.BrandsMenu != null)
+                    {
+                        foreach (var menuLink in Model.BrandsMenu.MenuLinks)
+                        {
+                            <option value="@menuLink.Link.Url">@menuLink.LinkText</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="footer-social-signup">
+            @using (Html.BeginForm("NewsletterSignup", "Notification", FormMethod.Post))
+            {
+                <div class="email-input">
+                    <h6>@Editable(m => m.SignUpText)</h6>
+                    <input type="email" class="form-control input-field-h" id="inputEmail" name="email" placeholder="@Sitecore.Globalization.Translate.Text(Constants.TranslationKeys.YourEmailAddress)"/>
+                    <button type="submit" class="btn btn-primary">@Sitecore.Globalization.Translate.Text(Constants.TranslationKeys.SignUp)</button>
+                </div>
+            }
+        </div>
+
+        <div class="footer-social-icons">
+            <h6>@Editable(m => m.ConnectText)</h6>
+            @try
+            {
+                foreach (var prop in Model.SocialMediaProperties)
+                {
+                    using (BeginRenderLink(prop, p => p.SocialMediaLink, new { @class = prop.SocialMediaPlatform.CssClass }))
+                    {
+                        <i class="@prop.SocialMediaPlatform.IconCssClass" aria-hidden="true"></i>
+                    }
+                }
+            }
+            catch
+            {
+            }
+        </div>
+    </div>
+</div>

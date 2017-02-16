@@ -1,0 +1,24 @@
+﻿@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<BridgeStreet.Website.Domain.Models.Pages.ContactUs.GlobalReservationsList.GlobalReservationsList>
+
+@if (Model.Reservations != null && Model.Reservations.Any())
+{
+    <div class="global-reservations">
+        <div class="row">
+            <div class="col-xs-12">
+                <h2>@Editable(m => m.Title)</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            @foreach (var res in Model.Reservations)
+            {
+                <div class="col-xs-12 col-md-4">
+                    <h4>@res.Location</h4>
+                    <p>@res.Phone</p>
+                    <p>@res.Email</p>
+                </div>
+            }
+        </div>
+    </div>
+}
+ 

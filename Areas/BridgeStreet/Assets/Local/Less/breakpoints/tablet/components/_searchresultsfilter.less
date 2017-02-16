@@ -1,0 +1,83 @@
+.filter-minimal {
+	display: none;
+}
+
+#top-filter {
+	display: block;
+
+	&.active {
+		display: block;
+	}
+}
+
+.results-filter {
+	.results-filter-wrapper {
+		padding: 10px 0;
+		margin: 5px 0;
+		border-bottom: 1px solid @gr-100;
+
+		.dropdown-group {
+			padding-left: 15px;
+			padding-right: 15px;
+		}
+
+		.filter-half {
+			border-right: 1px solid @gr-100;
+			border-bottom: none;
+			padding-top: 0px;
+			padding-bottom: 0px;	
+
+			&.price-range-slider {
+				padding-bottom: 30px;
+				border-right: none;
+			}
+
+			&.view-section {
+				.label-cell-view {
+					border-top: 1px solid @gr-100;
+				    padding: 10px 15px 0;
+				    margin: 5px 0;					
+				}
+			}
+
+			.label-cell {
+				float: left;
+				text-align: left;
+				padding-left: 15px;
+				width: 100%;
+			}
+
+			.book-deals-wrapper {
+				.col {
+					
+				}
+			}			
+
+			.range-slider-wrapper {			
+    			margin: 6px 0;
+    			padding: 0;
+			}
+
+			.size-selector  {
+				padding-right: 10px;
+				padding-left: 0;
+				padding-top: 0;				
+				float: left;
+				padding-bottom: 10px;	
+
+				.btn-group {
+					width: 170px;
+				}						
+			}			
+		}
+
+		&.results-filter-wrapper-bottom {
+			.filter-half {
+				.more-filters-btn {
+					width: auto;
+				}
+			}
+		}
+	}
+
+}

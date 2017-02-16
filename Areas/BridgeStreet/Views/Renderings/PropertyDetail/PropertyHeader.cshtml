@@ -1,0 +1,44 @@
+﻿@using BridgeStreet.Website.Infrastructure.Constants
+@using Sitecore.Globalization
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<BridgeStreet.Website.Domain.Models.Content.Properties.Property>
+
+<div class="alert-bar" style="display: none;">
+    <span>Lorem Ipsum Sit Dolor Amet Nonummy</span>
+</div>
+<div class="property-header container">
+    <div class="p-address">
+        <h1>@Model.PropertyName</h1>
+        <span>@Model.GetAddress()</span>
+    </div>
+
+    <div class="p-icon-details">
+        <div class="p-icon-details-item col-xs-3">
+            <i class="fa fa-home"></i>
+            @*<span>@Model.PropertyType</span>*@
+            <span id="property-room-types">@Html.Raw(Model.GetRoomTypeString())</span>
+        </div>
+
+        <div class="p-icon-details-item col-xs-3">
+            <i class="fa fa-users"></i>
+            <span>@Model.MinGuests-@Model.MaxGuests @Translate.Text(Constants.TranslationKeys.Guests)</span>
+        </div>
+
+        <div class="p-icon-details-item col-xs-3">
+            <i class="fa fa-paw"></i>
+            @if (Model.IsPetFriendly)
+            {
+                <span>@Translate.Text(Constants.TranslationKeys.PetsAllowed)</span>
+            }
+            @if (!Model.IsPetFriendly)
+            {
+                <span>@Translate.Text(Constants.TranslationKeys.PetsNotAllowed)</span>
+            }
+        </div>
+
+        <div class="p-icon-details-item col-xs-3">
+            <i class="fa fa-wifi"></i>
+            <span>@Translate.Text(Constants.TranslationKeys.WifiIncluded)</span>
+        </div>
+
+    </div>
+</div>

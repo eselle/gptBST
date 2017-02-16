@@ -1,0 +1,31 @@
+﻿@using BridgeStreet.Website.Domain.Models.SocialMedia
+@using BridgeStreet.Website.Infrastructure.Constants
+@using Sitecore.Globalization
+@using Glass.Mapper.Sc.Web.Mvc
+
+@inherits GlassView<BridgeStreet.Website.Areas.BridgeStreet.Models.SocialSharing.SocialSharingViewModel>
+
+@if (Model != null && Model.SocialSharing != null)
+{
+    <ul>
+        @foreach (SocialMediaPlatform s in Model.SocialSharing.Where(n => n != null))
+        {
+            <li>
+                <a href="@(s.ShareUrl.Replace("{url}", Html.Encode(Model.PageUrl)).Replace("{title}", @Translate.Text(Constants.TranslationKeys.IWouldLikeToShare)))" aria-label="@Translate.Text(Constants.TranslationKeys.ShareOn) @s.PlatformName">
+                    <i class="fa @(s.IconCssClass)" aria-hidden="true"></i>
+                </a>
+            </li>
+        }
+
+        <li>
+            <a href="mailto:?subject=I would like to share this model with you&amp;body=@Html.Encode(Model.PageUrl)" aria-label="@Translate.Text(Constants.TranslationKeys.ShareOn) @Translate.Text(Constants.TranslationKeys.Email)">
+                <i class="fa fa-envelope-o"></i>
+            </a>
+        </li>
+        <li>
+            <a href="#" aria-label="">
+                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+}

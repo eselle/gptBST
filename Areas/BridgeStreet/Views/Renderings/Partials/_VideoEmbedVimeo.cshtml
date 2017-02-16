@@ -1,0 +1,17 @@
+﻿@using Glass.Mapper.Sc.Web.Mvc
+@using BridgeStreet.Website.Infrastructure.Constants
+
+@inherits GlassView<BridgeStreet.Website.Domain.Models.Components.Media.VideoGallery.VimeoMediaVideo>
+
+@if (Model.VimeoId != null)
+{
+    <div class="media-video">
+        <div class="embed-responsive-wrapper">
+            <iframe class="embed-responsive-item"
+                    src="@(Constants.Urls.VimeoBaseUrl)/@Model.VimeoId" width="100%" height="100%"
+                    frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        </div>
+    </div>    
+}
+
+

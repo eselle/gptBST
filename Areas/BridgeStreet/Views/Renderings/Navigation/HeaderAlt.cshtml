@@ -1,0 +1,172 @@
+﻿@using System.Collections.ObjectModel
+@using BridgeStreet.Website.Domain.Models.Navigation
+@using BridgeStreet.Website.Infrastructure.Constants
+@using BridgeStreet.Website.Infrastructure.Sc.Extensions
+@using Sitecore.Globalization
+@using Sitecore.Mvc
+
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<BridgeStreet.Website.Areas.BridgeStreet.Models.Navigation.HeaderViewModel>
+
+<div class="sticky-header alt-header" data-sticky_column>
+    <header class="header-alt container-fluid hidden-sm hidden-md hidden-lg">
+        <nav class="">
+            <a href="@Model.GetHomeUrl()" class="logo">
+                @RenderImage(m => m.HeaderConfiguration.HeaderMobileLogo)
+            </a>
+
+            <a class="js-slideout-toggle toggle">
+                <div class="patty"></div>
+            </a>
+        </nav>
+
+        <div class="mobile-search row">
+            <div class="input-addon" id="MobileSearch">
+                <i class="fa fa-map-marker form-control-icon" aria-hidden="true"></i>
+                <span class="input-stem input-large fake-search-field">@Translate.Text(Constants.TranslationKeys.Search)</span>
+                <div class="fake-search-button btn-search">
+                    <a class="searchbox-submit" tabindex="4">
+                        <i class="input-suffix icon-search"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="desktop-search container-fluid">
+        <div class="row">
+            <div class="logo-container">
+                <a href="@Model.GetHomeUrl()" class="logo">
+                    @RenderImage(m => m.HeaderConfiguration.HeaderLogo, new { Class = "img-responsive" })
+                </a>
+            </div>
+            <form id="searchbox-form">
+                <div class="form-container">
+                    <div class="searchbox-input searchbox-input-where-to has-icon">
+                        <i class="fa fa-map-marker form-control-icon" aria-hidden="true"></i>
+                        <input type="text" name="LocationSearch" class="form-control hidden-xs" id="searchKeywords" placeholder="@Translate.Text(Constants.TranslationKeys.SearchCityAddressLandmark)" data-value-large="@Translate.Text(Constants.TranslationKeys.SearchCityAddressLandmark)" data-value-small="@Translate.Text(Constants.TranslationKeys.Search)">
+                        
+                    </div>
+
+                    <div class="searchbox-input searchbox-input-date has-icon">
+                        <i class="fa fa-calendar form-control-icon" aria-hidden="true"></i>
+                        <input type="text" id="check_in_date" name="from-date" class="form-control hiddex-xs" tabindex="2" placeholder="@Translate.Text(Constants.TranslationKeys.ChooseYourDates)" data-value-large="@Translate.Text(Constants.TranslationKeys.ChooseYourDates)"  data-value-small="@Translate.Text(Constants.TranslationKeys.Dates)" readonly>
+                        
+                        <span class="bs-caret"><i class="fa fa-chevron-down"></i></span>
+                    </div>
+
+                    <div class="searchbox-input searchbox-guests has-icon user-dropdown dropdown mega-dropdown">
+                        <a href="#" class="dropdown-toggle" data-target="#" data-toggle="dropdown" data-content>
+                            <i class="fa fa-users form-control-icon" aria-hidden="true"></i>
+                            <input readonly="readonly" type="text" id="number_of_guests" name="guests" class="form-control hiddex-xs" tabindex="3" placeholder="@Translate.Text(Constants.TranslationKeys.SelectNumberGuests)" data-value-large="@Translate.Text(Constants.TranslationKeys.SelectNumberGuests)" data-value-small="@Translate.Text(Constants.TranslationKeys.Guests)">
+                            
+                            <span class="bs-caret"><i class="fa fa-chevron-down"></i></span>
+                        </a>
+                        <ul class="dropdown-menu custom-drop-down mega-dropdown-menu animated fadeInRight" role="menu">
+                            <li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
+                                <div class="mm-category-label col-sm-4">
+                                    <span>@Translate.Text(Constants.TranslationKeys.Adults)</span>
+                                </div>
+
+                                <div class="spinner col-sm-8 spinner-item spinner-incredment">
+                                    <input readonly="true" type="spinner" placeholder id="@Translate.Text(Constants.TranslationKeys.Adults)" value="1" name="spinner">
+                                </div>
+                            </li>
+
+                            <li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
+                                <div class="mm-category-label col-sm-4">
+                                    <span>@Translate.Text(Constants.TranslationKeys.Children)</span>
+                                </div>
+                                <div class="spinner col-sm-8 spinner-item spinner-incredment">
+                                    <input readonly="true" type="spinner" placeholder id="@Translate.Text(Constants.TranslationKeys.Children)" value="0" name="spinner" />
+                                </div>
+                            </li>
+
+                            <li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
+                                <div class="mm-category-label category-label-bedrooms col-sm-4">
+                                    <span>@Translate.Text(Constants.TranslationKeys.RoomType)</span>
+                                </div>
+
+                                <div class="bedroom-selector col-sm-8">
+                                    <select class="bedroom-type" data-width="112px">
+                                        <option value="0">@Translate.Text(Constants.TranslationKeys.RoomTypeStudio)</option>
+                                        <option value="1">@Translate.Text(Constants.TranslationKeys.RoomType1Bedroom)</option>
+                                        <option value="2">@Translate.Text(Constants.TranslationKeys.RoomType2Bedrooms)</option>
+                                        <option value="3">@Translate.Text(Constants.TranslationKeys.RoomType3Bedrooms)</option>
+                                        <option value="4">@Translate.Text(Constants.TranslationKeys.RoomType4Bedrooms)</option>
+                                        <option value="5">@Translate.Text(Constants.TranslationKeys.RoomType5Bedrooms)</option>
+                                    </select>                                    
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div class="btn-search">
+                    <div class="btn-search-wrapper">
+                        <a class="searchbox-submit" tabindex="4">@Translate.Text(Constants.TranslationKeys.Go)</a> 
+                    </div>
+                </div>
+                <a class="js-slideout-toggle toggle">
+                    <div class="patty"></div>
+                </a>
+            </form>
+        </div>
+    </div>
+
+    @Html.Sitecore().Placeholder("header-pulldown")
+
+</div>
+
+<div class="remodal container" data-remodal-id="modal">
+    <button data-remodal-action="close" class="remodal-close">
+        <i class="fa fa-close"></i>
+    </button>
+
+    <span class="search-label">@Translate.Text(Constants.TranslationKeys.Search)</span>
+
+    <div class="form-container-mobile">
+        <div class="searchbox-input-mobile searchbox-input-where-to form-group has-icon">
+            <span class="twitter-typeahead">
+                <input type="text" id="searchKeywordsMobile" class="js-destination" tabindex="-1" placeholder="@Translate.Text(Constants.TranslationKeys.Destination)" autocomplete="off" spellcheck="false" dir="auto">
+
+            </span>
+            <i class="fa fa-map-marker form-control-icon" aria-hidden="true"></i>
+        </div>
+
+        <div class="searchbox-input-mobile searchbox-input-arriver-mobile form-group has-icon">
+            <input type="text" id="check_in_date_mobile" name="from-date" class="flatpickr-input" tabindex="2" placeholder="@Translate.Text(Constants.TranslationKeys.SelectDatesOrExplore)">
+            <i class="fa fa-calendar form-control-icon" aria-hidden="true"></i>
+        </div>
+
+        <div class="bedroom-type-selector nopadding col-xs-12">
+            <select class="bedroom-type" data-width="112px">
+                <option value="0">@Translate.Text(Constants.TranslationKeys.RoomTypeStudio)</option>
+                <option value="1">@Translate.Text(Constants.TranslationKeys.RoomType1Bedroom)</option>
+                <option value="2">@Translate.Text(Constants.TranslationKeys.RoomType2Bedrooms)</option>
+                <option value="3">@Translate.Text(Constants.TranslationKeys.RoomType3Bedrooms)</option>
+                <option value="4">@Translate.Text(Constants.TranslationKeys.RoomType4Bedrooms)</option>
+                <option value="5">@Translate.Text(Constants.TranslationKeys.RoomType5Bedrooms)</option>
+            </select>
+        </div>
+
+        <div class="number-of-guests-container nopadding col-xs-12">
+            <div class="row">
+
+                <div class="spinner mobile-adults col-xs-6">
+                    <p>@Translate.Text(Constants.TranslationKeys.Adults)</p>
+                    <input readonly="true" type="spinner" placeholder id="@Translate.Text(Constants.TranslationKeys.Adults)" value="0" name="spinner">
+                </div>
+
+                <div class="spinner mobile-children col-xs-6">
+                    <p>@Translate.Text(Constants.TranslationKeys.Children)</p>
+                    <input readonly="true" type="spinner" placeholder id="@Translate.Text(Constants.TranslationKeys.Children)" value="0" name="spinner">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="remodal-con">
+        <a class="mobileSearchButton" data-sequence="0">@Translate.Text(Constants.TranslationKeys.FindYourApartment)</a>
+    </div>
+</div> 

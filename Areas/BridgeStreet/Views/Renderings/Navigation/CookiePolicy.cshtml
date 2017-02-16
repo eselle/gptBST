@@ -1,0 +1,19 @@
+﻿@using BridgeStreet.Website.Infrastructure.Constants
+@using Sitecore.Globalization
+
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<BridgeStreet.Website.Areas.BridgeStreet.Models.Navigation.HeaderViewModel>
+
+<div class="cookie-policy-notice">
+    <div class="container-fluid">
+        <div class="cookie-policy-content">
+            <button type="button" class="btn">@Translate.Text(Constants.TranslationKeys.Go)</button>
+            @Editable(Model.CookieConfiguration, x => x.CookiePolicyText)
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function() {
+        adi.cookiePolicy.init(".cookie-policy-notice");
+    });
+</script>

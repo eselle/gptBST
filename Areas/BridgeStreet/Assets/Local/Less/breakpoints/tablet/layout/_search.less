@@ -1,0 +1,227 @@
+.desktop-search {
+	background-color: @navy;
+	position: relative;
+	display: block;
+
+	form {		    
+	    display: table;
+	    height: 70px;
+
+	    &:before {
+			content: " ";
+			display: table;					    	
+	    }
+
+	    .form-container {   
+		    display: table-cell;
+		    vertical-align: middle;	
+		    width: 100%;
+		    height: 100%;
+		    position: relative;		
+
+		    .searchbox-input {
+		    	float: left;
+		    	border-left: 1px solid #2e4964;
+		    	position: relative;
+			    display: table;
+			    height: 100%;			    	
+
+			    &:first-child {
+			    	.OpenSans700;
+			    	border: none;
+			    }				    	
+		    	
+		    	&.searchbox-input-where-to {
+		    		width: 49%;
+		    		padding-left: 20px;
+		    	}
+
+		    	&.searchbox-input-date {
+		    		width: 28%;
+		    	}
+
+		    	&.searchbox-guests {
+					width: 23%;
+		    	}
+		    }	
+
+		    #check_in_date {
+		    	cursor: pointer;
+		    }
+
+		    input.form-control {
+			    border: 0;
+			    display: table-cell;
+			    padding:0 0 0 0px;
+			    font-size: 14px;	
+			    height: 70px;
+			    box-shadow: none;
+			    background-color: @navy ;
+			    border-radius: 0;
+			    color: white;
+			    
+		    }			   
+
+			input:-webkit-autofill,
+			input:-webkit-autofill:hover,
+			input:-webkit-autofill:active,
+			input:-webkit-autofill:focus {
+			    background-color: @navy ;
+			    color: white ;
+			    -webkit-box-shadow: 0 0 0 1000px green inset ;
+			    -ms-box-shadow: 0 0 0 1000px white inset ;
+			    -webkit-text-fill-color: white ;
+			    -ms-text-fill-color: white ;
+			    }	
+
+			input::-webkit-input-placeholder {
+			   color: white;
+			}
+
+			input:-moz-placeholder { /* Firefox 18- */
+			   color: white;  
+			}
+
+			input::-moz-placeholder {  /* Firefox 19+ */
+			   color: white;  
+			}
+
+			input:-ms-input-placeholder {  
+			   color: white;  
+			}			    		
+	    }	
+
+	    .btn-search {
+			.searchButton(16px);			    	
+		}
+
+		.user-dropdown {
+		  height: 100%;
+		  float: right;
+		             
+		  .dropdown-toggle {
+		    width: 100%;
+		    height: 100%;
+		    display: table;
+		  }
+
+		  .dropdown-menu {
+		    border-radius: 4px;
+		    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+		    -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+		    outline: 0 !important;  
+		    border: none; 
+		    padding: 0;   
+		    width: 230px;
+		    margin: 0 auto;
+		    left: inherit;
+		    right: 0;
+		    padding: 20px 10px;
+		    margin-top: -3px;
+
+		    &:before {
+				width: 0;
+				height: 0;
+				border-left: 7px solid rgba(0, 0, 0, 0);
+				border-right: 7px solid rgba(0, 0, 0, 0);
+				border-bottom: 7px solid white;
+				content: '';
+				display: block;
+				position: absolute;
+				left: 50%;
+				-webkit-transform: translateX(-50%);
+				transform: translateX(-50%);
+				top: -7px;		    	
+		    }
+
+		    .wrapper {
+		      	padding: 5px 0;
+
+				.mm-category-label {
+				    padding-top: 10px;
+				    padding-bottom: 10px;
+				    text-align: left;
+				    color: @gr-500;
+
+				    &.category-label-bedrooms {
+					    line-height: 14px;
+					    padding-top: 2px;	
+					    text-align: left;			    	
+				    }
+				}
+
+				p {
+					text-decoration: none;
+					font-weight: 300;
+					font-weight: normal;
+					font-size: 1em;
+				}
+
+				.bedroom-selector {
+   				    z-index: 1;
+
+    				&:before {
+					    content: '';
+						    content: '';
+						    color: #333;
+						    display: block;
+						    font-size: 1em;
+						    height: 100%;
+						    line-height: 2.5em;
+						    padding: 0 .625em;
+						    position: absolute;
+						    top: 0;
+						    right: 20px;
+						    text-align: center;
+						    width: 1em;
+						    z-index: -1;    					
+    				}
+
+    				&:after {
+					    content: '';
+					    -moz-transform: rotate(-45deg);
+					    -ms-transform: rotate(-45deg);
+					    -webkit-transform: rotate(-45deg);
+					    transform: rotate(-45deg);
+					    position: absolute;
+					    right: 25px;
+					    bottom: 45%;
+					    display: block;
+					    width: 9px;
+					    height: 9px;
+					    border: 3px solid #ccc;
+					    border-top: none;
+					    border-right: none;
+					    z-index: -1;
+  					
+    				}
+
+					select {
+					    border: 1px solid @gr-100;
+					    -webkit-border-radius: @globalRadius;
+					    -moz-border-radius: @globalRadius;
+					    border-radius: @globalRadius;
+					    background-color: white;
+					    color: @gr-200;
+					    display: block;
+					    padding: 8px 10px;
+					    width: 100%;
+					    background-color: rgba(0, 0, 0, 0);
+					    -webkit-appearance: none;
+					    -moz-appearance: none;
+
+					}
+
+				}
+		    }
+
+		    li {
+		      float: left;
+		      width: 100%;
+		    }
+
+		  }
+		}
+
+	}		
+}

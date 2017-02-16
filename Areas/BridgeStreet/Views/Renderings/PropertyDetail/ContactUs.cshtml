@@ -1,0 +1,11 @@
+﻿@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<BridgeStreet.Website.Domain.Models.Configuration.Base.CallToAction>
+
+
+<div class="contact-pod col-xs-12">
+    
+        @using (BeginRenderLink(x => x.Link, isEditable: true, attributes: new { @class = "btn-contact" }))
+        {
+            <span>@Model.LinkText</span>
+        }
+    
+</div>

@@ -1,0 +1,27 @@
+﻿@using Glass.Mapper.Sc.Web.Mvc
+@using Glass.Mapper.Sc
+@using BridgeStreet.Website.Domain.Models.Components.Media.VideoGallery
+@using BridgeStreet.Website.Infrastructure.Constants
+
+@inherits GlassView<BridgeStreet.Website.Domain.Models.Components.Media.VideoGallery.MediaVideo>
+
+@if (Model.TemplateId.ToString().ToUpper() == Constants.Templates.Media.YouTubeMediaVideo.TemplateIdString)
+{
+    var service = new SitecoreService(Model.InnerItem.Database);
+    YoutubeMediaVideo video = service.CreateType<YoutubeMediaVideo>(Model.InnerItem);
+    @Html.Partial("~/Areas/Bridgestreet/Views/Renderings/Partials/_VideoEmbedYoutube.cshtml", video)
+}
+
+@if (Model.TemplateId.ToString().ToUpper() == Constants.Templates.Media.VimeoMediaVideo.TemplateIdString)
+{
+    var service = new SitecoreService(Model.InnerItem.Database);
+    VimeoMediaVideo video = service.CreateType<VimeoMediaVideo>(Model.InnerItem);
+    @Html.Partial("~/Areas/Bridgestreet/Views/Renderings/Partials/_VideoEmbedVimeo.cshtml", video)
+}
+
+@if (Model.TemplateId.ToString().ToUpper() == Constants.Templates.Media.Html5MediaVideo.TemplateIdString)
+{
+    var service = new SitecoreService(Model.InnerItem.Database);
+    Html5MediaVideo video = service.CreateType<Html5MediaVideo>(Model.InnerItem);
+    @Html.Partial("~/Areas/Bridgestreet/Views/Renderings/Partials/_VideoEmbedHtml5.cshtml", video)
+}

@@ -1,0 +1,17 @@
+﻿@using Sitecore.Mvc
+
+@Html.Sitecore().Placeholder("details-carousel")
+
+<div class="two-col-container container">
+    <div class="sticky-container row">
+        <div data-sticky_parent class="t-details col-right col-xs-12 col-sm-5 col-sm-push-7">
+            <div id="Sticky" data-sticky_column class="sticky-wrapper">
+                @Html.Sitecore().Placeholder("details-right")
+            </div>
+        </div>
+
+        <div id="NonSticky" class="p-detail col-left col-xs-12 col-sm-7 col-sm-pull-5">
+            @Html.Sitecore().Placeholder("details-left")
+        </div>
+    </div>
+</div>

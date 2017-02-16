@@ -1,0 +1,40 @@
+﻿@using System.Collections.Specialized
+@using BridgeStreet.Website.Domain.Models.Navigation
+@using BridgeStreet.Website.Domain.Models.Pages.HomePage.Guarantee
+@using BridgeStreet.Website.Infrastructure.Constants
+@using Glass.Mapper.Sc.Fields
+@using Sitecore.Globalization
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<BridgeStreet.Website.Domain.Models.Pages.HomePage.Guarantee.Guarantee>
+
+@if (Model == null || !(Model is Guarantee))
+{
+    return;
+}
+
+<div class="pull-down">
+    <div class="p-d-container">
+        <div class="pull-down-wrapper">
+
+            <div class="pull-down-logo hidden-sm hidden-md hidden-lg">
+                @RenderImage(Model, x => x.Image, isEditable: true, parameters: new { @class = "img-responsive" })
+            </div>
+
+            <div class="pull-down-content">
+                <p>@Editable(Model, x => x.GauranteeText)</p>
+            </div>
+            @if (@Model.Link != null)
+            { 
+            
+                <div class="pull-down-learn-more">
+                    <div class="pull-down-learn-more-container">
+                        <button type="button" class="btn btn-blue more-filters-btn" onclick="window.location = '@Model.Link.Url';">@Editable(Model, x => x.LinkText)</button>
+                    </div>
+                </div>
+            
+            }
+        </div>
+        <div class="pull-down-button">
+            <span>@Editable(Model, x => x.FlagText)</span>
+        </div>
+    </div>
+</div>

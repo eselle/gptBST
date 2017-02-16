@@ -1,0 +1,394 @@
+﻿/* ==========================================================================
+   Tablet Heading, Paragraph, and font styles
+   =========================================================================== */
+
+
+
+/* ==========================================================================
+   Tablet Pod styles
+   ========================================================================== */
+
+.PropertyPodRelatedTablet {
+    .property-pod-related {
+        .property-pod-wrapper {
+            /*min-height: 404px;  */
+            .property-pod-image-wrapper {
+                /*            float: left;
+            width: auto;*/
+            }
+
+            .property-pod-description-wrapper {
+                padding: 10px;
+            }
+
+            .building-type {
+                padding: 13px 20px 0px;
+            }
+
+            .property-pod-cta-wrapper {
+                padding: 15px;
+                position: absolute;
+                bottom: 5px;
+                right: 0px;
+                left: 0;
+
+                span.btn {
+                    background-color: @or-100;
+                    position: relative;
+                    top: 5px;
+                    line-height: 35px;
+                    height: 35px;
+
+                    &:hover,
+                    &:focus,
+                    &:active {
+                        color: @white;
+                        background-color: @or-100;
+                        cursor: pointer;
+                    }
+                }
+
+                .price-point {
+
+                    h3 {
+                        text-align: right;
+                    }
+
+                    span {
+                        text-align: right;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/*************************************************
+ HOME PAGE - FEATURED PROPERTIES - CARD FOR TABLET
+ ************************************************/
+
+.PropertyPodTablet {
+    .property-pod {
+
+        .property-pod-wrapper {
+            .property-pod-cta-wrapper {
+            }
+        }
+
+        &.list {
+            margin-bottom: 15px;
+
+            .property-pod-wrapper {
+                max-height: 154px;
+                position: relative;
+                min-height: auto;
+
+                .property-pod-image-wrapper {
+                    float: left;
+                }
+            }
+
+            .property-pod-description-wrapper {
+                float: left;
+                width: 42%;
+                padding: 20px 20px;
+            }
+
+            .building-type {
+                padding: 5px 20px 0px;
+
+                span {
+                    .OpenSans600;
+                    font-size: 10px;
+                    line-height: 1.17;
+                    color: @gr-200;
+                }
+
+                ul {
+                    &.building-type-items {
+                        .building-type-item {
+                            &.active {
+                                background-color: @or-100;
+                            }
+
+                            &.enabled {
+                                background-color: @navy;
+                            }
+                        }
+                    }
+
+                    li {
+                        float: left;
+                        background-color: @gr-100;
+                        border-radius: 50%;
+                        width: 18px;
+                        height: 18px;
+                        padding: 9px 0px;
+                        position: relative;
+                        margin-right: 5px;
+                        text-align: center;
+
+                        span {
+                            color: white;
+                            font-size: 12px;
+                            font-weight: bold;
+                            position: absolute;
+                            left: 5px;
+                            line-height: 0.2;
+                        }
+                    }
+                }
+            }
+
+            .property-pod-cta-wrapper {
+                padding: 10px 20px 0px;
+
+                .price-point {
+                    h3 {
+                        text-align: left;
+
+
+                        i {
+                            margin-left: 4px;
+                        }
+                    }
+
+                    span {
+                        text-align: left;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/*********************************
+ SEARCH PAGE - CARD FOR TABLET
+ ********************************/
+
+/****************************************
+ SEARCH PAGE - CARD FOR TABLET IN MAPVIEW
+ ***************************************/
+
+
+.PropertyPodSearchMapview {
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    z-index: 4444;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-right: auto;
+    margin-left: auto;
+    bottom: 60px;
+
+    .property-pod-map {
+        width: 700px;
+
+        .property-card-close {
+            position: absolute;
+            right: 30px;
+            top: 15px;
+            -webkit-transition: color .2s;
+            transition: color .2s;
+            background: 0 0;
+            z-index: 33333;
+            overflow: visible;
+            margin: 0;
+            cursor: pointer;
+            outline: 0;
+            border: 0;
+
+            i {
+                color: @gr-400;
+                font-size: 25px;
+            }
+        }
+
+        .property-pod-wrapper {
+            min-height: auto;
+            background-color: #fff;
+            border: 1px solid #dddede;
+            width: 100%;
+            position: relative;
+            display: block;
+            height: 100%;
+
+            .property-pod-image-wrapper {
+                max-width: 260px;
+                min-height: 155px;
+                float: left;
+
+                img {
+                    max-height: 150px;
+                    width: auto;
+                }
+            }
+
+            .property-pod-description-wrapper {
+                display: table-cell;
+                padding: 15px 30px;
+                width: 100%;
+                min-width: 350px;
+
+                h3 {
+                    margin-bottom: 0;
+                    margin-top: 0;
+                    .OpenSans700;
+                    font-size: 16px;
+                    line-height: 1.13;
+                    color: @navy;
+                }
+
+                h6 {
+                    margin-top: 3px;
+                    font-size: 14px;
+                    line-height: 1.29;
+                    color: @gr-500;
+                    margin-bottom: 0;
+                }
+            }
+
+            .building-type {
+                padding: 0px 30px;
+                float: left;
+
+                span {
+                    .OpenSans600;
+                    font-size: 10px;
+                    line-height: 1.17;
+                    color: @gr-200;
+                }
+
+                ul {
+                    &.building-type-items {
+                    }
+
+                    li {
+                        float: left;
+                        background-color: @gr-100;
+                        border-radius: 50%;
+                        width: 18px;
+                        height: 18px;
+                        padding: 9px 0;
+                        position: relative;
+                        margin-right: 5px;
+                        text-align: center;
+
+                        span {
+                            color: #fff;
+                            font-size: 12px;
+                            .OpenSans700;
+                            position: absolute;
+                            left: 5px;
+                            line-height: .2;
+                        }
+                    }
+                }
+            }
+
+            .property-pod-cta-wrapper {
+                width: 100%;
+                padding: 20px 0 0 0;
+                margin: 0px;
+                left: -15px;
+
+                span.btn, .price-point {
+                    bottom: 0px;
+                }
+
+                span.btn {
+                    background-color: @or-100;
+                    line-height: 35px;
+                    color: @white !important;
+
+                    &:hover {
+                        background-color: @or-200;
+                        cursor: pointer;
+                    }
+
+                    &:focus,
+                    &:visited,
+                    &:active {
+                        background-color: @or-100;
+                        cursor: pointer;
+                    }
+                }
+
+                .price-point {
+                    position: absolute;
+                    height: 35px;
+                    right: 0px;
+
+                    h3 {
+                        .OpenSans700;
+                        font-size: 22px;
+                        line-height: 1.09;
+                        text-align: right;
+                        color: @gre-100;
+                        margin: 0;
+
+                        i {
+                            margin-left: 4px;
+                            color: @or-100;
+                        }
+                    }
+
+                    span {
+                        .OpenSans600;
+                        font-size: 10px;
+                        line-height: 1.17;
+                        color: @gr-200;
+                        margin-top: 0;
+                        text-align: right;
+                        display: block;
+                    }
+                }
+            }
+
+            .property-pod-disclaimer {
+                padding: 15px 15px 0 0;
+                text-align: left;
+                font-family: 'Open Sans',sans-serif;
+                font-size: 10px;
+                font-weight: 400;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: 1.8;
+                color: #dd4b39;
+            }
+        }
+    }
+}
+
+
+/* ==========================================================================
+   Tablet Homepage Hero styles
+   ========================================================================== */
+
+
+
+
+/* ==========================================================================
+   Tablet Navigation styles
+   ========================================================================== */
+
+
+
+
+/* ==========================================================================
+   Tablet Button styles
+   ========================================================================== */
+
+
+
+/* ==========================================================================
+   Tablet Carousel styles
+   ========================================================================== */
+

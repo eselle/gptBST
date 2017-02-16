@@ -1,0 +1,157 @@
+﻿@model BridgeStreet.Website.Areas.BridgeStreet.Models.AllLocations.AllLocationsViewModel
+
+@functions{
+    public string AreaSearchUrl(string baseUrl, string defaultParams)
+    {
+        if (string.IsNullOrWhiteSpace(baseUrl))
+        {
+            return string.Empty;
+        }
+        else
+        {
+            return string.Format("{0}?{1}", baseUrl, defaultParams);
+        }
+    }
+}
+
+<div class="locations-page remodal-bg remodal-is-closed">
+    <div class="locations-tabs container">
+        @*<div class="locations-label">
+            <h1>locations</h1>
+        </div>*@
+        <ul class="locations-nav nav nav-tabs container" role="tablist">
+            @{
+                var tabCount = 0;
+            }
+            @foreach (var list in Model.Lists)
+            {
+                var activeClass = "";
+                var xsClass = "col-xs-3";
+                if (tabCount == 0)
+                {
+                    activeClass = "active";
+                }
+                if (tabCount == 1)
+                {
+                    xsClass = "col-xs-6";
+                }
+                var shortName = list.Name.ToLower().Replace(" ", string.Empty);
+                <li role="presentation" class="@activeClass @xsClass col-md-4 no-padding">
+                    <a href="@("#" + shortName)" class="hidden-xs hidden-sm" aria-controls="@shortName" role="tab" data-target="@("#" + shortName)" data-toggle="tab">@list.Name</a>
+                    <a href="@("#" + shortName)" class="visible-xs-block visible-sm-block" aria-controls="@shortName" role="tab" data-target="@("#" + shortName)" data-toggle="tab">@list.Name</a>
+                </li>
+                tabCount++;
+            }
+        </ul> 
+
+        <div class="container">
+            <span class="custom-dropdown big visible-xs-block">
+                <select class="alphabet-mobile">
+                    <option value="">Sort</option>
+                    <option value="#/a">a</option>
+                    <option value="#/b">b</option>
+                    <option value="#/c">c</option>
+                    <option value="#/d">d</option>
+                    <option value="#/e">e</option>
+                    <option value="#/f">f</option>
+                    <option value="#/g">g</option>
+                    <option value="#/h">h</option>
+                    <option value="#/i">i</option>
+                    <option value="#/j">j</option>
+                    <option value="#/k">k</option>
+                    <option value="#/l">l</option>
+                    <option value="#/m">m</option>
+                    <option value="#/n">n</option>
+                    <option value="#/o">o</option>
+                    <option value="#/p">p</option>
+                    <option value="#/q">q</option>
+                    <option value="#/r">r</option>
+                    <option value="#/s">s</option>
+                    <option value="#/t">t</option>
+                    <option value="#/u">u</option>
+                    <option value="#/v">v</option>
+                    <option value="#/w">w</option>
+                    <option value="#/x">x</option>
+                    <option value="#/y">y</option>
+                    <option value="#/z">z</option>
+
+                </select>
+                <i class="icon-chevron-down"></i>
+            </span>
+        </div>
+
+        <div class="locations-alphabet hidden-xs">
+            <ul class="locations-filter-list">
+                <li class="box"><a href="#/a">a</a></li>
+                <li class="box"><a href="#/b">b</a></li>
+                <li class="box"><a href="#/c">c</a></li>
+                <li class="box"><a href="#/d">d</a></li>
+                <li class="box"><a href="#/e">e</a></li>
+                <li class="box"><a href="#/f">f</a></li>
+                <li class="box"><a href="#/g">g</a></li>
+                <li class="box"><a href="#/h">h</a></li>
+                <li class="box"><a href="#/i">i</a></li>
+                <li class="box"><a href="#/j">j</a></li>
+                <li class="box"><a href="#/k">k</a></li>
+                <li class="box"><a href="#/l">l</a></li>
+                <li class="box"><a href="#/m">m</a></li>
+                <li class="box"><a href="#/n">n</a></li>
+                <li class="box"><a href="#/o">o</a></li>
+                <li class="box"><a href="#/p">p</a></li>
+                <li class="box"><a href="#/q">q</a></li>
+                <li class="box"><a href="#/r">r</a></li>
+                <li class="box"><a href="#/s">s</a></li>
+                <li class="box"><a href="#/t">t</a></li>
+                <li class="box"><a href="#/u">u</a></li>
+                <li class="box"><a href="#/v">v</a></li>
+                <li class="box"><a href="#/w">w</a></li>
+                <li class="box"><a href="#/x">x</a></li>
+                <li class="box"><a href="#/y">y</a></li>
+                <li class="box"><a href="#/z">z</a></li>
+            </ul>
+        </div>
+
+        <div class="tab-content container">
+            @{
+                var panelCount = 0;
+            }
+            @foreach(var list in Model.Lists)
+            {
+                var listShortName = list.Name.ToLower().Replace(" ", string.Empty);
+                var activeClass = "";
+                if (panelCount == 0)
+                {
+                    activeClass = "active";
+                }
+
+                <div role="tabpanel" class="tab-pane @activeClass" id="@listShortName">
+                    <ul class="location-results">
+                        @foreach(var grouping in list.Groupings)
+                        {
+                            var groupingShortName = grouping.GroupingTitle.Replace(" ", string.Empty);
+                            var groupingFirstChar = groupingShortName.ToLower()[0];
+                            <li id="@("/" + groupingFirstChar)" class="accordion-group dropdown-group locations-dropdown">
+                                <div class="accordion-heading">
+                                    <a data-group="@("/" + groupingFirstChar)" class="accordion-toggle collapsed" data-toggle="collapse" data-parent="@listShortName" href="@("#collapse" + listShortName + groupingShortName)" aria-expanded="false">
+                                        @grouping.GroupingTitle
+                                    </a>
+                                </div>
+                                <div class="location-results-grouping accordion-body collapse" id="@("collapse" + listShortName + groupingShortName)" aria-expanded="false">
+                                    <ul class="list-group">
+                                        @foreach(var region in grouping.GroupingAreas)
+                                        {
+                                            <li class="city col-xs-12 col-sm-4 col-md-3 no-padding">
+                                                <a href="@AreaSearchUrl(Model.SearchUrl, region.AreaSearchParameters)">@region.AreaName</a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                panelCount++;
+            }
+        </div>
+    </div>
+</div>

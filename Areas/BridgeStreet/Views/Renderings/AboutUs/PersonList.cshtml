@@ -1,0 +1,26 @@
+﻿@using System.Web.Mvc.Html
+@using BridgeStreet.Website.Domain.Models.Pages.AboutUs
+@using BridgeStreet.Website.Infrastructure.Constants
+@using Glass.Mapper.Sc.Web.Mvc
+@inherits GlassView<BridgeStreet.Website.Domain.Models.Pages.AboutUs.PersonList>
+
+
+
+@if (Model != null)
+{
+    <div class="person-list">
+        <h2>@Editable(Model, i => i.Title)</h2>
+        @{ 
+            var lastItem = Model.Children.OfType<PersonListItem>().Last();
+        }
+        @foreach (var person in Model.Children.OfType<PersonListItem>().OrderBy(x=>x.SortOrder))
+        {
+            @Html.Partial("~/Areas/Bridgestreet/Views/Renderings/AboutUs/PersonListItem.cshtml", person)
+
+            if (!person.Equals(lastItem))
+            {
+                <hr class="thick" />
+            }
+        }
+    </div>
+}
