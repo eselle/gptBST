@@ -273,51 +273,50 @@
         <!-- New Form -->
         <div class="hero-form container">
             <form class="form-inline row" id="searchbox-form">
-                <div class="col-md-3 col-lg-4">
+                <div class="col-md-4 col-lg-4 hero-form-input">
                     <div class="form-group location-fg ">
                         <label for="searchKeywords">Location</label>
                         <input type="text" name="LocationSearch" class="form-control" id="searchKeywords" placeholder="Search by City, Address or Landmark" data-value-large="Search by City, Address or Landmark" data-value-small="Search">
                     </div>
                 </div>
-
-                    <div class="col-md-3 col-lg-4">
-                        <div class="form-group date-fg">
-                            <label for="date">Dates</label>
-                            <input type="text" id="check_in_date" name="from-date" class="form-control hiddex-xs mbsc-comp" tabindex="2" placeholder="Choose Your Dates" data-value-large="Choose Your Dates" data-value-small="Dates" readonly="">
-                        </div>
+                <div class="col-md-4 col-lg-4 hero-form-input">
+                    <div class="form-group date-fg">
+                        <label for="date">Dates</label>
+                        <input type="text" id="check_in_date" name="from-date" class="form-control hiddex-xs mbsc-comp" tabindex="2" placeholder="Choose Your Dates" data-value-large="Choose Your Dates" data-value-small="Dates" readonly="">
                     </div>
-                    <div class="col-md-3 col-lg-3">
-                        <div class="form-group guest-fg user-dropdown dropdown mega-dropdown col-md-3">
-                            <label for="date">Guests</label>
-                            <a href="#" class="dropdown-toggle" data-target="#" data-toggle="dropdown" data-content>
-                                <input readonly="readonly" type="text" id="number_of_guests" name="guests" class="form-control hiddex-xs" tabindex="3" placeholder="Select Number of Guests" data-value-large="Select Number of Guests" data-value-small="Guests">
-                                <span class="bs-caret"><i class="fa fa-chevron-down"></i></span>
-                            </a>
-                            <ul class="dropdown-menu custom-drop-down mega-dropdown-menu animated fadeInRight"
-                                role="menu">
-                                <li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
-                                    <div class="mm-category-label col-sm-4">
-                                        <span>Adults</span>
-                                    </div>
+                </div>
+                <div class="col-md-3 col-lg-3 hero-form-input">
+                    <div class="form-group guest-fg user-dropdown dropdown mega-dropdown col-md-3">
+                        <label for="guests">Guests</label>
+                        <a href="#" class="dropdown-toggle" data-target="#" data-toggle="dropdown" data-content>
+                            <input readonly="readonly" type="text" id="number_of_guests" name="guests" class="form-control hiddex-xs" tabindex="3" placeholder="Select Number of Guests" data-value-large="Select Number of Guests" data-value-small="Guests">
+                            <span class="bs-caret"><i class="fa fa-chevron-down"></i></span>
+                        </a>
+                        <ul class="dropdown-menu custom-drop-down mega-dropdown-menu animated fadeInRight"
+                            role="menu">
+                            <li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
+                                <div class="mm-category-label col-sm-4">
+                                    <span>Adults</span>
+                                </div>
 
-                                    <div class="spinner col-sm-8 spinner-item spinner-incredment">
-                                        <input readonly="true" type="spinner" placeholder id="Adults" value="1" name="spinner">
-                                    </div>
-                                </li>
+                                <div class="spinner col-sm-8 spinner-item spinner-incredment">
+                                    <input readonly="true" type="spinner" placeholder id="Adults" value="1" name="spinner">
+                                </div>
+                            </li>
 
-                                <li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
-                                    <div class="mm-category-label col-sm-4">
-                                        <span>Children</span>
-                                    </div>
-                                    <div class="spinner col-sm-8 spinner-item spinner-incredment">
-                                        <input readonly="true" type="spinner" placeholder id="Children" value="0" name="spinner" />
-                                    </div>
-                                </li>
+                            <li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
+                                <div class="mm-category-label col-sm-4">
+                                    <span>Children</span>
+                                </div>
+                                <div class="spinner col-sm-8 spinner-item spinner-incredment">
+                                    <input readonly="true" type="spinner" placeholder id="Children" value="0" name="spinner" />
+                                </div>
+                            </li>
 
-                                <li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
-                                    <div class="mm-category-label category-label-bedrooms col-sm-4">
-                                        <span>Room Type</span>
-                                    </div>
+                            <li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
+                                <div class="mm-category-label category-label-bedrooms col-sm-4">
+                                    <span>Room Type</span>
+                                </div>
 
                                 <div class="bedroom-selector col-sm-8">
                                     <select class="bedroom-type" data-width="112px">
@@ -333,8 +332,8 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-3 col-lg-1">
-                    <div class="form-group btn-search-fg  ">
+                <div class="col-md-1 col-lg-1 hero-form-input">
+                    <div class="form-group btn-search-fg">
                         <div class="btn-search">
                             <div class="btn-search-wrapper">
                                 <a class="searchbox-submit" tabindex="4">Go</a>
@@ -407,7 +406,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <p class="text-center">Keys on Time</p>
+                                <p class="text-center hidden-xs">Keys on Time</p>
                             </div>
                         </div>
 
@@ -448,7 +447,7 @@
                                     </g>
                                 </svg>
                                 <!-- <img src="/Areas/BridgeStreet/Assets/Local/Images/Bed.svg" /> -->
-                                <p class="text-center">Always Clean</p>
+                                <p class="text-center hidden-xs">Always Clean</p>
                             </div>
                         </div>
 
@@ -503,7 +502,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <p class="text-center">Wireless Ready</p>
+                                <p class="text-center hidden-xs">Wireless Ready</p>
                             </div>
                         </div>
 

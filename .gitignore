@@ -1,3 +1,7 @@
+### Build files
+Areas/BridgeStreet/Assets/Local/Css/main.css
+"C:\\www\\BridgeStreet\\Website\\Areas\\Bridgestreet\\Assets\\Local\\Css/"
+
 ### Node template
 # Logs
 logs
@@ -54,6 +58,7 @@ jspm_packages
 # User-specific stuff:
 .idea/workspace.xml
 .idea/tasks.xml
+.DS_Store
 
 # Sensitive or high-churn files:
 .idea/dataSources/
