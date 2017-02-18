@@ -26,14 +26,7 @@
 
 
             jQuery('#MobileSearch').on("click", function() {
-                var searchKeywords = $('#searchKeywords');
-
-                if(searchKeywords) {
-                    searchKeywords.focus();
-                } else {
-                    inst.open();
-                }
-
+                inst.open();
             });
 
             /*
