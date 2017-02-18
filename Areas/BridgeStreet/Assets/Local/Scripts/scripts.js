@@ -2508,9 +2508,9 @@ var BSsplitscreen = require('./BRIDGESTREET.split.screen.js');
 
             jQuery('#MobileSearch').on("click", function() {
 
-                inst.open();
-
-            })    
+                // inst.open();
+                $('#searchKeywords').focus();
+            });
 
             /*
              *  Handle modal close when in tablet+ mode
