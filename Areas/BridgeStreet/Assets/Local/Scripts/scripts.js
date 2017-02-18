@@ -2507,7 +2507,6 @@ var BSsplitscreen = require('./BRIDGESTREET.split.screen.js');
 
 
             jQuery('#MobileSearch').on("click", function() {
-
                 // inst.open();
                 $('#searchKeywords').focus();
             });
