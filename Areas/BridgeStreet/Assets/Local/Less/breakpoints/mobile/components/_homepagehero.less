@@ -112,9 +112,7 @@
 				line-height: 1;
 				color: #ffffff;
 				text-shadow: 0 0 10px rgba(86, 89, 92, 0.5);
-
   			}
-
   		}
 
 		.hero-form {
@@ -122,6 +120,57 @@
 				display: block;
 				float: none;
 				margin-top: 12px;
+			}
+
+			.bedroom-selector {
+				&::before {
+					content: '';
+					color: #333;
+					display: block;
+					font-size: 1em;
+					height: 100%;
+					line-height: 2.5em;
+					padding: 0 .625em;
+					position: absolute;
+					top: 0;
+					left: 190px;
+					text-align: center;
+					width: 1em;
+					z-index: -1;
+				}
+
+				&::after {
+					content: '';
+					-moz-transform: rotate(-45deg);
+					-ms-transform: rotate(-45deg);
+					-webkit-transform: rotate(-45deg);
+					transform: rotate(-45deg);
+					position: absolute;
+					left: 190px;
+					bottom: 45%;
+					display: block;
+					width: 9px;
+					height: 9px;
+					border: 3px solid #ccc;
+					border-top: none;
+					border-right: none;
+					z-index: -1;
+				}
+
+				.bedroom-type {
+					border: 1px solid #dddede;
+					border-radius: 4px;
+					-webkit-border-radius: 4px;
+					-moz-border-radius: 4px;
+					background-color: #fff;
+					color: #9a9c9d;
+					display: block;
+					padding: 8px 10px;
+					width: 198px;
+					background-color: rgba(0,0,0,0);
+					-webkit-appearance: none;
+					-moz-appearance: none;
+				}
 			}
 		}
 

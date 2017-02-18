@@ -21,8 +21,38 @@
             background: #777;
         }
     }
+    .hero-item {
+        .hero-form {
+            &-input {
+                padding: 0 10px 0 0;
+            }
 
-    .hero-form-input {
-        padding: 0 10px 0 0;
+            .guest-fg {
+                .ui-spinner-horizontal {
+                    width: 100%;
+
+                    .ui-spinner-input {
+                        margin: 0 auto;
+                        width: 100%;
+                    }
+                }
+            }
+
+            .bedroom-selector {
+                .bedroom-type {
+                    width: 100%;
+                }
+
+                &::before {
+                    left: initial;
+                    right: 30px;
+                }
+
+                &::after {
+                    left: initial;
+                    right: 30px;
+                }
+            }
+        }
     }
 }
