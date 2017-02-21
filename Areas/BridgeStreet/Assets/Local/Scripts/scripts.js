@@ -2027,17 +2027,17 @@ var BSGlobalDateRange = require('./BRIDGESTREET.global.search.daterange.js');
             if(!DOMUtils.isUndefined(event.data)) {
 
                 var self = event.data.self;
+                var homeHeroHomepage = jQuery(window).height() - jQuery('.alt-header').height();
+
+                self.homepageHero.css('height', homeHeroHomepage);
 
                 if (DOMUtils.is_mobile() || DOMUtils.is_tabletSize()) {
-                    self.homepageHero.css('height', jQuery(window).height() - 151);
                     self.videoContainer.css('display', 'none');
                     self.heroBackground.css('display', 'block');
                 } else {
-                    self.homepageHero.css('height', jQuery(window).height() - jQuery('.alt-header').height());
                     self.videoContainer.css('display', 'block');
                     self.heroBackground.css('display', 'none');
-               }  
-
+               }
             }      
 
         },
