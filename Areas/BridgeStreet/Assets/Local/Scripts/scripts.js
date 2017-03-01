@@ -2005,11 +2005,12 @@ var BSGlobalDateRange = require('./BRIDGESTREET.global.search.daterange.js');
 
 
                 this.homepageHero = jQuery('.homepage-hero');
-
                 this.videoContainer = jQuery('.full-video-container').add('.split-video-container');
-
                 this.heroBackground = jQuery('.hero-background');
-
+                this.altHeader = jQuery('.alt-header');
+                this.heroMessaging = jQuery('.homepage-hero .hero-messaging');
+                this.heroForm = jQuery('.homepage-hero .hero-form');
+                this.heroIcons = jQuery('.homepage-hero .three-icon-blurp');
 
                 $window.on('resize', { self: this }, this._onResize);
 
@@ -2027,9 +2028,17 @@ var BSGlobalDateRange = require('./BRIDGESTREET.global.search.daterange.js');
             if(!DOMUtils.isUndefined(event.data)) {
 
                 var self = event.data.self;
-                var homeHeroHomepage = jQuery(window).height() - jQuery('.alt-header').height();
+                var homeHeroHomepageHeight = jQuery(window).height() - self.altHeader.height();
+                var homeHeroContentHeight =
+                    self.heroMessaging.outerHeight(true) +
+                    self.heroForm.outerHeight(true) +
+                    self.heroIcons.outerHeight(true);
 
-                self.homepageHero.css('height', homeHeroHomepage);
+                if (homeHeroContentHeight > homeHeroHomepageHeight) {
+                    homeHeroHomepageHeight = 'auto';
+                }
+
+                self.homepageHero.css('height', homeHeroHomepageHeight);
 
                 if (DOMUtils.is_mobile() || DOMUtils.is_tabletSize()) {
                     self.videoContainer.css('display', 'none');
