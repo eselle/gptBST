@@ -100,16 +100,17 @@
 		    opacity: 0;
 
   			h1 {	
-  				font-size: 3em;
+  				font-size: 40px;
   				line-height: 1;
   				color: white;
   				margin: 10px 0;
   				font-weight: 700;
+				padding: 0 15%;
   			}
 
   			h4 {
 				font-size: 35px;
-				line-height: 1;
+				line-height: 0.82;
 				color: #ffffff;
   			}
   		}
@@ -218,6 +219,10 @@
 			}
 		}
 
+		.three-icon-blurp {
+			display: none;
+		}
+
 		.video-btn {
 			cursor: pointer;
 		    margin: 0 auto;
@@ -230,7 +235,30 @@
   				margin: 10px 0;
   				font-size: 60px;
   			}
-
   		}  		
   	}
+}
+
+@media (max-width: 580px) {
+	.homepage-hero {
+		.hero-item{
+			.hero-messaging {
+				h1 {
+					padding: 0 7%;
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 480px) {
+	.homepage-hero {
+		.hero-item{
+			.hero-messaging {
+				h1 {
+					padding: 0;
+				}
+			}
+		}
+	}
 }

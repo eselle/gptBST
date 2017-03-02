@@ -107,9 +107,6 @@ h4.blue  {
     margin-left: 30px;
   }
 }
-/********************************************************************************/
-/*******************Three Icon Blurp ********************************************/
-
 
 .three-icon-blurp {
   background-color: transparent !important;
@@ -123,45 +120,39 @@ h4.blue  {
   color: #041d42;
 }
 
-@media screen and (min-device-width: 1440px) and (max-device-width: 1950px){
-
-  .three-icon-blurp {
-    bottom: 150px;
-  }
-
-}
-
-@media (min-width: 1200px) and (max-width: 1440px) {
-
-  .three-icon-blurp {
-    bottom: 50px;
-  }
-
-}
-/********************************************************************************/
-/******************* Homepage Purpose ********************************************/
 .homepagepurpose {
-  padding-top: 40px;
-  padding-bottom: 40px;
-}
-.homepagepurpose-image {
-  max-width: 80%;
-}
-.homepagepurpose .title{
-  text-align: center;
-  font-family: "Baskerville Semibold" !important;
-  color:#041d42  !important;
-  font-size: 36px  !important;
+  padding: 40px;
+
+  &-image {
+    max-width: 80%;
+  }
+
+  .title {
+    color: #041d42;
+    font-family: "Baskerville Semibold";
+    font-size: 36px;
+    text-align: center;
+  }
+
+  .top-img {
+    text-align: center;
+  }
+
+  .text {
+    color: #505e73;
+    font-family: "Myriad Pro Condensed";
+    font-size: 22px;
+    padding: 0 5px;
+    text-align: center;
+  }
 }
 
-.homepagepurpose .top-img{
-  text-align: center;
-}
-.homepagepurpose .text {
-  text-align: center;
-  font-family: "Myriad Pro Condensed" !important;
-  color: #505e73  !important;
-  font-size: 24px  !important;
+@media (max-width: 992px) {
+  .homepagepurpose {
+    .text {
+      padding: 0 20px;
+    }
+  }
 }
 
 /******************* Image  Purpose ********************************************/
