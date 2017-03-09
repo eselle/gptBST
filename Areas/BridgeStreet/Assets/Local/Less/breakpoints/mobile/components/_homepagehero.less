@@ -30,6 +30,102 @@
         position: relative;
       }
     }
+
+    .btn-search {
+      -webkit-border-radius: 0;
+      -moz-border-radius: 0;
+      -ms-border-radius: 0;
+      -o-border-radius: 0;
+      border-radius: 0;
+      -webkit-transition: .3s all ease;
+      -moz-transition: .3s all ease;
+      -ms-transition: .3s all ease;
+      -o-transition: .3s all ease;
+      transition: .3s all ease;
+      background-color: #e17000;
+      border: 0;
+      color: #fff;
+      font-family: "Myriad Pro Bold Condensed";
+      font-size: 38px;
+      font-weight: 700;
+      margin-top: 10px;
+      overflow: hidden;
+      padding: 13px 18px;
+      text-align: center;
+      vertical-align: middle;
+
+      a {
+        font-weight: bold;
+      }
+
+      &-fg {
+        display: block;
+      }
+    }
+
+    .custom-drop-down {
+      margin: 0;
+      padding: 10px 0;
+
+      .wrapper {
+        align-items: center;
+        display: flex;
+      }
+
+      .dropdown-input-label {
+        font-size: 13px;
+      }
+
+      .guest-fg__done-button {
+        border: 1px solid #dddede;
+        border-radius: 4px;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        background-color: #fff;
+        color: #9a9c9d;
+        padding: 8px 10px;
+        background-color: rgba(0,0,0,0);
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        margin: 0 10px 0 0;
+        width: 100%;
+      }
+
+      .bedroom-selector {
+        &::after {
+          content: '';
+          -moz-transform: rotate(-45deg);
+          -ms-transform: rotate(-45deg);
+          -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+          position: absolute;
+          right: 25px;
+          bottom: 45%;
+          display: block;
+          width: 9px;
+          height: 9px;
+          border: 3px solid #ccc;
+          border-top: none;
+          border-right: none;
+          z-index: -1;
+        }
+
+        .bedroom-type {
+          border: 1px solid #dddede;
+          border-radius: 4px;
+          -webkit-border-radius: 4px;
+          -moz-border-radius: 4px;
+          background-color: #fff;
+          color: #9a9c9d;
+          display: inline-block;
+          padding: 8px 10px;
+          width: 100%;
+          background-color: rgba(0,0,0,0);
+          -webkit-appearance: none;
+          -moz-appearance: none;
+        }
+      }
+    }
   }
 
   &__title {
