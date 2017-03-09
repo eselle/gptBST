@@ -24,9 +24,7 @@ var BSsplitscreen = require('../elements/BRIDGESTREET.split.screen.js');
 				if (!DOMUtils.isUndefined(document.getElementsByClassName('sticky-header')[0])) {
 		
 					jQuery('.sticky-header').stick_in_parent({
-
                         bottoming: false
-
 					});
 
 				}
