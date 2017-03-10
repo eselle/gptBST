@@ -264,11 +264,9 @@ var BSsplitscreen = require('../elements/BRIDGESTREET.split.screen.js');
 
 
 			var watchSVG,
-
-			    bBedSVG,
-
+			    bedSVG,
 			    deviceSVG,
-
+                bathtubSVG,
 			    svgArray = [];
 
 			var intervalSVG;
@@ -278,17 +276,16 @@ var BSsplitscreen = require('../elements/BRIDGESTREET.split.screen.js');
 			this.atEnd = false;
 
             var callback = function (scrollLeft, scrollTop, width, height) {
-
                 watchSVG = new Vivus('svg-animate-stopwatch', { start: "manual", duration: 60 });
-
                 bedSVG = new Vivus('svg-animate-bed', { start: "manual", duration: 60 });
-
                 deviceSVG = new Vivus('svg-animate-device', { start: "manual", duration: 60 });
+                bathtubSVG = new Vivus('svg-animate-bathtub', { start: "manual", duration: 60 });
 
-				svgArray.push(watchSVG, bedSVG, deviceSVG);
+				svgArray.push(watchSVG, bedSVG, deviceSVG, bathtubSVG);
 
-				intervalSVG = setInterval(fadeInSVG, 500)
+				console.log(svgArray);
 
+				intervalSVG = setInterval(fadeInSVG, 500);
 				trigger.detach(callback);
 			};
 

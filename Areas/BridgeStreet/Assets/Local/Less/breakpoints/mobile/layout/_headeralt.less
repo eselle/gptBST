@@ -9,8 +9,6 @@
 	background: -webkit-linear-gradient(top,  #ffffff 38%,#f9f9f9 66%,#e8e8e8 100%); /* Chrome10-25,Safari5.1-6 */
 	background: linear-gradient(to bottom,  #ffffff 38%,#f9f9f9 66%,#e8e8e8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e8e8e8',GradientType=0 ); /* IE6-9 */
-	border-bottom: 1px solid white;
-	
 
 	nav {
 	    position: relative;
@@ -214,20 +212,44 @@
 
 	    #MobileSearch{
 	    	.OpenSans400;
-	    	background-color: @navy;
-	    	padding: 18px 5px;
+            background-color: @gr-000;
 	    	position: relative;
 	    	width: 100%;
-	    	border-bottom: 1px solid white;
 	    	cursor: pointer;
 	    	height: 60px;
-			display: table;
+			display: flex;
+            align-items: center;
 	    	
+            .mobile-search__button {
+              -webkit-border-radius: 0;
+              -moz-border-radius: 0;
+              -ms-border-radius: 0;
+              -o-border-radius: 0;
+              border-radius: 0;
+              -webkit-transition: .3s all ease;
+              -moz-transition: .3s all ease;
+              -ms-transition: .3s all ease;
+              -o-transition: .3s all ease;
+              transition: .3s all ease;
+              background-color: @or-100;
+              border: 0;
+              color: #fff;
+              font-size: 16px;
+              font-weight: normal;
+              overflow: hidden;
+              align-items: center;
+              display: flex;
+              justify-content: center;
+              padding: 0 24px;
+              height: 100%;
+              font-weight: 600;
+            }
 
 		    .fake-search-field {
 		    	.OpenSans700;
 		    	font-size: 14px;
-		    	color: white;
+                color: @gr-500;
+                flex-grow: 2;
 			}
 
 			.fake-search-button {
