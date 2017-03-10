@@ -12,28 +12,45 @@ var BSglobaldaterange = require('./BRIDGESTREET.global.search.daterange.js');
                 guests: null
             };
             this.searchButton = $('.homepage-hero__form-submit-button');
+            this.searchButtonMobile = $('.mobileSearchButton');
             this.locationInput = $('#searchKeywords');
+            this.locationInputMobile = $('#searchKeywordsMobile');
 
-            if (this.searchButton.length) {
+            if (this.searchButton.length || this.searchButtonMobile.length) {
                 this.populateSearchData();
                 this.initializeForm();
+            }
 
+            if (this.searchButton.length) {
                 this.searchButton.on('click', this.search.bind(this));
+                $('.guest-fg__done-button').on('click', this.handleGuestDoneButtonClick.bind(this));
+            }
+
+            if (this.searchButtonMobile.length) {
+                this.searchButtonMobile.on('click', this.search.bind(this));
             }
         },
 
         search: function (e) {
-            // TODO: mobile code
             e.preventDefault();
+            var locationInput;
             var locationInputValue = '';
+            var isMobile = $(e.target).is(this.searchButtonMobile);
 
-            if (this.locationInput.length) {
+            // Desktop/Tablet button triggered
+            if ($(e.target).is(this.searchButton)) {
+                locationInput = this.locationInput;
                 locationInputValue = this.locationInput.val().trim();
             }
 
-            if (locationInputValue) {
-                // $(locationInputID).attr("data-remodal-action", "confirm"); TODO: mobile modal confirm
+            // Mobile button triggered
+            if (isMobile) {
+                locationInput = this.locationInputMobile;
+                locationInputValue = this.locationInputMobile.val().trim();
 
+            }
+
+            if (locationInput && locationInputValue) {
                 var searchUrl = "/Search?Latitude=" + this.searchData.location.lat +
                     "&Longitude=" + this.searchData.location.lng +
                     "&ArrivalDate=" + DateFormat(this.searchData.date.arrival, "yyyy-mm-dd") +
@@ -45,7 +62,7 @@ var BSglobaldaterange = require('./BRIDGESTREET.global.search.daterange.js');
 
                 document.location.href = searchUrl;
             } else {
-                // form error handling????
+                locationInput.focus();
             }
         },
 
@@ -128,6 +145,14 @@ var BSglobaldaterange = require('./BRIDGESTREET.global.search.daterange.js');
             this.searchData.date = BSglobaldaterange.init(this.searchData);
             this.searchData.guests = BSglobalguests.init(this.searchData);
             this.searchData.location = BSgloballocationsearch.init(this.searchData);
+        },
+
+        handleGuestDoneButtonClick: function (e) {
+            e.preventDefault();
+            // Due legacy code issues.. this is the guest dropdown instance....
+            if (this.searchData.guests) {
+                this.searchData.guests.updateRelatedControls();
+            }
         }
     };
 
