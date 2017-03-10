@@ -1810,8 +1810,10 @@ var BSIncrement = require('../utils/increment.js');
         updateRelatedControls: function (ui, caller) {
             var scope = this;
 
-            var callerID = jQuery(caller).attr('id');
-            $('input.ui-spinner-input[id=' + callerID + ']').val(ui.value);
+            if (ui && caller) {
+                var callerID = jQuery(caller).attr('id');
+                $('input.ui-spinner-input[id=' + callerID + ']').val(ui.value);
+            }
             
             scope.adults = $('#Adults').spinner("value");
             scope.children = $('#Children').spinner("value");
@@ -2017,6 +2019,7 @@ var BSglobaldaterange = require('./BRIDGESTREET.global.search.daterange.js');
 
             if (this.searchButton.length) {
                 this.searchButton.on('click', this.search.bind(this));
+                $('.guest-fg__done-button').on('click', this.handleGuestDoneButtonClick.bind(this));
             }
 
             if (this.searchButtonMobile.length) {
@@ -2138,6 +2141,14 @@ var BSglobaldaterange = require('./BRIDGESTREET.global.search.daterange.js');
             this.searchData.date = BSglobaldaterange.init(this.searchData);
             this.searchData.guests = BSglobalguests.init(this.searchData);
             this.searchData.location = BSgloballocationsearch.init(this.searchData);
+        },
+
+        handleGuestDoneButtonClick: function (e) {
+            e.preventDefault();
+            // Due legacy code issues.. this is the guest dropdown instance....
+            if (this.searchData.guests) {
+                this.searchData.guests.updateRelatedControls();
+            }
         }
     };
 
