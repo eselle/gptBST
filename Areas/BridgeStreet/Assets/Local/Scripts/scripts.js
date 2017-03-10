@@ -1992,15 +1992,10 @@ var BSGlobalDateRange = require('./BRIDGESTREET.global.search.daterange.js');
 
 
 },{"./BRIDGESTREET.global.search.daterange.js":10}],14:[function(require,module,exports){
-var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
 var DateFormat = require('../utils/BRIDGESTREET.date.format.js');
 var BSgloballocationsearch = require('./BRIDGESTREET.global.search.location.js');
 var BSglobalguests = require('./BRIDGESTREET.global.search.guests.js');
 var BSglobaldaterange = require('./BRIDGESTREET.global.search.daterange.js');
-
-function getValueFromQueryStringParameter(parameter) {
-    return
-}
 
 (function () {
     var homepagehero = {
@@ -2017,7 +2012,7 @@ function getValueFromQueryStringParameter(parameter) {
                 this.populateSearchData();
                 this.initializeForm();
 
-                this.searchButton.on("click", this.search.bind(this));
+                this.searchButton.on('click', this.search.bind(this));
             }
         },
 
@@ -2065,28 +2060,25 @@ function getValueFromQueryStringParameter(parameter) {
 
             var queryStringParameters = location.search.replace(/^\?/, '').split('&');
 
-            console.log(queryStringParameters);
-            console.log(this);
-
             queryStringParameters.forEach(function(parameter) {
                 var equalSignIndex = parameter.indexOf('=');
                 var slicedParameter = (equalSignIndex !== -1) ? parameter.slice(0, equalSignIndex) : '';
                 var value = (equalSignIndex !== -1) ? parameter.replace(slicedParameter + '=', '') : '';
 
                 if (slicedParameter && value) {
-                    if ([keys.latitude, keys.longitude, keys.place].indexOf(slicedParameter)) {
+                    if ([keys.latitude, keys.longitude, keys.place].indexOf(slicedParameter) !== -1) {
                         if (!this.searchData.location) {
                             this.searchData.location = {};
                         }
                     }
 
-                    if ([keys.arrival, keys.departure].indexOf(slicedParameter)) {
+                    if ([keys.arrival, keys.departure].indexOf(slicedParameter) !== -1) {
                         if (!this.searchData.date) {
                             this.searchData.date = {};
                         }
                     }
 
-                    if ([keys.adults, keys.children, keys.room].indexOf(slicedParameter)) {
+                    if ([keys.adults, keys.children, keys.room].indexOf(slicedParameter) !== -1) {
                         if (!this.searchData.guests) {
                             this.searchData.guests = {};
                         }
@@ -2127,7 +2119,7 @@ function getValueFromQueryStringParameter(parameter) {
         },
 
         initializeForm: function () {
-            // BSglobaldaterange.init(this.searchData);
+            this.searchData.date = BSglobaldaterange.init(this.searchData);
             this.searchData.guests = BSglobalguests.init(this.searchData);
             this.searchData.location = BSgloballocationsearch.init(this.searchData);
         }
@@ -2135,7 +2127,7 @@ function getValueFromQueryStringParameter(parameter) {
 
     module.exports = homepagehero || window.homepagehero;
 })();
-},{"../utils/BRIDGESTREET.calendarcontrol.js":27,"../utils/BRIDGESTREET.date.format.js":29,"./BRIDGESTREET.global.search.daterange.js":10,"./BRIDGESTREET.global.search.guests.js":12,"./BRIDGESTREET.global.search.location.js":13}],15:[function(require,module,exports){
+},{"../utils/BRIDGESTREET.date.format.js":29,"./BRIDGESTREET.global.search.daterange.js":10,"./BRIDGESTREET.global.search.guests.js":12,"./BRIDGESTREET.global.search.location.js":13}],15:[function(require,module,exports){
 var BSsplitscreen = require('./BRIDGESTREET.split.screen.js');
 
 (function () {
