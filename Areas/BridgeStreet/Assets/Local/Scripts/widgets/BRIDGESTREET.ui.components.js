@@ -283,8 +283,6 @@ var BSsplitscreen = require('../elements/BRIDGESTREET.split.screen.js');
 
 				svgArray.push(watchSVG, bedSVG, deviceSVG, bathtubSVG);
 
-				console.log(svgArray);
-
 				intervalSVG = setInterval(fadeInSVG, 500);
 				trigger.detach(callback);
 			};
