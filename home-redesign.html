@@ -247,77 +247,81 @@
 
     <div class="homepage-hero">
         <div class="homepage-hero__content hidden-xs">
-            <h1 class="homepage-hero__title">Wherever your travel takes you, book your apartment or home with the
-                hospitality professionals.</h1>
-            <form class="homepage-hero__form">
-                <div class="homepage-hero__form-input-wrapper">
-                    <input class="homepage-hero__form-input homepage-hero__form-input--search" type="text"
-                           name="LocationSearch" id="searchKeywords" placeholder="City, Address or Landmark"
-                           data-value-large="City, Address or Landmark" data-value-small="City, Address or Landmark"/>
-                </div>
-                <div class="homepage-hero__form-input-wrapper homepage-hero__form-input-wrapper--carret">
-                    <input class="homepage-hero__form-input" type="text" id="check_in_date" name="from-date"
-                           tabindex="2" placeholder="Your travel dates" data-value-large="Your travel dates"
-                           data-value-small="Your travel dates" readonly=""/>
-                </div>
-                <div class="homepage-hero__form-input-wrapper homepage-hero__form-input-wrapper--carret">
-                    <a href="#" class="dropdown-toggle" data-target="#" data-toggle="dropdown" data-content>
-                        <input class="homepage-hero__form-input" readonly="readonly" type="text" id="number_of_guests"
-                               name="guests" tabindex="3" placeholder="Room Type" data-value-large="Room Type"
-                               data-value-small="Room Type"/>
-                    </a>
-                    <ul class="dropdown-menu custom-drop-down mega-dropdown-menu animated fadeInRight"
-                        role="menu">
-                        <li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
-                            <div class="mm-category-label col-sm-4">
-                                <span class="dropdown-input-label">Adults</span>
-                            </div>
+            <div class="container">
+                <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
+                    <h1 class="homepage-hero__title">Wherever your travel takes you, book your apartment or home with the
+                        hospitality professionals.</h1>
+                    <form class="homepage-hero__form">
+                        <div class="homepage-hero__form-input-wrapper">
+                            <input class="homepage-hero__form-input homepage-hero__form-input--search" type="text"
+                                   name="LocationSearch" id="searchKeywords" placeholder="City, Address or Landmark"
+                                   data-value-large="City, Address or Landmark" data-value-small="City, Address or Landmark"/>
+                        </div>
+                        <div class="homepage-hero__form-input-wrapper homepage-hero__form-input-wrapper--carret">
+                            <input class="homepage-hero__form-input" type="text" id="check_in_date" name="from-date"
+                                   tabindex="2" placeholder="Your travel dates" data-value-large="Your travel dates"
+                                   data-value-small="Your travel dates" readonly=""/>
+                        </div>
+                        <div class="homepage-hero__form-input-wrapper homepage-hero__form-input-wrapper--carret">
+                            <a href="#" class="dropdown-toggle" data-target="#" data-toggle="dropdown" data-content>
+                                <input class="homepage-hero__form-input" readonly="readonly" type="text" id="number_of_guests"
+                                       name="guests" tabindex="3" placeholder="Guests" data-value-large="Guests"
+                                       data-value-small="Guests"/>
+                            </a>
+                            <ul class="dropdown-menu custom-drop-down mega-dropdown-menu animated fadeInRight"
+                                role="menu">
+                                <li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
+                                    <div class="mm-category-label col-sm-4">
+                                        <span class="dropdown-input-label">Adults</span>
+                                    </div>
 
-                            <div class="spinner col-sm-8 spinner-item spinner-increment">
-                                <input readonly="true" type="spinner" placeholder id="Adults" value="1" name="spinner">
-                            </div>
-                        </li>
-                        <li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
-                            <div class="mm-category-label col-sm-4">
-                                <span class="dropdown-input-label">Children</span>
-                            </div>
-                            <div class="spinner col-sm-8 spinner-item spinner-increment">
-                                <input readonly="true" type="spinner" placeholder id="Children" value="0" name="spinner" />
-                            </div>
-                        </li>
-                        <li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
-                            <div class="mm-category-label category-label-bedrooms col-sm-4">
-                                <span class="dropdown-input-label">Room Type</span>
-                            </div>
+                                    <div class="spinner col-sm-8 spinner-item spinner-increment">
+                                        <input readonly="true" type="spinner" placeholder id="Adults" value="1" name="spinner">
+                                    </div>
+                                </li>
+                                <li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
+                                    <div class="mm-category-label col-sm-4">
+                                        <span class="dropdown-input-label">Children</span>
+                                    </div>
+                                    <div class="spinner col-sm-8 spinner-item spinner-increment">
+                                        <input readonly="true" type="spinner" placeholder id="Children" value="0" name="spinner" />
+                                    </div>
+                                </li>
+                                <li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
+                                    <div class="mm-category-label category-label-bedrooms col-sm-4">
+                                        <span class="dropdown-input-label">Room Type</span>
+                                    </div>
 
-                            <div class="bedroom-selector col-sm-8 col-md-8">
-                                <select class="bedroom-type" data-width="112px">
-                                    <option value="0">Studio</option>
-                                    <option value="1">1 Bedroom</option>
-                                    <option value="2">2 Bedrooms</option>
-                                    <option value="3">3 Bedrooms</option>
-                                    <option value="4">4 Bedrooms</option>
-                                    <option value="5">5 Bedrooms</option>
-                                </select>
-                            </div>
-                        </li>
-                        <li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
-                            <div class="col-sm-5 col-md-5">
-                                <button class="dropdown-toggle guest-fg__done-button" data-toggle="dropdown">Done</button>
-                            </div>
-                        </li>
-                    </ul>
+                                    <div class="bedroom-selector col-sm-8 col-md-8">
+                                        <select class="bedroom-type" data-width="112px">
+                                            <option value="0">Studio</option>
+                                            <option value="1">1 Bedroom</option>
+                                            <option value="2">2 Bedrooms</option>
+                                            <option value="3">3 Bedrooms</option>
+                                            <option value="4">4 Bedrooms</option>
+                                            <option value="5">5 Bedrooms</option>
+                                        </select>
+                                    </div>
+                                </li>
+                                <li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
+                                    <div class="col-sm-5 col-md-5">
+                                        <button class="dropdown-toggle guest-fg__done-button" data-toggle="dropdown">Done</button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="homepage-hero__form-input-wrapper">
+                            <button class="homepage-hero__form-submit-button">Search</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="homepage-hero__form-input-wrapper">
-                    <button class="homepage-hero__form-submit-button">Search</button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 
     <div class="homepage-purpose container">
         <div class="row">
-            <div class="col-sm-8 col-sm-offset-2 col-md-10 col-md-offset-1 col-lg-12 col-lg-offset-0">
+            <div class="col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2">
                 <div class="homepage-purpose__features">
             <div class="homepage-purpose__features-item">
                 <div class="bubble">
@@ -496,7 +500,9 @@
             </div>
         </div>
             </div>
-            <div class="col-xs-12">
+        </div>
+        <div class="row">
+            <div class=" col-sm-12 col-sm-offset-0 col-lg-8 col-lg-offset-2">
                 <div class="homepage-purpose__description row">
                     <h2 class="homepage-purpose__title">A New Experience in Global Comfort</h2>
                     <p class="homepage-purpose__text">All the advantages of choosing a great place to live or work for a while with none of the downsides.

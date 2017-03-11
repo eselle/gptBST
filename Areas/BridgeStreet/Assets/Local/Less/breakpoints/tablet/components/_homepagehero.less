@@ -1,12 +1,20 @@
 .homepage-hero {
-  height: 600px;
-  width: 100vw;
+  height: 400px;
+
+  &__content {
+    padding-top: 100px;
+
+    & > .container {
+      padding: 0;
+    }
+  }
 
   &__form {
     &-input {
       &-wrapper {
         &:first-child {
-          width: 230px;
+          width: auto;
+          flex-grow: 1;
 
           .homepage-hero__form-input {
             padding: 31px 10px;
@@ -15,7 +23,7 @@
         }
 
         &:nth-child(2) {
-          width: 220px;
+          width: 29%;
 
           .homepage-hero__form-input {
             padding: 29px 38px 29px 10px;
@@ -24,7 +32,7 @@
         }
 
         &:nth-child(3) {
-          width: 215px;
+          width: 29%;
         }
       }
     }
