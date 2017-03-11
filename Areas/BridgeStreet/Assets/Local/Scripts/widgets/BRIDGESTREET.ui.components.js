@@ -295,7 +295,7 @@ var BSsplitscreen = require('../elements/BRIDGESTREET.split.screen.js');
 
                 if (DOMUtils.isNumber(num)) {
 
-                    if (num - 1 < 3) {
+                    if (num - 1 < svgArray.length) {
 
 						svgArray[num - 1].stop().reset().play();
 
