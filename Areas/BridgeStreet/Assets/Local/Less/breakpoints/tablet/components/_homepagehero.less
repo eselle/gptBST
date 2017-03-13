@@ -12,13 +12,21 @@
   &__form {
     &-input {
       &-wrapper {
+        .homepage-hero__form-input {
+          text-align: center;
+        }
+
         &:first-child {
           width: auto;
           flex-grow: 1;
 
           .homepage-hero__form-input {
-            padding: 31px 10px;
-            text-align: center;
+            background-image: url('/Areas/BridgeStreet/Assets/Local/Images/search-icon.png');
+            background-repeat: no-repeat;
+            background-size: 22px;
+            background-position: 15px center;
+            padding: 31px 10px 31px 50px;
+            text-align: left;
           }
         }
 
@@ -26,13 +34,16 @@
           width: 30%;
 
           .homepage-hero__form-input {
-            padding: 29px 38px 29px 10px;
-            text-align: center;
+            padding: 29px 41px 29px 10px;
           }
         }
 
         &:nth-child(3) {
-          width: 28%;
+          width: 160px;
+
+          .homepage-hero__form-input {
+            padding: 31px 50px 31px 35px;
+          }
         }
       }
     }
