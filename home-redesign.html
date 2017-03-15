@@ -244,7 +244,7 @@
         </div>
     </div>
 
-    <div class="homepage-hero">
+    <div class="homepage-hero" style="background-image: url('/-/media/bridgestreet/home/man-street.ashx')" data-url="/Videos/" id="RandomVideo">
         <div class="homepage-hero__content hidden-xs">
             <div class="container">
                 <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
@@ -805,6 +805,32 @@
     else if (document.readyState == "complete") bcLoad();
     else if (window.addEventListener) window.addEventListener('load', bcLoad, false);
     else window.attachEvent('onload', bcLoad);
+</script>
+<script type="text/javascript">
+
+    (function () {
+
+        function addSourceToVideo(element, src) {
+            var path = element.getAttribute('data-url');
+            if (path != undefined)
+                element.style.backgroundImage = "url('" + path + src + "')";
+            else
+                element.style.backgroundImage = "url('" + src + "')";
+
+        }
+
+        var videoObj = ['Image1.jpg',
+            'Image2.jpg',
+            'Image3.jpg',
+            'Image4.jpg',
+            'Image5.jpg'];
+        var randomVideo = videoObj.length * Math.random() | 0;
+        var videoEl = document.getElementById('RandomVideo');
+
+        addSourceToVideo(videoEl, videoObj[randomVideo]);
+
+    })();
+
 </script>
 <noscript>
     <a href="http://www.boldchat.com" title="Live Chat" target="_blank"><img alt="Live Chat"
