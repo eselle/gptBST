@@ -103,8 +103,10 @@ var BSIncrement = require('../utils/increment.js');
         updateRelatedControls: function (ui, caller) {
             var scope = this;
 
-            var callerID = jQuery(caller).attr('id');
-            $('input.ui-spinner-input[id=' + callerID + ']').val(ui.value);
+            if (ui && caller) {
+                var callerID = jQuery(caller).attr('id');
+                $('input.ui-spinner-input[id=' + callerID + ']').val(ui.value);
+            }
             
             scope.adults = $('#Adults').spinner("value");
             scope.children = $('#Children').spinner("value");

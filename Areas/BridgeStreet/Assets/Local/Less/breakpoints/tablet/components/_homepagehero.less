@@ -1,26 +1,55 @@
 .homepage-hero {
-	height: 800px;
+  height: 380px;
 
-	.hero-item {
-		.hero-messaging {
-			h1 {
-				font-size: 44px;
-			}
+  &__content {
+    padding-top: 120px;
 
-			h4 {
-				font-size: 40px;
-			}
-		}
+    & > .container {
+      padding: 0;
+    }
+  }
 
-		.three-icon-blurp {
-			display: block;
-		}
+  &__form {
+    &-input {
+      &-wrapper {
+        .homepage-hero__form-input {
+          text-align: center;
+        }
 
-		.video-btn {
-			i {
-				margin: 20px 0;
-				font-size: 60px;
-			}
-		}
-	}
+        &:first-child {
+          width: auto;
+          flex-grow: 1;
+
+          .homepage-hero__form-input {
+            background-image: url('/Areas/BridgeStreet/Assets/Local/Images/search-icon.png');
+            background-repeat: no-repeat;
+            background-size: 22px;
+            background-position: 15px center;
+            padding: 31px 10px 31px 50px;
+            text-align: left;
+          }
+        }
+
+        &:nth-child(2) {
+          width: 30%;
+
+          .homepage-hero__form-input {
+            padding: 29px 41px 29px 10px;
+          }
+        }
+
+        &:nth-child(3) {
+          width: 160px;
+
+          .homepage-hero__form-input {
+            padding: 31px 50px 31px 35px;
+          }
+        }
+      }
+    }
+  }
+
+  &__title {
+    font-size: 26px;
+  }
 }

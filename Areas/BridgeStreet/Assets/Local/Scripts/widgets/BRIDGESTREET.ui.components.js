@@ -24,9 +24,7 @@ var BSsplitscreen = require('../elements/BRIDGESTREET.split.screen.js');
 				if (!DOMUtils.isUndefined(document.getElementsByClassName('sticky-header')[0])) {
 		
 					jQuery('.sticky-header').stick_in_parent({
-
                         bottoming: false
-
 					});
 
 				}
@@ -266,11 +264,9 @@ var BSsplitscreen = require('../elements/BRIDGESTREET.split.screen.js');
 
 
 			var watchSVG,
-
-			    bBedSVG,
-
+			    bedSVG,
 			    deviceSVG,
-
+                bathtubSVG,
 			    svgArray = [];
 
 			var intervalSVG;
@@ -280,17 +276,14 @@ var BSsplitscreen = require('../elements/BRIDGESTREET.split.screen.js');
 			this.atEnd = false;
 
             var callback = function (scrollLeft, scrollTop, width, height) {
-
                 watchSVG = new Vivus('svg-animate-stopwatch', { start: "manual", duration: 60 });
-
                 bedSVG = new Vivus('svg-animate-bed', { start: "manual", duration: 60 });
-
                 deviceSVG = new Vivus('svg-animate-device', { start: "manual", duration: 60 });
+                bathtubSVG = new Vivus('svg-animate-bathtub', { start: "manual", duration: 60 });
 
-				svgArray.push(watchSVG, bedSVG, deviceSVG);
+				svgArray.push(watchSVG, bedSVG, deviceSVG, bathtubSVG);
 
-				intervalSVG = setInterval(fadeInSVG, 500)
-
+				intervalSVG = setInterval(fadeInSVG, 500);
 				trigger.detach(callback);
 			};
 
@@ -302,7 +295,7 @@ var BSsplitscreen = require('../elements/BRIDGESTREET.split.screen.js');
 
                 if (DOMUtils.isNumber(num)) {
 
-                    if (num - 1 < 3) {
+                    if (num - 1 < svgArray.length) {
 
 						svgArray[num - 1].stop().reset().play();
 

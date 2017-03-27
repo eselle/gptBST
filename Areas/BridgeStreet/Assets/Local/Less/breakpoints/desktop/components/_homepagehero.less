@@ -1,87 +1,41 @@
 .homepage-hero {
-    .hero-item {
-        .hero-messaging {
-            h1 {
-              font-size: 50px;
-              font-weight: bold;
-              padding: 0 3%;
-            }
+  height: 500px;
 
-            h4 {
-              font-size: 45px;
-            }
+  &__content {
+    padding-top: 140px;
+  }
+
+  &__form {
+    &-input {
+      &-wrapper {
+        &:first-child {
+          .homepage-hero__form-input {
+            background-position: 30px center;
+            background-size: 26px;
+            padding: 31px 50px 31px 80px;
+          }
         }
 
-        .hero-form {
-            .btn-search-fg {
-                margin-top: 0;
-            }
+        &:nth-child(2) {
+          width: 30%;
+
+          .homepage-hero__form-input {
+            padding: 29px 40px 29px 20px;
+          }
         }
+      }
     }
 
-    .full-video-container {
-        position: absolute;
-
-        .full-video {
-          display: block;
-          position: absolute;
-          left: 50%;
-          top: 50%;
-          transform: translate(-50%,-50%);
-          min-width: 100%;
-          min-height: 100%;
-          width: auto;
-          height: auto;
-          background: #777;
-          z-index: 0;
+    .custom-drop-down {
+      .bedroom-selector {
+        .bedroom-type {
+          font-size: 14px;
         }
+      }
     }
-    .hero-item {
-        .hero-form {
-            &-input {
-                padding: 0 10px 0 0;
-            }
+  }
 
-            .guest-fg {
-                .ui-spinner-horizontal {
-                    width: 100%;
-
-                    .ui-spinner-input {
-                        margin: 0 auto;
-                        width: 100%;
-                    }
-                }
-            }
-
-            .bedroom-selector {
-                margin: 10px 0;
-
-                .bedroom-type {
-                    width: 100%;
-                }
-
-                &::before {
-                    left: initial;
-                    right: 30px;
-                }
-
-                &::after {
-                    left: initial;
-                    right: 30px;
-                }
-            }
-
-            .btn-search {
-                margin-top: 0;
-            }
-        }
-    }
-}
-
-@media (min-width: 1440px) {
-    .homepage-hero {
-        .hero-form {
-            width: 1300px;
-        }
-    }
+  &__title {
+    font-size: 30px;
+  }
 }

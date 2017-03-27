@@ -1,103 +1,160 @@
+var DateFormat = require('../utils/BRIDGESTREET.date.format.js');
+var BSgloballocationsearch = require('./BRIDGESTREET.global.search.location.js');
+var BSglobalguests = require('./BRIDGESTREET.global.search.guests.js');
+var BSglobaldaterange = require('./BRIDGESTREET.global.search.daterange.js');
+
 (function () {
-
-    var $window = $(window);
     var homepagehero = {
+        init: function () {
+            this.searchData = {
+                location: null,
+                date: null,
+                guests: null
+            };
+            this.searchButton = $('.homepage-hero__form-submit-button');
+            this.searchButtonMobile = $('.mobileSearchButton');
+            this.locationInput = $('#searchKeywords');
+            this.locationInputMobile = $('#searchKeywordsMobile');
 
-        init : function () {
+            if (this.searchButton.length || this.searchButtonMobile.length) {
+                this.populateSearchData();
+                this.initializeForm();
+            }
 
-            if ($('.homepage-hero').length == 0) return;
+            if (this.searchButton.length) {
+                this.searchButton.on('click', this.search.bind(this));
+                $('.guest-fg__done-button').on('click', this.handleGuestDoneButtonClick.bind(this));
+            }
 
-                throttleTimeout = 500,
-
-
-                this.homepageHero = jQuery('.homepage-hero');
-                this.videoContainer = jQuery('.full-video-container').add('.split-video-container');
-                this.heroBackground = jQuery('.hero-background');
-                this.altHeader = jQuery('.alt-header');
-                this.heroMessaging = jQuery('.homepage-hero .hero-messaging');
-                this.heroForm = jQuery('.homepage-hero .hero-form');
-                this.heroIcons = jQuery('.homepage-hero .three-icon-blurp');
-
-                $window.on('resize', { self: this }, this._onResize);
-
-                $window.trigger('resize');
-
-
-
-                TweenMax.from(jQuery('.hero-messaging'), 0.5, {opacity:0, y: 30, delay:1}, 0.2);  
-
-
+            if (this.searchButtonMobile.length) {
+                this.searchButtonMobile.on('click', this.search.bind(this));
+            }
         },
 
-        _onResize : function (event) {
+        search: function (e) {
+            e.preventDefault();
+            var locationInput;
+            var locationInputValue = '';
+            var isMobile = $(e.target).is(this.searchButtonMobile);
 
-            if(!DOMUtils.isUndefined(event.data)) {
+            // Desktop/Tablet button triggered
+            if ($(e.target).is(this.searchButton)) {
+                locationInput = this.locationInput;
+                locationInputValue = this.locationInput.val().trim();
+            }
 
-                var self = event.data.self;
-                var homeHeroHomepageHeight = jQuery(window).height() - self.altHeader.height();
-                var homeHeroContentHeight =
-                    self.heroMessaging.outerHeight(true) +
-                    self.heroForm.outerHeight(true) +
-                    self.heroIcons.outerHeight(true);
+            // Mobile button triggered
+            if (isMobile) {
+                locationInput = this.locationInputMobile;
+                locationInputValue = this.locationInputMobile.val().trim();
 
-                if (homeHeroContentHeight > homeHeroHomepageHeight) {
-                    homeHeroHomepageHeight = 'auto';
+            }
+
+            if (locationInput && locationInputValue) {
+                var searchUrl = "/Search?Latitude=" + this.searchData.location.lat +
+                    "&Longitude=" + this.searchData.location.lng +
+                    "&ArrivalDate=" + DateFormat(this.searchData.date.arrival, "yyyy-mm-dd") +
+                    "&DepartureDate=" + DateFormat(this.searchData.date.departure, "yyyy-mm-dd") +
+                    "&Adults=" + this.searchData.guests.adults +
+                    "&Children=" + this.searchData.guests.children +
+                    "&RoomType=" + this.searchData.guests.roomType +
+                    "&Place=" + this.searchData.location.place;
+
+                document.location.href = searchUrl;
+            } else {
+                locationInput.focus();
+            }
+        },
+
+        populateSearchData: function () {
+            var keys = {
+                adults: 'Adults',
+                arrival: 'ArrivalDate',
+                children: 'Children',
+                departure: 'DepartureDate',
+                latitude: 'Latitude',
+                longitude: 'Longitude',
+                place: 'Place',
+                room: 'RoomType'
+
+            };
+            var arrival;
+            var departure;
+
+            var queryStringParameters = location.search.replace(/^\?/, '').split('&');
+
+            queryStringParameters.forEach(function(parameter) {
+                var equalSignIndex = parameter.indexOf('=');
+                var slicedParameter = (equalSignIndex !== -1) ? parameter.slice(0, equalSignIndex) : '';
+                var value = (equalSignIndex !== -1) ? parameter.replace(slicedParameter + '=', '') : '';
+
+                if (slicedParameter && value) {
+                    if ([keys.latitude, keys.longitude, keys.place].indexOf(slicedParameter) !== -1) {
+                        if (!this.searchData.location) {
+                            this.searchData.location = {};
+                        }
+                    }
+
+                    if ([keys.arrival, keys.departure].indexOf(slicedParameter) !== -1) {
+                        if (!this.searchData.date) {
+                            this.searchData.date = {};
+                        }
+                    }
+
+                    if ([keys.adults, keys.children, keys.room].indexOf(slicedParameter) !== -1) {
+                        if (!this.searchData.guests) {
+                            this.searchData.guests = {};
+                        }
+                    }
+
+                    switch (slicedParameter) {
+                        case keys.place:
+                            this.searchData.location.place = decodeURI(value);
+                            break;
+                        case keys.latitude:
+                            this.searchData.location.lat = Number(value);
+                            break;
+                        case keys.longitude:
+                            this.searchData.location.lng = Number(value);
+                            break;
+                        case keys.arrival:
+                            arrival = new Date(value);
+                            arrival.setDate(arrival.getDate() + 1);
+                            this.searchData.date.arrival = arrival;
+                            break;
+                        case keys.departure:
+                            departure = new Date(value);
+                            departure.setDate(departure.getDate() + 1);
+                            this.searchData.date.departure = departure;
+                            break;
+                        case keys.adults:
+                            this.searchData.guests.adults = Number(value);
+                            break;
+                        case keys.children:
+                            this.searchData.guests.children = Number(value);
+                            break;
+                        case keys.room:
+                            this.searchData.guests.roomType = Number(value);
+                            break;
+                    }
                 }
-
-                self.homepageHero.css('height', homeHeroHomepageHeight);
-
-                if (DOMUtils.is_mobile() || DOMUtils.is_tabletSize()) {
-                    self.videoContainer.css('display', 'none');
-                    self.heroBackground.css('display', 'block');
-                } else {
-                    self.videoContainer.css('display', 'block');
-                    self.heroBackground.css('display', 'none');
-               }
-            }      
-
+            }, this);
         },
 
-        _setVideo : function () {
-
-            var video = document.getElementsByTagName('video')[0];
-
-            var videoButton = document.getElementsByClassName('video-btn')[0];
-
-            var videoCloseButton = document.getElementsByClassName('full-video-close-button')[0];
-
-            videoButton.addEventListener("click", this._play, false);
-
-            videoCloseButton.addEventListener("click", this._stop, false);
-
+        initializeForm: function () {
+            this.searchData.date = BSglobaldaterange.init(this.searchData);
+            this.searchData.guests = BSglobalguests.init(this.searchData);
+            this.searchData.location = BSgloballocationsearch.init(this.searchData);
         },
 
-        _play : function () {
-
-            var video = document.getElementsByTagName('video')[0];
-
-            var videoContainer = document.getElementsByClassName('full-video-container')[0];
-
-            jQuery('.full-video-container').addClass('visible');
-
-            video.play();
-
-        },
-
-        _stop : function () {
-
-            var video = document.getElementsByTagName('video')[0];
-
-            var videoContainer = document.getElementsByClassName('full-video-container')[0];
-
-            jQuery('.full-video-container').removeClass('visible');
-
-            video.pause();
-
-            video.currentTime = 0;            
-        }		
-
-    }
+        handleGuestDoneButtonClick: function (e) {
+            e.preventDefault();
+            // Due legacy code issues.. this is the guest dropdown instance....
+            if (this.searchData.guests) {
+                this.searchData.guests.updateRelatedControls();
+            }
+        }
+    };
 
     module.exports = homepagehero || window.homepagehero;
-
 })();
