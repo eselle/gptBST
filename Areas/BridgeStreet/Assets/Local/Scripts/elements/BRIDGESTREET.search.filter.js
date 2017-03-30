@@ -16,7 +16,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
             var dfd = jQuery.Deferred();
 
-            var Model = Backbone.Model.extend({ url: '/briapi/PropertySearch/PropertySearchResultsJSON' });
+            var Model = Backbone.Model.extend({ url: '/local.json' });
 
             var View = Backbone.View.extend({
                 initialize: function () {
@@ -175,7 +175,6 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
                     window.history.pushState("object or string", "Title", url);
                     this.model.fetch({
-                        data: formValues,
                         success: this.render,
                         error: this.renderError
                     });
