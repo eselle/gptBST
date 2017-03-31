@@ -8,7 +8,6 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
         arrival: new Date(),
         departure: new Date(),
         init: function (search) {
-            console.log('HOME PAGE E');
             var scope = this;
             if (search.date != null) {
                 scope.arrival = search.date.arrival;
