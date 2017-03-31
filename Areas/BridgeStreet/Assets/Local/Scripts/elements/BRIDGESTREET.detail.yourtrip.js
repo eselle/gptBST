@@ -12,7 +12,7 @@
 
             var dfd = jQuery.Deferred();
 
-            var Model = Backbone.Model.extend({ url: '/briapi/PropertyDetail/YourTripJSON' })
+            var Model = Backbone.Model.extend({ url: '/your-trip.json' });
 
             var View = Backbone.View.extend({
                 initialize: function () {

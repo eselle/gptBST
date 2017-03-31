@@ -1,5 +1,29 @@
 .contact-pod {
-	.btn-contact {
-		.booking-button(@navy, @havy-hover);
-	}	
+  text-align: right;
+  margin-top: 20px;
+
+  .btn-contact {
+    .booking-button(@navy, @havy-hover);
+  }
+
+  &__more {
+    color: @gr-200;
+    font-weight: bold;
+    font-size: 14px;
+    margin-left: 35px;
+
+    &:hover {
+      color: @gr-300;
+    }
+
+    &-icon {
+      font-size: 20px;
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+
+    &-text {
+      vertical-align: middle;
+    }
+  }
 }

@@ -12,7 +12,7 @@
 
             var dfd = jQuery.Deferred();
 
-            var Model = Backbone.Model.extend({ url: '/briapi/PropertyDetail/RelatedPropertiesJSON' });
+            var Model = Backbone.Model.extend({ url: '/related-properties.json' });
 
             var View = Backbone.View.extend({
                 initialize: function () {

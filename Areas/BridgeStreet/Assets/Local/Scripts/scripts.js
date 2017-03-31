@@ -1009,7 +1009,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
             var dfd = jQuery.Deferred();
 
-            var Model = Backbone.Model.extend({ url: '/briapi/PropertyDetail/RelatedPropertiesJSON' });
+            var Model = Backbone.Model.extend({ url: '/related-properties.json' });
 
             var View = Backbone.View.extend({
                 initialize: function () {
@@ -1076,7 +1076,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
             var dfd = jQuery.Deferred();
 
-            var Model = Backbone.Model.extend({ url: '/briapi/PropertyDetail/YourTripJSON' })
+            var Model = Backbone.Model.extend({ url: '/your-trip.json' });
 
             var View = Backbone.View.extend({
                 initialize: function () {
