@@ -81,7 +81,9 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
         },
 
         resizeBrowser: function () {
-            DOMUtils.fitToPlaceholder("desktop_check_in_date");
+            if (document.getElementById('desktop_check_in_date')) {
+                DOMUtils.fitToPlaceholder("desktop_check_in_date");
+            }
         },
         show: function () {
             if (DOMUtils.is_mobile()) {
