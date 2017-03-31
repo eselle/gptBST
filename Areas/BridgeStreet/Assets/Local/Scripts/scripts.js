@@ -1061,7 +1061,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 })();
 
 
-},{"../utils/BRIDGESTREET.currency.js":28}],8:[function(require,module,exports){
+},{"../utils/BRIDGESTREET.currency.js":29}],8:[function(require,module,exports){
 var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
 (function () {
@@ -1452,7 +1452,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 })();
 
 
-},{"../utils/BRIDGESTREET.currency.js":28}],9:[function(require,module,exports){
+},{"../utils/BRIDGESTREET.currency.js":29}],9:[function(require,module,exports){
 (function () {
     var featuredPropertyPod = {
         init: function () {
@@ -1567,7 +1567,7 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
 
 
 
-},{"../utils/BRIDGESTREET.calendarcontrol.js":27}],11:[function(require,module,exports){
+},{"../utils/BRIDGESTREET.calendarcontrol.js":28}],11:[function(require,module,exports){
 var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
 var DateFormat = require('../utils/BRIDGESTREET.date.format.js');
 var BSgloballocationsearch = require('./BRIDGESTREET.global.search.location.js');
@@ -1708,7 +1708,7 @@ var globalgosearch = (function (app, parent, dateFormat, guests, document) {
 
 module.exports = globalgosearch || window.globalgosearch;
 
-},{"../utils/BRIDGESTREET.calendarcontrol.js":27,"../utils/BRIDGESTREET.date.format.js":29,"./BRIDGESTREET.global.search.daterange.js":10,"./BRIDGESTREET.global.search.guests.js":12,"./BRIDGESTREET.global.search.location.js":13}],12:[function(require,module,exports){
+},{"../utils/BRIDGESTREET.calendarcontrol.js":28,"../utils/BRIDGESTREET.date.format.js":30,"./BRIDGESTREET.global.search.daterange.js":10,"./BRIDGESTREET.global.search.guests.js":12,"./BRIDGESTREET.global.search.location.js":13}],12:[function(require,module,exports){
 var BSIncrement = require('../utils/increment.js');
 
 (function () {
@@ -1855,7 +1855,7 @@ var BSIncrement = require('../utils/increment.js');
 
 })();
 
-},{"../utils/increment.js":31}],13:[function(require,module,exports){
+},{"../utils/increment.js":32}],13:[function(require,module,exports){
 var BSGlobalDateRange = require('./BRIDGESTREET.global.search.daterange.js');
 
 (function () {
@@ -2001,7 +2001,7 @@ var BSGlobalDateRange = require('./BRIDGESTREET.global.search.daterange.js');
 var DateFormat = require('../utils/BRIDGESTREET.date.format.js');
 var BSgloballocationsearch = require('./BRIDGESTREET.global.search.location.js');
 var BSglobalguests = require('./BRIDGESTREET.global.search.guests.js');
-var BSglobaldaterange = require('./BRIDGESTREET.global.search.daterange.js');
+var BSHomepageDateRange = require('./BRIDGESTREET.homepage.search.daterange.js');
 
 (function () {
     var homepagehero = {
@@ -2142,7 +2142,7 @@ var BSglobaldaterange = require('./BRIDGESTREET.global.search.daterange.js');
         },
 
         initializeForm: function () {
-            this.searchData.date = BSglobaldaterange.init(this.searchData);
+            this.searchData.date = BSHomepageDateRange.init(this.searchData);
             this.searchData.guests = BSglobalguests.init(this.searchData);
             this.searchData.location = BSgloballocationsearch.init(this.searchData);
         },
@@ -2158,7 +2158,109 @@ var BSglobaldaterange = require('./BRIDGESTREET.global.search.daterange.js');
 
     module.exports = homepagehero || window.homepagehero;
 })();
-},{"../utils/BRIDGESTREET.date.format.js":29,"./BRIDGESTREET.global.search.daterange.js":10,"./BRIDGESTREET.global.search.guests.js":12,"./BRIDGESTREET.global.search.location.js":13}],15:[function(require,module,exports){
+},{"../utils/BRIDGESTREET.date.format.js":30,"./BRIDGESTREET.global.search.guests.js":12,"./BRIDGESTREET.global.search.location.js":13,"./BRIDGESTREET.homepage.search.daterange.js":15}],15:[function(require,module,exports){
+var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
+
+(function () {
+
+    var homepageSearchDaterange = {
+        desktopRange: null,
+        mobileRange: null,
+        arrival: new Date(),
+        departure: new Date(),
+        init: function (search) {
+            console.log('HOME PAGE E');
+            var scope = this;
+            if (search.date != null) {
+                scope.arrival = search.date.arrival;
+                scope.departure = search.date.departure;
+            }
+
+            var sharedCalOptions = {
+                theme: 'material',
+                animate: false,
+                min: new Date(),
+                weekDays: 'short',
+                dayNamesMin: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+                dayNamesShort: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+                showSelector: false,
+                yearChange: false,
+                buttons: [],
+                defaultValue: [scope.arrival, scope.departure],
+                onMarkupReady: function (event, inst) {
+                    var $ = mobiscroll.$,
+                        markup = $(event.target);
+                    markup.find('.mbsc-fr-c').append(CalendarUtil.getMarkup());
+                    CalendarUtil.set(inst);
+                },
+                onSetDate: function (event, inst) {
+                    if (event.control == 'calendar') {
+                        CalendarUtil.update(inst, event);
+                    }
+                },
+                onSet: function (event, inst) {
+                    // save the date and ensure that the other control is updated
+                    scope.arrival = inst._startDate;
+                    scope.departure = inst._endDate;
+
+                    if (inst == scope.desktopRange)
+                        scope.mobileRange.setVal([scope.arrival, scope.departure], true);
+                    else
+                        scope.desktopRange.setVal([scope.arrival, scope.departure], true);
+
+                }
+            };
+
+            var desktopCalOptions = _.clone(sharedCalOptions);
+            desktopCalOptions.display = 'bubble';
+            desktopCalOptions.months = 2;
+            desktopCalOptions.calendarWidth = 742;
+            desktopCalOptions.startInput = '#desktop_check_in_date';
+            desktopCalOptions.endInput = '#desktop_check_out_date';
+
+            var mobileCalOptions = _.clone(sharedCalOptions);
+            mobileCalOptions.display = 'bottom';
+            mobileCalOptions.months = 1;
+            mobileCalOptions.startInput = '#mobile_check_in_date';
+            mobileCalOptions.endInput = '#mobile_check_out_date';
+
+            this.desktopRange = mobiscroll.range('#desktop_date_range_target', desktopCalOptions);
+            this.mobileRange = mobiscroll.range('#mobile_date_range_target', mobileCalOptions);
+
+            if (search.date != null && scope.arrival != null && scope.departure != null) {
+                this.desktopRange.setVal([scope.arrival, scope.departure], true);
+                this.mobileRange.setVal([scope.arrival, scope.departure], true);
+            }
+
+            this.initListeners();
+
+            return scope;
+        },
+
+        initListeners: function () {
+            var scope = this;
+            $(window).on('resize', { self: this }, scope.resizeBrowser);
+        },
+
+        resizeBrowser: function () {
+            DOMUtils.fitToPlaceholder("desktop_check_in_date");
+        },
+        show: function () {
+            if (DOMUtils.is_mobile()) {
+                this.mobileRange.show();
+            } else {
+                this.desktopRange.show();
+            }
+        }
+    }
+
+    module.exports = homepageSearchDaterange || window.homepageSearchDaterange;
+
+})();
+
+
+
+},{"../utils/BRIDGESTREET.calendarcontrol.js":28}],16:[function(require,module,exports){
 var BSsplitscreen = require('./BRIDGESTREET.split.screen.js');
 
 (function () {
@@ -2550,7 +2652,7 @@ var BSsplitscreen = require('./BRIDGESTREET.split.screen.js');
 })();
 
 
-},{"./BRIDGESTREET.split.screen.js":23}],16:[function(require,module,exports){
+},{"./BRIDGESTREET.split.screen.js":24}],17:[function(require,module,exports){
 (function () {
     var $window = $(window);
     var mobilemodal = {
@@ -2609,7 +2711,7 @@ var BSsplitscreen = require('./BRIDGESTREET.split.screen.js');
 })();
 
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 (function () {
 
     var navigation = {
@@ -2707,7 +2809,7 @@ var BSsplitscreen = require('./BRIDGESTREET.split.screen.js');
 })();
 
 
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 (function () {
 
     var nearby = {
@@ -2858,7 +2960,7 @@ var BSsplitscreen = require('./BRIDGESTREET.split.screen.js');
     module.exports = nearby || window.nearby;
 
 })();
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 (function () {
     var PartnerContactUsForm = {
 	    
@@ -2936,7 +3038,7 @@ var BSsplitscreen = require('./BRIDGESTREET.split.screen.js');
     module.exports = PartnerContactUsForm || window.PartnerContactUsForm;
 
 })();
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 (function () {
     var $window = $(window);
     var peeldown = {
@@ -2980,7 +3082,7 @@ var BSsplitscreen = require('./BRIDGESTREET.split.screen.js');
 })();
 
 
-},{}],21:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 var BSmapview = require('./BRIDGESTREET.mapview.js');
 var BSsearchlisting = require('./BRIDGESTREET.search.listing.js');
 var BSuicomponents = require('../widgets/BRIDGESTREET.ui.components.js');
@@ -3423,7 +3525,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 })();
 
 
-},{"../utils/BRIDGESTREET.currency.js":28,"../widgets/BRIDGESTREET.ui.components.js":33,"./BRIDGESTREET.mapview.js":15,"./BRIDGESTREET.search.listing.js":22}],22:[function(require,module,exports){
+},{"../utils/BRIDGESTREET.currency.js":29,"../widgets/BRIDGESTREET.ui.components.js":34,"./BRIDGESTREET.mapview.js":16,"./BRIDGESTREET.search.listing.js":23}],23:[function(require,module,exports){
 (function () {
     var $window = $(window);
 
@@ -3564,7 +3666,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 })();
 
 
-},{}],23:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 (function () {
     var $window = $(window);
     var splitscreen = {
@@ -3682,7 +3784,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
 })();
 
-},{}],24:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 (function () {
 
     var statisticsPod = {
@@ -3711,7 +3813,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
 
 
-},{}],25:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 (function () {
 
     var VideoSlider = {
@@ -3943,7 +4045,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
 })();
 
-},{}],26:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 "use strict"
 
 window.Utils = window.Utils || {};
@@ -4255,7 +4357,7 @@ jQuery( document ).ready( function (jQuery) {
     DOMUtils.scrollPageToId();
 
 });
-},{"./elements/BRIDGESTREET.accordion.list.js":1,"./elements/BRIDGESTREET.alllocations.js":2,"./elements/BRIDGESTREET.bookingflow.js":3,"./elements/BRIDGESTREET.contactusMaps.js":4,"./elements/BRIDGESTREET.contactusform.js":5,"./elements/BRIDGESTREET.detail.carousel.js":6,"./elements/BRIDGESTREET.detail.related.properties.js":7,"./elements/BRIDGESTREET.detail.yourtrip.js":8,"./elements/BRIDGESTREET.featured.pod.js":9,"./elements/BRIDGESTREET.global.search.go.js":11,"./elements/BRIDGESTREET.homepage.hero.js":14,"./elements/BRIDGESTREET.mapview.js":15,"./elements/BRIDGESTREET.mobile.modal.js":16,"./elements/BRIDGESTREET.navigation.js":17,"./elements/BRIDGESTREET.nearby.js":18,"./elements/BRIDGESTREET.partnercontactusform.js":19,"./elements/BRIDGESTREET.peeldown.js":20,"./elements/BRIDGESTREET.search.filter.js":21,"./elements/BRIDGESTREET.search.listing.js":22,"./elements/BRIDGESTREET.statistics.pod.js":24,"./elements/BRIDGESTREET.video.slider.js":25,"./utils/DOMUtils":30,"./widgets/BRIDGESTREET.spinner.widget":32,"./widgets/BRIDGESTREET.ui.components.js":33}],27:[function(require,module,exports){
+},{"./elements/BRIDGESTREET.accordion.list.js":1,"./elements/BRIDGESTREET.alllocations.js":2,"./elements/BRIDGESTREET.bookingflow.js":3,"./elements/BRIDGESTREET.contactusMaps.js":4,"./elements/BRIDGESTREET.contactusform.js":5,"./elements/BRIDGESTREET.detail.carousel.js":6,"./elements/BRIDGESTREET.detail.related.properties.js":7,"./elements/BRIDGESTREET.detail.yourtrip.js":8,"./elements/BRIDGESTREET.featured.pod.js":9,"./elements/BRIDGESTREET.global.search.go.js":11,"./elements/BRIDGESTREET.homepage.hero.js":14,"./elements/BRIDGESTREET.mapview.js":16,"./elements/BRIDGESTREET.mobile.modal.js":17,"./elements/BRIDGESTREET.navigation.js":18,"./elements/BRIDGESTREET.nearby.js":19,"./elements/BRIDGESTREET.partnercontactusform.js":20,"./elements/BRIDGESTREET.peeldown.js":21,"./elements/BRIDGESTREET.search.filter.js":22,"./elements/BRIDGESTREET.search.listing.js":23,"./elements/BRIDGESTREET.statistics.pod.js":25,"./elements/BRIDGESTREET.video.slider.js":26,"./utils/DOMUtils":31,"./widgets/BRIDGESTREET.spinner.widget":33,"./widgets/BRIDGESTREET.ui.components.js":34}],28:[function(require,module,exports){
 var BSGlobalSearchGuest = require('../elements/BRIDGESTREET.global.search.guests');
 
 var calendarControl = (function() {
@@ -4327,7 +4429,7 @@ var calendarControl = (function() {
 })();
 
 module.exports = calendarControl || window.calendarControl;
-},{"../elements/BRIDGESTREET.global.search.guests":12}],28:[function(require,module,exports){
+},{"../elements/BRIDGESTREET.global.search.guests":12}],29:[function(require,module,exports){
 var currencyUtil = (function () {
     var my = {},
     currency_symbols = {
@@ -4361,7 +4463,7 @@ var currencyUtil = (function () {
 }());
 
 module.exports = currencyUtil || window.currencyUtil;
-},{}],29:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 var dateFormat = (function() {
 	var	token = /d{1,4}|m{1,4}|yy(?:yy)?|([HhMsTt])\1?|[LloSZ]|"[^"]*"|'[^']*'/g,
 		timezone = /\b(?:[PMCEA][SDP]T|(?:Pacific|Mountain|Central|Eastern|Atlantic) (?:Standard|Daylight|Prevailing) Time|(?:GMT|UTC)(?:[-+]\d{4})?)\b/g,
@@ -4475,7 +4577,7 @@ Date.prototype.format = function (mask, utc) {
 };
 
 module.exports = dateFormat || window.dateFormat;
-},{}],30:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 (function(window) {
 
     'use strict';
@@ -5112,7 +5214,7 @@ module.exports = dateFormat || window.dateFormat;
 
 })(window);
    
-},{}],31:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 (function () {
 
     var factory = (function() {
@@ -5142,7 +5244,7 @@ module.exports = dateFormat || window.dateFormat;
 
 })();
 
-},{}],32:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
 (function () {
 
     var SpinnerWidget = {
@@ -5203,7 +5305,7 @@ module.exports = dateFormat || window.dateFormat;
 
 })();
 
-},{}],33:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 var BSsplitscreen = require('../elements/BRIDGESTREET.split.screen.js');
 (function ($window) {
 
@@ -5566,4 +5668,4 @@ var BSsplitscreen = require('../elements/BRIDGESTREET.split.screen.js');
 })();
 
 
-},{"../elements/BRIDGESTREET.split.screen.js":23}]},{},[26]);
+},{"../elements/BRIDGESTREET.split.screen.js":24}]},{},[27]);

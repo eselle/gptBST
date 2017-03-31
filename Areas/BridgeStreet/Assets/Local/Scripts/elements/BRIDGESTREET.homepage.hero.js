@@ -1,7 +1,7 @@
 var DateFormat = require('../utils/BRIDGESTREET.date.format.js');
 var BSgloballocationsearch = require('./BRIDGESTREET.global.search.location.js');
 var BSglobalguests = require('./BRIDGESTREET.global.search.guests.js');
-var BSglobaldaterange = require('./BRIDGESTREET.global.search.daterange.js');
+var BSHomepageDateRange = require('./BRIDGESTREET.homepage.search.daterange.js');
 
 (function () {
     var homepagehero = {
@@ -142,7 +142,7 @@ var BSglobaldaterange = require('./BRIDGESTREET.global.search.daterange.js');
         },
 
         initializeForm: function () {
-            this.searchData.date = BSglobaldaterange.init(this.searchData);
+            this.searchData.date = BSHomepageDateRange.init(this.searchData);
             this.searchData.guests = BSglobalguests.init(this.searchData);
             this.searchData.location = BSgloballocationsearch.init(this.searchData);
         },
