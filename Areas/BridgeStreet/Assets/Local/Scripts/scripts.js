@@ -1522,17 +1522,13 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
             desktopCalOptions.display = 'bubble';
             desktopCalOptions.months = 2;
             desktopCalOptions.calendarWidth = 742;
-            desktopCalOptions.startInput = '#desktop_check_in_date';
-            desktopCalOptions.endInput = '#desktop_check_out_date';
 
             var mobileCalOptions = _.clone(sharedCalOptions);
             mobileCalOptions.display = 'bottom';
             mobileCalOptions.months = 1;
-            mobileCalOptions.startInput = '#mobile_check_in_date';
-            mobileCalOptions.endInput = '#mobile_check_out_date';
 
-            this.desktopRange = mobiscroll.range('#desktop_date_range_target', desktopCalOptions);
-            this.mobileRange = mobiscroll.range('#mobile_date_range_target', mobileCalOptions);
+            this.desktopRange = mobiscroll.range('#check_in_date', desktopCalOptions);
+            this.mobileRange = mobiscroll.range('#check_in_date_mobile', mobileCalOptions);
 
             if (search.date != null && scope.arrival != null && scope.departure != null) {
                 this.desktopRange.setVal([scope.arrival, scope.departure], true);
@@ -1550,7 +1546,7 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
         },
 
         resizeBrowser: function () {
-            DOMUtils.fitToPlaceholder("desktop_check_in_date");
+            DOMUtils.fitToPlaceholder("check_in_date");
         },
         show: function () {
             if (DOMUtils.is_mobile()) {
@@ -1564,8 +1560,6 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
     module.exports = globalSearchDaterange || window.globalSearchDaterange;
 
 })();
-
-
 
 },{"../utils/BRIDGESTREET.calendarcontrol.js":28}],11:[function(require,module,exports){
 var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
