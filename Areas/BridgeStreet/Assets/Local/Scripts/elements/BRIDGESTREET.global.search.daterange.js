@@ -59,9 +59,11 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
             var mobileCalOptions = _.clone(sharedCalOptions);
             mobileCalOptions.display = 'bottom';
             mobileCalOptions.months = 1;
+            mobileCalOptions.startInput = '#mobile_check_in_date';
+            mobileCalOptions.endInput = '#mobile_check_out_date';
 
             this.desktopRange = mobiscroll.range('#desktop_date_range_target', desktopCalOptions);
-            this.mobileRange = mobiscroll.range('#check_in_date_mobile', mobileCalOptions);
+            this.mobileRange = mobiscroll.range('#mobile_date_range_target', mobileCalOptions);
 
             if (search.date != null && scope.arrival != null && scope.departure != null) {
                 this.desktopRange.setVal([scope.arrival, scope.departure], true);
