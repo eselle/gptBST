@@ -216,13 +216,7 @@
                 </form>
             </div>
         </div>
-
-
-
     </div>
-
-
-
     <form id="filter-container">
         <div class="filter-minimal">
             <p id="intro">Results for properties in Las Vegas, Nevada, Estados Unidos from 04/17/2017 through 04/20/2017 with one bedroom.</p>
@@ -310,7 +304,7 @@
                             </div>
                         </div>
 
-                        <div class="filter-half price-range-slider col-xs-12 " style="width: 628px;">
+                        <div class="filter-half price-range-slider col-xs-12 ">
                             <div class="rows">
                                 <div class="label-cell clearfix">
                                     <label>Price Range</label>
@@ -1333,22 +1327,15 @@
                         featured
                     </div>
                     <% } %>
-                    <!--
-    <div class="user-flag">
-        <i class="icon-man"></i>
-
-    </div>
-    <div class="property-pod-user-br">
-        <span>22</span>
-
-    </div>
-    -->
                 </div>
                 <div class="property-pod-description-wrapper">
                     <h3><%= prop.Name %></h3>
                     <h6>
                         <%= prop.Address1 %>, <%= prop.Address2 %><br />
-                        <%= prop.City %>, <%= prop.State %> <%= prop.PostalCode %> <%= prop.Country %>
+                        <%= prop.City %>, <%= prop.State %> <%= prop.PostalCode %> <%= prop.Country %> <br />
+                        <%  if (prop.DistanceFromPoint ){ %>
+                            <strong><%= Math.round(prop.DistanceFromPoint*10)/10 %> miles to <%= PlaceName %></strong>
+                        <% } %>
                     </h6>
                 </div>
 

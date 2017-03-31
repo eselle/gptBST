@@ -290,13 +290,15 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                     var gridTmpl = $("#grid-template").html();
                     var gridtemplate = _.template(gridTmpl);
                     this.$el.find('#full-match').html(gridtemplate({
-                        'PropertyList': this.model.attributes.PropertyResults
+                        'PropertyList': this.model.attributes.PropertyResults,
+                        'PlaceName': this.model.attributes.Place
                     }));
 
                     var pmGridTmpl = $("#grid-template").html();
                     var pmGridtemplate = _.template(pmGridTmpl);
                     this.$el.find('#partial-match').html(pmGridtemplate({
-                        'PropertyList': this.model.attributes.PartialMatchPropertyResults
+                        'PropertyList': this.model.attributes.PartialMatchPropertyResults,
+                        'PlaceName': this.model.attributes.Place
                     }));
 
                     //update the contact us links with all the filters that they selected
