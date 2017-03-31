@@ -250,17 +250,23 @@
                 <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
                     <h1 class="homepage-hero__title">Wherever your travel takes you, book your apartment or home with the
                         hospitality professionals.</h1>
-                    <form class="homepage-hero__form">
+                    <form class="homepage-hero__form" id="homepage-hero__form">
                         <div class="homepage-hero__form-input-wrapper">
                             <input class="homepage-hero__form-input homepage-hero__form-input--search" type="text"
                                    name="LocationSearch" id="searchKeywords" placeholder="City, Address or Landmark"
                                    data-value-large="City, Address or Landmark" data-value-small="City, Address or Landmark"/>
                         </div>
                         <div class="homepage-hero__form-input-wrapper homepage-hero__form-input-wrapper--carret">
-                            <input class="homepage-hero__form-input" type="text" id="check_in_date" name="from-date"
-                                   tabindex="2" placeholder="Your travel dates" data-value-large="Your travel dates"
-                                   data-value-small="Your travel dates" readonly=""/>
+                            <input class="homepage-hero__form-input" type="text" id="desktop_check_in_date" name="checkin"
+                                   tabindex="2" placeholder="Check-in" data-value-large="Check-in"
+                                   data-value-small="Check-in" />
                         </div>
+                        <div class="homepage-hero__form-input-wrapper homepage-hero__form-input-wrapper--carret">
+                            <input class="homepage-hero__form-input" type="text" id="desktop_check_out_date" name="checkout"
+                                   tabindex="2" placeholder="Check-out" data-value-large="Check-out"
+                                   data-value-small="Check-out" />
+                        </div>
+                        <div id="desktop_date_range_target"></div>
                         <div class="homepage-hero__form-input-wrapper homepage-hero__form-input-wrapper--carret">
                             <a href="#" class="dropdown-toggle" data-target="#" data-toggle="dropdown" data-content>
                                 <input class="homepage-hero__form-input" readonly="readonly" type="text" id="number_of_guests"

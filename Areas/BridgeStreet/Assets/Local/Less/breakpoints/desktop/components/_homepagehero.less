@@ -8,6 +8,12 @@
   &__form {
     &-input {
       &-wrapper {
+        &--carret {
+          &::after {
+            right: 20px;
+          }
+        }
+
         &:first-child {
           .homepage-hero__form-input {
             background-position: 30px center;
@@ -16,11 +22,20 @@
           }
         }
 
-        &:nth-child(2) {
-          width: 30%;
+        &:nth-child(2),
+        &:nth-child(3) {
+          width: 16%;
 
           .homepage-hero__form-input {
             padding: 29px 40px 29px 20px;
+          }
+        }
+
+        &:nth-child(5) {
+          width: 190px;
+
+          .homepage-hero__form-input {
+            padding: 31px 50px 31px 35px;
           }
         }
       }
