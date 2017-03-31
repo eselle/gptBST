@@ -59,7 +59,7 @@ var BSGlobalDateRange = require('./BRIDGESTREET.global.search.daterange.js');
                 scope.place = $desktopSearch.val();
 
                 $mobileSearch.val(scope.place);
-
+                console.log('SHOW');
                 BSGlobalDateRange.show();
                 return false;
             });

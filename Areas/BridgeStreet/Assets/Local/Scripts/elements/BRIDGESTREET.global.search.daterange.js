@@ -91,5 +91,3 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
     module.exports = globalSearchDaterange || window.globalSearchDaterange;
 
 })();
-
-
