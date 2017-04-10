@@ -1061,7 +1061,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 })();
 
 
-},{"../utils/BRIDGESTREET.currency.js":29}],8:[function(require,module,exports){
+},{"../utils/BRIDGESTREET.currency.js":30}],8:[function(require,module,exports){
 var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
 (function () {
@@ -1452,7 +1452,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 })();
 
 
-},{"../utils/BRIDGESTREET.currency.js":29}],9:[function(require,module,exports){
+},{"../utils/BRIDGESTREET.currency.js":30}],9:[function(require,module,exports){
 (function () {
     var featuredPropertyPod = {
         init: function () {
@@ -1474,6 +1474,7 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
     var globalSearchDaterange = {
         desktopRange: null,
         mobileRange: null,
+        topSearchRange: null,
         arrival: new Date(),
         departure: new Date(),
         init: function (search) {
@@ -1510,11 +1511,11 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
                     scope.arrival = inst._startDate;
                     scope.departure = inst._endDate;
 
-                    if (inst == scope.desktopRange)
+                    if (inst == scope.desktopRange || inst == scope.topSearchRange)
                         scope.mobileRange.setVal([scope.arrival, scope.departure], true);
                     else
                         scope.desktopRange.setVal([scope.arrival, scope.departure], true);
-
+                        scope.topSearchRange.setVal([scope.arrival, scope.departure], true);
                 }
             };
 
@@ -1527,12 +1528,21 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
             mobileCalOptions.display = 'bottom';
             mobileCalOptions.months = 1;
 
+            var self = this;
+
             this.desktopRange = mobiscroll.range('#check_in_date', desktopCalOptions);
             this.mobileRange = mobiscroll.range('#check_in_date_mobile', mobileCalOptions);
+
+            setTimeout(function () {
+                self.topSearchRange = mobiscroll.range('#topsearch-check_in_date', desktopCalOptions);
+            }, 500, this);
 
             if (search.date != null && scope.arrival != null && scope.departure != null) {
                 this.desktopRange.setVal([scope.arrival, scope.departure], true);
                 this.mobileRange.setVal([scope.arrival, scope.departure], true);
+                setTimeout(function () {
+                    self.topSearchRange.setVal([scope.arrival, scope.departure], true);
+                }, 500, this);
             }
 
             this.initListeners();
@@ -1554,16 +1564,20 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
             if (DOMUtils.is_mobile()) {
                 this.mobileRange.show();
             } else {
-                this.desktopRange.show();
+                if ($('#topsearch-check_in_date')) {
+                    this.topSearchRange.show();
+                } else {
+                    this.desktopRange.show();
+                }
             }
         }
-    }
+    };
 
     module.exports = globalSearchDaterange || window.globalSearchDaterange;
 
 })();
 
-},{"../utils/BRIDGESTREET.calendarcontrol.js":28}],11:[function(require,module,exports){
+},{"../utils/BRIDGESTREET.calendarcontrol.js":29}],11:[function(require,module,exports){
 var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
 var DateFormat = require('../utils/BRIDGESTREET.date.format.js');
 var BSgloballocationsearch = require('./BRIDGESTREET.global.search.location.js');
@@ -1580,18 +1594,37 @@ var globalgosearch = (function (app, parent, dateFormat, guests, document) {
     };
     return {
         init: function () {
+            var self = this;
+
             if (!$('.btn-search').length) return;
 
             this.populateSearchControls();
 
             jQuery('#searchbox-form .btn-search').on("click", this._issueSearch);
             jQuery('.mobileSearchButton').on("click", this._issueSearch);
+
+            setTimeout(function () {
+                jQuery('#top-search-box .topsearchbox__button-wrapper').on("click", self._issueSearch);
+            }, 500);
         },
 
         _issueSearch: function (evt) {
-
+            console.log('issueSearch');
             console.dir(search);
-            var locationInputID = (DOMUtils.is_mobile() || DOMUtils.is_tablet()) ? '#searchKeywordsMobile' : '#searchKeywords';
+            var locationInputID = '';
+
+            if (DOMUtils.is_mobile() || DOMUtils.is_tablet()) {
+                locationInputID = '#searchKeywordsMobile';
+            } else {
+                console.log('has topsearch', $('#topsearch-guests').length);
+                if ($('#topsearch-guests').length) {
+                    locationInputID = '#topSearchKeywords';
+                } else {
+                    locationInputID = '#searchKeywords';
+                }
+            }
+            console.log('locationInputID', locationInputID);
+            // var locationInputID = (DOMUtils.is_mobile() || DOMUtils.is_tablet()) ? '#searchKeywordsMobile' : '#searchKeywords';
 
             var searchTerm = $(locationInputID).val().trim();
             if (searchTerm == '') {
@@ -1615,6 +1648,7 @@ var globalgosearch = (function (app, parent, dateFormat, guests, document) {
                                 "&Place=" + search.location.place;
 
                 document.location.href = searchUrl;
+                console.log(search);
             }
         },
 
@@ -1704,7 +1738,7 @@ var globalgosearch = (function (app, parent, dateFormat, guests, document) {
 
 module.exports = globalgosearch || window.globalgosearch;
 
-},{"../utils/BRIDGESTREET.calendarcontrol.js":28,"../utils/BRIDGESTREET.date.format.js":30,"./BRIDGESTREET.global.search.daterange.js":10,"./BRIDGESTREET.global.search.guests.js":12,"./BRIDGESTREET.global.search.location.js":13}],12:[function(require,module,exports){
+},{"../utils/BRIDGESTREET.calendarcontrol.js":29,"../utils/BRIDGESTREET.date.format.js":31,"./BRIDGESTREET.global.search.daterange.js":10,"./BRIDGESTREET.global.search.guests.js":12,"./BRIDGESTREET.global.search.location.js":13}],12:[function(require,module,exports){
 var BSIncrement = require('../utils/increment.js');
 
 (function () {
@@ -1833,8 +1867,13 @@ var BSIncrement = require('../utils/increment.js');
             $('.bedroom-type').val(scope.roomType);
         },
         show: function () {
-            jQuery('.searchbox-guests').addClass('open');
-            jQuery('.dropdown-toggle').attr('aria-expanded', 'true');
+            if($('#topsearch-guests').length) {
+                jQuery('#topsearch-guests').addClass('open');
+                jQuery('#topsearch-guests > .dropdown-toggle').attr('aria-expanded', 'true');
+            } else {
+                jQuery('.searchbox-guests').addClass('open');
+                jQuery('.dropdown-toggle').attr('aria-expanded', 'true');
+            }
         },
 
         initListeners: function () {
@@ -1851,7 +1890,7 @@ var BSIncrement = require('../utils/increment.js');
 
 })();
 
-},{"../utils/increment.js":32}],13:[function(require,module,exports){
+},{"../utils/increment.js":33}],13:[function(require,module,exports){
 var BSGlobalDateRange = require('./BRIDGESTREET.global.search.daterange.js');
 
 (function () {
@@ -1878,12 +1917,35 @@ var BSGlobalDateRange = require('./BRIDGESTREET.global.search.daterange.js');
 
             var $mobileSearch = $('#searchKeywordsMobile');
             var $desktopSearch = $('#searchKeywords');
+            var $topFilterSearch = $('#topSearchKeywords');
 
             $mobileSearch.val(scope.place);
             $desktopSearch.val(scope.place);
+            $topFilterSearch.val(scope.place);
 
             var mobileSearchCity = document.getElementById('searchKeywordsMobile');
             var desktopSearchCity = document.getElementById('searchKeywords');
+
+            setTimeout(function () {
+                var topFilterSearchCity = document.getElementById('topSearchKeywords');
+                var topFilterSearchCityAuto = new google.maps.places.Autocomplete(topFilterSearchCity, scope.cityOptions);
+
+                google.maps.event.addListener(topFilterSearchCityAuto, 'place_changed', function () {
+
+                    var place = topFilterSearchCityAuto.getPlace();
+
+                    scope.id = place.id;
+                    scope.lat = place.geometry.location.lat();
+                    scope.lng = place.geometry.location.lng();
+                    scope.place = $topFilterSearch.val();
+
+                    $topFilterSearch.val(scope.place);
+                    console.log('SHOW TOP FILTER');
+                    BSGlobalDateRange.show();
+                    return false;
+                });
+
+            }, 500);
 
             var mobileSearchCityAuto = new google.maps.places.Autocomplete(mobileSearchCity, scope.cityOptions);
             var desktopSearchCityAuto = new google.maps.places.Autocomplete(desktopSearchCity, scope.cityOptions);
@@ -1966,6 +2028,7 @@ var BSGlobalDateRange = require('./BRIDGESTREET.global.search.daterange.js');
                         $(".pac-container").hide();
                         $("#searchKeywords").val(scope.place);
                         $("#searchKeywordsMobile").val(scope.place);
+                        $("#topSearchKeywords").val(scope.place);
                     }
                     else {
                         $autocompleteDomScope.show();
@@ -2154,7 +2217,7 @@ var BSHomepageDateRange = require('./BRIDGESTREET.homepage.search.daterange.js')
 
     module.exports = homepagehero || window.homepagehero;
 })();
-},{"../utils/BRIDGESTREET.date.format.js":30,"./BRIDGESTREET.global.search.guests.js":12,"./BRIDGESTREET.global.search.location.js":13,"./BRIDGESTREET.homepage.search.daterange.js":15}],15:[function(require,module,exports){
+},{"../utils/BRIDGESTREET.date.format.js":31,"./BRIDGESTREET.global.search.guests.js":12,"./BRIDGESTREET.global.search.location.js":13,"./BRIDGESTREET.homepage.search.daterange.js":15}],15:[function(require,module,exports){
 var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
 
 (function () {
@@ -2257,7 +2320,7 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
 
 
 
-},{"../utils/BRIDGESTREET.calendarcontrol.js":28}],16:[function(require,module,exports){
+},{"../utils/BRIDGESTREET.calendarcontrol.js":29}],16:[function(require,module,exports){
 var BSsplitscreen = require('./BRIDGESTREET.split.screen.js');
 
 (function () {
@@ -3098,7 +3161,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
             var dfd = jQuery.Deferred();
 
-            var Model = Backbone.Model.extend({ url: '/local.json' });
+            var Model = Backbone.Model.extend({ url: '/search-results.json' });
 
             var View = Backbone.View.extend({
                 initialize: function () {
@@ -3523,7 +3586,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 })();
 
 
-},{"../utils/BRIDGESTREET.currency.js":29,"../widgets/BRIDGESTREET.ui.components.js":34,"./BRIDGESTREET.mapview.js":16,"./BRIDGESTREET.search.listing.js":23}],23:[function(require,module,exports){
+},{"../utils/BRIDGESTREET.currency.js":30,"../widgets/BRIDGESTREET.ui.components.js":35,"./BRIDGESTREET.mapview.js":16,"./BRIDGESTREET.search.listing.js":23}],23:[function(require,module,exports){
 (function () {
     var $window = $(window);
 
@@ -3813,6 +3876,22 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
 },{}],26:[function(require,module,exports){
 (function () {
+    var $window = $(window);
+
+    var topSearch = {
+        init: function () {
+            var $city = $('#searchKeywords');
+            console.log('top search initialized', $city);
+
+        }
+    };
+
+    module.exports = topSearch || window.topSearch;
+})();
+
+
+},{}],27:[function(require,module,exports){
+(function () {
 
     var VideoSlider = {
 
@@ -4043,7 +4122,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
 })();
 
-},{}],27:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 "use strict"
 
 window.Utils = window.Utils || {};
@@ -4060,6 +4139,7 @@ var BShomepagehero = require('./elements/BRIDGESTREET.homepage.hero.js');
 var BSstatisticspod = require('./elements/BRIDGESTREET.statistics.pod.js');
 var BSfeaturedpod = require('./elements/BRIDGESTREET.featured.pod.js');
 var BSsearchfilter = require('./elements/BRIDGESTREET.search.filter.js');
+var BStopsearch = require('./elements/BRIDGESTREET.topsearch.js');
 var BSsearchlisting = require('./elements/BRIDGESTREET.search.listing.js');
 var BSmapview = require('./elements/BRIDGESTREET.mapview.js');
 var BSglobalsearch = require('./elements/BRIDGESTREET.global.search.go.js');
@@ -4179,9 +4259,9 @@ var BSVideoSlider = require('./elements/BRIDGESTREET.video.slider.js');
                   console.log("filter rendering succeeded; " + status);
                              
                   BSsearchlisting.init();
-
+                  BStopsearch.init();
                   BSmapview.init();
-                  
+
                   $('.p-accordion').SimpleAccordion();
 
                   BSuicomponents.initSearchPageUIComponents();
@@ -4355,7 +4435,7 @@ jQuery( document ).ready( function (jQuery) {
     DOMUtils.scrollPageToId();
 
 });
-},{"./elements/BRIDGESTREET.accordion.list.js":1,"./elements/BRIDGESTREET.alllocations.js":2,"./elements/BRIDGESTREET.bookingflow.js":3,"./elements/BRIDGESTREET.contactusMaps.js":4,"./elements/BRIDGESTREET.contactusform.js":5,"./elements/BRIDGESTREET.detail.carousel.js":6,"./elements/BRIDGESTREET.detail.related.properties.js":7,"./elements/BRIDGESTREET.detail.yourtrip.js":8,"./elements/BRIDGESTREET.featured.pod.js":9,"./elements/BRIDGESTREET.global.search.go.js":11,"./elements/BRIDGESTREET.homepage.hero.js":14,"./elements/BRIDGESTREET.mapview.js":16,"./elements/BRIDGESTREET.mobile.modal.js":17,"./elements/BRIDGESTREET.navigation.js":18,"./elements/BRIDGESTREET.nearby.js":19,"./elements/BRIDGESTREET.partnercontactusform.js":20,"./elements/BRIDGESTREET.peeldown.js":21,"./elements/BRIDGESTREET.search.filter.js":22,"./elements/BRIDGESTREET.search.listing.js":23,"./elements/BRIDGESTREET.statistics.pod.js":25,"./elements/BRIDGESTREET.video.slider.js":26,"./utils/DOMUtils":31,"./widgets/BRIDGESTREET.spinner.widget":33,"./widgets/BRIDGESTREET.ui.components.js":34}],28:[function(require,module,exports){
+},{"./elements/BRIDGESTREET.accordion.list.js":1,"./elements/BRIDGESTREET.alllocations.js":2,"./elements/BRIDGESTREET.bookingflow.js":3,"./elements/BRIDGESTREET.contactusMaps.js":4,"./elements/BRIDGESTREET.contactusform.js":5,"./elements/BRIDGESTREET.detail.carousel.js":6,"./elements/BRIDGESTREET.detail.related.properties.js":7,"./elements/BRIDGESTREET.detail.yourtrip.js":8,"./elements/BRIDGESTREET.featured.pod.js":9,"./elements/BRIDGESTREET.global.search.go.js":11,"./elements/BRIDGESTREET.homepage.hero.js":14,"./elements/BRIDGESTREET.mapview.js":16,"./elements/BRIDGESTREET.mobile.modal.js":17,"./elements/BRIDGESTREET.navigation.js":18,"./elements/BRIDGESTREET.nearby.js":19,"./elements/BRIDGESTREET.partnercontactusform.js":20,"./elements/BRIDGESTREET.peeldown.js":21,"./elements/BRIDGESTREET.search.filter.js":22,"./elements/BRIDGESTREET.search.listing.js":23,"./elements/BRIDGESTREET.statistics.pod.js":25,"./elements/BRIDGESTREET.topsearch.js":26,"./elements/BRIDGESTREET.video.slider.js":27,"./utils/DOMUtils":32,"./widgets/BRIDGESTREET.spinner.widget":34,"./widgets/BRIDGESTREET.ui.components.js":35}],29:[function(require,module,exports){
 var BSGlobalSearchGuest = require('../elements/BRIDGESTREET.global.search.guests');
 
 var calendarControl = (function() {
@@ -4427,7 +4507,7 @@ var calendarControl = (function() {
 })();
 
 module.exports = calendarControl || window.calendarControl;
-},{"../elements/BRIDGESTREET.global.search.guests":12}],29:[function(require,module,exports){
+},{"../elements/BRIDGESTREET.global.search.guests":12}],30:[function(require,module,exports){
 var currencyUtil = (function () {
     var my = {},
     currency_symbols = {
@@ -4461,7 +4541,7 @@ var currencyUtil = (function () {
 }());
 
 module.exports = currencyUtil || window.currencyUtil;
-},{}],30:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 var dateFormat = (function() {
 	var	token = /d{1,4}|m{1,4}|yy(?:yy)?|([HhMsTt])\1?|[LloSZ]|"[^"]*"|'[^']*'/g,
 		timezone = /\b(?:[PMCEA][SDP]T|(?:Pacific|Mountain|Central|Eastern|Atlantic) (?:Standard|Daylight|Prevailing) Time|(?:GMT|UTC)(?:[-+]\d{4})?)\b/g,
@@ -4575,7 +4655,7 @@ Date.prototype.format = function (mask, utc) {
 };
 
 module.exports = dateFormat || window.dateFormat;
-},{}],31:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 (function(window) {
 
     'use strict';
@@ -5212,7 +5292,7 @@ module.exports = dateFormat || window.dateFormat;
 
 })(window);
    
-},{}],32:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
 (function () {
 
     var factory = (function() {
@@ -5242,7 +5322,7 @@ module.exports = dateFormat || window.dateFormat;
 
 })();
 
-},{}],33:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 (function () {
 
     var SpinnerWidget = {
@@ -5303,7 +5383,7 @@ module.exports = dateFormat || window.dateFormat;
 
 })();
 
-},{}],34:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 var BSsplitscreen = require('../elements/BRIDGESTREET.split.screen.js');
 (function ($window) {
 
@@ -5666,4 +5746,4 @@ var BSsplitscreen = require('../elements/BRIDGESTREET.split.screen.js');
 })();
 
 
-},{"../elements/BRIDGESTREET.split.screen.js":24}]},{},[27]);
+},{"../elements/BRIDGESTREET.split.screen.js":24}]},{},[28]);

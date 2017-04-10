@@ -16,7 +16,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
             var dfd = jQuery.Deferred();
 
-            var Model = Backbone.Model.extend({ url: '/local.json' });
+            var Model = Backbone.Model.extend({ url: '/search-results.json' });
 
             var View = Backbone.View.extend({
                 initialize: function () {

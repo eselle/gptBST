@@ -126,8 +126,13 @@ var BSIncrement = require('../utils/increment.js');
             $('.bedroom-type').val(scope.roomType);
         },
         show: function () {
-            jQuery('.searchbox-guests').addClass('open');
-            jQuery('.dropdown-toggle').attr('aria-expanded', 'true');
+            if($('#topsearch-guests').length) {
+                jQuery('#topsearch-guests').addClass('open');
+                jQuery('#topsearch-guests > .dropdown-toggle').attr('aria-expanded', 'true');
+            } else {
+                jQuery('.searchbox-guests').addClass('open');
+                jQuery('.dropdown-toggle').attr('aria-expanded', 'true');
+            }
         },
 
         initListeners: function () {

@@ -14,18 +14,37 @@ var globalgosearch = (function (app, parent, dateFormat, guests, document) {
     };
     return {
         init: function () {
+            var self = this;
+
             if (!$('.btn-search').length) return;
 
             this.populateSearchControls();
 
             jQuery('#searchbox-form .btn-search').on("click", this._issueSearch);
             jQuery('.mobileSearchButton').on("click", this._issueSearch);
+
+            setTimeout(function () {
+                jQuery('#top-search-box .topsearchbox__button-wrapper').on("click", self._issueSearch);
+            }, 500);
         },
 
         _issueSearch: function (evt) {
-
+            console.log('issueSearch');
             console.dir(search);
-            var locationInputID = (DOMUtils.is_mobile() || DOMUtils.is_tablet()) ? '#searchKeywordsMobile' : '#searchKeywords';
+            var locationInputID = '';
+
+            if (DOMUtils.is_mobile() || DOMUtils.is_tablet()) {
+                locationInputID = '#searchKeywordsMobile';
+            } else {
+                console.log('has topsearch', $('#topsearch-guests').length);
+                if ($('#topsearch-guests').length) {
+                    locationInputID = '#topSearchKeywords';
+                } else {
+                    locationInputID = '#searchKeywords';
+                }
+            }
+            console.log('locationInputID', locationInputID);
+            // var locationInputID = (DOMUtils.is_mobile() || DOMUtils.is_tablet()) ? '#searchKeywordsMobile' : '#searchKeywords';
 
             var searchTerm = $(locationInputID).val().trim();
             if (searchTerm == '') {
@@ -49,6 +68,7 @@ var globalgosearch = (function (app, parent, dateFormat, guests, document) {
                                 "&Place=" + search.location.place;
 
                 document.location.href = searchUrl;
+                console.log(search);
             }
         },
 

@@ -24,12 +24,35 @@ var BSGlobalDateRange = require('./BRIDGESTREET.global.search.daterange.js');
 
             var $mobileSearch = $('#searchKeywordsMobile');
             var $desktopSearch = $('#searchKeywords');
+            var $topFilterSearch = $('#topSearchKeywords');
 
             $mobileSearch.val(scope.place);
             $desktopSearch.val(scope.place);
+            $topFilterSearch.val(scope.place);
 
             var mobileSearchCity = document.getElementById('searchKeywordsMobile');
             var desktopSearchCity = document.getElementById('searchKeywords');
+
+            setTimeout(function () {
+                var topFilterSearchCity = document.getElementById('topSearchKeywords');
+                var topFilterSearchCityAuto = new google.maps.places.Autocomplete(topFilterSearchCity, scope.cityOptions);
+
+                google.maps.event.addListener(topFilterSearchCityAuto, 'place_changed', function () {
+
+                    var place = topFilterSearchCityAuto.getPlace();
+
+                    scope.id = place.id;
+                    scope.lat = place.geometry.location.lat();
+                    scope.lng = place.geometry.location.lng();
+                    scope.place = $topFilterSearch.val();
+
+                    $topFilterSearch.val(scope.place);
+                    console.log('SHOW TOP FILTER');
+                    BSGlobalDateRange.show();
+                    return false;
+                });
+
+            }, 500);
 
             var mobileSearchCityAuto = new google.maps.places.Autocomplete(mobileSearchCity, scope.cityOptions);
             var desktopSearchCityAuto = new google.maps.places.Autocomplete(desktopSearchCity, scope.cityOptions);
@@ -112,6 +135,7 @@ var BSGlobalDateRange = require('./BRIDGESTREET.global.search.daterange.js');
                         $(".pac-container").hide();
                         $("#searchKeywords").val(scope.place);
                         $("#searchKeywordsMobile").val(scope.place);
+                        $("#topSearchKeywords").val(scope.place);
                     }
                     else {
                         $autocompleteDomScope.show();

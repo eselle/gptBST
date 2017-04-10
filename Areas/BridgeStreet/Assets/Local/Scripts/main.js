@@ -14,6 +14,7 @@ var BShomepagehero = require('./elements/BRIDGESTREET.homepage.hero.js');
 var BSstatisticspod = require('./elements/BRIDGESTREET.statistics.pod.js');
 var BSfeaturedpod = require('./elements/BRIDGESTREET.featured.pod.js');
 var BSsearchfilter = require('./elements/BRIDGESTREET.search.filter.js');
+var BStopsearch = require('./elements/BRIDGESTREET.topsearch.js');
 var BSsearchlisting = require('./elements/BRIDGESTREET.search.listing.js');
 var BSmapview = require('./elements/BRIDGESTREET.mapview.js');
 var BSglobalsearch = require('./elements/BRIDGESTREET.global.search.go.js');
@@ -133,9 +134,9 @@ var BSVideoSlider = require('./elements/BRIDGESTREET.video.slider.js');
                   console.log("filter rendering succeeded; " + status);
                              
                   BSsearchlisting.init();
-
+                  BStopsearch.init();
                   BSmapview.init();
-                  
+
                   $('.p-accordion').SimpleAccordion();
 
                   BSuicomponents.initSearchPageUIComponents();

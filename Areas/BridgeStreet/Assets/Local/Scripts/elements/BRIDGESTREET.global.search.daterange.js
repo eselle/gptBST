@@ -5,6 +5,7 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
     var globalSearchDaterange = {
         desktopRange: null,
         mobileRange: null,
+        topSearchRange: null,
         arrival: new Date(),
         departure: new Date(),
         init: function (search) {
@@ -41,11 +42,11 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
                     scope.arrival = inst._startDate;
                     scope.departure = inst._endDate;
 
-                    if (inst == scope.desktopRange)
+                    if (inst == scope.desktopRange || inst == scope.topSearchRange)
                         scope.mobileRange.setVal([scope.arrival, scope.departure], true);
                     else
                         scope.desktopRange.setVal([scope.arrival, scope.departure], true);
-
+                        scope.topSearchRange.setVal([scope.arrival, scope.departure], true);
                 }
             };
 
@@ -58,12 +59,21 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
             mobileCalOptions.display = 'bottom';
             mobileCalOptions.months = 1;
 
+            var self = this;
+
             this.desktopRange = mobiscroll.range('#check_in_date', desktopCalOptions);
             this.mobileRange = mobiscroll.range('#check_in_date_mobile', mobileCalOptions);
+
+            setTimeout(function () {
+                self.topSearchRange = mobiscroll.range('#topsearch-check_in_date', desktopCalOptions);
+            }, 500, this);
 
             if (search.date != null && scope.arrival != null && scope.departure != null) {
                 this.desktopRange.setVal([scope.arrival, scope.departure], true);
                 this.mobileRange.setVal([scope.arrival, scope.departure], true);
+                setTimeout(function () {
+                    self.topSearchRange.setVal([scope.arrival, scope.departure], true);
+                }, 500, this);
             }
 
             this.initListeners();
@@ -85,10 +95,14 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
             if (DOMUtils.is_mobile()) {
                 this.mobileRange.show();
             } else {
-                this.desktopRange.show();
+                if ($('#topsearch-check_in_date')) {
+                    this.topSearchRange.show();
+                } else {
+                    this.desktopRange.show();
+                }
             }
         }
-    }
+    };
 
     module.exports = globalSearchDaterange || window.globalSearchDaterange;
 
