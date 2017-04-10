@@ -3146,6 +3146,7 @@ var BSsplitscreen = require('./BRIDGESTREET.split.screen.js');
 var BSmapview = require('./BRIDGESTREET.mapview.js');
 var BSsearchlisting = require('./BRIDGESTREET.search.listing.js');
 var BSuicomponents = require('../widgets/BRIDGESTREET.ui.components.js');
+var BSTopSearch = require('./BRIDGESTREET.topsearch.js');
 var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
 (function () {
@@ -3178,8 +3179,9 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                     "change #PropertySpecial": "applyFilter"
                 },
                 redoSearch: function (e) {
-                    if (e != undefined) e.preventDefault();
+                    if (e) e.preventDefault();
                     var formValues = $("#filter-container").serialize();
+
                     this.processForm(formValues);
                 },
                 cancelFilter: function (e) {
@@ -3319,6 +3321,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                     var url = (location.pathname + "?" + formValues).replace(/\?+/, '?').replace(/\&+/, '&');
 
                     window.history.pushState("object or string", "Title", url);
+
                     this.model.fetch({
                         success: this.render,
                         error: this.renderError
@@ -3326,6 +3329,9 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                 },
                 cleanModel: function (data, status) {
                     var dateStr = this.model.attributes.ArrivalDate;
+                    var selectedRoomTypeModel = [];
+                    var selectedRoomType = $("#filter-container #RoomType option:selected");
+
                     dateStr = dateStr.replace(/[/\(\)]/g, '').replace('Date', '');
 
                     this.model.attributes.ArrivalDate = new Date(Number(dateStr)).toISOString().slice(0, 10);
@@ -3389,6 +3395,22 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                             return rank;
                         })
                         .value();
+
+                    if (selectedRoomType.attr('value')) {
+                        _.each(this.model.attributes.Size.RoomTypes, function(roomtype) {
+                            if (roomtype.Value === selectedRoomType.attr('value')) {
+                                roomtype.Selected = true;
+                            } else {
+                                roomtype.Selected = false;
+                            }
+
+                            selectedRoomTypeModel.push(roomtype);
+                        });
+
+                        if (selectedRoomTypeModel.length) {
+                            this.model.attributes.Size.RoomTypes = selectedRoomTypeModel;
+                        }
+                    }
 
                 },
 
@@ -3457,6 +3479,10 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                         $('#partial-results-only-intro').show();
                     } else if (this.model.attributes.PropertyResults.length == 0) {
                         $("#no-results").show();
+                    }
+
+                    if (BSTopSearch && !BSTopSearch.initialized) {
+                        BSTopSearch.init(this.model);
                     }
                 },
                 render: function (data, status) {
@@ -3586,7 +3612,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 })();
 
 
-},{"../utils/BRIDGESTREET.currency.js":30,"../widgets/BRIDGESTREET.ui.components.js":35,"./BRIDGESTREET.mapview.js":16,"./BRIDGESTREET.search.listing.js":23}],23:[function(require,module,exports){
+},{"../utils/BRIDGESTREET.currency.js":30,"../widgets/BRIDGESTREET.ui.components.js":35,"./BRIDGESTREET.mapview.js":16,"./BRIDGESTREET.search.listing.js":23,"./BRIDGESTREET.topsearch.js":26}],23:[function(require,module,exports){
 (function () {
     var $window = $(window);
 
@@ -3879,10 +3905,76 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
     var $window = $(window);
 
     var topSearch = {
-        init: function () {
+        init: function (model) {
             var $city = $('#searchKeywords');
-            console.log('top search initialized', $city);
 
+            this.initGuestDropdown();
+            this.model = model;
+            this.initialized = true;
+        },
+
+        initGuestDropdown: function () {
+
+            $('#topsearch-guests .bedroom-type').on('change', function () {
+                //$('.bedroom-type').val(scope.roomType);
+            });
+
+            $('#topsearch-guests .custom-drop-down').on('click', function (event) {
+                event.stopPropagation();
+            });
+
+            $('#topsearch-guests .custom-drop-down .spinner input').spinner({
+                min: 0,
+                max: 20,
+                step: 1,
+                alignment: 'horizontal',
+                icons: {
+                    left: "fa fa-minus",
+                    right: "fa fa-plus"
+                },
+                spin: (function (event, ui) {
+                    this.updateRelatedControls(ui, this);
+                }).bind(this)
+            })
+                .parent()
+                .find('.ui-spinner-up')
+                .find('span')
+                .empty()
+                .end()
+                .parent()
+                .find('.ui-spinner-down')
+                .find('span')
+                .empty();
+        },
+
+        updateRelatedControls: function (ui, caller) {
+            var bedroomTypeElement = $('#topsearch-guests .bedroom-type');
+            var adults;
+            var children;
+            var roomType;
+
+            if (ui && caller) {
+                var callerID = jQuery(caller).attr('id');
+                $('input.ui-spinner-input[id=' + callerID + ']').val(ui.value);
+            }
+
+            adults = $('#topsearch-guests #Adults').spinner("value");
+            children = $('#topsearch-guests #Children').spinner("value");
+            roomType = bedroomTypeElement.val();
+
+
+            var people = adults + children;
+            var requiredMinRooms = people <= 2 ? 0 : Math.floor(people / 2);
+
+            if (requiredMinRooms > roomType) {
+                if (requiredMinRooms > 5) {
+                    requiredMinRooms = 5;
+                }
+                roomType = requiredMinRooms;
+            }
+
+            $('#topsearch-guest #number_of_guests').val(people + ' Guests');
+            bedroomTypeElement.val(roomType);
         }
     };
 
@@ -4139,7 +4231,6 @@ var BShomepagehero = require('./elements/BRIDGESTREET.homepage.hero.js');
 var BSstatisticspod = require('./elements/BRIDGESTREET.statistics.pod.js');
 var BSfeaturedpod = require('./elements/BRIDGESTREET.featured.pod.js');
 var BSsearchfilter = require('./elements/BRIDGESTREET.search.filter.js');
-var BStopsearch = require('./elements/BRIDGESTREET.topsearch.js');
 var BSsearchlisting = require('./elements/BRIDGESTREET.search.listing.js');
 var BSmapview = require('./elements/BRIDGESTREET.mapview.js');
 var BSglobalsearch = require('./elements/BRIDGESTREET.global.search.go.js');
@@ -4259,7 +4350,6 @@ var BSVideoSlider = require('./elements/BRIDGESTREET.video.slider.js');
                   console.log("filter rendering succeeded; " + status);
                              
                   BSsearchlisting.init();
-                  BStopsearch.init();
                   BSmapview.init();
 
                   $('.p-accordion').SimpleAccordion();
@@ -4435,7 +4525,7 @@ jQuery( document ).ready( function (jQuery) {
     DOMUtils.scrollPageToId();
 
 });
-},{"./elements/BRIDGESTREET.accordion.list.js":1,"./elements/BRIDGESTREET.alllocations.js":2,"./elements/BRIDGESTREET.bookingflow.js":3,"./elements/BRIDGESTREET.contactusMaps.js":4,"./elements/BRIDGESTREET.contactusform.js":5,"./elements/BRIDGESTREET.detail.carousel.js":6,"./elements/BRIDGESTREET.detail.related.properties.js":7,"./elements/BRIDGESTREET.detail.yourtrip.js":8,"./elements/BRIDGESTREET.featured.pod.js":9,"./elements/BRIDGESTREET.global.search.go.js":11,"./elements/BRIDGESTREET.homepage.hero.js":14,"./elements/BRIDGESTREET.mapview.js":16,"./elements/BRIDGESTREET.mobile.modal.js":17,"./elements/BRIDGESTREET.navigation.js":18,"./elements/BRIDGESTREET.nearby.js":19,"./elements/BRIDGESTREET.partnercontactusform.js":20,"./elements/BRIDGESTREET.peeldown.js":21,"./elements/BRIDGESTREET.search.filter.js":22,"./elements/BRIDGESTREET.search.listing.js":23,"./elements/BRIDGESTREET.statistics.pod.js":25,"./elements/BRIDGESTREET.topsearch.js":26,"./elements/BRIDGESTREET.video.slider.js":27,"./utils/DOMUtils":32,"./widgets/BRIDGESTREET.spinner.widget":34,"./widgets/BRIDGESTREET.ui.components.js":35}],29:[function(require,module,exports){
+},{"./elements/BRIDGESTREET.accordion.list.js":1,"./elements/BRIDGESTREET.alllocations.js":2,"./elements/BRIDGESTREET.bookingflow.js":3,"./elements/BRIDGESTREET.contactusMaps.js":4,"./elements/BRIDGESTREET.contactusform.js":5,"./elements/BRIDGESTREET.detail.carousel.js":6,"./elements/BRIDGESTREET.detail.related.properties.js":7,"./elements/BRIDGESTREET.detail.yourtrip.js":8,"./elements/BRIDGESTREET.featured.pod.js":9,"./elements/BRIDGESTREET.global.search.go.js":11,"./elements/BRIDGESTREET.homepage.hero.js":14,"./elements/BRIDGESTREET.mapview.js":16,"./elements/BRIDGESTREET.mobile.modal.js":17,"./elements/BRIDGESTREET.navigation.js":18,"./elements/BRIDGESTREET.nearby.js":19,"./elements/BRIDGESTREET.partnercontactusform.js":20,"./elements/BRIDGESTREET.peeldown.js":21,"./elements/BRIDGESTREET.search.filter.js":22,"./elements/BRIDGESTREET.search.listing.js":23,"./elements/BRIDGESTREET.statistics.pod.js":25,"./elements/BRIDGESTREET.video.slider.js":27,"./utils/DOMUtils":32,"./widgets/BRIDGESTREET.spinner.widget":34,"./widgets/BRIDGESTREET.ui.components.js":35}],29:[function(require,module,exports){
 var BSGlobalSearchGuest = require('../elements/BRIDGESTREET.global.search.guests');
 
 var calendarControl = (function() {

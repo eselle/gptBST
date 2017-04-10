@@ -966,7 +966,7 @@
 
     <script type="text/template" id="top-filter-template">
         <div class="results-filter container-fluid">
-            <div id="top-search-box" class="topsearchbox">
+            <div class="topsearchbox">
                 <div class="topsearchbox__input-wrapper">
                     <input class="topsearchbox__input-element" type="text" placeholder="City, Address or Landmark" data-value-large="City, Address or Landmark" data-value-small="Search" autocomplete="off" id="topSearchKeywords" value="" />
                 </div>
@@ -976,36 +976,36 @@
                 <!--<input type="text" id="desktop_check_out_date" name="checkout"/>-->
                 <div class="topsearchbox__input-wrapper">
                     <div id="topsearch-guests" class="searchbox-input searchbox-guests has-icon user-dropdown dropdown mega-dropdown">
-                        <a href="#" class="dropdown-toggle" data-target="#" data-toggle="dropdown" data-content="" aria-expanded="false">
-                            <input class="topsearchbox__input-element" readonly="readonly" type="text" id="topsearch-number_of_guests" name="guests" tabindex="3" placeholder="Select Number of Guests" data-value-large="Select Number of Guests" data-value-small="Guests">
-
-                            <span class="bs-caret"><i class="fa fa-chevron-down"></i></span>
+                        <a href="#" class="dropdown-toggle" data-target="#" data-toggle="dropdown" data-content>
+                            <input class="topsearchbox__input-element" readonly="readonly" type="text" id="number_of_guests"
+                                   name="guests" tabindex="3" placeholder="Guests" data-value-large="Guests"
+                                   data-value-small="Guests"/>
                         </a>
-                        <ul class="dropdown-menu custom-drop-down mega-dropdown-menu animated fadeInRight" role="menu">
-                            <li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
-                                <div class="col-sm-4">
-                                    <span>Adults</span>
-                                </div>
-                                <div class="spinner col-sm-8 spinner-item spinner-incredment">
-                                    <span class="ui-spinner ui-widget ui-widget-content ui-corner-all ui-spinner-horizontal"><input readonly="true" type="spinner" placeholder="" id="topsearch-Adults" value="1" name="spinner" aria-valuemin="0" aria-valuemax="20" aria-valuenow="1" class="ui-spinner-input" autocomplete="off" role="spinbutton"><a class="ui-spinner-button ui-spinner-up ui-corner-right" tabindex="-1"><span class="ui-icon fa-plus fa fa-minus"></span></a><a class="ui-spinner-button ui-spinner-down ui-corner-left" tabindex="-1"><span class="ui-icon fa-minus fa fa-plus"></span></a></span>
-                                </div>
-                            </li>
-
+                        <ul class="dropdown-menu custom-drop-down mega-dropdown-menu animated fadeInRight"
+                            role="menu">
                             <li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
                                 <div class="mm-category-label col-sm-4">
-                                    <span>Children</span>
+                                    <span class="dropdown-input-label">Adults</span>
                                 </div>
-                                <div class="spinner col-sm-8 spinner-item spinner-incredment">
-                                    <span class="ui-spinner ui-widget ui-widget-content ui-corner-all ui-spinner-horizontal"><input readonly="true" type="spinner" placeholder="" id="topsearch-Children" value="0" name="spinner" aria-valuemin="0" aria-valuemax="20" aria-valuenow="0" class="ui-spinner-input" autocomplete="off" role="spinbutton"><a class="ui-spinner-button ui-spinner-up ui-corner-right" tabindex="-1"><span class="ui-icon fa-plus fa fa-minus"></span></a><a class="ui-spinner-button ui-spinner-down ui-corner-left" tabindex="-1"><span class="ui-icon fa-minus fa fa-plus"></span></a></span>
+
+                                <div class="spinner col-sm-8 spinner-item spinner-increment">
+                                    <input readonly="true" type="spinner" placeholder id="Adults" value="1" name="spinner">
                                 </div>
                             </li>
-
+                            <li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
+                                <div class="mm-category-label col-sm-4">
+                                    <span class="dropdown-input-label">Children</span>
+                                </div>
+                                <div class="spinner col-sm-8 spinner-item spinner-increment">
+                                    <input readonly="true" type="spinner" placeholder id="Children" value="0" name="spinner" />
+                                </div>
+                            </li>
                             <li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
                                 <div class="mm-category-label category-label-bedrooms col-sm-4">
-                                    <span>Room Type</span>
+                                    <span class="dropdown-input-label">Room Type</span>
                                 </div>
 
-                                <div class="bedroom-selector col-sm-8">
+                                <div class="bedroom-selector col-sm-8 col-md-8">
                                     <select class="bedroom-type" data-width="112px">
                                         <option value="0">Studio</option>
                                         <option value="1">1 Bedroom</option>
@@ -1014,6 +1014,11 @@
                                         <option value="4">4 Bedrooms</option>
                                         <option value="5">5 Bedrooms</option>
                                     </select>
+                                </div>
+                            </li>
+                            <li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
+                                <div class="col-sm-5 col-md-5">
+                                    <button class="dropdown-toggle guest-fg__done-button" data-toggle="dropdown">Done</button>
                                 </div>
                             </li>
                         </ul>

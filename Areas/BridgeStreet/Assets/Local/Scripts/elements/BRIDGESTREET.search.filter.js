@@ -1,6 +1,7 @@
 var BSmapview = require('./BRIDGESTREET.mapview.js');
 var BSsearchlisting = require('./BRIDGESTREET.search.listing.js');
 var BSuicomponents = require('../widgets/BRIDGESTREET.ui.components.js');
+var BSTopSearch = require('./BRIDGESTREET.topsearch.js');
 var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
 (function () {
@@ -33,8 +34,9 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                     "change #PropertySpecial": "applyFilter"
                 },
                 redoSearch: function (e) {
-                    if (e != undefined) e.preventDefault();
+                    if (e) e.preventDefault();
                     var formValues = $("#filter-container").serialize();
+
                     this.processForm(formValues);
                 },
                 cancelFilter: function (e) {
@@ -174,6 +176,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                     var url = (location.pathname + "?" + formValues).replace(/\?+/, '?').replace(/\&+/, '&');
 
                     window.history.pushState("object or string", "Title", url);
+
                     this.model.fetch({
                         success: this.render,
                         error: this.renderError
@@ -181,6 +184,9 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                 },
                 cleanModel: function (data, status) {
                     var dateStr = this.model.attributes.ArrivalDate;
+                    var selectedRoomTypeModel = [];
+                    var selectedRoomType = $("#filter-container #RoomType option:selected");
+
                     dateStr = dateStr.replace(/[/\(\)]/g, '').replace('Date', '');
 
                     this.model.attributes.ArrivalDate = new Date(Number(dateStr)).toISOString().slice(0, 10);
@@ -244,6 +250,22 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                             return rank;
                         })
                         .value();
+
+                    if (selectedRoomType.attr('value')) {
+                        _.each(this.model.attributes.Size.RoomTypes, function(roomtype) {
+                            if (roomtype.Value === selectedRoomType.attr('value')) {
+                                roomtype.Selected = true;
+                            } else {
+                                roomtype.Selected = false;
+                            }
+
+                            selectedRoomTypeModel.push(roomtype);
+                        });
+
+                        if (selectedRoomTypeModel.length) {
+                            this.model.attributes.Size.RoomTypes = selectedRoomTypeModel;
+                        }
+                    }
 
                 },
 
@@ -312,6 +334,10 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                         $('#partial-results-only-intro').show();
                     } else if (this.model.attributes.PropertyResults.length == 0) {
                         $("#no-results").show();
+                    }
+
+                    if (BSTopSearch && !BSTopSearch.initialized) {
+                        BSTopSearch.init(this.model);
                     }
                 },
                 render: function (data, status) {
