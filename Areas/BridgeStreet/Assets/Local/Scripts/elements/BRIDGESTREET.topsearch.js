@@ -1,4 +1,7 @@
 var BSTopSearchGuestSelector = require('./BRIDGESTREET.topsearch.guest.selector.js');
+var BSgloballocationsearch = require('./BRIDGESTREET.global.search.location.js');
+var BSglobaldaterange = require('./BRIDGESTREET.global.search.daterange.js');
+var DateFormat = require('../utils/BRIDGESTREET.date.format.js');
 
 (function () {
     var $window = $(window);
@@ -12,6 +15,8 @@ var BSTopSearchGuestSelector = require('./BRIDGESTREET.topsearch.guest.selector.
             //TODO: remove previous listeners
             if ($('#topsearch-guests').length) {
                 BSTopSearchGuestSelector.init(this.model, this.updateModel.bind(this));
+                this.locationSearch = BSgloballocationsearch.init({location: null}); // TODO: update this logic
+                this.dateRange = BSglobaldaterange.init({date: null});
                 this.changeHeader();
             }
 
@@ -23,6 +28,12 @@ var BSTopSearchGuestSelector = require('./BRIDGESTREET.topsearch.guest.selector.
         },
 
         updateModel: function (model) {
+            model.attributes.ArrivalDate = DateFormat(this.dateRange.arrival, "yyyy-mm-dd");
+            model.attributes.DepartureDate = DateFormat(this.dateRange.departure, "yyyy-mm-dd");
+            model.attributes.Latitude = this.locationSearch.lat;
+            model.attributes.Longitude = this.locationSearch.lng;
+            model.attributes.Place = this.locationSearch.place;
+
             this.model = model;
             this.onModelUpdateCallback(model);
         },

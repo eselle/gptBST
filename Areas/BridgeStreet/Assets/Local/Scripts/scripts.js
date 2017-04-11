@@ -1606,15 +1606,9 @@ var globalgosearch = (function (app, parent, dateFormat, guests, document) {
 
             jQuery('#searchbox-form .btn-search').on("click", this._issueSearch);
             jQuery('.mobileSearchButton').on("click", this._issueSearch);
-
-            setTimeout(function () {
-                jQuery('.topsearchbox > .topsearchbox__button-wrapper').on("click", self._issueSearch);
-            }, 500);
         },
 
         _issueSearch: function (evt) {
-            console.log('issueSearch');
-            console.dir(search);
             var locationInputID = '';
 
             if (DOMUtils.is_mobile() || DOMUtils.is_tablet()) {
@@ -1627,7 +1621,7 @@ var globalgosearch = (function (app, parent, dateFormat, guests, document) {
                     locationInputID = '#searchKeywords';
                 }
             }
-            console.log('locationInputID', locationInputID);
+
             // var locationInputID = (DOMUtils.is_mobile() || DOMUtils.is_tablet()) ? '#searchKeywordsMobile' : '#searchKeywords';
 
             var searchTerm = $(locationInputID).val().trim();
@@ -3152,7 +3146,6 @@ var BSsearchlisting = require('./BRIDGESTREET.search.listing.js');
 var BSuicomponents = require('../widgets/BRIDGESTREET.ui.components.js');
 var BSTopSearch = require('./BRIDGESTREET.topsearch.js');
 var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
-
 (function () {
     var $window = $(window);
 
@@ -3518,7 +3511,17 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                     this.model.set(model.attributes);
                 },
                 onSearchCallback: function() {
-                    console.log('search')
+                    //TODO: apply filters
+                    var searchUrl = '/Search?Latitude=' + this.model.attributes.Latitude +
+                        '&Longitude=' + this.model.attributes.Longitude +
+                        '&ArrivalDate=' + this.model.attributes.ArrivalDate +
+                        '&DepartureDate=' + this.model.attributes.DepartureDate +
+                        '&Adults=' + this.model.attributes.Adults +
+                        '&Children=' + this.model.attributes.Children +
+                        '&RoomType=' + this.model.attributes.RoomType +
+                        '&Place=' + this.model.attributes.Place;
+
+                    document.location.href = searchUrl;
                 },
                 fromUrlDate: function (dateStr) {
                     var bits = dateStr.split('-');
@@ -3971,6 +3974,8 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
         },
 
         updateBedroomType: function (event, ui) {
+            var adults = this.spinnerAdults.spinner('value');
+            var children = this.spinnerChildren.spinner('value');
             var people;
             var requiredMinRooms;
             var roomType;
@@ -3979,8 +3984,11 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                 $(event.target).val(ui.value);
             }
 
+            this.model.attributes.Adults = adults;
+            this.model.attributes.Children = children;
+
             roomType = this.bedroomTypeNode.val();
-            people = this.spinnerAdults.spinner('value') + this.spinnerChildren.spinner('value');
+            people = adults + children;
             requiredMinRooms = people <= 2 ? 1 : Math.floor(people / 2);
 
             if (requiredMinRooms > roomType) {
@@ -4006,12 +4014,13 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
             _.each(this.model.attributes.Size.RoomTypes, function(roomType) {
                 if (roomType.Value === currentRoomType.toString()) {
                     roomType.Selected = true;
+                    this.model.attributes.RoomType = roomType.Value;
                 } else {
                     roomType.Selected = false;
                 }
 
                 roomTypeModel.push(roomType);
-            });
+            }, this);
 
             this.model.attributes.Size.RoomTypes = roomTypeModel;
             this.updateModel(this.model);
@@ -4024,6 +4033,9 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
 },{}],27:[function(require,module,exports){
 var BSTopSearchGuestSelector = require('./BRIDGESTREET.topsearch.guest.selector.js');
+var BSgloballocationsearch = require('./BRIDGESTREET.global.search.location.js');
+var BSglobaldaterange = require('./BRIDGESTREET.global.search.daterange.js');
+var DateFormat = require('../utils/BRIDGESTREET.date.format.js');
 
 (function () {
     var $window = $(window);
@@ -4037,6 +4049,8 @@ var BSTopSearchGuestSelector = require('./BRIDGESTREET.topsearch.guest.selector.
             //TODO: remove previous listeners
             if ($('#topsearch-guests').length) {
                 BSTopSearchGuestSelector.init(this.model, this.updateModel.bind(this));
+                this.locationSearch = BSgloballocationsearch.init({location: null}); // TODO: update this logic
+                this.dateRange = BSglobaldaterange.init({date: null});
                 this.changeHeader();
             }
 
@@ -4048,6 +4062,12 @@ var BSTopSearchGuestSelector = require('./BRIDGESTREET.topsearch.guest.selector.
         },
 
         updateModel: function (model) {
+            model.attributes.ArrivalDate = DateFormat(this.dateRange.arrival, "yyyy-mm-dd");
+            model.attributes.DepartureDate = DateFormat(this.dateRange.departure, "yyyy-mm-dd");
+            model.attributes.Latitude = this.locationSearch.lat;
+            model.attributes.Longitude = this.locationSearch.lng;
+            model.attributes.Place = this.locationSearch.place;
+
             this.model = model;
             this.onModelUpdateCallback(model);
         },
@@ -4062,7 +4082,7 @@ var BSTopSearchGuestSelector = require('./BRIDGESTREET.topsearch.guest.selector.
     module.exports = topSearch || window.topSearch;
 })();
 
-},{"./BRIDGESTREET.topsearch.guest.selector.js":26}],28:[function(require,module,exports){
+},{"../utils/BRIDGESTREET.date.format.js":32,"./BRIDGESTREET.global.search.daterange.js":10,"./BRIDGESTREET.global.search.location.js":13,"./BRIDGESTREET.topsearch.guest.selector.js":26}],28:[function(require,module,exports){
 (function () {
 
     var VideoSlider = {

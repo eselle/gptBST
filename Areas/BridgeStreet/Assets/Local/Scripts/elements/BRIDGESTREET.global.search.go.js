@@ -22,15 +22,9 @@ var globalgosearch = (function (app, parent, dateFormat, guests, document) {
 
             jQuery('#searchbox-form .btn-search').on("click", this._issueSearch);
             jQuery('.mobileSearchButton').on("click", this._issueSearch);
-
-            setTimeout(function () {
-                jQuery('.topsearchbox > .topsearchbox__button-wrapper').on("click", self._issueSearch);
-            }, 500);
         },
 
         _issueSearch: function (evt) {
-            console.log('issueSearch');
-            console.dir(search);
             var locationInputID = '';
 
             if (DOMUtils.is_mobile() || DOMUtils.is_tablet()) {
@@ -43,7 +37,7 @@ var globalgosearch = (function (app, parent, dateFormat, guests, document) {
                     locationInputID = '#searchKeywords';
                 }
             }
-            console.log('locationInputID', locationInputID);
+
             // var locationInputID = (DOMUtils.is_mobile() || DOMUtils.is_tablet()) ? '#searchKeywordsMobile' : '#searchKeywords';
 
             var searchTerm = $(locationInputID).val().trim();

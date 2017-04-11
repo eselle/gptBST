@@ -3,7 +3,6 @@ var BSsearchlisting = require('./BRIDGESTREET.search.listing.js');
 var BSuicomponents = require('../widgets/BRIDGESTREET.ui.components.js');
 var BSTopSearch = require('./BRIDGESTREET.topsearch.js');
 var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
-
 (function () {
     var $window = $(window);
 
@@ -369,7 +368,17 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                     this.model.set(model.attributes);
                 },
                 onSearchCallback: function() {
-                    console.log('search')
+                    //TODO: apply filters
+                    var searchUrl = '/Search?Latitude=' + this.model.attributes.Latitude +
+                        '&Longitude=' + this.model.attributes.Longitude +
+                        '&ArrivalDate=' + this.model.attributes.ArrivalDate +
+                        '&DepartureDate=' + this.model.attributes.DepartureDate +
+                        '&Adults=' + this.model.attributes.Adults +
+                        '&Children=' + this.model.attributes.Children +
+                        '&RoomType=' + this.model.attributes.RoomType +
+                        '&Place=' + this.model.attributes.Place;
+
+                    document.location.href = searchUrl;
                 },
                 fromUrlDate: function (dateStr) {
                     var bits = dateStr.split('-');

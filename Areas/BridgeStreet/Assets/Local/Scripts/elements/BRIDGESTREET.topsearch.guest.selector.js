@@ -61,6 +61,8 @@
         },
 
         updateBedroomType: function (event, ui) {
+            var adults = this.spinnerAdults.spinner('value');
+            var children = this.spinnerChildren.spinner('value');
             var people;
             var requiredMinRooms;
             var roomType;
@@ -69,8 +71,11 @@
                 $(event.target).val(ui.value);
             }
 
+            this.model.attributes.Adults = adults;
+            this.model.attributes.Children = children;
+
             roomType = this.bedroomTypeNode.val();
-            people = this.spinnerAdults.spinner('value') + this.spinnerChildren.spinner('value');
+            people = adults + children;
             requiredMinRooms = people <= 2 ? 1 : Math.floor(people / 2);
 
             if (requiredMinRooms > roomType) {
@@ -96,12 +101,13 @@
             _.each(this.model.attributes.Size.RoomTypes, function(roomType) {
                 if (roomType.Value === currentRoomType.toString()) {
                     roomType.Selected = true;
+                    this.model.attributes.RoomType = roomType.Value;
                 } else {
                     roomType.Selected = false;
                 }
 
                 roomTypeModel.push(roomType);
-            });
+            }, this);
 
             this.model.attributes.Size.RoomTypes = roomTypeModel;
             this.updateModel(this.model);
