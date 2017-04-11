@@ -335,12 +335,6 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                     } else if (this.model.attributes.PropertyResults.length == 0) {
                         $("#no-results").show();
                     }
-
-                    if (BSTopSearch && !BSTopSearch.initialized) {
-                        BSTopSearch.init(this.model, (function(model) {
-                            this.model.set(model.attributes);
-                        }).bind(this));
-                    }
                 },
                 render: function (data, status) {
                     this.cleanModel(data, status);
@@ -348,6 +342,9 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
                     BSuicomponents.initSearchPageUIComponents();
                     BSuicomponents.initRangeSliderComponent(this);
+                    BSTopSearch.init(this.model, (function(model) {
+                        this.model.set(model.attributes);
+                    }).bind(this));
 
                     if (
                         this.model.attributes.PropertyResults.length == 0 &&

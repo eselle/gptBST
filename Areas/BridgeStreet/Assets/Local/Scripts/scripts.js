@@ -1061,7 +1061,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 })();
 
 
-},{"../utils/BRIDGESTREET.currency.js":30}],8:[function(require,module,exports){
+},{"../utils/BRIDGESTREET.currency.js":31}],8:[function(require,module,exports){
 var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
 (function () {
@@ -1452,7 +1452,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 })();
 
 
-},{"../utils/BRIDGESTREET.currency.js":30}],9:[function(require,module,exports){
+},{"../utils/BRIDGESTREET.currency.js":31}],9:[function(require,module,exports){
 (function () {
     var featuredPropertyPod = {
         init: function () {
@@ -1577,7 +1577,7 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
 
 })();
 
-},{"../utils/BRIDGESTREET.calendarcontrol.js":29}],11:[function(require,module,exports){
+},{"../utils/BRIDGESTREET.calendarcontrol.js":30}],11:[function(require,module,exports){
 var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
 var DateFormat = require('../utils/BRIDGESTREET.date.format.js');
 var BSgloballocationsearch = require('./BRIDGESTREET.global.search.location.js');
@@ -1738,7 +1738,7 @@ var globalgosearch = (function (app, parent, dateFormat, guests, document) {
 
 module.exports = globalgosearch || window.globalgosearch;
 
-},{"../utils/BRIDGESTREET.calendarcontrol.js":29,"../utils/BRIDGESTREET.date.format.js":31,"./BRIDGESTREET.global.search.daterange.js":10,"./BRIDGESTREET.global.search.guests.js":12,"./BRIDGESTREET.global.search.location.js":13}],12:[function(require,module,exports){
+},{"../utils/BRIDGESTREET.calendarcontrol.js":30,"../utils/BRIDGESTREET.date.format.js":32,"./BRIDGESTREET.global.search.daterange.js":10,"./BRIDGESTREET.global.search.guests.js":12,"./BRIDGESTREET.global.search.location.js":13}],12:[function(require,module,exports){
 var BSIncrement = require('../utils/increment.js');
 
 (function () {
@@ -1890,7 +1890,7 @@ var BSIncrement = require('../utils/increment.js');
 
 })();
 
-},{"../utils/increment.js":33}],13:[function(require,module,exports){
+},{"../utils/increment.js":34}],13:[function(require,module,exports){
 var BSGlobalDateRange = require('./BRIDGESTREET.global.search.daterange.js');
 
 (function () {
@@ -2217,7 +2217,7 @@ var BSHomepageDateRange = require('./BRIDGESTREET.homepage.search.daterange.js')
 
     module.exports = homepagehero || window.homepagehero;
 })();
-},{"../utils/BRIDGESTREET.date.format.js":31,"./BRIDGESTREET.global.search.guests.js":12,"./BRIDGESTREET.global.search.location.js":13,"./BRIDGESTREET.homepage.search.daterange.js":15}],15:[function(require,module,exports){
+},{"../utils/BRIDGESTREET.date.format.js":32,"./BRIDGESTREET.global.search.guests.js":12,"./BRIDGESTREET.global.search.location.js":13,"./BRIDGESTREET.homepage.search.daterange.js":15}],15:[function(require,module,exports){
 var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
 
 (function () {
@@ -2320,7 +2320,7 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
 
 
 
-},{"../utils/BRIDGESTREET.calendarcontrol.js":29}],16:[function(require,module,exports){
+},{"../utils/BRIDGESTREET.calendarcontrol.js":30}],16:[function(require,module,exports){
 var BSsplitscreen = require('./BRIDGESTREET.split.screen.js');
 
 (function () {
@@ -3480,12 +3480,6 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                     } else if (this.model.attributes.PropertyResults.length == 0) {
                         $("#no-results").show();
                     }
-
-                    if (BSTopSearch && !BSTopSearch.initialized) {
-                        BSTopSearch.init(this.model, (function(model) {
-                            this.model.set(model.attributes);
-                        }).bind(this));
-                    }
                 },
                 render: function (data, status) {
                     this.cleanModel(data, status);
@@ -3493,6 +3487,10 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
                     BSuicomponents.initSearchPageUIComponents();
                     BSuicomponents.initRangeSliderComponent(this);
+                    BSTopSearch.init(this.model, (function(model) {
+                        this.model.set(model.attributes);
+                        console.log(this.model);
+                    }).bind(this));
 
                     if (
                         this.model.attributes.PropertyResults.length == 0 &&
@@ -3614,7 +3612,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 })();
 
 
-},{"../utils/BRIDGESTREET.currency.js":30,"../widgets/BRIDGESTREET.ui.components.js":35,"./BRIDGESTREET.mapview.js":16,"./BRIDGESTREET.search.listing.js":23,"./BRIDGESTREET.topsearch.js":26}],23:[function(require,module,exports){
+},{"../utils/BRIDGESTREET.currency.js":31,"../widgets/BRIDGESTREET.ui.components.js":36,"./BRIDGESTREET.mapview.js":16,"./BRIDGESTREET.search.listing.js":23,"./BRIDGESTREET.topsearch.js":27}],23:[function(require,module,exports){
 (function () {
     var $window = $(window);
 
@@ -3906,14 +3904,12 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 (function () {
     var $window = $(window);
 
-    var topSearch = {
+    var topSearchGuestSelector = {
         init: function (model, onModelUpdate) {
-            var $city = $('#searchKeywords');
-
-            this.initGuestDropdown();
             this.model = model;
             this.updateModel = onModelUpdate;
             //TODO: remove previous listeners
+            this.initGuestDropdown();
         },
 
         initGuestDropdown: function () {
@@ -3934,13 +3930,12 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                 event.stopPropagation();
             });
 
-            this.doneButton.on('click', function (event) {
+            this.doneButton.on('click', (function (event) {
                 event.preventDefault();
                 this.dropdownNode.dropdown('toggle');
-            });
+            }).bind(this));
 
             this.dropdownNode.parent().on('hide.bs.dropdown', (function(event) {
-                console.log('HIDE', event);
                 this.updateBedroomType();
             }).bind(this));
 
@@ -4011,11 +4006,35 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
         }
     };
 
-    module.exports = topSearch || window.topSearch;
+    module.exports = topSearchGuestSelector || window.topSearchGuestSelector;
 })();
 
 
 },{}],27:[function(require,module,exports){
+var BSTopSearchGuestSelector = require('./BRIDGESTREET.topsearch.guest.selector.js');
+
+(function () {
+    var $window = $(window);
+
+    var topSearch = {
+        init: function (model, onModelUpdateCallback) {
+            this.model = model;
+            this.onModelUpdateCallback = onModelUpdateCallback;
+
+            BSTopSearchGuestSelector.init(this.model, this.updateModel.bind(this));
+            //TODO: remove previous listeners
+        },
+
+        updateModel: function (model) {
+            this.onModelUpdateCallback(model);
+        }
+    };
+
+    module.exports = topSearch || window.topSearch;
+})();
+
+
+},{"./BRIDGESTREET.topsearch.guest.selector.js":26}],28:[function(require,module,exports){
 (function () {
 
     var VideoSlider = {
@@ -4247,7 +4266,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
 })();
 
-},{}],28:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 "use strict"
 
 window.Utils = window.Utils || {};
@@ -4558,7 +4577,7 @@ jQuery( document ).ready( function (jQuery) {
     DOMUtils.scrollPageToId();
 
 });
-},{"./elements/BRIDGESTREET.accordion.list.js":1,"./elements/BRIDGESTREET.alllocations.js":2,"./elements/BRIDGESTREET.bookingflow.js":3,"./elements/BRIDGESTREET.contactusMaps.js":4,"./elements/BRIDGESTREET.contactusform.js":5,"./elements/BRIDGESTREET.detail.carousel.js":6,"./elements/BRIDGESTREET.detail.related.properties.js":7,"./elements/BRIDGESTREET.detail.yourtrip.js":8,"./elements/BRIDGESTREET.featured.pod.js":9,"./elements/BRIDGESTREET.global.search.go.js":11,"./elements/BRIDGESTREET.homepage.hero.js":14,"./elements/BRIDGESTREET.mapview.js":16,"./elements/BRIDGESTREET.mobile.modal.js":17,"./elements/BRIDGESTREET.navigation.js":18,"./elements/BRIDGESTREET.nearby.js":19,"./elements/BRIDGESTREET.partnercontactusform.js":20,"./elements/BRIDGESTREET.peeldown.js":21,"./elements/BRIDGESTREET.search.filter.js":22,"./elements/BRIDGESTREET.search.listing.js":23,"./elements/BRIDGESTREET.statistics.pod.js":25,"./elements/BRIDGESTREET.video.slider.js":27,"./utils/DOMUtils":32,"./widgets/BRIDGESTREET.spinner.widget":34,"./widgets/BRIDGESTREET.ui.components.js":35}],29:[function(require,module,exports){
+},{"./elements/BRIDGESTREET.accordion.list.js":1,"./elements/BRIDGESTREET.alllocations.js":2,"./elements/BRIDGESTREET.bookingflow.js":3,"./elements/BRIDGESTREET.contactusMaps.js":4,"./elements/BRIDGESTREET.contactusform.js":5,"./elements/BRIDGESTREET.detail.carousel.js":6,"./elements/BRIDGESTREET.detail.related.properties.js":7,"./elements/BRIDGESTREET.detail.yourtrip.js":8,"./elements/BRIDGESTREET.featured.pod.js":9,"./elements/BRIDGESTREET.global.search.go.js":11,"./elements/BRIDGESTREET.homepage.hero.js":14,"./elements/BRIDGESTREET.mapview.js":16,"./elements/BRIDGESTREET.mobile.modal.js":17,"./elements/BRIDGESTREET.navigation.js":18,"./elements/BRIDGESTREET.nearby.js":19,"./elements/BRIDGESTREET.partnercontactusform.js":20,"./elements/BRIDGESTREET.peeldown.js":21,"./elements/BRIDGESTREET.search.filter.js":22,"./elements/BRIDGESTREET.search.listing.js":23,"./elements/BRIDGESTREET.statistics.pod.js":25,"./elements/BRIDGESTREET.video.slider.js":28,"./utils/DOMUtils":33,"./widgets/BRIDGESTREET.spinner.widget":35,"./widgets/BRIDGESTREET.ui.components.js":36}],30:[function(require,module,exports){
 var BSGlobalSearchGuest = require('../elements/BRIDGESTREET.global.search.guests');
 
 var calendarControl = (function() {
@@ -4630,7 +4649,7 @@ var calendarControl = (function() {
 })();
 
 module.exports = calendarControl || window.calendarControl;
-},{"../elements/BRIDGESTREET.global.search.guests":12}],30:[function(require,module,exports){
+},{"../elements/BRIDGESTREET.global.search.guests":12}],31:[function(require,module,exports){
 var currencyUtil = (function () {
     var my = {},
     currency_symbols = {
@@ -4664,7 +4683,7 @@ var currencyUtil = (function () {
 }());
 
 module.exports = currencyUtil || window.currencyUtil;
-},{}],31:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 var dateFormat = (function() {
 	var	token = /d{1,4}|m{1,4}|yy(?:yy)?|([HhMsTt])\1?|[LloSZ]|"[^"]*"|'[^']*'/g,
 		timezone = /\b(?:[PMCEA][SDP]T|(?:Pacific|Mountain|Central|Eastern|Atlantic) (?:Standard|Daylight|Prevailing) Time|(?:GMT|UTC)(?:[-+]\d{4})?)\b/g,
@@ -4778,7 +4797,7 @@ Date.prototype.format = function (mask, utc) {
 };
 
 module.exports = dateFormat || window.dateFormat;
-},{}],32:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
 (function(window) {
 
     'use strict';
@@ -5415,7 +5434,7 @@ module.exports = dateFormat || window.dateFormat;
 
 })(window);
    
-},{}],33:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 (function () {
 
     var factory = (function() {
@@ -5445,7 +5464,7 @@ module.exports = dateFormat || window.dateFormat;
 
 })();
 
-},{}],34:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 (function () {
 
     var SpinnerWidget = {
@@ -5506,7 +5525,7 @@ module.exports = dateFormat || window.dateFormat;
 
 })();
 
-},{}],35:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 var BSsplitscreen = require('../elements/BRIDGESTREET.split.screen.js');
 (function ($window) {
 
@@ -5869,4 +5888,4 @@ var BSsplitscreen = require('../elements/BRIDGESTREET.split.screen.js');
 })();
 
 
-},{"../elements/BRIDGESTREET.split.screen.js":24}]},{},[28]);
+},{"../elements/BRIDGESTREET.split.screen.js":24}]},{},[29]);
