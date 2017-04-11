@@ -3487,10 +3487,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
                     BSuicomponents.initSearchPageUIComponents();
                     BSuicomponents.initRangeSliderComponent(this);
-                    BSTopSearch.init(this.model, (function(model) {
-                        this.model.set(model.attributes);
-                        console.log(this.model);
-                    }).bind(this));
+                    BSTopSearch.init(this.model, this.onModelChangeCallback.bind(this), this.onSearchCallback.bind(this));
 
                     if (
                         this.model.attributes.PropertyResults.length == 0 &&
@@ -3512,6 +3509,12 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                 renderError: function (data, status) {
                     console.log(status.responseText);
                     dfd.reject("sorry");
+                },
+                onModelChangeCallback: function(model) {
+                    this.model.set(model.attributes);
+                },
+                onSearchCallback: function() {
+                    console.log('search')
                 },
                 fromUrlDate: function (dateStr) {
                     var bits = dateStr.split('-');
@@ -4017,15 +4020,23 @@ var BSTopSearchGuestSelector = require('./BRIDGESTREET.topsearch.guest.selector.
     var $window = $(window);
 
     var topSearch = {
-        init: function (model, onModelUpdateCallback) {
+        init: function (model, onModelUpdateCallback, onSearchCallback) {
             this.model = model;
             this.onModelUpdateCallback = onModelUpdateCallback;
+            this.onSearchCallback = onSearchCallback;
 
-            BSTopSearchGuestSelector.init(this.model, this.updateModel.bind(this));
             //TODO: remove previous listeners
+            BSTopSearchGuestSelector.init(this.model, this.updateModel.bind(this));
+
+            $('.topsearchbox #topsearch-search_button').on('click', (function(event) {
+                event.preventDefault();
+                this.updateModel(this.model);
+                this.onSearchCallback();
+            }).bind(this));
         },
 
         updateModel: function (model) {
+            this.model = model;
             this.onModelUpdateCallback(model);
         }
     };

@@ -4,15 +4,23 @@ var BSTopSearchGuestSelector = require('./BRIDGESTREET.topsearch.guest.selector.
     var $window = $(window);
 
     var topSearch = {
-        init: function (model, onModelUpdateCallback) {
+        init: function (model, onModelUpdateCallback, onSearchCallback) {
             this.model = model;
             this.onModelUpdateCallback = onModelUpdateCallback;
+            this.onSearchCallback = onSearchCallback;
 
-            BSTopSearchGuestSelector.init(this.model, this.updateModel.bind(this));
             //TODO: remove previous listeners
+            BSTopSearchGuestSelector.init(this.model, this.updateModel.bind(this));
+
+            $('.topsearchbox #topsearch-search_button').on('click', (function(event) {
+                event.preventDefault();
+                this.updateModel(this.model);
+                this.onSearchCallback();
+            }).bind(this));
         },
 
         updateModel: function (model) {
+            this.model = model;
             this.onModelUpdateCallback(model);
         }
     };
