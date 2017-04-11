@@ -1925,6 +1925,8 @@ var BSGlobalDateRange = require('./BRIDGESTREET.global.search.daterange.js');
             var desktopSearchCity = document.getElementById('searchKeywords');
 
             setTimeout(function () {
+                $topFilterSearch = $('#topSearchKeywords');
+
                 var topFilterSearchCity = document.getElementById('topSearchKeywords');
                 var topFilterSearchCityAuto = new google.maps.places.Autocomplete(topFilterSearchCity, scope.cityOptions);
 
@@ -1937,7 +1939,7 @@ var BSGlobalDateRange = require('./BRIDGESTREET.global.search.daterange.js');
                     scope.lng = place.geometry.location.lng();
                     scope.place = $topFilterSearch.val();
 
-                    $topFilterSearch.val(scope.place);
+                    $mobileSearch.val(scope.place);
                     console.log('SHOW TOP FILTER');
                     BSGlobalDateRange.show();
                     return false;
