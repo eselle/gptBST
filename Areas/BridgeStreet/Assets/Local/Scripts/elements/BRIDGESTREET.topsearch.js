@@ -2,25 +2,32 @@
     var $window = $(window);
 
     var topSearch = {
-        init: function (model) {
+        init: function (model, onModelUpdate) {
             var $city = $('#searchKeywords');
 
             this.initGuestDropdown();
             this.model = model;
+            this.updateModel = onModelUpdate;
             this.initialized = true;
         },
 
         initGuestDropdown: function () {
+            this.topSearchGuestsNode = $('#topsearch-guests');
+            this.bedroomTypeNode = this.topSearchGuestsNode.find('.bedroom-type');
+            this.numberOfGuestsNode = this.topSearchGuestsNode.find('#topsearch-number_of_guests');
+            this.spinnerNodes = this.topSearchGuestsNode.find('.custom-drop-down .spinner input');
+            this.spinnerAdults = this.topSearchGuestsNode.find('#spinner-adults');
+            this.spinnerChildren = this.topSearchGuestsNode.find('#spinner-children');
 
-            $('#topsearch-guests .bedroom-type').on('change', function () {
-                //$('.bedroom-type').val(scope.roomType);
-            });
+            this.bedroomTypeNode.on('change', (function () {
+                this.onRoomTypeChange(this.bedroomTypeNode.val());
+            }).bind(this));
 
-            $('#topsearch-guests .custom-drop-down').on('click', function (event) {
+            this.topSearchGuestsNode.find('.custom-drop-down').on('click', function (event) {
                 event.stopPropagation();
             });
 
-            $('#topsearch-guests .custom-drop-down .spinner input').spinner({
+            this.spinnerNodes.spinner({
                 min: 0,
                 max: 20,
                 step: 1,
@@ -30,7 +37,7 @@
                     right: "fa fa-plus"
                 },
                 spin: (function (event, ui) {
-                    this.updateRelatedControls(ui, this);
+                    this.updateBedroomType(event, ui);
                 }).bind(this)
             })
                 .parent()
@@ -44,34 +51,46 @@
                 .empty();
         },
 
-        updateRelatedControls: function (ui, caller) {
-            var bedroomTypeElement = $('#topsearch-guests .bedroom-type');
-            var adults;
-            var children;
+        updateBedroomType: function (event, ui) {
+            var people;
+            var requiredMinRooms;
             var roomType;
 
-            if (ui && caller) {
-                var callerID = jQuery(caller).attr('id');
-                $('input.ui-spinner-input[id=' + callerID + ']').val(ui.value);
+            if (ui && event) {
+                $(event.target).val(ui.value);
             }
 
-            adults = $('#topsearch-guests #Adults').spinner("value");
-            children = $('#topsearch-guests #Children').spinner("value");
-            roomType = bedroomTypeElement.val();
-
-
-            var people = adults + children;
-            var requiredMinRooms = people <= 2 ? 0 : Math.floor(people / 2);
+            roomType = this.bedroomTypeNode.val();
+            people = this.spinnerAdults.spinner('value') + this.spinnerChildren.spinner('value');
+            requiredMinRooms = people <= 2 ? 1 : Math.floor(people / 2);
 
             if (requiredMinRooms > roomType) {
                 if (requiredMinRooms > 5) {
                     requiredMinRooms = 5;
                 }
-                roomType = requiredMinRooms;
             }
+            roomType = requiredMinRooms;
 
-            $('#topsearch-guest #number_of_guests').val(people + ' Guests');
-            bedroomTypeElement.val(roomType);
+            this.numberOfGuestsNode.val(people + ' Guests');
+            this.bedroomTypeNode.val(roomType);
+            this.onRoomTypeChange(roomType)
+        },
+
+        onRoomTypeChange: function (currentRoomType) {
+            var roomTypeModel = [];
+
+            _.each(this.model.attributes.Size.RoomTypes, function(roomType) {
+                if (roomType.Value === currentRoomType.toString()) {
+                    roomType.Selected = true;
+                } else {
+                    roomType.Selected = false;
+                }
+
+                roomTypeModel.push(roomType);
+            });
+
+            this.model.attributes.Size.RoomTypes = roomTypeModel;
+            this.updateModel(this.model);
         }
     };
 

@@ -337,7 +337,10 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                     }
 
                     if (BSTopSearch && !BSTopSearch.initialized) {
-                        BSTopSearch.init(this.model);
+                        BSTopSearch.init(this.model, (function(model) {
+                            this.model = model;
+                            console.log(this.model);
+                        }).bind(this));
                     }
                 },
                 render: function (data, status) {
