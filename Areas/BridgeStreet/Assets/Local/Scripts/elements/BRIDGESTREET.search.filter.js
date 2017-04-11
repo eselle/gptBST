@@ -335,12 +335,6 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                     } else if (this.model.attributes.PropertyResults.length == 0) {
                         $("#no-results").show();
                     }
-
-                    if (BSTopSearch && !BSTopSearch.initialized) {
-                        BSTopSearch.init(this.model, (function(model) {
-                            this.model.set(model.attributes);
-                        }).bind(this));
-                    }
                 },
                 render: function (data, status) {
                     this.cleanModel(data, status);
@@ -348,6 +342,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
                     BSuicomponents.initSearchPageUIComponents();
                     BSuicomponents.initRangeSliderComponent(this);
+                    BSTopSearch.init(this.model, this.onModelChangeCallback.bind(this), this.onSearchCallback.bind(this));
 
                     if (
                         this.model.attributes.PropertyResults.length == 0 &&
@@ -369,6 +364,12 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                 renderError: function (data, status) {
                     console.log(status.responseText);
                     dfd.reject("sorry");
+                },
+                onModelChangeCallback: function(model) {
+                    this.model.set(model.attributes);
+                },
+                onSearchCallback: function() {
+                    console.log('search')
                 },
                 fromUrlDate: function (dateStr) {
                     var bits = dateStr.split('-');
