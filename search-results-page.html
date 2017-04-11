@@ -966,18 +966,22 @@
 
     <script type="text/template" id="top-filter-template">
         <div class="results-filter container-fluid">
-            <div class="topsearchbox__title label-cell clearfix">
+            <div class="topsearchbox__title label-cell clearfix hidden-xs">
                 <label>Edit search:</label>
             </div>
-            <div class="topsearchbox">
+            <div class="topsearchbox hidden-xs">
                 <div class="topsearchbox__input-wrapper topsearchbox__input-wrapper-location">
-                    <input class="topsearchbox__input-element" type="text" placeholder="City, Address or Landmark" data-value-large="City, Address or Landmark" data-value-small="Search" autocomplete="off" id="topSearchKeywords" value="" />
+                    <input class="topsearchbox__input-element topsearchbox__input-element-location" type="text" placeholder="City, Address or Landmark" data-value-large="City, Address or Landmark" data-value-small="Search" autocomplete="off" id="topSearchKeywords" value="" />
                 </div>
-                <div class="topsearchbox__input-wrapper topsearchbox__input-wrapper-dates">
-                    <input class="topsearchbox__input-element" type="text" id="topsearch-check_in_date" name="checkin" placeholder="Choose Your Dates" data-value-large="Choose Your Dates" data-value-small="Dates" readonly=""/>
+                <div class="topsearchbox__input-wrapper topsearchbox__input-wrapper-dates topsearchbox__input-wrapper--carret">
+                    <input class="topsearchbox__input-element" type="text" id="topsearch-check_in_date" name="checkin" placeholder="Check in" data-value-large="Check in" data-value-small="Check in" readonly=""/>
                 </div>
+                <div class="topsearchbox__input-wrapper topsearchbox__input-wrapper-dates topsearchbox__input-wrapper--carret">
+                    <input class="topsearchbox__input-element" type="text" id="topsearch-check_out_date" name="checkout" placeholder="Check out" data-value-large="Check out" data-value-small="Check out" readonly=""/>
+                </div>
+                <div id="topsearchbox_date_range_target"></div>
                 <!--<input type="text" id="desktop_check_out_date" name="checkout"/>-->
-                <div class="topsearchbox__input-wrapper topsearchbox__input-wrapper-guests">
+                <div class="topsearchbox__input-wrapper topsearchbox__input-wrapper-guests topsearchbox__input-wrapper--carret">
                     <div id="topsearch-guests" class="searchbox-input searchbox-guests has-icon user-dropdown dropdown mega-dropdown">
                         <a href="#" class="dropdown-toggle" data-target="#" data-toggle="dropdown" data-content>
                             <input class="topsearchbox__input-element" readonly="readonly" type="text" id="topsearch-number_of_guests"

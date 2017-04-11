@@ -65,7 +65,11 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
             this.mobileRange = mobiscroll.range('#check_in_date_mobile', mobileCalOptions);
 
             setTimeout(function () {
-                self.topSearchRange = mobiscroll.range('#topsearch-check_in_date', desktopCalOptions);
+                var topSearchCalOptions = _.clone(desktopCalOptions);
+
+                topSearchCalOptions.startInput = '#topsearch-check_in_date';
+                topSearchCalOptions.endInput = '#topsearch-check_out_date';
+                self.topSearchRange = mobiscroll.range('#topsearchbox_date_range_target', topSearchCalOptions);
             }, 500, this);
 
             if (search.date != null && scope.arrival != null && scope.departure != null) {
@@ -95,7 +99,7 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
             if (DOMUtils.is_mobile()) {
                 this.mobileRange.show();
             } else {
-                if ($('#topsearch-check_in_date')) {
+                if ($('#topsearch-check_in_date').length) {
                     this.topSearchRange.show();
                 } else {
                     this.desktopRange.show();

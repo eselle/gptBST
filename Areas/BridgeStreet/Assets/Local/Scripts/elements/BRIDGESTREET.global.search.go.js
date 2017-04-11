@@ -24,7 +24,7 @@ var globalgosearch = (function (app, parent, dateFormat, guests, document) {
             jQuery('.mobileSearchButton').on("click", this._issueSearch);
 
             setTimeout(function () {
-                jQuery('#top-search-box .topsearchbox__button-wrapper').on("click", self._issueSearch);
+                jQuery('.topsearchbox > .topsearchbox__button-wrapper').on("click", self._issueSearch);
             }, 500);
         },
 
@@ -48,16 +48,17 @@ var globalgosearch = (function (app, parent, dateFormat, guests, document) {
 
             var searchTerm = $(locationInputID).val().trim();
             if (searchTerm == '') {
-
+                $(locationInputID).focus();
+                $(locationInputID).addClass('highlight');
                 $(locationInputID + ', i.fa.fa-map-marker.form-control-icon').addClass('highlight');
                 setTimeout(function () {
                     $(locationInputID + ', i.fa.fa-map-marker.form-control-icon').removeClass('highlight');
+                    $(locationInputID).removeClass('highlight');
                 }, 600);
 
             } else {
-
                 $(locationInputID).attr("data-remodal-action", "confirm");
-                
+
                 var searchUrl = "/Search?Latitude=" + search.location.lat +
                                 "&Longitude=" + search.location.lng +
                                 "&ArrivalDate=" + DateFormat(search.date.arrival, "yyyy-mm-dd") +
@@ -68,7 +69,6 @@ var globalgosearch = (function (app, parent, dateFormat, guests, document) {
                                 "&Place=" + search.location.place;
 
                 document.location.href = searchUrl;
-                console.log(search);
             }
         },
 

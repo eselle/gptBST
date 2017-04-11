@@ -1534,7 +1534,11 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
             this.mobileRange = mobiscroll.range('#check_in_date_mobile', mobileCalOptions);
 
             setTimeout(function () {
-                self.topSearchRange = mobiscroll.range('#topsearch-check_in_date', desktopCalOptions);
+                var topSearchCalOptions = _.clone(desktopCalOptions);
+
+                topSearchCalOptions.startInput = '#topsearch-check_in_date';
+                topSearchCalOptions.endInput = '#topsearch-check_out_date';
+                self.topSearchRange = mobiscroll.range('#topsearchbox_date_range_target', topSearchCalOptions);
             }, 500, this);
 
             if (search.date != null && scope.arrival != null && scope.departure != null) {
@@ -1564,7 +1568,7 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
             if (DOMUtils.is_mobile()) {
                 this.mobileRange.show();
             } else {
-                if ($('#topsearch-check_in_date')) {
+                if ($('#topsearch-check_in_date').length) {
                     this.topSearchRange.show();
                 } else {
                     this.desktopRange.show();
@@ -1604,7 +1608,7 @@ var globalgosearch = (function (app, parent, dateFormat, guests, document) {
             jQuery('.mobileSearchButton').on("click", this._issueSearch);
 
             setTimeout(function () {
-                jQuery('#top-search-box .topsearchbox__button-wrapper').on("click", self._issueSearch);
+                jQuery('.topsearchbox > .topsearchbox__button-wrapper').on("click", self._issueSearch);
             }, 500);
         },
 
@@ -1628,16 +1632,17 @@ var globalgosearch = (function (app, parent, dateFormat, guests, document) {
 
             var searchTerm = $(locationInputID).val().trim();
             if (searchTerm == '') {
-
+                $(locationInputID).focus();
+                $(locationInputID).addClass('highlight');
                 $(locationInputID + ', i.fa.fa-map-marker.form-control-icon').addClass('highlight');
                 setTimeout(function () {
                     $(locationInputID + ', i.fa.fa-map-marker.form-control-icon').removeClass('highlight');
+                    $(locationInputID).removeClass('highlight');
                 }, 600);
 
             } else {
-
                 $(locationInputID).attr("data-remodal-action", "confirm");
-                
+
                 var searchUrl = "/Search?Latitude=" + search.location.lat +
                                 "&Longitude=" + search.location.lng +
                                 "&ArrivalDate=" + DateFormat(search.date.arrival, "yyyy-mm-dd") +
@@ -1648,7 +1653,6 @@ var globalgosearch = (function (app, parent, dateFormat, guests, document) {
                                 "&Place=" + search.location.place;
 
                 document.location.href = searchUrl;
-                console.log(search);
             }
         },
 
@@ -3910,7 +3914,9 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
         init: function (model, onModelUpdate) {
             var $city = $('#searchKeywords');
 
-            this.initGuestDropdown();
+            if ($('#topsearch-guests').length) {
+                this.initGuestDropdown();
+            }
             this.model = model;
             this.updateModel = onModelUpdate;
             //TODO: remove previous listeners
@@ -3926,6 +3932,8 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
             this.spinnerChildren = this.topSearchGuestsNode.find('#spinner-children');
             this.doneButton = this.topSearchGuestsNode.find('.done-button');
 
+            this.changeHeader();
+
             this.bedroomTypeNode.on('change', (function () {
                 this.onRoomTypeChange(this.bedroomTypeNode.val());
             }).bind(this));
@@ -3934,13 +3942,12 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                 event.stopPropagation();
             });
 
-            this.doneButton.on('click', function (event) {
+            this.doneButton.on('click', (function (event) {
                 event.preventDefault();
                 this.dropdownNode.dropdown('toggle');
-            });
+            }).bind(this));
 
             this.dropdownNode.parent().on('hide.bs.dropdown', (function(event) {
-                console.log('HIDE', event);
                 this.updateBedroomType();
             }).bind(this));
 
@@ -3988,7 +3995,12 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
             }
             roomType = requiredMinRooms;
 
-            this.numberOfGuestsNode.val(people + ' Guests');
+            if (people > 1) {
+                this.numberOfGuestsNode.val(people + ' Guests');
+            } else {
+                this.numberOfGuestsNode.val(people + ' Guest');
+            }
+
             this.bedroomTypeNode.val(roomType);
             this.onRoomTypeChange(roomType)
         },
@@ -4008,6 +4020,12 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
             this.model.attributes.Size.RoomTypes = roomTypeModel;
             this.updateModel(this.model);
+        },
+
+        changeHeader: function () {
+            $('#searchbox-form > .form-container').hide();
+            $('#searchbox-form > .btn-search').hide();
+            $('.logo-container').append('<div class="slogan-site"><div class="content-slogan">Every Stay Guaranteed</div></div>');
         }
     };
 

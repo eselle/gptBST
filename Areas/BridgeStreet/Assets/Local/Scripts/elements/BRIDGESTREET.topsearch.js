@@ -5,7 +5,9 @@
         init: function (model, onModelUpdate) {
             var $city = $('#searchKeywords');
 
-            this.initGuestDropdown();
+            if ($('#topsearch-guests').length) {
+                this.initGuestDropdown();
+            }
             this.model = model;
             this.updateModel = onModelUpdate;
             //TODO: remove previous listeners
@@ -20,6 +22,8 @@
             this.spinnerAdults = this.topSearchGuestsNode.find('#spinner-adults');
             this.spinnerChildren = this.topSearchGuestsNode.find('#spinner-children');
             this.doneButton = this.topSearchGuestsNode.find('.done-button');
+
+            this.changeHeader();
 
             this.bedroomTypeNode.on('change', (function () {
                 this.onRoomTypeChange(this.bedroomTypeNode.val());
@@ -82,7 +86,12 @@
             }
             roomType = requiredMinRooms;
 
-            this.numberOfGuestsNode.val(people + ' Guests');
+            if (people > 1) {
+                this.numberOfGuestsNode.val(people + ' Guests');
+            } else {
+                this.numberOfGuestsNode.val(people + ' Guest');
+            }
+
             this.bedroomTypeNode.val(roomType);
             this.onRoomTypeChange(roomType)
         },
@@ -102,6 +111,12 @@
 
             this.model.attributes.Size.RoomTypes = roomTypeModel;
             this.updateModel(this.model);
+        },
+
+        changeHeader: function () {
+            $('#searchbox-form > .form-container').hide();
+            $('#searchbox-form > .btn-search').hide();
+            $('.logo-container').append('<div class="slogan-site"><div class="content-slogan">Every Stay Guaranteed</div></div>');
         }
     };
 
