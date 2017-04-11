@@ -1,15 +1,55 @@
 .topsearchbox {
+  min-height: 100px;
+  border-bottom: 1px @gr-100 solid;
+  align-items: center;
   display: flex;
+  justify-content: center;
+
+  &__title {
+    align-items: center;
+    display: flex;
+    min-height: 100px;
+    position: absolute;
+    margin-left: 14px;
+  }
 
   &__input-wrapper {
     width: 100px;
+
+    &-location {
+      width: 20%;
+    }
+
+    &-dates {
+      width: 20%;
+    }
+
+    &-guests {
+      width: 20%;
+    }
   }
 
   &__input-element {
+    padding-left: 15px;
     width: 100%;
+    min-height: 50px;
   }
 
   &__button-wrapper {
+    width: 80px;
+  }
 
+  &__button {
+    align-items: center;
+    background-color: @or-100;
+    justify-content: center;
+    display: flex;
+    height: 100%;
+    min-height: 50px;
+    width: 100%;
+
+    &:hover {
+      background-color: @or-200;
+    }
   }
 }
