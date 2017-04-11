@@ -3483,8 +3483,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
                     if (BSTopSearch && !BSTopSearch.initialized) {
                         BSTopSearch.init(this.model, (function(model) {
-                            this.model = model;
-                            console.log(this.model);
+                            this.model.set(model.attributes);
                         }).bind(this));
                     }
                 },
@@ -3608,7 +3607,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
         getPriceRange: function () {
             return this.searchModel.attributes.Price;
         }
-    }
+    };
 
     module.exports = searchfilter || window.searchfilter;
 
@@ -3914,16 +3913,18 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
             this.initGuestDropdown();
             this.model = model;
             this.updateModel = onModelUpdate;
-            this.initialized = true;
+            //TODO: remove previous listeners
         },
 
         initGuestDropdown: function () {
             this.topSearchGuestsNode = $('#topsearch-guests');
             this.bedroomTypeNode = this.topSearchGuestsNode.find('.bedroom-type');
             this.numberOfGuestsNode = this.topSearchGuestsNode.find('#topsearch-number_of_guests');
+            this.dropdownNode = this.topSearchGuestsNode.find('.dropdown-toggle');
             this.spinnerNodes = this.topSearchGuestsNode.find('.custom-drop-down .spinner input');
             this.spinnerAdults = this.topSearchGuestsNode.find('#spinner-adults');
             this.spinnerChildren = this.topSearchGuestsNode.find('#spinner-children');
+            this.doneButton = this.topSearchGuestsNode.find('.done-button');
 
             this.bedroomTypeNode.on('change', (function () {
                 this.onRoomTypeChange(this.bedroomTypeNode.val());
@@ -3932,6 +3933,16 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
             this.topSearchGuestsNode.find('.custom-drop-down').on('click', function (event) {
                 event.stopPropagation();
             });
+
+            this.doneButton.on('click', function (event) {
+                event.preventDefault();
+                this.dropdownNode.dropdown('toggle');
+            });
+
+            this.dropdownNode.parent().on('hide.bs.dropdown', (function(event) {
+                console.log('HIDE', event);
+                this.updateBedroomType();
+            }).bind(this));
 
             this.spinnerNodes.spinner({
                 min: 0,

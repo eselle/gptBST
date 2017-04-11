@@ -8,16 +8,18 @@
             this.initGuestDropdown();
             this.model = model;
             this.updateModel = onModelUpdate;
-            this.initialized = true;
+            //TODO: remove previous listeners
         },
 
         initGuestDropdown: function () {
             this.topSearchGuestsNode = $('#topsearch-guests');
             this.bedroomTypeNode = this.topSearchGuestsNode.find('.bedroom-type');
             this.numberOfGuestsNode = this.topSearchGuestsNode.find('#topsearch-number_of_guests');
+            this.dropdownNode = this.topSearchGuestsNode.find('.dropdown-toggle');
             this.spinnerNodes = this.topSearchGuestsNode.find('.custom-drop-down .spinner input');
             this.spinnerAdults = this.topSearchGuestsNode.find('#spinner-adults');
             this.spinnerChildren = this.topSearchGuestsNode.find('#spinner-children');
+            this.doneButton = this.topSearchGuestsNode.find('.done-button');
 
             this.bedroomTypeNode.on('change', (function () {
                 this.onRoomTypeChange(this.bedroomTypeNode.val());
@@ -26,6 +28,15 @@
             this.topSearchGuestsNode.find('.custom-drop-down').on('click', function (event) {
                 event.stopPropagation();
             });
+
+            this.doneButton.on('click', (function (event) {
+                event.preventDefault();
+                this.dropdownNode.dropdown('toggle');
+            }).bind(this));
+
+            this.dropdownNode.parent().on('hide.bs.dropdown', (function(event) {
+                this.updateBedroomType();
+            }).bind(this));
 
             this.spinnerNodes.spinner({
                 min: 0,

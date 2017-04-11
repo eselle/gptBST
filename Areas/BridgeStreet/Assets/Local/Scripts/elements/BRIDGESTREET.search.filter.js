@@ -338,8 +338,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
                     if (BSTopSearch && !BSTopSearch.initialized) {
                         BSTopSearch.init(this.model, (function(model) {
-                            this.model = model;
-                            console.log(this.model);
+                            this.model.set(model.attributes);
                         }).bind(this));
                     }
                 },
@@ -463,7 +462,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
         getPriceRange: function () {
             return this.searchModel.attributes.Price;
         }
-    }
+    };
 
     module.exports = searchfilter || window.searchfilter;
 
