@@ -25,6 +25,10 @@ var DateFormat = require('../utils/BRIDGESTREET.date.format.js');
                 this.updateModel(this.model);
                 this.onSearchCallback();
             }).bind(this));
+
+            $('#FilterAmeneties').on('click', (function(event) {
+                event.stopPropagation();
+            }).bind(this));
         },
 
         updateModel: function (model) {
