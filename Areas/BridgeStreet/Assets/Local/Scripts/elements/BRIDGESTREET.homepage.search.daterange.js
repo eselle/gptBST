@@ -9,6 +9,9 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
         departure: new Date(),
         init: function (search) {
             var scope = this;
+
+            if (!$('#desktop_date_range_target').length) return;
+
             if (search.date != null) {
                 scope.arrival = search.date.arrival;
                 scope.departure = search.date.departure;

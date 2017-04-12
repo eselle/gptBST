@@ -2229,6 +2229,9 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
         departure: new Date(),
         init: function (search) {
             var scope = this;
+
+            if (!$('#desktop_date_range_target').length) return;
+
             if (search.date != null) {
                 scope.arrival = search.date.arrival;
                 scope.departure = search.date.departure;
@@ -3922,6 +3925,30 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
             this.updateModel = onModelUpdate;
             //TODO: remove previous listeners
             this.initGuestDropdown();
+
+            var qsAdults = decodeURI(window.location.search).match(/Adults=([^&]*)+/);
+            var qsChildren = decodeURI(window.location.search).match(/Children=([^&]*)+/);
+
+            if (qsAdults) {
+                this.model.attributes.Adults = parseInt(qsAdults[1]);
+            }
+
+            if (qsChildren) {
+                this.model.attributes.Children = parseInt(qsChildren[1]);
+            }
+
+            if (qsAdults || qsChildren) {
+                this.setModelAttributesToDOMElements();
+            }
+        },
+
+        setModelAttributesToDOMElements: function () {
+            var adults = this.model.attributes.Adults;
+            var children = this.model.attributes.Children;
+
+            this.spinnerAdults.spinner('value',  adults);
+            this.spinnerChildren.spinner('value',  children);
+            this.updateBedroomType();
         },
 
         initGuestDropdown: function () {
@@ -4000,14 +4027,18 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
             }
             roomType = requiredMinRooms;
 
-            if (people > 1) {
-                this.numberOfGuestsNode.val(people + ' Guests');
-            } else {
-                this.numberOfGuestsNode.val(people + ' Guest');
-            }
+            this.setGuestsValueToInput(people);
             
             this.bedroomTypeNode.val(roomType);
             this.onRoomTypeChange(roomType)
+        },
+
+        setGuestsValueToInput: function (numberOfGuests) {
+            if (numberOfGuests > 1) {
+                this.numberOfGuestsNode.val(numberOfGuests + ' Guests');
+            } else {
+                this.numberOfGuestsNode.val(numberOfGuests + ' Guest');
+            }
         },
 
         onRoomTypeChange: function (currentRoomType) {
@@ -4050,9 +4081,9 @@ var DateFormat = require('../utils/BRIDGESTREET.date.format.js');
 
             //TODO: remove previous listeners
             if ($('#topsearch-guests').length) {
-                BSTopSearchGuestSelector.init(this.model, this.updateModel.bind(this));
-                this.locationSearch = BSgloballocationsearch.init({location: null}); // TODO: update this logic
                 this.dateRange = BSglobaldaterange.init({date: null});
+                this.locationSearch = BSgloballocationsearch.init({location: null}); // TODO: update this logic
+                BSTopSearchGuestSelector.init(this.model, this.updateModel.bind(this));
                 this.changeHeader();
             }
 
