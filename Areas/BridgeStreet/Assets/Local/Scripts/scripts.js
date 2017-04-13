@@ -1539,14 +1539,14 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
                 topSearchCalOptions.startInput = '#topsearch-check_in_date';
                 topSearchCalOptions.endInput = '#topsearch-check_out_date';
                 self.topSearchRange = mobiscroll.range('#topsearchbox_date_range_target', topSearchCalOptions);
-            }, 500, this);
+            }, 2000, this);
 
             if (search.date != null && scope.arrival != null && scope.departure != null) {
                 this.desktopRange.setVal([scope.arrival, scope.departure], true);
                 this.mobileRange.setVal([scope.arrival, scope.departure], true);
                 setTimeout(function () {
                     self.topSearchRange.setVal([scope.arrival, scope.departure], true);
-                }, 500, this);
+                }, 2000, this);
             }
 
             this.initListeners();
@@ -3722,26 +3722,25 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
                     if( window.innerWidth > 768 && window.innerWidth < 992) {
 
-                        var slider = jQuery('.price-range-slider');
-
-                        slider.css('width', '50%');
+                        // var slider = jQuery('.price-range-slider');
+                        //
+                        // slider.css('width', '50%');
 
                     }
 
                     if( window.innerWidth > 991) {
-                        
-                        var screenWidth = window.innerWidth;
-
-                        var sizeWidth = jQuery('.size-section').outerWidth();
-
-                        var viewWidth = jQuery('.view-section').outerWidth();
-
-                        var slider = jQuery('.price-range-slider');
-
-                        var totalWidth = sizeWidth + viewWidth;
-
-                        slider.css('width', (screenWidth - totalWidth) - 1);
-
+                        //
+                        // var screenWidth = window.innerWidth;
+                        //
+                        // var sizeWidth = jQuery('.size-section').outerWidth();
+                        //
+                        // var viewWidth = jQuery('.view-section').outerWidth();
+                        //
+                        // var slider = jQuery('.price-range-slider');
+                        //
+                        // var totalWidth = sizeWidth + viewWidth;
+                        //
+                        // slider.css('width', (screenWidth - totalWidth) - 1);
                     }
 
                 } else {
@@ -3752,16 +3751,16 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
                     jQuery('body').css('overflow', 'auto');
 
-                    var slider = jQuery('.price-range-slider');
-
-                    slider.css('width', '100%');
+                    // var slider = jQuery('.price-range-slider');
+                    //
+                    // slider.css('width', '100%');
 
 	            }
 
             }
 
         }
-    }
+    };
 
     module.exports = searchlisting || window.searchlisting;
 

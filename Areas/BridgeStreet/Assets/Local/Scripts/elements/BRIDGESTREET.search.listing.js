@@ -92,26 +92,25 @@
 
                     if( window.innerWidth > 768 && window.innerWidth < 992) {
 
-                        var slider = jQuery('.price-range-slider');
-
-                        slider.css('width', '50%');
+                        // var slider = jQuery('.price-range-slider');
+                        //
+                        // slider.css('width', '50%');
 
                     }
 
                     if( window.innerWidth > 991) {
-                        
-                        var screenWidth = window.innerWidth;
-
-                        var sizeWidth = jQuery('.size-section').outerWidth();
-
-                        var viewWidth = jQuery('.view-section').outerWidth();
-
-                        var slider = jQuery('.price-range-slider');
-
-                        var totalWidth = sizeWidth + viewWidth;
-
-                        slider.css('width', (screenWidth - totalWidth) - 1);
-
+                        //
+                        // var screenWidth = window.innerWidth;
+                        //
+                        // var sizeWidth = jQuery('.size-section').outerWidth();
+                        //
+                        // var viewWidth = jQuery('.view-section').outerWidth();
+                        //
+                        // var slider = jQuery('.price-range-slider');
+                        //
+                        // var totalWidth = sizeWidth + viewWidth;
+                        //
+                        // slider.css('width', (screenWidth - totalWidth) - 1);
                     }
 
                 } else {
@@ -122,16 +121,16 @@
 
                     jQuery('body').css('overflow', 'auto');
 
-                    var slider = jQuery('.price-range-slider');
-
-                    slider.css('width', '100%');
+                    // var slider = jQuery('.price-range-slider');
+                    //
+                    // slider.css('width', '100%');
 
 	            }
 
             }
 
         }
-    }
+    };
 
     module.exports = searchlisting || window.searchlisting;
 

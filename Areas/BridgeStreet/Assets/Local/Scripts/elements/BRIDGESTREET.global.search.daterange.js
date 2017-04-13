@@ -70,14 +70,14 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
                 topSearchCalOptions.startInput = '#topsearch-check_in_date';
                 topSearchCalOptions.endInput = '#topsearch-check_out_date';
                 self.topSearchRange = mobiscroll.range('#topsearchbox_date_range_target', topSearchCalOptions);
-            }, 500, this);
+            }, 2000, this);
 
             if (search.date != null && scope.arrival != null && scope.departure != null) {
                 this.desktopRange.setVal([scope.arrival, scope.departure], true);
                 this.mobileRange.setVal([scope.arrival, scope.departure], true);
                 setTimeout(function () {
                     self.topSearchRange.setVal([scope.arrival, scope.departure], true);
-                }, 500, this);
+                }, 2000, this);
             }
 
             this.initListeners();
