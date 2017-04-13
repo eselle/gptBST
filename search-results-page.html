@@ -521,11 +521,12 @@
 
     <script type="text/template" id="bottom-filter-template">
         <div class="dropdown">
-            <button class="btn btn-blue more-filters-dropdown__button dropdown-toggle" type="button" data-toggle="dropdown">
-                More Filters
+            <button id="more-filters" class="more-filters-dropdown__button dropdown-toggle" type="button" data-toggle="dropdown">
+                Amenities
+                <span class="caret"></span>
             </button>
-            <ul id="FilterAmeneties" data-line-value="1" class="dropdown-menu dropdown-menu-left more-filters-drodpdown">
-                <li class="more-filters-drodpdown__title"><%= PropertyTypes.DisplayName %></li>
+            <ul id="FilterAmeneties" data-line-value="1" class="dropdown-menu more-filters-dropdown">
+                <li class="more-filters-dropdown__title"><%= PropertyTypes.DisplayName %></li>
                 <% _.each(PropertyTypes.Options, function(opt) { %>
                 <li>
                     <div class="checkbox-inline">
@@ -537,13 +538,13 @@
                                 <% if (!opt.Selected) { %>
                                 <input type="checkbox" name="PropertyTypes" id="<%= opt.Value %>" value="<%= opt.Value %>" />
                                 <% } %>
-                                <span class="checkbox__label"><%= opt.Text %></span>
+                                <span class="checkbox__label more-filters-dropdown__label"><%= opt.Text %></span>
                             </div>
                         </label>
                     </div>
                 </li>
                 <% }); %>
-                <li class="more-filters-drodpdown__title">Pets</li>
+                <li class="more-filters-dropdown__title">Pets</li>
                 <li>
                     <div>
                         <div class="checkbox-inline">
@@ -555,14 +556,14 @@
                                     <%  if (!IsPetFriendly.Selected ) { %>
                                     <input type="checkbox" name="IsPetFriendly" value="true" />
                                     <% } %>
-                                    <span class="checkbox__label"><%= IsPetFriendly.Text %></span>
+                                    <span class="checkbox__label more-filters-dropdown__label"><%= IsPetFriendly.Text %></span>
                                 </div>
                             </label>
                         </div>
                     </div>
                 </li>
                 <% _.each(Attributes, function(attrSet) { %>
-                <li class="more-filters-drodpdown__title"><%= attrSet.DisplayName %></li>
+                <li class="more-filters-dropdown__title"><%= attrSet.DisplayName %></li>
                 <% _.each(attrSet.Options, function(opt) { %>
                 <li>
                     <div class="checkbox-inline">
@@ -574,15 +575,16 @@
                                 <% if (!opt.Selected) { %>
                                 <input type="checkbox" name="Attributes" id="<%= opt.Value %>" value="<%= opt.Value %>" />
                                 <% } %>
-                                <span class="checkbox__label"><%= opt.Text %></span>
+                                <span class="checkbox__label more-filters-dropdown__label"><%= opt.Text %></span>
                             </div>
                         </label>
                     </div>
                 </li>
                 <% }); %>
                 <% }); %>
-                <li>
-                    <button type="submit" class="btn btn-blue submit-btn">Apply</button>
+                <li class="more-filters-dropdown__buttons">
+                    <button type="button" class="btn btn-white cancel-btn more-filters-dropdown__buttons-cancel">Cancel</button>
+                    <button type="submit" class="btn btn-blue submit-btn more-filters-dropdown__buttons-apply">Apply</button>
                 </li>
             </ul>
         </div>
@@ -666,7 +668,7 @@
             <input type="hidden" name="Children" id="Children" value="<%= Children %>" />
             <div class="results-filter-wrapper results-filter-wrapper-top">
                 <div class="row">
-                    <div class="filter-half price-range-slider col-xs-12 col-md-4">
+                    <div class="filter-half price-range-slider col-xs-6 col-md-4">
                         <div class="rows">
                             <div class="label-cell clearfix">
                                 <label><%= Price.Name %></label>
@@ -680,7 +682,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="filter-half col-xs-12 col-md-6">
+                    <div class="filter-half col-xs-4 col-md-6">
                         <div class="rows">
                             <div class="label-cell label-cell-view">
                                 <label><%= View.Name %></label>

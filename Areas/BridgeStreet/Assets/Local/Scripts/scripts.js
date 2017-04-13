@@ -4094,7 +4094,15 @@ var DateFormat = require('../utils/BRIDGESTREET.date.format.js');
 
             $('#FilterAmeneties').on('click', (function(event) {
                 event.stopPropagation();
-            }).bind(this));
+            }));
+
+            $('.more-filters-dropdown__buttons-cancel').on('click', function(event) {
+                $('.dropdown.open .dropdown-toggle').dropdown('toggle');
+            });
+
+            $('.more-filters-dropdown__buttons-apply').on('click', function(event) {
+                $('.dropdown.open .dropdown-toggle').dropdown('toggle');
+            });
         },
 
         updateModel: function (model) {
