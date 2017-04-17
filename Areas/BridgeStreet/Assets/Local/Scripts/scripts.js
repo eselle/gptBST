@@ -4083,7 +4083,6 @@ var DateFormat = require('../utils/BRIDGESTREET.date.format.js');
                 this.dateRange = BSglobaldaterange.init({date: null});
                 this.locationSearch = BSgloballocationsearch.init({location: null}); // TODO: update this logic
                 BSTopSearchGuestSelector.init(this.model, this.updateModel.bind(this));
-                this.changeHeader();
             }
 
             $('.topsearchbox #topsearch-search_button').on('click', (function(event) {
@@ -4114,12 +4113,6 @@ var DateFormat = require('../utils/BRIDGESTREET.date.format.js');
 
             this.model = model;
             this.onModelUpdateCallback(model);
-        },
-
-        changeHeader: function () {
-            $('#searchbox-form > .form-container').hide();
-            $('#searchbox-form > .btn-search').hide();
-            $('.logo-container').append('<div class="slogan-site"><div class="content-slogan">Every Stay Guaranteed</div></div>');
         }
     };
 

@@ -1,0 +1,99 @@
+.open>.more-filters-dropdown {
+  display: flex;
+  flex-wrap: wrap;
+  position: initial;
+}
+
+.book-deals-section {
+  align-items: center;
+  border-bottom: 1px solid @gr-100;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  min-height: 60px;
+
+  .book-deals-wrapper {
+    display: flex;
+    margin-left: 25px;
+  }
+
+  .checkbox-inline {
+    float: none;
+    padding-left: inherit;
+    display:inherit;
+    width: inherit;
+  }
+
+  .facet-checkbox {
+    padding: 0 0 0 25px;
+  }
+}
+
+
+#bottom-filter {
+  align-items: center;
+  display: flex;
+  min-height: 40px;
+  justify-content: center;
+}
+
+button#more-filters.more-filters-dropdown__button {
+  color: @bl-100;
+  background-color: transparent;
+  border: none;
+  font-weight: 600;
+
+  &:hover {
+    color: @bl-200;
+  }
+
+  .caret:before {
+    top: 6px;
+    position: absolute;
+  }
+}
+
+#bottom-filter {
+  text-align: center;
+}
+
+.more-filters-dropdown {
+  width: 100%;
+  padding: 25px;
+  top: 20px;
+  right: 0;
+  left: inherit;
+
+  &__title {
+    width: 100%;
+    font-weight: bold;
+    padding-bottom: 10px;
+  }
+
+  &__buttons {
+    text-align: right;
+    width: 100%;
+
+    button {
+      width: 170px;
+    }
+  }
+
+  &__label.checkbox__label {
+    font-weight: 400;
+    color: @gr-600;
+  }
+
+  li {
+    margin-right: 10px;
+  }
+}
+
+.price-range-slider {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}

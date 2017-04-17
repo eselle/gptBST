@@ -221,7 +221,7 @@
         <div class="filter-minimal">
             <p id="intro">Results for properties in Las Vegas, Nevada, Estados Unidos from 04/17/2017 through 04/20/2017 with one bedroom.</p>
             <div class="expand-filter-btn">
-                <button type="button" class="btn btn-blue filters-edit-btn col-xs-12">Filter &amp; Edit</button>
+                <button type="button" class="btn btn-blue filters-edit-btn col-xs-12">Edit</button>
             </div>
         </div>
         <div id="top-filter">
@@ -668,8 +668,8 @@
             <input type="hidden" name="Children" id="Children" value="<%= Children %>" />
             <div class="results-filter-wrapper results-filter-wrapper-top">
                 <div class="row">
-                    <div class="filter-half price-range-slider col-xs-6 col-md-4">
-                        <div class="rows">
+                    <div class="filter-half price-range-slider col-xs-12 col-sm-6 col-md-4">
+                        <div class="price-range-slider__container rows">
                             <div class="label-cell clearfix">
                                 <label><%= Price.Name %></label>
                                 <span> Avg price/night</span>
@@ -682,56 +682,50 @@
                             </div>
                         </div>
                     </div>
-                    <div class="filter-half col-xs-4 col-md-6">
-                        <div class="rows">
-                            <div class="label-cell label-cell-view">
-                                <label><%= View.Name %></label>
+                    <div class="book-deals-section col-xs-12 col-sm-6 col-md-6">
+                        <div class="label-cell label-cell-view">
+                            <label><%= View.Name %></label>
+                        </div>
+                        <div class="book-deals-wrapper">
+                            <div class="checkbox-inline">
+                                <label class="facet-checkbox">
+                                    <div>
+                                        <%  if (ShowInstantBook)  {%>
+                                        <%  if (View.IsRealTimeBookable.Selected)  {%>
+                                        <input type="checkbox" id="IsRealTimeBookable" name="IsRealTimeBookable" value="true" checked />
+                                        <% } %>
+                                        <%  if (!View.IsRealTimeBookable.Selected) { %>
+                                        <input type="checkbox" id="IsRealTimeBookable" name="IsRealTimeBookable" value="true" />
+                                        <% } %>
+                                        <span class="checkbox__label"><i class="fa fa-bolt"></i><%= View.IsRealTimeBookable.Text %></span>
+                                        <% } %>
+                                        <%  if (!ShowInstantBook)  {%>
+                                        <input type="checkbox" id="IsRealTimeBookable" name="IsRealTimeBookable" value="true" disabled />
+                                        <span style="color: #dddede;" class="checkbox__label"><i style="color: #dddede;" class="fa fa-bolt"></i><%= View.IsRealTimeBookable.Text %></span>
+                                        <% } %>
+                                    </div>
+                                </label>
                             </div>
-                            <div class="book-deals-wrapper col-lg-10">
-                                <div class="col">
-                                    <div class="checkbox-inline">
-                                        <label class="facet-checkbox">
-                                            <div>
-                                                <%  if (ShowInstantBook)  {%>
-                                                <%  if (View.IsRealTimeBookable.Selected)  {%>
-                                                <input type="checkbox" id="IsRealTimeBookable" name="IsRealTimeBookable" value="true" checked />
-                                                <% } %>
-                                                <%  if (!View.IsRealTimeBookable.Selected) { %>
-                                                <input type="checkbox" id="IsRealTimeBookable" name="IsRealTimeBookable" value="true" />
-                                                <% } %>
-                                                <span class="checkbox__label"><i class="fa fa-bolt"></i><%= View.IsRealTimeBookable.Text %></span>
-                                                <% } %>
-                                                <%  if (!ShowInstantBook)  {%>
-                                                <input type="checkbox" id="IsRealTimeBookable" name="IsRealTimeBookable" value="true" disabled />
-                                                <span style="color: #dddede;" class="checkbox__label"><i style="color: #dddede;" class="fa fa-bolt"></i><%= View.IsRealTimeBookable.Text %></span>
-                                                <% } %>
-                                            </div>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="checkbox-inline">
-                                        <label class="facet-checkbox">
-                                            <%  if (ShowSpecials)  {%>
-                                            <%  if (View.PropertySpecial.Selected){ %>
-                                            <input type="checkbox" id="PropertySpecial" name="PropertySpecial" value="true" checked />
-                                            <% } %>
-                                            <%  if (!View.PropertySpecial.Selected ){ %>
-                                            <input type="checkbox" id="PropertySpecial" name="PropertySpecial" value="true" />
-                                            <% } %>
-                                            <span class="checkbox__label"><%= View.PropertySpecial.Text %></span>
-                                            <% } %>
-                                            <%  if (!ShowSpecials)  {%>
-                                            <input type="checkbox" id="PropertySpecial" name="PropertySpecial" value="true" disabled />
-                                            <span style="color: #dddede;" class="checkbox__label"><%= View.PropertySpecial.Text %></span>
-                                            <% } %>
-                                        </label>
-                                    </div>
-                                </div>
+                            <div class="checkbox-inline">
+                                <label class="facet-checkbox">
+                                    <%  if (ShowSpecials)  {%>
+                                    <%  if (View.PropertySpecial.Selected){ %>
+                                    <input type="checkbox" id="PropertySpecial" name="PropertySpecial" value="true" checked />
+                                    <% } %>
+                                    <%  if (!View.PropertySpecial.Selected ){ %>
+                                    <input type="checkbox" id="PropertySpecial" name="PropertySpecial" value="true" />
+                                    <% } %>
+                                    <span class="checkbox__label"><%= View.PropertySpecial.Text %></span>
+                                    <% } %>
+                                    <%  if (!ShowSpecials)  {%>
+                                    <input type="checkbox" id="PropertySpecial" name="PropertySpecial" value="true" disabled />
+                                    <span style="color: #dddede;" class="checkbox__label"><%= View.PropertySpecial.Text %></span>
+                                    <% } %>
+                                </label>
                             </div>
                         </div>
                     </div>
-                    <div id="bottom-filter" class="col-md-2">
+                    <div id="bottom-filter" class="col-sm-12 col-md-2">
                         <!--bottom filter template-->
                     </div>
                 </div>
