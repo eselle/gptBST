@@ -1061,7 +1061,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 })();
 
 
-},{"../utils/BRIDGESTREET.currency.js":31}],8:[function(require,module,exports){
+},{"../utils/BRIDGESTREET.currency.js":32}],8:[function(require,module,exports){
 var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
 (function () {
@@ -1452,7 +1452,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 })();
 
 
-},{"../utils/BRIDGESTREET.currency.js":31}],9:[function(require,module,exports){
+},{"../utils/BRIDGESTREET.currency.js":32}],9:[function(require,module,exports){
 (function () {
     var featuredPropertyPod = {
         init: function () {
@@ -1474,7 +1474,6 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
     var globalSearchDaterange = {
         desktopRange: null,
         mobileRange: null,
-        topSearchRange: null,
         arrival: new Date(),
         departure: new Date(),
         init: function (search) {
@@ -1511,11 +1510,10 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
                     scope.arrival = inst._startDate;
                     scope.departure = inst._endDate;
 
-                    if (inst == scope.desktopRange || inst == scope.topSearchRange)
+                    if (inst == scope.desktopRange)
                         scope.mobileRange.setVal([scope.arrival, scope.departure], true);
                     else
                         scope.desktopRange.setVal([scope.arrival, scope.departure], true);
-                        scope.topSearchRange.setVal([scope.arrival, scope.departure], true);
                 }
             };
 
@@ -1533,20 +1531,9 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
             this.desktopRange = mobiscroll.range('#check_in_date', desktopCalOptions);
             this.mobileRange = mobiscroll.range('#check_in_date_mobile', mobileCalOptions);
 
-            setTimeout(function () {
-                var topSearchCalOptions = _.clone(desktopCalOptions);
-
-                topSearchCalOptions.startInput = '#topsearch-check_in_date';
-                topSearchCalOptions.endInput = '#topsearch-check_out_date';
-                self.topSearchRange = mobiscroll.range('#topsearchbox_date_range_target', topSearchCalOptions);
-            }, 2000, this);
-
             if (search.date != null && scope.arrival != null && scope.departure != null) {
                 this.desktopRange.setVal([scope.arrival, scope.departure], true);
                 this.mobileRange.setVal([scope.arrival, scope.departure], true);
-                setTimeout(function () {
-                    self.topSearchRange.setVal([scope.arrival, scope.departure], true);
-                }, 2000, this);
             }
 
             this.initListeners();
@@ -1568,11 +1555,7 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
             if (DOMUtils.is_mobile()) {
                 this.mobileRange.show();
             } else {
-                if ($('#topsearch-check_in_date').length) {
-                    this.topSearchRange.show();
-                } else {
-                    this.desktopRange.show();
-                }
+                this.desktopRange.show();
             }
         }
     };
@@ -1581,7 +1564,7 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
 
 })();
 
-},{"../utils/BRIDGESTREET.calendarcontrol.js":30}],11:[function(require,module,exports){
+},{"../utils/BRIDGESTREET.calendarcontrol.js":31}],11:[function(require,module,exports){
 var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
 var DateFormat = require('../utils/BRIDGESTREET.date.format.js');
 var BSgloballocationsearch = require('./BRIDGESTREET.global.search.location.js');
@@ -1736,7 +1719,7 @@ var globalgosearch = (function (app, parent, dateFormat, guests, document) {
 
 module.exports = globalgosearch || window.globalgosearch;
 
-},{"../utils/BRIDGESTREET.calendarcontrol.js":30,"../utils/BRIDGESTREET.date.format.js":32,"./BRIDGESTREET.global.search.daterange.js":10,"./BRIDGESTREET.global.search.guests.js":12,"./BRIDGESTREET.global.search.location.js":13}],12:[function(require,module,exports){
+},{"../utils/BRIDGESTREET.calendarcontrol.js":31,"../utils/BRIDGESTREET.date.format.js":33,"./BRIDGESTREET.global.search.daterange.js":10,"./BRIDGESTREET.global.search.guests.js":12,"./BRIDGESTREET.global.search.location.js":13}],12:[function(require,module,exports){
 var BSIncrement = require('../utils/increment.js');
 
 (function () {
@@ -1888,7 +1871,7 @@ var BSIncrement = require('../utils/increment.js');
 
 })();
 
-},{"../utils/increment.js":34}],13:[function(require,module,exports){
+},{"../utils/increment.js":35}],13:[function(require,module,exports){
 var BSGlobalDateRange = require('./BRIDGESTREET.global.search.daterange.js');
 
 (function () {
@@ -2217,7 +2200,7 @@ var BSHomepageDateRange = require('./BRIDGESTREET.homepage.search.daterange.js')
 
     module.exports = homepagehero || window.homepagehero;
 })();
-},{"../utils/BRIDGESTREET.date.format.js":32,"./BRIDGESTREET.global.search.guests.js":12,"./BRIDGESTREET.global.search.location.js":13,"./BRIDGESTREET.homepage.search.daterange.js":15}],15:[function(require,module,exports){
+},{"../utils/BRIDGESTREET.date.format.js":33,"./BRIDGESTREET.global.search.guests.js":12,"./BRIDGESTREET.global.search.location.js":13,"./BRIDGESTREET.homepage.search.daterange.js":15}],15:[function(require,module,exports){
 var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
 
 (function () {
@@ -2323,7 +2306,7 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
 
 
 
-},{"../utils/BRIDGESTREET.calendarcontrol.js":30}],16:[function(require,module,exports){
+},{"../utils/BRIDGESTREET.calendarcontrol.js":31}],16:[function(require,module,exports){
 var BSsplitscreen = require('./BRIDGESTREET.split.screen.js');
 
 (function () {
@@ -3164,7 +3147,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
             var dfd = jQuery.Deferred();
 
-            var Model = Backbone.Model.extend({ url: '/search-results.json' });
+            var Model = Backbone.Model.extend({ url: 'http://localhost:5000/bridge-mock' });
 
             var View = Backbone.View.extend({
                 initialize: function () {
@@ -3193,14 +3176,14 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                     //check the sub filters that are in the model
                     for (var i = 0; i < this.model.attributes.filters.PropertyTypes.length; i++) {
                         var id = this.model.attributes.filters.PropertyTypes[i];
-                        $('input[name=PropertyTypes]#' + id).prop('checked', 'checked');;
+                        $('input[name=PropertyTypes]#' + id).prop('checked', 'checked');
                     }
                     for (var i = 0; i < this.model.attributes.filters.Attributes.length; i++) {
                         var id = this.model.attributes.filters.Attributes[i];
-                        $('input[name=Attributes]#' + id).prop('checked', 'checked');;
+                        $('input[name=Attributes]#' + id).prop('checked', 'checked');
                     }
                     if (this.model.attributes.filters.IsPetFriendly) {
-                        $('input[name=IsPetFriendly]#' + id).prop('checked', 'checked');;
+                        $('input[name=IsPetFriendly]#' + id).prop('checked', 'checked');
                     }
                 },
                 applyFilter: function (e) {
@@ -3489,7 +3472,6 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
                     BSuicomponents.initSearchPageUIComponents();
                     BSuicomponents.initRangeSliderComponent(this);
-                    BSTopSearch.init(this.model, this.onModelChangeCallback.bind(this), this.onSearchCallback.bind(this));
 
                     if (
                         this.model.attributes.PropertyResults.length == 0 &&
@@ -3506,7 +3488,6 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                     }
 
                     DOMUtils.resizeForOldBrowsers();
-
                 },
                 renderError: function (data, status) {
                     console.log(status.responseText);
@@ -3604,11 +3585,21 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                             BSmapview.disableMarker(prop);
                         }
                     }
+                },
+
+                initializeTopSearch: function() {
+                    BSTopSearch.init(this.model, this.onModelChangeCallback.bind(this), this.onSearchCallback.bind(this));
                 }
             });
 
             this.searchModel = new Model();
             this.searchView = new View({ model: this.searchModel, tagName: "form", el: $("#filter-container") });
+
+            this.searchModel.on('sync', (function (event) {
+                this.searchModel.off('sync')
+                this.searchView.initializeTopSearch();
+            }).bind(this));
+
             return dfd.promise();
         },
         getExactMatches: function () {
@@ -3627,7 +3618,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 })();
 
 
-},{"../utils/BRIDGESTREET.currency.js":31,"../widgets/BRIDGESTREET.ui.components.js":36,"./BRIDGESTREET.mapview.js":16,"./BRIDGESTREET.search.listing.js":23,"./BRIDGESTREET.topsearch.js":27}],23:[function(require,module,exports){
+},{"../utils/BRIDGESTREET.currency.js":32,"../widgets/BRIDGESTREET.ui.components.js":37,"./BRIDGESTREET.mapview.js":16,"./BRIDGESTREET.search.listing.js":23,"./BRIDGESTREET.topsearch.js":28}],23:[function(require,module,exports){
 (function () {
     var $window = $(window);
 
@@ -3915,6 +3906,111 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
 
 },{}],26:[function(require,module,exports){
+var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
+
+(function () {
+
+    var topSearchDaterange = {
+        topSearchRange: null,
+        arrival: new Date(),
+        departure: new Date(),
+        init: function (search) {
+            if (search.date) {
+                var searchArrival = search.date.arrival;
+                var searchDeparture = search.date.departure;
+                var splittedArrival;
+                var splitedDeparture;
+                var arrival;
+                var departure;
+
+                if (typeof searchArrival === 'string') {
+                    splittedArrival = searchArrival.split('-');
+                    arrival = new Date(splittedArrival[0], (parseInt(splittedArrival[1]) - 1), splittedArrival[2]);
+                } else if (searchArrival instanceof Date) {
+                    arrival = searchArrival;
+                }
+
+                if (typeof searchDeparture === 'string') {
+                    splitedDeparture = searchDeparture.split('-');
+                    departure = new Date(splitedDeparture[0], (parseInt(splitedDeparture[1]) - 1), splitedDeparture[2]);
+                } else if (searchDeparture instanceof Date) {
+                    departure = searchDeparture;
+                }
+
+                if (arrival) {
+                    this.arrival = arrival;
+                }
+                if (departure) {
+                    this.departure = departure;
+                }
+            }
+
+            var topSearchCalOptions = {
+                theme: 'material',
+                months: 2,
+                display: 'bubble',
+                calendarWidth: 742,
+                animate: false,
+                min: new Date(),
+                weekDays: 'short',
+                dayNamesMin: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+                dayNamesShort: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+                showSelector: false,
+                yearChange: false,
+                buttons: [],
+                defaultValue: [this.arrival, this.departure],
+                onMarkupReady: function (event, inst) {
+                    var $ = mobiscroll.$,
+                    markup = $(event.target);
+                    markup.find('.mbsc-fr-c').append(CalendarUtil.getMarkup());
+                    CalendarUtil.set(inst);
+                },
+                onSetDate: function (event, inst) {
+                    if (event.control == 'calendar') {
+                        CalendarUtil.update(inst, event);
+                    }
+                },
+                onSet: function (event, inst) {
+                    // save the date and ensure that the other control is updated
+                    console.log('ON SET', inst._startDate, inst._endDate);
+                    this.arrival = inst._startDate;
+                    this.departure = inst._endDate;
+                    this.topSearchRange.setVal([this.arrival, this.departure], true);
+                }
+            };
+
+            topSearchCalOptions.startInput = '#topsearch-check_in_date';
+            topSearchCalOptions.endInput = '#topsearch-check_out_date';
+            this.topSearchRange = mobiscroll.range('#topsearchbox_date_range_target', topSearchCalOptions);
+            console.log(this.arrival, this.departure);
+            if (this.arrival != null && this.departure != null) {
+                this.topSearchRange.setVal([this.arrival, this.departure], true);
+            }
+
+            this.initListeners();
+
+            return this;
+        },
+
+        initListeners: function () {
+            $(window).on('resize', { self: this }, this.resizeBrowser);
+        },
+
+        resizeBrowser: function () {
+            if (document.getElementById('topsearch-check_in_date')) {
+                DOMUtils.fitToPlaceholder("topsearch-check_in_date");
+            }
+        },
+        show: function () {
+            this.topSearchRange.show();
+        }
+    };
+
+    module.exports = topSearchDaterange || window.topSearchDaterange;
+
+})();
+
+},{"../utils/BRIDGESTREET.calendarcontrol.js":31}],27:[function(require,module,exports){
 (function () {
     var $window = $(window);
 
@@ -4063,10 +4159,10 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 })();
 
 
-},{}],27:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 var BSTopSearchGuestSelector = require('./BRIDGESTREET.topsearch.guest.selector.js');
 var BSgloballocationsearch = require('./BRIDGESTREET.global.search.location.js');
-var BSglobaldaterange = require('./BRIDGESTREET.global.search.daterange.js');
+var BSTopSearchDaterange = require('./BRIDGESTREET.topsearch.daterange.js');
 var DateFormat = require('../utils/BRIDGESTREET.date.format.js');
 
 (function () {
@@ -4078,12 +4174,13 @@ var DateFormat = require('../utils/BRIDGESTREET.date.format.js');
             this.onModelUpdateCallback = onModelUpdateCallback;
             this.onSearchCallback = onSearchCallback;
 
-            //TODO: remove previous listeners
-            if ($('#topsearch-guests').length) {
-                this.dateRange = BSglobaldaterange.init({date: null});
-                this.locationSearch = BSgloballocationsearch.init({location: null}); // TODO: update this logic
-                BSTopSearchGuestSelector.init(this.model, this.updateModel.bind(this));
-            }
+            console.log(this.model, this.getParameterFromQueryString('ArrivalDate'), this.getParameterFromQueryString('DepartureDate'));
+            this.dateRange = BSTopSearchDaterange.init({date: {
+                arrival: this.getParameterFromQueryString('ArrivalDate'),
+                departure: this.getParameterFromQueryString('DepartureDate')
+            }});
+            this.locationSearch = BSgloballocationsearch.init({location: null}); // TODO: update this logic
+            BSTopSearchGuestSelector.init(this.model, this.updateModel.bind(this));
 
             $('.topsearchbox #topsearch-search_button').on('click', (function(event) {
                 event.preventDefault();
@@ -4103,7 +4200,6 @@ var DateFormat = require('../utils/BRIDGESTREET.date.format.js');
                 $('.dropdown.open .dropdown-toggle').dropdown('toggle');
             });
         },
-
         updateModel: function (model) {
             model.attributes.ArrivalDate = DateFormat(this.dateRange.arrival, "yyyy-mm-dd");
             model.attributes.DepartureDate = DateFormat(this.dateRange.departure, "yyyy-mm-dd");
@@ -4113,13 +4209,22 @@ var DateFormat = require('../utils/BRIDGESTREET.date.format.js');
 
             this.model = model;
             this.onModelUpdateCallback(model);
+        },
+        getParameterFromQueryString: function(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
         }
     };
 
     module.exports = topSearch || window.topSearch;
 })();
 
-},{"../utils/BRIDGESTREET.date.format.js":32,"./BRIDGESTREET.global.search.daterange.js":10,"./BRIDGESTREET.global.search.location.js":13,"./BRIDGESTREET.topsearch.guest.selector.js":26}],28:[function(require,module,exports){
+},{"../utils/BRIDGESTREET.date.format.js":33,"./BRIDGESTREET.global.search.location.js":13,"./BRIDGESTREET.topsearch.daterange.js":26,"./BRIDGESTREET.topsearch.guest.selector.js":27}],29:[function(require,module,exports){
 (function () {
 
     var VideoSlider = {
@@ -4351,7 +4456,7 @@ var DateFormat = require('../utils/BRIDGESTREET.date.format.js');
 
 })();
 
-},{}],29:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 "use strict"
 
 window.Utils = window.Utils || {};
@@ -4662,7 +4767,7 @@ jQuery( document ).ready( function (jQuery) {
     DOMUtils.scrollPageToId();
 
 });
-},{"./elements/BRIDGESTREET.accordion.list.js":1,"./elements/BRIDGESTREET.alllocations.js":2,"./elements/BRIDGESTREET.bookingflow.js":3,"./elements/BRIDGESTREET.contactusMaps.js":4,"./elements/BRIDGESTREET.contactusform.js":5,"./elements/BRIDGESTREET.detail.carousel.js":6,"./elements/BRIDGESTREET.detail.related.properties.js":7,"./elements/BRIDGESTREET.detail.yourtrip.js":8,"./elements/BRIDGESTREET.featured.pod.js":9,"./elements/BRIDGESTREET.global.search.go.js":11,"./elements/BRIDGESTREET.homepage.hero.js":14,"./elements/BRIDGESTREET.mapview.js":16,"./elements/BRIDGESTREET.mobile.modal.js":17,"./elements/BRIDGESTREET.navigation.js":18,"./elements/BRIDGESTREET.nearby.js":19,"./elements/BRIDGESTREET.partnercontactusform.js":20,"./elements/BRIDGESTREET.peeldown.js":21,"./elements/BRIDGESTREET.search.filter.js":22,"./elements/BRIDGESTREET.search.listing.js":23,"./elements/BRIDGESTREET.statistics.pod.js":25,"./elements/BRIDGESTREET.video.slider.js":28,"./utils/DOMUtils":33,"./widgets/BRIDGESTREET.spinner.widget":35,"./widgets/BRIDGESTREET.ui.components.js":36}],30:[function(require,module,exports){
+},{"./elements/BRIDGESTREET.accordion.list.js":1,"./elements/BRIDGESTREET.alllocations.js":2,"./elements/BRIDGESTREET.bookingflow.js":3,"./elements/BRIDGESTREET.contactusMaps.js":4,"./elements/BRIDGESTREET.contactusform.js":5,"./elements/BRIDGESTREET.detail.carousel.js":6,"./elements/BRIDGESTREET.detail.related.properties.js":7,"./elements/BRIDGESTREET.detail.yourtrip.js":8,"./elements/BRIDGESTREET.featured.pod.js":9,"./elements/BRIDGESTREET.global.search.go.js":11,"./elements/BRIDGESTREET.homepage.hero.js":14,"./elements/BRIDGESTREET.mapview.js":16,"./elements/BRIDGESTREET.mobile.modal.js":17,"./elements/BRIDGESTREET.navigation.js":18,"./elements/BRIDGESTREET.nearby.js":19,"./elements/BRIDGESTREET.partnercontactusform.js":20,"./elements/BRIDGESTREET.peeldown.js":21,"./elements/BRIDGESTREET.search.filter.js":22,"./elements/BRIDGESTREET.search.listing.js":23,"./elements/BRIDGESTREET.statistics.pod.js":25,"./elements/BRIDGESTREET.video.slider.js":29,"./utils/DOMUtils":34,"./widgets/BRIDGESTREET.spinner.widget":36,"./widgets/BRIDGESTREET.ui.components.js":37}],31:[function(require,module,exports){
 var BSGlobalSearchGuest = require('../elements/BRIDGESTREET.global.search.guests');
 
 var calendarControl = (function() {
@@ -4734,7 +4839,7 @@ var calendarControl = (function() {
 })();
 
 module.exports = calendarControl || window.calendarControl;
-},{"../elements/BRIDGESTREET.global.search.guests":12}],31:[function(require,module,exports){
+},{"../elements/BRIDGESTREET.global.search.guests":12}],32:[function(require,module,exports){
 var currencyUtil = (function () {
     var my = {},
     currency_symbols = {
@@ -4768,7 +4873,7 @@ var currencyUtil = (function () {
 }());
 
 module.exports = currencyUtil || window.currencyUtil;
-},{}],32:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
 var dateFormat = (function() {
 	var	token = /d{1,4}|m{1,4}|yy(?:yy)?|([HhMsTt])\1?|[LloSZ]|"[^"]*"|'[^']*'/g,
 		timezone = /\b(?:[PMCEA][SDP]T|(?:Pacific|Mountain|Central|Eastern|Atlantic) (?:Standard|Daylight|Prevailing) Time|(?:GMT|UTC)(?:[-+]\d{4})?)\b/g,
@@ -4882,7 +4987,7 @@ Date.prototype.format = function (mask, utc) {
 };
 
 module.exports = dateFormat || window.dateFormat;
-},{}],33:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 (function(window) {
 
     'use strict';
@@ -5519,7 +5624,7 @@ module.exports = dateFormat || window.dateFormat;
 
 })(window);
    
-},{}],34:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 (function () {
 
     var factory = (function() {
@@ -5549,7 +5654,7 @@ module.exports = dateFormat || window.dateFormat;
 
 })();
 
-},{}],35:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 (function () {
 
     var SpinnerWidget = {
@@ -5610,7 +5715,7 @@ module.exports = dateFormat || window.dateFormat;
 
 })();
 
-},{}],36:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 var BSsplitscreen = require('../elements/BRIDGESTREET.split.screen.js');
 (function ($window) {
 
@@ -5973,4 +6078,4 @@ var BSsplitscreen = require('../elements/BRIDGESTREET.split.screen.js');
 })();
 
 
-},{"../elements/BRIDGESTREET.split.screen.js":24}]},{},[29]);
+},{"../elements/BRIDGESTREET.split.screen.js":24}]},{},[30]);

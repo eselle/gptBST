@@ -16,7 +16,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
             var dfd = jQuery.Deferred();
 
-            var Model = Backbone.Model.extend({ url: '/search-results.json' });
+            var Model = Backbone.Model.extend({ url: 'http://localhost:5000/bridge-mock' });
 
             var View = Backbone.View.extend({
                 initialize: function () {
@@ -45,14 +45,14 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                     //check the sub filters that are in the model
                     for (var i = 0; i < this.model.attributes.filters.PropertyTypes.length; i++) {
                         var id = this.model.attributes.filters.PropertyTypes[i];
-                        $('input[name=PropertyTypes]#' + id).prop('checked', 'checked');;
+                        $('input[name=PropertyTypes]#' + id).prop('checked', 'checked');
                     }
                     for (var i = 0; i < this.model.attributes.filters.Attributes.length; i++) {
                         var id = this.model.attributes.filters.Attributes[i];
-                        $('input[name=Attributes]#' + id).prop('checked', 'checked');;
+                        $('input[name=Attributes]#' + id).prop('checked', 'checked');
                     }
                     if (this.model.attributes.filters.IsPetFriendly) {
-                        $('input[name=IsPetFriendly]#' + id).prop('checked', 'checked');;
+                        $('input[name=IsPetFriendly]#' + id).prop('checked', 'checked');
                     }
                 },
                 applyFilter: function (e) {
@@ -341,7 +341,6 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
                     BSuicomponents.initSearchPageUIComponents();
                     BSuicomponents.initRangeSliderComponent(this);
-                    BSTopSearch.init(this.model, this.onModelChangeCallback.bind(this), this.onSearchCallback.bind(this));
 
                     if (
                         this.model.attributes.PropertyResults.length == 0 &&
@@ -358,7 +357,6 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                     }
 
                     DOMUtils.resizeForOldBrowsers();
-
                 },
                 renderError: function (data, status) {
                     console.log(status.responseText);
@@ -456,11 +454,21 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                             BSmapview.disableMarker(prop);
                         }
                     }
+                },
+
+                initializeTopSearch: function() {
+                    BSTopSearch.init(this.model, this.onModelChangeCallback.bind(this), this.onSearchCallback.bind(this));
                 }
             });
 
             this.searchModel = new Model();
             this.searchView = new View({ model: this.searchModel, tagName: "form", el: $("#filter-container") });
+
+            this.searchModel.on('sync', (function (event) {
+                this.searchModel.off('sync')
+                this.searchView.initializeTopSearch();
+            }).bind(this));
+
             return dfd.promise();
         },
         getExactMatches: function () {

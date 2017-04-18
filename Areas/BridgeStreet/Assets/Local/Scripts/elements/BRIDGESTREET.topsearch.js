@@ -1,6 +1,6 @@
 var BSTopSearchGuestSelector = require('./BRIDGESTREET.topsearch.guest.selector.js');
 var BSgloballocationsearch = require('./BRIDGESTREET.global.search.location.js');
-var BSglobaldaterange = require('./BRIDGESTREET.global.search.daterange.js');
+var BSTopSearchDaterange = require('./BRIDGESTREET.topsearch.daterange.js');
 var DateFormat = require('../utils/BRIDGESTREET.date.format.js');
 
 (function () {
@@ -12,12 +12,13 @@ var DateFormat = require('../utils/BRIDGESTREET.date.format.js');
             this.onModelUpdateCallback = onModelUpdateCallback;
             this.onSearchCallback = onSearchCallback;
 
-            //TODO: remove previous listeners
-            if ($('#topsearch-guests').length) {
-                this.dateRange = BSglobaldaterange.init({date: null});
-                this.locationSearch = BSgloballocationsearch.init({location: null}); // TODO: update this logic
-                BSTopSearchGuestSelector.init(this.model, this.updateModel.bind(this));
-            }
+            console.log(this.model, this.getParameterFromQueryString('ArrivalDate'), this.getParameterFromQueryString('DepartureDate'));
+            this.dateRange = BSTopSearchDaterange.init({date: {
+                arrival: this.getParameterFromQueryString('ArrivalDate'),
+                departure: this.getParameterFromQueryString('DepartureDate')
+            }});
+            this.locationSearch = BSgloballocationsearch.init({location: null}); // TODO: update this logic
+            BSTopSearchGuestSelector.init(this.model, this.updateModel.bind(this));
 
             $('.topsearchbox #topsearch-search_button').on('click', (function(event) {
                 event.preventDefault();
@@ -37,7 +38,6 @@ var DateFormat = require('../utils/BRIDGESTREET.date.format.js');
                 $('.dropdown.open .dropdown-toggle').dropdown('toggle');
             });
         },
-
         updateModel: function (model) {
             model.attributes.ArrivalDate = DateFormat(this.dateRange.arrival, "yyyy-mm-dd");
             model.attributes.DepartureDate = DateFormat(this.dateRange.departure, "yyyy-mm-dd");
@@ -47,6 +47,15 @@ var DateFormat = require('../utils/BRIDGESTREET.date.format.js');
 
             this.model = model;
             this.onModelUpdateCallback(model);
+        },
+        getParameterFromQueryString: function(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
         }
     };
 
