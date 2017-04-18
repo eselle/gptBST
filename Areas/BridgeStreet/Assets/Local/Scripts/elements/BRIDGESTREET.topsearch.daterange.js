@@ -62,13 +62,13 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
                         CalendarUtil.update(inst, event);
                     }
                 },
-                onSet: function (event, inst) {
+                onSet: (function (event, inst) {
                     // save the date and ensure that the other control is updated
                     console.log('ON SET', inst._startDate, inst._endDate);
                     this.arrival = inst._startDate;
                     this.departure = inst._endDate;
                     this.topSearchRange.setVal([this.arrival, this.departure], true);
-                }
+                }).bind(this)
             };
 
             topSearchCalOptions.startInput = '#topsearch-check_in_date';
