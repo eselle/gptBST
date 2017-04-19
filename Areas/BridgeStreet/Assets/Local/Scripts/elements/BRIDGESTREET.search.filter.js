@@ -16,7 +16,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
             var dfd = jQuery.Deferred();
 
-            var Model = Backbone.Model.extend({ url: 'http://localhost:5000/bridge-mock' });
+            var Model = Backbone.Model.extend({ url: '/search-results.json' });
 
             var View = Backbone.View.extend({
                 initialize: function () {
@@ -80,6 +80,8 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                         Attributes: []
                     };
 
+                    this.model.attributes.filters = filters;
+
                     var priceMin = $('#RangeSlider .noUi-handle.noUi-handle-lower .noUi-tooltip').text().replace("$", "");
                     if (priceMin != "") {
                         filters.PriceMin = Number(priceMin);
@@ -105,11 +107,22 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                         $(".filter-close[value='PropertyTypes=" + val + "']").show();
                         filters.PropertyTypes.push(val);
                     });
+                    $('input[name=Attributes]').each(function () {
+                        var val = Number($(this).val());
+                        $(".filter-close[value='Attributes=" + val + "']").hide();
+                    });
                     $('input[name=Attributes]:checked').each(function () {
                         var val = Number($(this).val());
                         $(".filter-close[value='Attributes=" + val + "']").show();
                         filters.Attributes.push(val);
                     });
+                    console.log(this.model.attributes);
+
+                    if (filters.Attributes.length > 0) {
+                        $('.more-filters-dropdown__amount').html('(' +filters.Attributes.length + ')');
+                    } else {
+                        $('.more-filters-dropdown__amount').html('');
+                    }
 
                     this.model.attributes.filters = filters;
 
@@ -304,6 +317,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
                     var filterTmpl2 = $("#bottom-filter-template").html();
                     var template2 = _.template(filterTmpl2);
+                    console.log(this.model.attributes);
                     this.$el.find('#bottom-filter').html(template2(this.model.attributes));
 
                     $('.filter-close').hide();
@@ -461,7 +475,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                 }
             });
 
-            this.searchModel = new Model();
+            this.searchModel = new Model({ filters: {}});
             this.searchView = new View({ model: this.searchModel, tagName: "form", el: $("#filter-container") });
 
             this.searchModel.on('sync', (function (event) {

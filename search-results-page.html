@@ -522,7 +522,8 @@
     <script type="text/template" id="bottom-filter-template">
         <div class="dropdown">
             <button id="more-filters" class="more-filters-dropdown__button dropdown-toggle" type="button" data-toggle="dropdown">
-                Amenities
+                <span>Amenities</span>
+                <span class="more-filters-dropdown__amount"></span>
                 <span class="caret"></span>
             </button>
             <ul id="FilterAmeneties" data-line-value="1" class="dropdown-menu more-filters-dropdown">
@@ -668,21 +669,21 @@
             <input type="hidden" name="Children" id="Children" value="<%= Children %>" />
             <div class="results-filter-wrapper results-filter-wrapper-top">
                 <div class="row">
-                    <div class="filter-half price-range-slider col-xs-12 col-sm-6 col-md-4">
+                    <div class="filter-half price-range-slider col-lg-4 col-xs-12 col-sm-6 col-md-4">
                         <div class="price-range-slider__container rows">
                             <div class="label-cell clearfix">
                                 <label><%= Price.Name %></label>
                                 <span> Avg price/night</span>
                             </div>
                             <div class="range-slider-wrapper">
-                                <span id="ValueLower" class="slider-label label-left hidden-xs col-sm-1 col-md-1 nopadding padding-right" data-value="<%= Price.Min %>"><%= Price.CurrencyCode %></span>
+                                <span id="ValueLower" class="slider-label label-left hidden-xs col-lg-1 col-md-1 col-sm-1 col-xs-1 nopadding padding-right" data-value="<%= Price.Min %>"><%= Price.CurrencyCode %></span>
                                 <div id="RangeSlider" class="col-xs-12 col-sm-10 col-md-10 nopadding"></div>
-                                <span id="ValueHigher" class="slider-label label-right hidden-xs col-sm-1 col-md-1 nopadding padding-left" data-value="<%= Price.Max %>"><%= Price.CurrencyCode %></span>
+                                <span id="ValueHigher" class="slider-label label-right hidden-xs col-lg-1 col-md-1 col-sm-1 col-xs-1 nopadding padding-left" data-value="<%= Price.Max %>"><%= Price.CurrencyCode %></span>
                                 <input type="hidden" name="PriceRangeMax" id="PriceRangeMax" value="<%= Price.RangeMax %>" />
                             </div>
                         </div>
                     </div>
-                    <div class="book-deals-section col-xs-12 col-sm-6 col-md-6">
+                    <div class="book-deals-section col-6 col-xs-12 col-sm-6 col-md-6">
                         <div class="label-cell label-cell-view">
                             <label><%= View.Name %></label>
                         </div>
@@ -725,7 +726,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="bottom-filter" class="col-sm-12 col-md-2">
+                    <div id="bottom-filter" class="col-2 col-sm-12 col-md-2">
                         <!--bottom filter template-->
                     </div>
                 </div>
