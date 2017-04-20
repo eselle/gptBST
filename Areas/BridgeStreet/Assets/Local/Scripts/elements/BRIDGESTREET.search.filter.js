@@ -30,7 +30,8 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                     "click .cancel-btn": "cancelFilter",
                     "change #RoomType": "redoSearch",
                     "change #IsRealTimeBookable": "applyFilter",
-                    "change #PropertySpecial": "applyFilter"
+                    "change #PropertySpecial": "applyFilter",
+                    "click .property-types-checkbox": "onPropertyTypeChange"
                 },
                 redoSearch: function (e) {
                     if (e) e.preventDefault();
@@ -378,6 +379,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                 },
                 onModelChangeCallback: function(model) {
                     this.model.set(model.attributes);
+                    this.showHideAllPods();
                 },
                 onSearchCallback: function() {
                     //TODO: apply filters
@@ -397,7 +399,6 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                     return bits[1] + "/" + bits[2] + "/" + bits[0];
                 },
                 showHideAllPods: function () {
-
                     $('#extra-results-intro').hide();
                     $('#partial-results-only-intro').hide();
                     $("#no-results").hide();
@@ -431,6 +432,8 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                     BSmapview.enableMarker(prop);
 
                     var filters = this.model.attributes.filters;
+
+                    console.log('showHidePod', filters.PropertyTypes, prop.PropertyType);
 
                     if (filters.IsPetFriendly && !prop.IsPetFriendly) {
                         propPod.hide();
@@ -493,6 +496,9 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
         },
         getPriceRange: function () {
             return this.searchModel.attributes.Price;
+        },
+        onPropertyTypeChange: function () {
+            console.log('onPropertyChange');
         }
     };
 

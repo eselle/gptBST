@@ -207,7 +207,9 @@
 
                     <div class="btn-search">
                         <div class="btn-search-wrapper">
-                            <a class="searchbox-submit" tabindex="4">Go</a>
+                            <a class="searchbox-submit" tabindex="4">
+                                <i class="fa fa-search"></i>
+                            </a>
                         </div>
                     </div>
                     <a class="js-slideout-toggle toggle">
@@ -527,24 +529,6 @@
                 <span class="caret"></span>
             </button>
             <ul id="FilterAmeneties" data-line-value="1" class="dropdown-menu more-filters-dropdown">
-                <li class="more-filters-dropdown__title"><%= PropertyTypes.DisplayName %></li>
-                <% _.each(PropertyTypes.Options, function(opt) { %>
-                <li>
-                    <div class="checkbox-inline">
-                        <label class="facet-checkbox">
-                            <div>
-                                <% if (opt.Selected) { %>
-                                <input type="checkbox" name="PropertyTypes" id="<%= opt.Value %>" value="<%= opt.Value %>" checked />
-                                <% } %>
-                                <% if (!opt.Selected) { %>
-                                <input type="checkbox" name="PropertyTypes" id="<%= opt.Value %>" value="<%= opt.Value %>" />
-                                <% } %>
-                                <span class="checkbox__label more-filters-dropdown__label"><%= opt.Text %></span>
-                            </div>
-                        </label>
-                    </div>
-                </li>
-                <% }); %>
                 <li class="more-filters-dropdown__title">Pets</li>
                 <li>
                     <div>
@@ -603,10 +587,10 @@
                 <div class="topsearchbox__input-wrapper topsearchbox__input-wrapper-dates topsearchbox__input-wrapper--carret">
                     <input class="topsearchbox__input-element" type="text" id="topsearch-check_in_date" name="checkin" placeholder="Check in" data-value-large="Check in" data-value-small="Check in" readonly=""/>
                 </div>
+                <div id="topsearchbox_date_range_target"></div>
                 <div class="topsearchbox__input-wrapper topsearchbox__input-wrapper-dates topsearchbox__input-wrapper--carret">
                     <input class="topsearchbox__input-element" type="text" id="topsearch-check_out_date" name="checkout" placeholder="Check out" data-value-large="Check out" data-value-small="Check out" readonly=""/>
                 </div>
-                <div id="topsearchbox_date_range_target"></div>
                 <div class="topsearchbox__input-wrapper topsearchbox__input-wrapper-guests topsearchbox__input-wrapper--carret">
                     <div id="topsearch-guests" class="searchbox-input searchbox-guests has-icon user-dropdown dropdown mega-dropdown">
                         <a href="#" class="dropdown-toggle" data-target="#" data-toggle="dropdown" data-content>
@@ -684,9 +668,6 @@
                         </div>
                     </div>
                     <div class="book-deals-section col-6 col-xs-12 col-sm-6 col-md-6">
-                        <div class="label-cell label-cell-view">
-                            <label><%= View.Name %></label>
-                        </div>
                         <div class="book-deals-wrapper">
                             <div class="checkbox-inline">
                                 <label class="facet-checkbox">
@@ -707,9 +688,9 @@
                                     </div>
                                 </label>
                             </div>
+                            <%  if (ShowSpecials)  {%>
                             <div class="checkbox-inline">
                                 <label class="facet-checkbox">
-                                    <%  if (ShowSpecials)  {%>
                                     <%  if (View.PropertySpecial.Selected){ %>
                                     <input type="checkbox" id="PropertySpecial" name="PropertySpecial" value="true" checked />
                                     <% } %>
@@ -717,40 +698,28 @@
                                     <input type="checkbox" id="PropertySpecial" name="PropertySpecial" value="true" />
                                     <% } %>
                                     <span class="checkbox__label"><%= View.PropertySpecial.Text %></span>
-                                    <% } %>
-                                    <%  if (!ShowSpecials)  {%>
-                                    <input type="checkbox" id="PropertySpecial" name="PropertySpecial" value="true" disabled />
-                                    <span style="color: #dddede;" class="checkbox__label"><%= View.PropertySpecial.Text %></span>
-                                    <% } %>
                                 </label>
                             </div>
+                            <% } %>
+                            <% _.each(PropertyTypes.Options, function(opt) { %>
+                            <div class="checkbox-inline">
+                                <label class="facet-checkbox">
+                                    <div>
+                                        <% if (opt.Selected) { %>
+                                        <input class="property-types-checkbox" type="checkbox" name="PropertyTypes" id="<%= opt.Value %>" value="<%= opt.Value %>" checked />
+                                        <% } %>
+                                        <% if (!opt.Selected) { %>
+                                        <input class="property-types-checkbox" type="checkbox" name="PropertyTypes" id="<%= opt.Value %>" value="<%= opt.Value %>" />
+                                        <% } %>
+                                        <span class="checkbox__label more-filters-dropdown__label"><%= opt.Text %></span>
+                                    </div>
+                                </label>
+                            </div>
+                            <% }); %>
                         </div>
                     </div>
-                    <div id="bottom-filter" class="col-2 col-sm-12 col-md-2">
+                    <div id="bottom-filter" class="col-2 col-sm-12 col-md-2 col-xs-12">
                         <!--bottom filter template-->
-                    </div>
-                </div>
-            </div>
-            <div class="results-filter-wrapper results-filter-wrapper-bottom">
-                <div class="row">
-                    <div class="filter-half border-right col-xs-12">
-                        <div class="more-filters-button-container">
-                            <button class="btn btn-close filter-close" value="IsPetFriendly=true" type="button"><%= IsPetFriendly.Text %> <i class="fa fa-close"></i> </button>
-
-                            <% _.each(Attributes, function(attrSet){ %>
-                            <% _.each(attrSet.Options, function(opt){ %>
-
-                            <button class="btn btn-close filter-close" value="Attributes=<%= opt.Value %>" type="button"><%= opt.Text %> <i class="fa fa-close"></i> </button>
-
-                            <% }); %>
-                            <% }); %>
-
-                            <% _.each(PropertyTypes.Options, function(opt){ %>
-
-                            <button class="btn btn-close filter-close" value="PropertyTypes=<%= opt.Value %>" type="button"><%= opt.Text %> <i class="fa fa-close"></i> </button>
-
-                            <% }); %>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -760,14 +729,13 @@
     <script type="text/template" id="grid-template">
         <% _.each(PropertyList, function(prop){ %>
         <div class="property-pod column col-search-pod half-padding toppadding75" id="<%= prop.PropertyId %>">
-            <a class="property-pod-wrapper" href="<%= prop.URL %>">
+            <a class="property-pod-wrapper" href="<%= prop.URL %>" target="_blank">
                 <div class="property-pod-image-wrapper img-pod-animated">
                     <div class="media-cover">
                         <img class="img-animated" src="<%= prop.Image %>" alt="Bridgestreet Property - <%= prop.Name %>"/>
                     </div>
                     <!--
     <div class="property-pod-heart-bl">
-        <i class="fa fa-heart"></i>
     </div>
     -->
                     <%  if (prop.IsFeatured ){ %>

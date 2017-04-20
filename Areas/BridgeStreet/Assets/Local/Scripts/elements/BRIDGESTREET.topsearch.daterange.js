@@ -73,8 +73,9 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
 
             topSearchCalOptions.startInput = '#topsearch-check_in_date';
             topSearchCalOptions.endInput = '#topsearch-check_out_date';
+
             this.topSearchRange = mobiscroll.range('#topsearchbox_date_range_target', topSearchCalOptions);
-            console.log(this.arrival, this.departure);
+
             if (this.arrival != null && this.departure != null) {
                 this.topSearchRange.setVal([this.arrival, this.departure], true);
             }

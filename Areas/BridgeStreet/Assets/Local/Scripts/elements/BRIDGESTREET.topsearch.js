@@ -8,6 +8,7 @@ var DateFormat = require('../utils/BRIDGESTREET.date.format.js');
 
     var topSearch = {
         init: function (model, onModelUpdateCallback, onSearchCallback) {
+            var self = this;
             this.model = model;
             this.onModelUpdateCallback = onModelUpdateCallback;
             this.onSearchCallback = onSearchCallback;
@@ -36,6 +37,27 @@ var DateFormat = require('../utils/BRIDGESTREET.date.format.js');
 
             $('.more-filters-dropdown__buttons-apply').on('click', function(event) {
                 $('.dropdown.open .dropdown-toggle').dropdown('toggle');
+            });
+
+            $('.property-types-checkbox').on('click', function (event) {
+                var val = Number($(this).val());
+
+                if (!self.model.attributes.filters.PropertyTypes) {
+                    self.model.attributes.filters.PropertyTypes = [];
+                }
+
+                if ($(this).is(':checked')) {
+                    if (!_.contains(self.model.attributes.filters.PropertyTypes, val)) {
+                        self.model.attributes.filters.PropertyTypes.push(val);
+                    }
+                } else {
+                    self.model.attributes.filters.PropertyTypes = _.filter(self.model.attributes.filters.PropertyTypes, function (propertyType) {
+                        return propertyType !== val;
+                    });
+                }
+
+                self.model.attributes.filters.Attributes = [];
+                self.onModelUpdateCallback(self.model);
             });
         },
         updateModel: function (model) {

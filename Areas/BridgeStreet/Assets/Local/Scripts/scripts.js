@@ -1873,6 +1873,7 @@ var BSIncrement = require('../utils/increment.js');
 
 },{"../utils/increment.js":35}],13:[function(require,module,exports){
 var BSGlobalDateRange = require('./BRIDGESTREET.global.search.daterange.js');
+var BSTopSearchDateRange = require('./BRIDGESTREET.topsearch.daterange');
 
 (function () {
 
@@ -1924,7 +1925,7 @@ var BSGlobalDateRange = require('./BRIDGESTREET.global.search.daterange.js');
 
                     $mobileSearch.val(scope.place);
                     console.log('SHOW TOP FILTER');
-                    BSGlobalDateRange.show();
+                    BSTopSearchDateRange.show();
                     return false;
                 });
 
@@ -2039,7 +2040,7 @@ var BSGlobalDateRange = require('./BRIDGESTREET.global.search.daterange.js');
 })();
 
 
-},{"./BRIDGESTREET.global.search.daterange.js":10}],14:[function(require,module,exports){
+},{"./BRIDGESTREET.global.search.daterange.js":10,"./BRIDGESTREET.topsearch.daterange":26}],14:[function(require,module,exports){
 var DateFormat = require('../utils/BRIDGESTREET.date.format.js');
 var BSgloballocationsearch = require('./BRIDGESTREET.global.search.location.js');
 var BSglobalguests = require('./BRIDGESTREET.global.search.guests.js');
@@ -3161,7 +3162,8 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                     "click .cancel-btn": "cancelFilter",
                     "change #RoomType": "redoSearch",
                     "change #IsRealTimeBookable": "applyFilter",
-                    "change #PropertySpecial": "applyFilter"
+                    "change #PropertySpecial": "applyFilter",
+                    "click .property-types-checkbox": "onPropertyTypeChange"
                 },
                 redoSearch: function (e) {
                     if (e) e.preventDefault();
@@ -3509,6 +3511,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                 },
                 onModelChangeCallback: function(model) {
                     this.model.set(model.attributes);
+                    this.showHideAllPods();
                 },
                 onSearchCallback: function() {
                     //TODO: apply filters
@@ -3528,7 +3531,6 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                     return bits[1] + "/" + bits[2] + "/" + bits[0];
                 },
                 showHideAllPods: function () {
-
                     $('#extra-results-intro').hide();
                     $('#partial-results-only-intro').hide();
                     $("#no-results").hide();
@@ -3562,6 +3564,8 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                     BSmapview.enableMarker(prop);
 
                     var filters = this.model.attributes.filters;
+
+                    console.log('showHidePod', filters.PropertyTypes, prop.PropertyType);
 
                     if (filters.IsPetFriendly && !prop.IsPetFriendly) {
                         propPod.hide();
@@ -3624,6 +3628,9 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
         },
         getPriceRange: function () {
             return this.searchModel.attributes.Price;
+        },
+        onPropertyTypeChange: function () {
+            console.log('onPropertyChange');
         }
     };
 
@@ -3995,8 +4002,9 @@ var CalendarUtil = require('../utils/BRIDGESTREET.calendarcontrol.js');
 
             topSearchCalOptions.startInput = '#topsearch-check_in_date';
             topSearchCalOptions.endInput = '#topsearch-check_out_date';
+
             this.topSearchRange = mobiscroll.range('#topsearchbox_date_range_target', topSearchCalOptions);
-            console.log(this.arrival, this.departure);
+
             if (this.arrival != null && this.departure != null) {
                 this.topSearchRange.setVal([this.arrival, this.departure], true);
             }
@@ -4184,6 +4192,7 @@ var DateFormat = require('../utils/BRIDGESTREET.date.format.js');
 
     var topSearch = {
         init: function (model, onModelUpdateCallback, onSearchCallback) {
+            var self = this;
             this.model = model;
             this.onModelUpdateCallback = onModelUpdateCallback;
             this.onSearchCallback = onSearchCallback;
@@ -4212,6 +4221,27 @@ var DateFormat = require('../utils/BRIDGESTREET.date.format.js');
 
             $('.more-filters-dropdown__buttons-apply').on('click', function(event) {
                 $('.dropdown.open .dropdown-toggle').dropdown('toggle');
+            });
+
+            $('.property-types-checkbox').on('click', function (event) {
+                var val = Number($(this).val());
+
+                if (!self.model.attributes.filters.PropertyTypes) {
+                    self.model.attributes.filters.PropertyTypes = [];
+                }
+
+                if ($(this).is(':checked')) {
+                    if (!_.contains(self.model.attributes.filters.PropertyTypes, val)) {
+                        self.model.attributes.filters.PropertyTypes.push(val);
+                    }
+                } else {
+                    self.model.attributes.filters.PropertyTypes = _.filter(self.model.attributes.filters.PropertyTypes, function (propertyType) {
+                        return propertyType !== val;
+                    });
+                }
+
+                self.model.attributes.filters.Attributes = [];
+                self.onModelUpdateCallback(self.model);
             });
         },
         updateModel: function (model) {
