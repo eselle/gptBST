@@ -1,4 +1,5 @@
 var BSGlobalDateRange = require('./BRIDGESTREET.global.search.daterange.js');
+var BSHomePageDateRange = require('./BRIDGESTREET.homepage.search.daterange');
 var BSTopSearchDateRange = require('./BRIDGESTREET.topsearch.daterange');
 
 (function () {
@@ -86,7 +87,7 @@ var BSTopSearchDateRange = require('./BRIDGESTREET.topsearch.daterange');
 
                 $mobileSearch.val(scope.place);
                 console.log('SHOW');
-                BSGlobalDateRange.show();
+                BSHomePageDateRange.show();
                 return false;
             });
 

@@ -30,8 +30,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                     "click .cancel-btn": "cancelFilter",
                     "change #RoomType": "redoSearch",
                     "change #IsRealTimeBookable": "applyFilter",
-                    "change #PropertySpecial": "applyFilter",
-                    "click .property-types-checkbox": "onPropertyTypeChange"
+                    "change #PropertySpecial": "applyFilter"
                 },
                 redoSearch: function (e) {
                     if (e) e.preventDefault();
@@ -117,7 +116,6 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                         $(".filter-close[value='Attributes=" + val + "']").show();
                         filters.Attributes.push(val);
                     });
-                    console.log(this.model.attributes);
 
                     if (filters.Attributes.length > 0) {
                         $('.more-filters-dropdown__amount').html('(' +filters.Attributes.length + ')');
@@ -318,7 +316,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
                     var filterTmpl2 = $("#bottom-filter-template").html();
                     var template2 = _.template(filterTmpl2);
-                    console.log(this.model.attributes);
+
                     this.$el.find('#bottom-filter').html(template2(this.model.attributes));
 
                     $('.filter-close').hide();
@@ -433,7 +431,10 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
                     var filters = this.model.attributes.filters;
 
-                    console.log('showHidePod', filters.PropertyTypes, prop.PropertyType);
+                    if (!filters.PropertyTypes) {
+                        filters.PropertyTypes = [];
+                        filters.Attributes = [];
+                    }
 
                     if (filters.IsPetFriendly && !prop.IsPetFriendly) {
                         propPod.hide();
@@ -496,9 +497,6 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
         },
         getPriceRange: function () {
             return this.searchModel.attributes.Price;
-        },
-        onPropertyTypeChange: function () {
-            console.log('onPropertyChange');
         }
     };
 

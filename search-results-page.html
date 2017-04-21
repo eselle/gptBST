@@ -577,10 +577,10 @@
 
     <script type="text/template" id="top-filter-template">
         <div class="results-filter container-fluid">
-            <div class="topsearchbox__title label-cell clearfix hidden-xs">
-                <label>Edit search:</label>
-            </div>
             <div class="topsearchbox hidden-xs">
+                <div class="topsearchbox__title label-cell clearfix hidden-xs">
+                    <label>Edit search:</label>
+                </div>
                 <div class="topsearchbox__input-wrapper topsearchbox__input-wrapper-location">
                     <input class="topsearchbox__input-element topsearchbox__input-element-location" type="text" placeholder="City, Address or Landmark" data-value-large="City, Address or Landmark" data-value-small="Search" autocomplete="off" id="topSearchKeywords"/>
                 </div>
@@ -729,7 +729,7 @@
     <script type="text/template" id="grid-template">
         <% _.each(PropertyList, function(prop){ %>
         <div class="property-pod column col-search-pod half-padding toppadding75" id="<%= prop.PropertyId %>">
-            <a class="property-pod-wrapper" href="<%= prop.URL %>" target="_blank">
+            <a class="property-pod-wrapper" href="<%= prop.URL %>">
                 <div class="property-pod-image-wrapper img-pod-animated">
                     <div class="media-cover">
                         <img class="img-animated" src="<%= prop.Image %>" alt="Bridgestreet Property - <%= prop.Name %>"/>

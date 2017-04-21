@@ -1873,6 +1873,7 @@ var BSIncrement = require('../utils/increment.js');
 
 },{"../utils/increment.js":35}],13:[function(require,module,exports){
 var BSGlobalDateRange = require('./BRIDGESTREET.global.search.daterange.js');
+var BSHomePageDateRange = require('./BRIDGESTREET.homepage.search.daterange');
 var BSTopSearchDateRange = require('./BRIDGESTREET.topsearch.daterange');
 
 (function () {
@@ -1960,7 +1961,7 @@ var BSTopSearchDateRange = require('./BRIDGESTREET.topsearch.daterange');
 
                 $mobileSearch.val(scope.place);
                 console.log('SHOW');
-                BSGlobalDateRange.show();
+                BSHomePageDateRange.show();
                 return false;
             });
 
@@ -2040,7 +2041,7 @@ var BSTopSearchDateRange = require('./BRIDGESTREET.topsearch.daterange');
 })();
 
 
-},{"./BRIDGESTREET.global.search.daterange.js":10,"./BRIDGESTREET.topsearch.daterange":26}],14:[function(require,module,exports){
+},{"./BRIDGESTREET.global.search.daterange.js":10,"./BRIDGESTREET.homepage.search.daterange":15,"./BRIDGESTREET.topsearch.daterange":26}],14:[function(require,module,exports){
 var DateFormat = require('../utils/BRIDGESTREET.date.format.js');
 var BSgloballocationsearch = require('./BRIDGESTREET.global.search.location.js');
 var BSglobalguests = require('./BRIDGESTREET.global.search.guests.js');
@@ -3162,8 +3163,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                     "click .cancel-btn": "cancelFilter",
                     "change #RoomType": "redoSearch",
                     "change #IsRealTimeBookable": "applyFilter",
-                    "change #PropertySpecial": "applyFilter",
-                    "click .property-types-checkbox": "onPropertyTypeChange"
+                    "change #PropertySpecial": "applyFilter"
                 },
                 redoSearch: function (e) {
                     if (e) e.preventDefault();
@@ -3249,7 +3249,6 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
                         $(".filter-close[value='Attributes=" + val + "']").show();
                         filters.Attributes.push(val);
                     });
-                    console.log(this.model.attributes);
 
                     if (filters.Attributes.length > 0) {
                         $('.more-filters-dropdown__amount').html('(' +filters.Attributes.length + ')');
@@ -3450,7 +3449,7 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
                     var filterTmpl2 = $("#bottom-filter-template").html();
                     var template2 = _.template(filterTmpl2);
-                    console.log(this.model.attributes);
+
                     this.$el.find('#bottom-filter').html(template2(this.model.attributes));
 
                     $('.filter-close').hide();
@@ -3565,7 +3564,10 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
 
                     var filters = this.model.attributes.filters;
 
-                    console.log('showHidePod', filters.PropertyTypes, prop.PropertyType);
+                    if (!filters.PropertyTypes) {
+                        filters.PropertyTypes = [];
+                        filters.Attributes = [];
+                    }
 
                     if (filters.IsPetFriendly && !prop.IsPetFriendly) {
                         propPod.hide();
@@ -3628,9 +3630,6 @@ var CurrencyUtil = require('../utils/BRIDGESTREET.currency.js');
         },
         getPriceRange: function () {
             return this.searchModel.attributes.Price;
-        },
-        onPropertyTypeChange: function () {
-            console.log('onPropertyChange');
         }
     };
 
