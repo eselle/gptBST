@@ -1,5 +1,6 @@
 var BSTopSearchGuestSelector = require('./BRIDGESTREET.topsearch.guest.selector.js');
 var BSgloballocationsearch = require('./BRIDGESTREET.global.search.location.js');
+var BSTopSearchLocation = require('./BRIDGESTREET.topsearch.location.js');
 var BSTopSearchDaterange = require('./BRIDGESTREET.topsearch.daterange.js');
 var DateFormat = require('../utils/BRIDGESTREET.date.format.js');
 
@@ -13,12 +14,19 @@ var DateFormat = require('../utils/BRIDGESTREET.date.format.js');
             this.onModelUpdateCallback = onModelUpdateCallback;
             this.onSearchCallback = onSearchCallback;
 
-            console.log(this.model, this.getParameterFromQueryString('ArrivalDate'), this.getParameterFromQueryString('DepartureDate'));
             this.dateRange = BSTopSearchDaterange.init({date: {
                 arrival: this.getParameterFromQueryString('ArrivalDate'),
                 departure: this.getParameterFromQueryString('DepartureDate')
             }});
-            this.locationSearch = BSgloballocationsearch.init({location: null}); // TODO: update this logic
+
+            this.locationSearch = BSTopSearchLocation.init({
+                location: {
+                    lat: this.getParameterFromQueryString('Latitude'),
+                    lng: this.getParameterFromQueryString('Longitude'),
+                    place: this.getParameterFromQueryString('Place')
+                }
+            });
+
             BSTopSearchGuestSelector.init(this.model, this.updateModel.bind(this));
 
             $('.topsearchbox #topsearch-search_button').on('click', (function(event) {
